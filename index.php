@@ -10,9 +10,13 @@ require_once 'config.php';
 require_once 'core/base/settings/int_settings.php';
 
 use core\base\exceptions\RouteException;
+use core\base\controller\RouteController;
 
 try {
-    //code...
+    
+    RouteController::getInstance();
+   
+    
 } catch (RouteException $e) {
     exit($e->getMessage());
 }
