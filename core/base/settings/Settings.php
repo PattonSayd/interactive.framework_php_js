@@ -7,6 +7,8 @@ class Settings
    
     static private $_instance;
 
+    private $car = 'BMW';
+
     # put a slash(/) at the end of the path
     private $routes = [
         'admin' => [
@@ -14,7 +16,7 @@ class Settings
             'path' => 'core/admin/controllers/',
             'hrUrl' => false,
             'routes' => [
-
+                 'show' => 'info' # url /show   connected InfoController
             ]
         ],
         'settings' => [
@@ -43,6 +45,8 @@ class Settings
         'text' => ['name', 'phone', 'address'],
         'textarea' => ['content', 'keywolds']
     ];
+
+    
  
     public static function get($property)
     {

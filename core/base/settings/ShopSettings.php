@@ -10,7 +10,7 @@ class ShopSettings
     private $settings;
     
     private $templates = [
-        'text' => ['price', 'short'],
+        'text' => ['price', 'short', 'name'],
         'textarea' => ['goods_content']
     ];
 
@@ -19,6 +19,8 @@ class ShopSettings
             'alias' => 'todo',
         ],
     ]; 
+
+    private $color = 'yellow';
 
     static public function instance()
     {
