@@ -34,7 +34,7 @@ class RouteController
             $url = substr($url, 0, strpos($url, $_SERVER['QUERY_STRING']) - 1);
         }
 #                          /index.php                                         1  
-         $path = substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'index.php')); #   '/'
+        $path = substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], 'index.php')); #   '/'
         
         if($path === PATH){
                      
@@ -60,9 +60,10 @@ class RouteController
                     $pluginSetting = $this->routes['settings']['path'] . ucfirst($plugin . 'Settings'); # core/base/settings/ShopSetting
 
                     if (file_exists($_SERVER['DOCUMENT_ROOT'] . PATH . $pluginSetting . '.php')) { # red.info/core/base/settings/ShopSetting.php
+
                         $pluginSetting = str_replace('/', '\\', $pluginSetting);
 
-                        $this->routes = $pluginSetting::get('routes'); 
+                        $this->routes = $pluginSetting::get('routes');  
                     };
 
                     $dir = $this->routes['plugins']['dir'] ? '/' . $this->routes['plugins']['dir'] . '/' : '/';

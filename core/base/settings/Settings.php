@@ -31,7 +31,7 @@ class Settings
             'path'=> 'core/user/controllers/',
             'hrUrl' => true,
             'routes' => [
-                'hello' => 'index/walli/kenny',
+                'hello' => 'info/hello/world', # url = hello, controller = InfoController, inputMethod = hello, outputMethod = world
             ]
         ],
         'default' => [
