@@ -13,7 +13,7 @@ class Settings
     private $routes = [
         'admin' => [
             'alias' => 'admin',
-            'path' => 'core/admin/controllers/',
+            'path' => 'core/admin/controller/',
             'hrUrl' => false,
             'routes' => [
                  'show' => 'info' # url /show   connected InfoController
@@ -28,10 +28,10 @@ class Settings
             'dir' => ''
         ],
         'user' =>[
-            'path'=> 'core/user/controllers/',
+            'path'=> 'core/user/controller/',
             'hrUrl' => true,
             'routes' => [
-                'hello' => 'info/hello/world', # url = hello, controller = InfoController, inputMethod = hello, outputMethod = world
+                'hello' => 'info/page/first', # url = hello, controller = InfoController, inputMethod = hello, outputMethod = first
             ]
         ],
         'default' => [

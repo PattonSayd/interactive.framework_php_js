@@ -14,7 +14,7 @@ use core\base\controller\RouteController;
 
 try {
     
-    RouteController::instance();
+    RouteController::instance()->route();
     
 } catch (RouteException $e) {
     exit($e->getMessage());

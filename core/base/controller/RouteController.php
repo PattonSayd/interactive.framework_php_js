@@ -2,19 +2,15 @@
 
 namespace core\base\controller;
 
+use core\base\controller\Controller;
 use core\base\exceptions\RouteException;
 use core\base\settings\Settings;
  
-class RouteController
+class RouteController extends Controller
 {
     static private $_instance;
 
     protected $routes;
-
-    protected $controller;
-    protected $inputMethod;
-    protected $outputMethod;
-    protected $parameters;
         
     static public function instance()
     {
