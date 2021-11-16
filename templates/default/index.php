@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <?=$name?>
+    <?=$lot?>
 </body>
 </html>

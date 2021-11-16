@@ -53,20 +53,16 @@ abstract class Controller
     {        
         $this->parameters = $arqs['parametrs'];
 
-        $inputData = $arqs['inputMethod'];     // 'inputData'
-        $outputData = $arqs['outputMethod'];  // 'outputData'
+        $inputData = $arqs['inputMethod'];     // default 'inputData' or url '/page'
+        $outputData = $arqs['outputMethod'];  // default 'outputData' or url '/page' 
 
-        $vars = $this->$inputData();   // 'inputData'
+        $data = $this->$inputData();   //  fucn 'inputData()' or func 'page()'
 
         if(method_exists($this, $outputData)){
-            $page = $this->$outputData($vars);   // 'outputData'
+            $this->page = $this->$outputData($data);   // 'outputData'
 
-            if($page){
-                $this->page = $page;
-            }
-        }
-        elseif($vars){
-            $this->page = $vars;
+        }elseif($data){
+            $this->page = $data;
         }
 
         // if ($this->errors()){
@@ -89,7 +85,7 @@ abstract class Controller
             $route = Settings::get('routes');
 
             if($space === $route['user']['path']){
-                $template = TEMPLATE;
+                $template = TEMPLATE;  
             }else{ 
                 $template = ADMIN_TEMPLATE;
             }
