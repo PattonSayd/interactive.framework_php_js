@@ -3,14 +3,14 @@
 namespace core\user\controller;
 
 use core\base\controller\Controller;
+use core\base\controllers\Methods;
 
 class IndexController extends Controller{
 
    public function inputData(){
 
       $lot = "hello";
-      
-       $todo = $this->render('', compact('lot'));
+   
 
        
    } public function outputData($data){

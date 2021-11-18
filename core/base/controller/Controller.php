@@ -2,12 +2,15 @@
 
 namespace core\base\controller;
 
+use core\base\controller\Methods;
 use core\base\exceptions\RouteException;
 use core\base\settings\Settings;
 
 
 abstract class Controller
 {
+    use Methods;
+    
     protected $header;
     protected $content;
     protected $footer;
@@ -47,7 +50,6 @@ abstract class Controller
         }
 
     }
-
 
     public function request($arqs)
     {        
@@ -113,6 +115,34 @@ abstract class Controller
             }
         }else{
             echo $this->page;
+        }
+    }
+
+
+    protected function init($admin = false)
+    {
+        if (!$admin) {
+            if (USER_CSS_JS['styles']) {
+                foreach (USER_CSS_JS['styles'] as $item) {   //  delete '/'
+                    $this->styles[] = PATH . TEMPLATE . trim($item, '/');
+                }
+            }
+            if (USER_CSS_JS['scripts']) {
+                foreach (USER_CSS_JS['scripts'] as $item) {
+                    $this->scripts[] = PATH . TEMPLATE . trim($item, '/');
+                }
+            }
+        } else {
+            if (ADMIN_CSS_JS['styles']) {
+                foreach (ADMIN_CSS_JS['styles'] as $item) {   //  delete '/'
+                    $this->styles[] = PATH . ADMIN_TEMPLATE . trim($item, '/');
+                }
+            }
+            if (ADMIN_CSS_JS['scripts']) {
+                foreach (ADMIN_CSS_JS['scripts'] as $item) {
+                    $this->scripts[] = PATH . ADMIN_TEMPLATE . trim($item, '/');
+                }
+            }
         }
     }
   

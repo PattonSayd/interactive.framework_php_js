@@ -35,7 +35,7 @@ class RouteController extends Controller
         if($path === PATH){
                      
             if (strrpos($url, '/') === strlen($url) - 1 && strrpos($url,  '/') !== strlen(PATH) - 1) {
-                // $this->redirect(rtrim($url, '/'), 301);
+                $this->redirect(rtrim($url, '/'), 301);
             }
 
             $this->routes = Settings::get('routes');
