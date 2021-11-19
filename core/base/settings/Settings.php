@@ -2,10 +2,11 @@
 
 namespace core\base\settings;
 
+use core\base\controller\Singleton;
+
 class Settings
 {
-   
-    static private $_instance;
+    use Singleton;
 
     private $car = 'BMW';
 
@@ -51,15 +52,6 @@ class Settings
     public static function get($property)
     {
         return self::instance()->$property;  
-    }
-
-    static public function instance()
-    {
-        if(self::$_instance instanceof self)
-            return self::$_instance;
-
-        return self::$_instance = new self;
-
     }
 
     public function clueProperties($class)
@@ -114,8 +106,4 @@ class Settings
         }
         return $base;
     }
-
-
-    private function __construct(){}
-    private function clone(){}
 }

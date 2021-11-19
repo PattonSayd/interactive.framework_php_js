@@ -2,11 +2,13 @@
 
 namespace core\base\settings;
 
+use core\base\controller\Singleton;
 use core\base\settings\Settings;
 
 class ShopSettings
 {   
-    static private $_instance;
+    use Singleton;
+    
     private $settings;
     
     private $templates = [
@@ -22,14 +24,12 @@ class ShopSettings
 
     private $color = 'yellow';
 
-    static public function instance()
+    static public function getInstance()
     {
         if(self::$_instance instanceof self)
             return self::$_instance;
-
-        self::$_instance = new self;
         
-        self::$_instance->settings = Settings::instance();
+        self::instance()->settings = Settings::instance();
 
         $properties = self::$_instance->settings->clueProperties(get_class());
 
@@ -41,7 +41,7 @@ class ShopSettings
 
     public static function get($property)
     {
-        return self::instance()->$property;  
+        return self::getInstance()->$property;  
     }
 
     protected function setProperty($properties)
@@ -52,7 +52,4 @@ class ShopSettings
             }
         }
     }
-    
-    private function __construct(){}
-    private function clone(){}
 }

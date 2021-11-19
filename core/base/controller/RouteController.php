@@ -8,18 +8,9 @@ use core\base\settings\Settings;
  
 class RouteController extends Controller
 {
-    static private $_instance;
-
+    use Singleton;
+    
     protected $routes;
-        
-    static public function instance()
-    {
-        if(self::$_instance instanceof self)
-            return self::$_instance;
-
-        return self::$_instance = new self;
-        
-    }
 
     private function __construct(){
 
@@ -139,6 +130,5 @@ class RouteController extends Controller
 #                                                                          outputMethod => outputData
             $this->outputMethod = isset($route[2]) ? $route[2] : $this->routes['default']['outputMethod'];
     }
-    private function clone(){}
 }
 
