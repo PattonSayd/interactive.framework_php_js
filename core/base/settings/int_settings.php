@@ -32,6 +32,6 @@ spl_autoload_register(function ($class_name) {
    $class_name = str_replace('\\', '/', $class_name);
     
     if (!@include_once $class_name . '.php') {
-        throw new RouteException('not connection is file -' . $class_name);
+        throw new RouteException('Неверное имя файла для подключения -' . $class_name);
     }
 });

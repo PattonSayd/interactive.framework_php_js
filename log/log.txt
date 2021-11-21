@@ -1,0 +1,24 @@
+Fault: 21-11-2021 13:28:11 - Не корректная директория сайта
+file C:\xampp\htdocs\public_html\core\base\controller\RouteController.php
+In line 107
+
+Fault: 21-11-2021 17:13:26 - Не корректная директория сайта
+file C:\xampp\htdocs\public_html\core\base\controller\RouteController.php
+In line 107
+
+Fault: 21-11-2021 17:14:09 - not connection is file -core/base/controller/Cke
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 35
+
+Fault: 21-11-2021 17:14:15 - not connection is file -core/base/controller/Cke
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 35
+
+Fault: 21-11-2021 17:14:19 - not connection is file -core/base/controller/Cke
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 35
+
+Fault: 21-11-2021 17:15:10 - not connection is file -core/base/controller/Cke
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 35
+
