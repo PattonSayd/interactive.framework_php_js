@@ -30,12 +30,13 @@ abstract class Controller
     protected $userID;
     protected $data;
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     public function route()
     {
         $controller = str_replace('/', '\\', $this->controller);
 
         try {
-            $object = new \ReflectionMethod($controller, 'request');
+            $object = new \ReflectionMethod($controller, 'request');  
             
             $arqs = [                   
                     'parametrs' => $this->parameters,        // []
@@ -48,9 +49,9 @@ abstract class Controller
         } catch (\ReflectionException $e) {
             throw new RouteException($e->getMessage());
         }
-
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     public function request($arqs)
     {        
         $this->parameters = $arqs['parametrs'];
@@ -63,18 +64,18 @@ abstract class Controller
         if(method_exists($this, $outputData)){
             $this->page = $this->$outputData($data);   // 'outputData'
 
-        }elseif($data){
+        }else if($data){
             $this->page = $data;
         }
 
-        // if ($this->errors()){
-        //     $this->writeLog();
+        // if ($this->errors){
+        //     $this->writeLog($this->errors);
         // }
 
         $this->getPage();
     }
 
-
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function render($path = '', $parameters = [])
     {
         extract($parameters); // если не массив, @ - отключаем warnings
@@ -106,7 +107,7 @@ abstract class Controller
         $this->getPage();
     }
 
-
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function getPage(){
         
         if(is_array($this->page)){
@@ -118,7 +119,7 @@ abstract class Controller
         }
     }
 
-
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function init($admin = false)
     {
         if (!$admin) {
@@ -145,8 +146,6 @@ abstract class Controller
             }
         }
     }
-  
-
 }
 
 

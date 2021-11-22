@@ -12,6 +12,7 @@ class RouteController extends Controller
     
     protected $routes;
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     private function __construct(){
 
         $url = $_SERVER['REQUEST_URI'];
@@ -33,8 +34,9 @@ class RouteController extends Controller
            
             if (!$this->routes)
                     throw new RouteException('Отсутствуют маршруты в базовых настройках', 1);
-#                                      /unknown/denied     1
-            $explode_url = explode('/', substr($url, strlen(PATH))); #  0:unknown  1:denied   
+#                                      /admin/show     1
+            $explode_url = explode('/', substr($url, strlen(PATH))); #  0:admin  1:show   
+
 #                    admin             admin === admin
             if ($explode_url[0] && $explode_url[0] ===  $this->routes['admin']['alias']){
                                           
@@ -108,6 +110,7 @@ class RouteController extends Controller
         }
      }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
      private function createRoute($var, $explode_url)
      {
             $route = [];

@@ -4,6 +4,7 @@ namespace core\base\controller;
 
 trait Methods{
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function clearStr($str)
     {
         if(is_array($str)){
@@ -16,21 +17,25 @@ trait Methods{
         }
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function clearNum($num)
     {
         return (!empty($num) && preg_match('/\d/', $num)) ? preg_replace('/[^\d.]/', '', $num) * 1 : 0; 
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function isPost()
     {
         return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function isAjax()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function redirect($http = false, $code = false)
     {
         if($code){
@@ -51,6 +56,7 @@ trait Methods{
         exit();
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function getStyles()
     {
         if($this->styles){
@@ -63,6 +69,7 @@ trait Methods{
         }
     }
 
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function getScripts()
     {
         if($this->scripts){
@@ -74,7 +81,8 @@ trait Methods{
             }
         }
     }
-
+    
+#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     protected function writeLog($message, $file = 'log.txt', $event = 'Fault')
     {
         $dataTime = new \DateTime();
