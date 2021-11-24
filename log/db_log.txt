@@ -66,3 +66,15 @@ Fault: 22-11-2021 13:52:11 - Ошибка подключения к базе д�
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 23
 
+Fault: 22-11-2021 21:26:08 - Ошибка подключения к базе данных: 1049 Unknown database 'ard'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 23
+
+Fault: 23-11-2021 13:48:42 - Ошибка подключения к базе данных: 1049 Unknown database 'ard'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 23
+
+Fault: 23-11-2021 13:55:14 - Ошибка подключения к базе данных: 1049 Unknown database 'ard'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 23
+

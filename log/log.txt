@@ -2,3 +2,7 @@ Fault: 22-11-2021 9:49:16 - Class "core\user\controller\Robots.txtController" do
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 50
 
+Fault: 23-11-2021 21:04:41 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 50
+

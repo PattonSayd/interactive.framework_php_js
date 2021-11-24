@@ -12,11 +12,11 @@ class Model
 	
 	protected $db;
 
-# ----------------- CONNECT ---------------------------------------------------
+#   ------------------ CONNECT ------------------------------------------------
 
 	protected function __construct()
 	{
-		$this->db = @new mysqli(HOST, USER, PASS, 'ard');
+		$this->db = @new mysqli(HOST, USER, PASS, DB_NAME);
 
 		if($this->db->connect_error)
 		{
@@ -25,7 +25,7 @@ class Model
 		$this->db->query("SET NAMES UTF8");
 	}
 
-# --------------------- QUERY FUNC ----------------------------------------------
+#   ------------------ QUERY FUNC ----------------------------------------------
 
 	final public function queryFunc($query, $crud = 'r', $return_id = false)
 	{
@@ -67,4 +67,6 @@ class Model
 				break;
 		}
 	}
+
+
 }
