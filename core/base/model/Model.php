@@ -77,8 +77,11 @@ class Model
 
 		 
 		$where = $this->createWhere($table, $set);
+
+		if (!$where) $new_where = true;
+			else $new_where = false;
 		
-		$join_arr = $this->createJoin($table, $set);
+		$join_arr = $this->createJoin($table, $set, $new_where);
 
 		$fields .= $join_arr['fields'];
 		$where .= $join_arr['where'];
@@ -106,7 +109,7 @@ class Model
 
 		foreach($set['fields'] as $field){
 
-			$fields .= $table . $field . ','; # users.name,
+			$fields .= $table . $field . ', '; # users.name,
 		}
 
 		return $fields;
@@ -134,29 +137,140 @@ class Model
 					$order_direction = strtoupper($set['order_direction'][$direct_count]);
 					$direct_count++;
 
-				}else{
-					$order_direction = strtoupper($set['order_direction'][$direct_count - 1]);
+				}else{																								#	0++     1++   2-- (1)
+					$order_direction = strtoupper($set['order_direction'][$direct_count - 1]); # 'order_direction' => ['ASC', 'DESC', (DESC)],
 				}
+
+                if(is_int($order)) 
+                    $order_by .= $order . ' ' . $order_direction . ',';
+                    
+                else 
+                    $order_by .= $table . $order . ' ' . $order_direction . ',';
 				
-				$order_by .= $table . $order . ' ' . $order_direction . ',';
+				$order_by .= $table . $order . ' ' . $order_direction . ', ';
 			}
 
-			$order_by = rtrim($order_by, ',');
+			$order_by = rtrim($order_by, ', ');
 		}
 
 		# ORDER BY table.id ASC, table.name DESC;
 		
 		return $order_by;
     }
+
+#   -------------------- CREATE WHERE ---------------------------------------------------
+
+    protected function createWhere($table = false, $set, $instruction = 'WHERE')
+    {
+		$table = $table ? $table . '.' : '';
+
+		$where = ''; 
+
+		if (is_array($set['where']) &&  !empty($set['where'])){
+
+			$set['operand'] = is_array($set['operand']) &&  !empty($set['operand'])  ? $set['operand'] : ['='];
+			$set['condition'] = is_array($set['condition']) &&  !empty($set['condition'])  ? $set['condition'] : ['AND'];
+
+			$where = $instruction; 
+
+			$operand_count = 0;
+			$condition_count = 0;
+			
+			foreach($set['where'] as $key => $value){
+
+				$where .= ' '; 
+				
+				if ($set['operand'][$operand_count]) {
+					$operand = $set['operand'][$operand_count];
+					$operand_count++;
+
+				}else{
+					$operand = $set['operand'][$operand_count - 1];
+				}
+
+				if ($set['condition'][$condition_count]) {
+					$condition = $set['condition'][$condition_count];
+					$condition_count++;
+
+				}else{
+					$condition = $set['condition'][$condition_count - 1];
+				}
+
+				if ($operand === 'IN' || $operand === 'NOT IN') {
+					
+                    if (is_string($value) && strpos($value, 'SELECT')) {
+                        $in = $value;
+
+                    } else {
+                        if (is_array($value)) {
+                            $temp_value = $value;
+
+                        } else {
+                            $temp_value = explode(',', $value);
+                        }
+						
+                        $in = '';
+
+                        foreach ($temp_value as $v) {
+                            $in .= "'" . addslashes(trim($v)) . "', ";
+                        }
+                    }
+
+                    $where .= $table . $key . ' ' . $operand . ' (' . trim($in, ', ') . ') ' . $condition;
+
+                }elseif (strpos($operand, 'LIKE') !== false) {
+
+                    $like = explode('%', $operand);
+
+                    foreach ($like as $like_key => $like_value) {
+
+                        if (!$like_value) {
+
+                            if (!$like_key) {
+                                $value = '%' . $value;
+                            } else {
+                                $value .= '%';
+                            }
+                        }
+                    }
+
+                    $where .= $table . $key . ' LIKE ' . "'" . addslashes($value) . "' " .  $condition;
+
+                }else{
+
+                    if(strpos($value, 'SELECT') === 0) {
+                        $where .= $table . $key . " $operand " . '(' . $value . ')' . $condition;
+
+                    }elseif($value === NULL || $value === 'NULL'){
+
+                        if($operand === '=') 
+                            $where .= $table . $key . ' IS NULL ' . $condition;
+                        else
+                            $where .= $table . $key . ' IS NOT NULL ' . $condition;
+
+                    }else{
+                        $where .= $table . $key . " $operand " . "'" . addslashes($value)  . "' " . $condition;
+                    }
+                }
+			}
+
+            $where = substr($where, 0, strrpos($where, $condition));			
+		}
+
+		return $where;
+
+		# =, <>, IN (SELECT * FROM table), NOT, LIKE;
+    }
+
 }
 
 	/** $table   - Таблица базы данных
 	 *  $set  - array
 	 *  'fields'          => ['id', 'name'],
 	 *  'no_concat'       => false/true Если True не присоединять имя таблицы к полям и where
-	 *  'where'           => ['fio' => 'DeviJones', 'name' => 'Patton', 'surname' => 'Sayd'],
-	 *  'operand'         => ['=', '<>'],
-	 *  'condition'       => ['AND'],
+	 *  'where'           => ['id' => '1, 2, 3, 4', 'fio' => 'DeviJones', 'name' => 'Patton', 'surname' => 'Sayd', color=>['red', 'green', 'blue'],
+	 *  'operand'         => ['=', '<>', 'IN', '%LIKE%', ''NOT IN],
+	 *  'condition'       => ['OR', AND'],
 	 *  'order'           => ['fio', 'name'],
 	 *  'order_direction' => ['ASC', 'DESC'],
 	 *  'limit'           => '1'

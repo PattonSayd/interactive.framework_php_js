@@ -78,3 +78,7 @@ Fault: 23-11-2021 13:55:14 - Ошибка подключения к базе д�
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 23
 
+Fault: 26-11-2021 0:33:30 - Ошибка в SLQ запросе: SELECT users.name, users.surname FROM users  WHERE users.id IN ('1', '2', '3', '4') AND users.fio LIKE 'DeviJones' AND users.name <> 'Patton' AND users.surname = 'Sayd' AND users.color NOT IN ('red', 'grey', 'yellow')  ORDER BY users.name DESK,users.name DESK, users.old ASK,users.old ASK, users.surname ASK,users.surname ASK  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DESK,users.name DESK, users.old ASK,users.old ASK, users.surname ASK,users.su...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 36
+

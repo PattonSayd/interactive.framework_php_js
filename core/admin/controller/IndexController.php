@@ -11,8 +11,11 @@ class IndexController extends Controller
     {
         $db = Model::instance();
         $res = $db->select('users',[
-            'fields' => ['name', 'surname', 'old'],
-            'order' => ['name', 'old', 'surname'],
+            'fields'          => ['name', 'surname'],
+            'where'           => ['id' => '1, 2, 3, 4', 'fio' => 'DeviJones', 'name' => 'Patton', 'surname' => 'Sayd', 'color' => ['red', 'grey', 'yellow']],
+	        'operand'         => ['IN', 'LIKE', '<>', '=', 'NOT IN'],
+	        'condition'       => ['AND'],
+            'order'           => ['name', 'old', 'surname'],
             'order_direction' => ['desk', 'ask']
         ]);
         exit;
