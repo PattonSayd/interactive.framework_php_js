@@ -72,16 +72,16 @@ class Model
 
 	final public function select($table, $set = [])
 	{
-		$fields = $this->createFields($table, $set);
-		$order = $this->createOrder($table, $set);
+		$fields = $this->createFields($set, $table);
+		$order = $this->createOrder($set, $table);
 
 		 
-		$where = $this->createWhere($table, $set);
+		$where = $this->createWhere($set, $table);
 
 		if (!$where) $new_where = true;
 			else $new_where = false;
 		
-		$join_arr = $this->createJoin($table, $set, $new_where);
+		$join_arr = $this->createJoin($set, $table, $new_where);
 
 		$fields .= $join_arr['fields'];
 		$where .= $join_arr['where'];
@@ -94,12 +94,12 @@ class Model
 
 		$query = "SELECT $fields FROM $table $join $where $order $limit";
 
-		return $this->queryFunc($query);
+ 		return $this->queryFunc($query);
 	}
 
 #   -------------------- CREATE FIELDS ---------------------------------------------------
 
-    protected function createFields($table = false, $set)
+    protected function createFields($set, $table = false)
     {
 		$set['fields'] = is_array($set['fields']) &&  !empty($set['fields'])  ? $set['fields'] : ['*'];
 
@@ -117,7 +117,7 @@ class Model
 
 #   -------------------- CREATE ORDER ---------------------------------------------------
 
-    protected function createOrder($table = false, $set)
+    protected function createOrder($set, $table = false)
     {
 		$table = $table ? $table . '.' : '';
 
@@ -142,12 +142,11 @@ class Model
 				}
 
                 if(is_int($order)) 
-                    $order_by .= $order . ' ' . $order_direction . ',';
+                    $order_by .= $order . ' ' . $order_direction . ', ';
                     
                 else 
-                    $order_by .= $table . $order . ' ' . $order_direction . ',';
+                    $order_by .= $table . $order . ' ' . $order_direction . ', ';
 				
-				$order_by .= $table . $order . ' ' . $order_direction . ', ';
 			}
 
 			$order_by = rtrim($order_by, ', ');
@@ -160,7 +159,7 @@ class Model
 
 #   -------------------- CREATE WHERE ---------------------------------------------------
 
-    protected function createWhere($table = false, $set, $instruction = 'WHERE')
+    protected function createWhere($set, $table = false, $instruction = 'WHERE')
     {
 		$table = $table ? $table . '.' : '';
 
@@ -198,7 +197,7 @@ class Model
 
 				if ($operand === 'IN' || $operand === 'NOT IN') {
 					
-                    if (is_string($value) && strpos($value, 'SELECT')) {
+                    if (is_string($value) && strpos($value, 'SELECT') === 0) {
                         $in = $value;
 
                     } else {
@@ -254,7 +253,10 @@ class Model
                 }
 			}
 
-            $where = substr($where, 0, strrpos($where, $condition));			
+            $where = substr($where, 0, strrpos($where, $condition));	
+
+			// $where = rtrim($where, "$condition ");
+
 		}
 
 		return $where;
@@ -262,6 +264,77 @@ class Model
 		# =, <>, IN (SELECT * FROM table), NOT, LIKE;
     }
 
+#   ------------------ CREATE JOIN -----------------------------------------------------
+
+    protected function createJoin($set, $table = false, $new_where = false)
+    {
+        $fields = '';
+        $join = '';
+        $where = '';
+
+        if ($set['join']) {
+
+            $join_table = $table;
+
+            foreach ($set['join'] as $key => $value) {
+
+                if (is_int($key)) {
+                    if (!$value['table']) 
+                        continue;
+                    else 
+                        $key = $value['table'];
+                }
+
+                if ($join) $join .= ' ';
+
+                if ($value['on'] && $value['on']) {
+
+                    if($value['on']['fields'] && is_array($value['on']['fields']) && count($value['on']['fields']) === 2){
+                        $join_fields = $value['on']['fields'];
+
+                    }elseif(count($value['on']) === 2){
+                        $join_fields = $value['on'];
+
+                    }else{
+                        continue;
+                    }
+
+                    if (!$value['type'])
+                        $join .= ' LEFT JOIN ';
+                    else
+                        $join .= trim(strtoupper($value['type'])) . ' JOIN ';
+
+                    $join .= $key . ' ON ';
+
+                    if ($value['on']['table'])
+                        $join_temp_table = $value['on']['table'];
+                    else
+                        $join_temp_table = $join_table;
+
+                    $join .= '.' . $join_fields[0] . ' = ' . $key . '.' . $join_fields[1];
+
+                    $join_table = $key;
+
+
+                    if ($new_where) {
+
+                        if ($value['where'])
+                            $new_where = false;
+
+                        $group_condition = 'WHERE';
+
+                    } else {
+                        $group_condition = $value['group_condition'] ? strtoupper($value['group_condition']) : 'AND';
+                    }
+
+                    $fields .= $this->createFields($value, $key, $set['join_structure']);
+                    $where .= $this->createWhere($value, $key, $group_condition);
+                }
+            }
+        }
+
+        return compact('fields', 'join', 'where');
+    }
 }
 
 	/** $table   - Таблица базы данных
@@ -277,28 +350,29 @@ class Model
 	 * 
 	 * 
 	 *  'join'            =>  [
-	 * 	      [
-	 * 	      'table'			 => 'join_table1',
-	 * 	      'fields' 			 => ['id as j_id', 'name as j_name'],
-	 * 	      'type'  			 => 'left',
-	 * 	      'where'            => ['name' => 'Yellow'],
-	 * 	      'operand'     	 => ['='],
-	 * 	      'condition'	     => ['OR'],
-	 * 	      'on'			     => ['id', 'parent_id'],
-	 * 	      'group_condition'  => 'AND'
-	 * 	       									],
-	 *
-	 * 	   'join_table2' => [
-	 * 	        'fields'         => ['id as j2_id', 'name as j2_name'],
-	 * 	        'type'           => 'left',
-	 * 	        'where'          => ['name' => 'Yellow'],
-	 * 	        'operand'        => ['<>'],
-	 * 	        'condition'      => ['and'],
-	 * 	        'on' => [
-	 * 	               'table'  =>'test',
-	 * 	               'fields' => ['id', 'parent_id']
-	 * 	                			]
-	 * 											],	
-	 *			]
+	 * 		[
+		* 	   'join_table2' =>  [
+		* 	      'table'			 => 'join_table1',
+		* 	      'fields' 			 => ['id as j_id', 'name as j_name'],
+		* 	      'type'  			 => 'left',
+		* 	      'where'            => ['name' => 'Yellow'],
+		* 	      'operand'     	 => ['='],
+		* 	      'condition'	     => ['OR'],
+		* 	      'on'			     => ['id', 'parent_id'],
+		* 	      'group_condition'  => 'AND'
+		* 	  ],
+		*
+		* 	   'join_table2' => [
+		* 	        'fields'         => ['id as j2_id', 'name as j2_name'],
+		* 	        'type'           => 'left',
+		* 	        'where'          => ['name' => 'Yellow'],
+		* 	        'operand'        => ['<>'],
+		* 	        'condition'      => ['and'],
+		* 	        'on' => [
+		* 	               'table'  =>'test',
+		* 	               'fields' => ['id', 'parent_id']
+		* 	                			]
+		* 		],	
+	 *		]
 	 */
 

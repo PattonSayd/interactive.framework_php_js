@@ -82,3 +82,15 @@ Fault: 26-11-2021 0:33:30 - Ошибка в SLQ запросе: SELECT users.nam
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 36
 
+Fault: 30-11-2021 1:03:09 - Ошибка в SLQ запросе: SELECT users.id, users.surname FROM users  WHERE users.id IN ('Patton') AND users.surname LIKE 'Sayd' or users.fio <> 'DTox' or users.car = 'Tesla' or users.color NOT IN ('red', 'blue', 'green')  ORDER BY users.1 DESK,users.1 DESK, users.name DESK,users.name DESK LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DESK,users.1 DESK, users.name DESK,users.name DESK LIMIT 1' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 36
+
+Fault: 30-11-2021 1:04:02 - Ошибка в SLQ запросе: SELECT users.id, users.surname FROM users  WHERE users.id IN ('Patton') AND users.surname LIKE 'Sayd' or users.fio <> 'DTox' or users.car = 'Tesla' or users.color NOT IN ('red', 'blue', 'green')  ORDER BY users.1 DESC,users.1 DESC, users.name DESC,users.name DESC LIMIT 1 - 1054 Unknown column 'users.fio' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 36
+
+Fault: 06-12-2021 23:44:42 - Ошибка в SLQ запросе: SELECT users.id, users.surname, join_table.id as j_id, join_table.name as j_name, join_table2.id as j2_id, join_table2.name as j2_name FROM users LEFT JOIN join_table ON .id = join_table.parent_id LEFT JOIN join_table2 ON .id = join_table2.parent_id WHERE users.id = '2' AND join_table.name = 'Yellow' AND join_table2.name <> 'Yellow'  ORDER BY users.name DESC LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= join_table.parent_id LEFT JOIN join_table2 ON .id = join_table2.parent_id W...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 36
+
