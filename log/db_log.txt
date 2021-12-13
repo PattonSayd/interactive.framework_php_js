@@ -94,3 +94,35 @@ Fault: 06-12-2021 23:44:42 - Ошибка в SLQ запросе: SELECT users.id
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 36
 
+Fault: 07-12-2021 23:40:16 - Ошибка в SLQ запросе: SELECT users.id, users.surname, join_table2.id as j_id, join_table2.name as j_name FROM users LEFT JOIN join_table2 ON .id = join_table2.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%%phil%' AND users.color NOT IN ('white', 'black') AND join_table2.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= join_table2.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' A...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 07-12-2021 23:54:23 - Ошибка в SLQ запросе: SELECT users.id, users.surname, join_table2.id as j_id, join_table2.name as j_name FROM users LEFT JOIN join_table2 ON .id = join_table2.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND join_table2.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= join_table2.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' A...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 08-12-2021 0:24:13 - Ошибка в SLQ запросе: SELECT users.id, users.surname, rrrrrrrrrrrrrrrr.id as j_id, rrrrrrrrrrrrrrrr.name as j_name FROM users LEFT JOIN rrrrrrrrrrrrrrrr ON .id = rrrrrrrrrrrrrrrr.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND rrrrrrrrrrrrrrrr.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= rrrrrrrrrrrrrrrr.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'che...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 08-12-2021 0:24:21 - Ошибка в SLQ запросе: SELECT users.id, users.surname, rrrrrrrrrrrrrrrr.id as j_id, rrrrrrrrrrrrrrrr.name as j_name FROM users LEFT JOIN rrrrrrrrrrrrrrrr ON .id = rrrrrrrrrrrrrrrr.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND rrrrrrrrrrrrrrrr.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= rrrrrrrrrrrrrrrr.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'che...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 08-12-2021 0:46:28 - Ошибка в SLQ запросе: SELECT users.id, users.surname, like.id as j_id, like.name as j_name FROM users LEFT JOIN like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND like.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'che...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 08-12-2021 1:07:27 - Ошибка в SLQ запросе: SELECT users.id, users.surname, like.id as j_id, like.name as j_name FROM users LEFT JOIN like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND like.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'che...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 08-12-2021 1:07:30 - Ошибка в SLQ запросе: SELECT users.id, users.surname, like.id as j_id, like.name as j_name FROM users LEFT JOIN like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'chess' AND users.name LIKE '%phil' AND users.color NOT IN ('white', 'black') AND like.name = 'Yellow'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like ON .id = like.parent_id WHERE users.id = '1, 2, 3' OR users.game <> 'che...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 13-12-2021 12:21:51 - Ошибка в SLQ запросе: SELECT users.id, users.surname FROM users  WHERE users.id = '1, 2, 3' AND users.game <> 'chess' AND users.name LIKE '%phil' OR users.color NOT IN ('white', 'black')   LIMIT 1 - 1054 Unknown column 'users.game' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
