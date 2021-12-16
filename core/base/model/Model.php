@@ -156,5 +156,107 @@ class Model extends ModelMethods
 
 		return $this->queryFunc($query, $crud = 'c', $set['return_id']);
 	}
+
+
+/*
+|--------------------------------------------------------------------------
+|					EDIT
+|--------------------------------------------------------------------------
+|    
+|  
+*/
+
+	final public function edit($table, $set = [])
+	{
+		$set['fields'] = (is_array($set['fields'])) && !empty($set['fields']) ? $set['fields'] : $_POST;
+
+		$set['files'] =  (is_array($set['files'])) && !empty($set['files']) ? $set['files'] : false;	
+
+		$set['except'] = (is_array($set['except'])) && !empty($set['except']) ? $set['except'] : false;
+
+		if (!$set['fields'] && !$set['files']) return false; 
+
+		if(!$set['all_rows']){
+
+			if($set['where']){
+				$where = $this->createWhere($set);
+			}else {
+				$where = false;
+
+				$columns = $this->showColumns($table);
+
+				if(!$columns) return false;
+						// id						
+				if($columns['id_row'] && $set['fields'][$columns['id_row']]){
+
+					$where = 'WHERE ' . $columns['id_row'] . '=' . $set['fields'][$columns['id_row']];
+
+					unset($set['fields'][$columns['id_row']]);
+				}
+			}
+		}
+			
+		$update = $this->createUpdate($set['fields'], $set['files'], $set['except']);
+
+		$query = "UPDATE $table SET $update $where";
+
+		return $this->queryFunc($query, $crud = 'u');
+		
+	}
+
+/*
+|--------------------------------------------------------------------------
+|					SHOW COLUMNS
+|--------------------------------------------------------------------------
+|   
+|   
+*/
+	
+	final public function showColumns($table)
+	{
+		if(!isset($this->tableRows[$table]) || !$this->tableRows[$table]) {
+
+			$checkTable = $this->createTableAlias($table);
+
+			if($this->tableRows[$checkTable['table']]){
+
+				return $this->tableRows[$checkTable['alias']] = $this->tableRows[$checkTable['table']];
+			}
+
+			$query = "SHOW COLUMNS FROM {$checkTable['table']}";
+
+			$res = $this->queryFunc($query);
+
+			$this->tableRows[$checkTable['table']] = [];
+
+			if($res){
+
+				foreach($res as $row) {
+					$this->tableRows[$checkTable['table']][$row['Field']] =  $row; // ячейка с бызы данных
+
+					if ($row['Key'] === 'PRI') {
+
+						if(!isset($this->tableRows[$checkTable['table']]['id_row'])) {
+
+							$this->tableRows[$checkTable['table']]['id_row'] = $row['Field'];
+						}else{
+							
+							if(!isset($this->tableRows[$checkTable['table']]['multi_id_row'])) $this->tableRows[$checkTable['table']]['multi_id_row'][] = $this->tableRows[$checkTable['table']]['id_row'];
+
+							$this->tableRows[$checkTable['table']]['multi_id_row'][] = $row['Field'];
+						}
+					}
+				}
+			}
+
+		}
+
+		if(isset($checkTable) && $checkTable['table'] !== $checkTable['alias']) {
+
+			return $this->tableRows[$checkTable['alias']] = $this->tableRows[$checkTable['table']];
+		}
+
+		return $this->tableRows[$table];
+	}
 	
 }
