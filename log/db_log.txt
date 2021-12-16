@@ -126,3 +126,11 @@ Fault: 13-12-2021 12:21:51 - Ошибка в SLQ запросе: SELECT users.id
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 50
 
+Fault: 13-12-2021 13:16:25 - Ошибка в SLQ запросе: SELECT users.id, users.surname FROM users  WHERE users.id = '1, 2, 3' AND users.game <> 'chess' AND users.name LIKE '%phil' OR users.color NOT IN ('white', 'black')   LIMIT 1 - 1054 Unknown column 'users.game' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 50
+
+Fault: 16-12-2021 14:38:54 - Ошибка в SLQ запросе: INSERT INTO users (name, surname, images, gallery_images) VALUE ('patton', 'Sayd', 'main.jpg', '[\"red\'\'.jpg\",\"green.jpg\",\"black.jpg\"]') - 1054 Unknown column 'images' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 51
+

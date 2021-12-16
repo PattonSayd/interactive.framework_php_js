@@ -35,12 +35,13 @@ class Model extends ModelMethods
 |					QUERU FUNCTION
 |--------------------------------------------------------------------------
 |
-| c - CREATE(INSERT),
-| r - READ(SELECT), 
-| u - UPDATE(EDIT),
-| d - DELETE  
+|  c - CREATE(INSERT),
+|  r - READ(SELECT), 
+|  u - UPDATE(EDIT),
+|  d - DELETE  
 |		
 */
+
 	final public function queryFunc($query, $crud = 'r', $return_id = false)
 	{
 		$result = $this->db->query($query);
@@ -92,7 +93,9 @@ class Model extends ModelMethods
 |  'order_direction'  => ['ASC', 'DESC'],  default: 'ASC'
 |  'limit'            => '1'
 | 
+|  "SELECT fields FROM table join where order limit"
 */
+
 	final public function select($table, $set = [])
 	{
 		$fields = $this->createFields($set, $table);
@@ -128,29 +131,30 @@ class Model extends ModelMethods
 |  string $table - табоица для добавления данных
 |  array $set 	- массив параметров
 |  fields 		=> [поле => значение]; если не указан, то обрабатывается $_POST[поле => значение]
+|  разрешена передача например NOW() в качестве MySQL функции обычной строкой
 |  files 		=> [поле => значение]; можно подать массив вида [поле => [массив значение]]
 |  except 		=> ['исключение 1', 'исключение 2'] - исключает данные элементы массива из добавления в запрос
 |  return_id	=> true|false - возвпащать или нет идентификатор вставленной записи 
-|  return mixed
+|  return mixed 
+|   
+|  "INSERT INTO table (field, field2) VALUE ('field', 'field2')" 
 */
 
-final public function insert($table, $set = [])
-{
-	$set['fields'] = !empty($set['fields']) && is_array($set['fields']) ? $set['fields'] : $_POST;
+	final public function insert($table, $set = [])
+	{
+		$set['fields'] = (is_array($set['fields'])) && !empty($set['fields']) ? $set['fields'] : $_POST;
+		$set['files'] = (is_array($set['files'])) && !empty($set['files']) ? $set['files'] : false;	
 
-	$set['files'] = !empty($set['files']) && is_array($set['files']) ? $set['files'] : false;		
+		if (!$set['fields'] && !$set['files']) return false; 
 
-	$set['except'] = !empty($set['except']) && is_array($set['except']) ? $set['except'] : false;
+		$set['except'] = (is_array($set['except'])) && !empty($set['except']) ? $set['except'] : false;
+		$set['return_id'] = $set['return_id'] ? true : false;
+		
+		$insert = $this->createInsert($set['fields'], $set['files'], $set['except']);
 
-	$set['return_id'] = !empty($set['return_id']) ? true : false;
+		$query = "INSERT INTO $table {$insert['fields']} VALUE {$insert['value']}";
 
-
-	if (!$set['fields'] && !$set['files']) return false; 
+		return $this->queryFunc($query, $crud = 'c', $set['return_id']);
+	}
 	
-	$insert = $this->createInsert($set['fields'], $set['files'], $set['except']);
-
-	$query = "INSERT INTO $table {$insert['fields']} VALUE {$insert['value']}";
-
-	return $this->queryFunc($query, $crud = 'c', $set['return_id']);
-}
 }

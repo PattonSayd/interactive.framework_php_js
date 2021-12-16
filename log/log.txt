@@ -34,3 +34,11 @@ Fault: 07-12-2021 15:01:24 - Class "core\user\controller\Robots.txtController" d
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 50
 
+Fault: 13-12-2021 17:28:09 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 50
+
+Fault: 16-12-2021 16:50:37 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 50
+

@@ -4,6 +4,9 @@ namespace core\base\model;
 
 abstract class ModelMethods
 {    
+    protected $sql_func = ['RAND()', 'NOW()'];
+    protected $tableRows;
+
 /*
 |--------------------------------------------------------------------------
 |                   CREATE FIELDS
@@ -145,8 +148,6 @@ abstract class ModelMethods
 		}
 
 		return $where;
-
-		# =, <>, IN (SELECT * FROM table), NOT, LIKE;
     }
 
 
@@ -306,7 +307,124 @@ abstract class ModelMethods
         return compact('fields', 'join', 'where');
     }
 
+/*
+|--------------------------------------------------------------------------
+|                   CREATE INSERT  
+|--------------------------------------------------------------------------
+|   
+|  'except' => ['field']
+|   
+|  table (field, field2) VALUE ('field', 'field2')
+*/
 
+    protected function createInsert ($fields, $files, $except)
+    {
+        $insert = [];
+        $insert['fields'] = '(';
+        $insert['value'] = false;
+
+        $array_type = array_keys($fields)[0];
+
+        if(is_int($array_type)){
+
+            $check_fields = false;
+            $count_fields = 0;
+
+            foreach($fields as $key => $items){
+
+                $insert['value'] .= '(';
+
+                if(!$count_fields)
+                    $count_fields = count($fields[$key]);
+
+                $a = 0; 
+
+                foreach($items as $row =>$value){
+                    
+                    if($except && in_array($row, $except))
+                        continue;
+
+                    if(!$check_fields)
+                        $insert['fields'] .= $row . ',';
+
+                    if(in_array($value, $this->sql_func)){
+                        $insert['value'] .= $value . ',';
+
+                    }elseif($value == 'NULL' || $value == NULL){
+                        $insert['value'] .= "NULL" . ',';
+
+                    }else{
+                        $insert['value'] .= "'" . addslashes($value) . "',";
+                    }
+                    
+                    $a++;
+
+                    if($a === $count_fields)
+                        break;         // ОБЕЗОПАСИТЬ ЛИШНЕЕ ВХОЖДЕНИЕ В VALUE
+                }
+
+                if($a < $count_fields){
+                    for(; $a < $count_fields; $a++){
+                        $insert['value'] .= "NULL" . ',';
+                    }
+                }
+                
+                $insert['value'] = rtrim($insert['value'], ',') . '),';
+
+                if(!$check_fields){
+                    $check_fields = true;
+                    $insert['fields'] = rtrim($insert['fields'], ',') . ')';
+                }
+            }
+
+            $insert['value'] = rtrim($insert['value'], ',');
+            
+        }else{
+            
+            $insert['value'] = '(';
+            
+            if($fields){
+
+                foreach($fields as $row => $value){
+
+                    if($except && in_array($row, $except))
+                        continue;
+
+                    $insert['fields'] .= $row . ', ';
+
+                    if(in_array($value, $this->sql_func)){
+                        $insert['value'] .= $value . ', ';
+
+                    }elseif($value == 'NULL' || $value == NULL){
+                        $insert['value'] .= "NULL" . ', ';
+
+                    }else{
+                        $insert['value'] .= "'" . addslashes($value) . "', ";
+                    }
+
+                }
+            }
+
+            if($files){
+
+                foreach($files as $row => $file){
+                    
+                    $insert['fields'] .= $row . ', ';
+
+                    if(is_array($file))
+                        $insert['value'] .= "'" . addslashes(json_encode($file)) . "', ";
+                    else
+                        $insert['value'] .= "'" . addslashes($file) . "', ";
+                }
+            }
+
+            foreach($insert as $key => $arr){ 
+                $insert[$key] = rtrim($arr, ', ') . ')';
+            }
+            
+        }
+        return $insert;
+    }
 
 
 
