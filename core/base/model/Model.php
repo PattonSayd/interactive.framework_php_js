@@ -142,12 +142,12 @@ class Model extends ModelMethods
 
 	final public function insert($table, $set = [])
 	{
-		$set['fields'] = (is_array($set['fields'])) && !empty($set['fields']) ? $set['fields'] : $_POST;
-		$set['files'] = (is_array($set['files'])) && !empty($set['files']) ? $set['files'] : false;	
+		$set['fields'] = !empty($set['fields']) && (is_array($set['fields'])) ? $set['fields'] : $_POST;
+		$set['files'] = !empty($set['files']) && (is_array($set['files'])) ? $set['files'] : false;	
 
 		if (!$set['fields'] && !$set['files']) return false; 
 
-		$set['except'] = (is_array($set['except'])) && !empty($set['except']) ? $set['except'] : false;
+		$set['except'] = !empty($set['except']) && (is_array($set['except'])) ? $set['except'] : false;
 		$set['return_id'] = $set['return_id'] ? true : false;
 		
 		$insert = $this->createInsert($set['fields'], $set['files'], $set['except']);
@@ -163,16 +163,16 @@ class Model extends ModelMethods
 |					EDIT
 |--------------------------------------------------------------------------
 |    
-|  
+|  UPDATE table SET update where
 */
 
 	final public function edit($table, $set = [])
 	{
-		$set['fields'] = (is_array($set['fields'])) && !empty($set['fields']) ? $set['fields'] : $_POST;
+		$set['fields'] = !empty($set['fields']) && (is_array($set['fields'])) ? $set['fields'] : $_POST;
 
-		$set['files'] =  (is_array($set['files'])) && !empty($set['files']) ? $set['files'] : false;	
+		$set['files'] =  !empty($set['files']) && (is_array($set['files'])) ? $set['files'] : false;	
 
-		$set['except'] = (is_array($set['except'])) && !empty($set['except']) ? $set['except'] : false;
+		$set['except'] = !empty($set['except']) && (is_array($set['except'])) ? $set['except'] : false;
 
 		if (!$set['fields'] && !$set['files']) return false; 
 
@@ -202,6 +202,54 @@ class Model extends ModelMethods
 
 		return $this->queryFunc($query, $crud = 'u');
 		
+	}
+
+/*
+|--------------------------------------------------------------------------
+|					DELETE
+|--------------------------------------------------------------------------
+|    
+|  DELETE FROM table WHERE field = field
+|  
+*/
+
+	final public function delete($table, $set = [])
+	{
+		$table = trim($table);
+
+		$where = $this->createWhere($set, $table);
+
+		$columns = $this->showColumns($table);
+
+		if (!$columns) return false;
+
+		if (is_array($set['fields']) && !empty($set['fields'])) {
+
+			if ($columns['id_row']) {
+				$key = array_search($columns['id_row'], $set['fields']);  # Если пришел первичный(id-PRİ) ключ то удаляет его с массива
+
+				if ($key !== false)
+					unset($set['fields'][$key]);
+			}
+			$fields = [];
+
+			foreach ($set['fields'] as $field) {
+
+				$fields[$field] = $columns[$field]['Default'];
+			}
+			$update = $this->createUpdate($fields, false, false);
+
+			$query = "UPDATE $table SET $update $where";
+		}else{
+			$join_arr = $this->createJoin($table, $set);
+
+			$join = $join_arr['join'];
+
+			$join_tables = $join_arr['tables'] ? $join_arr['tables'] : '';
+
+			$query = 'DELETE ' . $table . $join_tables . ' FROM ' . $table . ' ' . $join . ' ' . $where;
+		}
+		return $this->queryFunc($query, $crud = 'u');
 	}
 
 /*

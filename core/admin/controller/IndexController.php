@@ -10,17 +10,14 @@ class IndexController extends Controller
     public function inputData()
     {
         $db = Model::instance();
-        $res = $db->insert(
+        $res = $db->delete(
             'users',
             [
-                'fields'=> ['name' => 'patton', 'surname' => 'Sayd'],
-                'except' => ['name'],
-                'files' => [
-                    'images' => 'main.jpg',
-                    'gallery_images' => ["red''.jpg", 'green.jpg', 'black.jpg' ]
-                ]
+                'fields'=> ['id', 'name'],
+                'where'=> ['id' => 2],
+                
             ]
-        );       
+        );              
         
         // $redirect = PATH . Settings::get('routes')['admin']['alias'] . '/show';
 

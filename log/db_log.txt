@@ -134,3 +134,7 @@ Fault: 16-12-2021 14:38:54 - Ошибка в SLQ запросе: INSERT INTO use
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 51
 
+Fault: 17-12-2021 23:30:04 - Ошибка в SLQ запросе: INSERT INTO likes (like) VALUE ('160') - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(like) VALUE ('160')' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 51
+

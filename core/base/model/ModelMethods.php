@@ -286,7 +286,6 @@ abstract class ModelMethods
 
                     $join_table = $key;
 
-
                     if ($new_where) {
 
                         if ($value['where'])
@@ -390,16 +389,16 @@ abstract class ModelMethods
                     if($except && in_array($row, $except))
                         continue;
 
-                    $insert['fields'] .= $row . ', ';
+                    $insert['fields'] .= $row . ',';
 
                     if(in_array($value, $this->sql_func)){
-                        $insert['value'] .= $value . ', ';
+                        $insert['value'] .= $value . ',';
 
                     }elseif($value == 'NULL' || $value == NULL){
-                        $insert['value'] .= "NULL" . ', ';
+                        $insert['value'] .= "NULL" . ',';
 
                     }else{
-                        $insert['value'] .= "'" . addslashes($value) . "', ";
+                        $insert['value'] .= "'" . addslashes($value) . "',";
                     }
 
                 }
@@ -409,22 +408,68 @@ abstract class ModelMethods
 
                 foreach($files as $row => $file){
                     
-                    $insert['fields'] .= $row . ', ';
+                    $insert['fields'] .= $row . ',';
 
                     if(is_array($file))
-                        $insert['value'] .= "'" . addslashes(json_encode($file)) . "', ";
+                        $insert['value'] .= "'" . addslashes(json_encode($file)) . "',";
                     else
-                        $insert['value'] .= "'" . addslashes($file) . "', ";
+                        $insert['value'] .= "'" . addslashes($file) . "',";
                 }
             }
 
             foreach($insert as $key => $arr){ 
-                $insert[$key] = rtrim($arr, ', ') . ')';
+                $insert[$key] = rtrim($arr, ',') . ')';
             }
             
         }
         return $insert;
     }
+    
+/*
+|--------------------------------------------------------------------------
+|                   CREATE UPDATE  
+|--------------------------------------------------------------------------
+|   
+|  UPDATE table SET update where
+*/
+
+    protected function createUpdate($fields, $files, $except)
+    {
+        $update = '';
+
+        if($fields){
+
+            foreach ($fields as $row => $value) {
+                
+                if ($except && in_array($row, $except)) continue;
+                
+                $update .= $row . '='; 
+
+                if(in_array($value, $this->sql_func))
+                    $update .= $value . ',';  
+
+                elseif($value === 'NULL' || $value === NULL || $value === '')
+                    $update .= 'NULL' . ',';
+
+                else 
+                    $update .= "'" . addslashes($value) . "',";
+            }
+        }
+
+        if($files){
+            foreach ($files as $row => $file) {
+                $update .= $row . '=';
+
+                if (is_array($file))
+                    $update .= "'" . addslashes(json_encode($file)) . "',";
+                else
+                    $update .= "'" . addslashes($file) . "',";
+            }
+        }
+
+        return rtrim($update, ',');
+    }
+
 
 
 
