@@ -28,9 +28,10 @@ abstract class Controller
     protected $scripts;
 
     protected $userID;
-    protected $data;
+    // protected $data;
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
+# ------------------ Route ------------------------------------------------------------
+
     public function route()
     {
         $controller = str_replace('/', '\\', $this->controller);
@@ -51,7 +52,8 @@ abstract class Controller
         }
     }
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
+# ------------------ Request ----------------------------------------------------------
+
     public function request($arqs)
     {        
         $this->parameters = $arqs['parametrs'];
@@ -75,7 +77,8 @@ abstract class Controller
         $this->getPage();
     }
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
+# -------------------------------------------------------------------------------------
+
     protected function render($path = '', $parameters = [])
     {
         extract($parameters); // если не массив, @ - отключаем warnings
@@ -107,7 +110,8 @@ abstract class Controller
         $this->getPage();
     }
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
+# -------------------------------------------------------------------------------------
+
     protected function getPage(){
         
         if(is_array($this->page)){
@@ -119,7 +123,8 @@ abstract class Controller
         }
     }
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
+# -------------------------------------------------------------------------------------
+
     protected function init($admin = false)
     {
         if (!$admin) {

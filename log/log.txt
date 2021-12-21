@@ -54,3 +54,15 @@ Fault: 19-12-2021 14:50:26 - Class "core\user\controller\Robots.txtController" d
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 50
 
+Fault: 19-12-2021 18:05:56 - Неверное имя файла для подключения -core/admin/controller/InfoController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 35
+
+Fault: 19-12-2021 18:09:18 - Class "core\admin\controller\ShowController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 50
+
+Fault: 21-12-2021 13:31:40 - Method core\admin\controller\ShowController::request() does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+

@@ -17,7 +17,7 @@ class Settings
             'path' => 'core/admin/controller/',
             'hrUrl' => false,
             'routes' => [
-                 'show' => 'info' # url /show   connected InfoController
+                 'dash' => 'info' # url .../dash   connected InfoController
             ]
         ],
         'settings' => [
@@ -46,6 +46,8 @@ class Settings
         'text' => ['name', 'phone', 'address'],
         'textarea' => ['content', 'keywolds']
     ];
+    
+    private $defaultTable = 'users';
 
     
  

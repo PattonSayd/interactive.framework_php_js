@@ -12,7 +12,6 @@ class RouteController extends Controller
     
     protected $routes;
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
     private function __construct(){
 
         $url = $_SERVER['REQUEST_URI'];
@@ -110,7 +109,6 @@ class RouteController extends Controller
         }
      }
 
-#*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
      private function createRoute($var, $explode_url)
      {
             $route = [];
