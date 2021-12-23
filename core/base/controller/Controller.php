@@ -30,7 +30,7 @@ abstract class Controller
     protected $userID;
     // protected $data;
 
-# ------------------ Route ------------------------------------------------------------
+# ----------------- ROUTE -----------------------------------------------------
 
     public function route()
     {
@@ -40,9 +40,9 @@ abstract class Controller
             $object = new \ReflectionMethod($controller, 'request');  
             
             $arqs = [                   
-                    'parametrs' => $this->parameters,        // []
-                    'inputMethod' => $this->inputMethod,    //inputData
-                    'outputMethod' => $this->outputMethod,  //outputData
+                    'parametrs' => $this->parameters, # []
+                    'inputMethod' => $this->inputMethod, # inputData
+                    'outputMethod' => $this->outputMethod, # outputData
                 ];
 
             $object->invoke(new $controller, $arqs);
@@ -52,41 +52,42 @@ abstract class Controller
         }
     }
 
-# ------------------ Request ----------------------------------------------------------
+# ----------------- REQUEST ---------------------------------------------------
 
     public function request($arqs)
     {        
         $this->parameters = $arqs['parametrs'];
 
-        $inputData = $arqs['inputMethod'];     // default 'inputData' or url '/page'
-        $outputData = $arqs['outputMethod'];  // default 'outputData' or url '/page' 
+        $inputData = $arqs['inputMethod']; # default 'inputData' or url '/page'
+        $outputData = $arqs['outputMethod']; # default 'outputData' or url '/page' 
 
-        $data = $this->$inputData();   //  fucn 'inputData()' or func 'page()'
+        $data = $this->$inputData(); # fucn 'inputData()' or func 'page()'
 
         if(method_exists($this, $outputData)){
-            $this->page = $this->$outputData($data);   // 'outputData'
+            $this->page = $this->$outputData($data);                              # 'outputData'
 
         }else if($data){
             $this->page = $data;
         }
-
-        // if ($this->errors){
-        //     $this->writeLog($this->errors);
-        // }
+        /**
+         *  if ($this->errors){
+         *      $this->writeLog($this->errors);
+         *  }
+         */
 
         $this->getPage();
     }
 
-# -------------------------------------------------------------------------------------
+# -------------------- RENDER -------------------------------------------------
 
     protected function render($path = '', $parameters = [])
     {
-        extract($parameters); // если не массив, @ - отключаем warnings
+        extract($parameters); # если не массив, @ - отключаем warnings
         
         if(!$path) {
-            $class = new \ReflectionClass($this);  # ex. core\user\controller\IndexController
+            $class = new \ReflectionClass($this); # ex. core\user\controller\IndexController
 
-            $space = str_replace('\\', '/', $class->getNamespaceName() . '\\'); #core/user/controller/
+            $space = str_replace('\\', '/', $class->getNamespaceName() . '\\'); # core/user/controller/
 
             $route = Settings::get('routes');
 
@@ -110,7 +111,7 @@ abstract class Controller
         $this->getPage();
     }
 
-# -------------------------------------------------------------------------------------
+# -------------------- GET PAGE -----------------------------------------------
 
     protected function getPage(){
         
@@ -123,13 +124,13 @@ abstract class Controller
         }
     }
 
-# -------------------------------------------------------------------------------------
+# -------------------- INIT ------------------------------------------------
 
     protected function init($admin = false)
     {
         if (!$admin) {
             if (USER_CSS_JS['styles']) {
-                foreach (USER_CSS_JS['styles'] as $item) {   //  delete '/'
+                foreach (USER_CSS_JS['styles'] as $item) {                        
                     $this->styles[] = PATH . TEMPLATE . trim($item, '/');
                 }
             }
@@ -140,7 +141,7 @@ abstract class Controller
             }
         } else {
             if (ADMIN_CSS_JS['styles']) {
-                foreach (ADMIN_CSS_JS['styles'] as $item) {   //  delete '/'
+                foreach (ADMIN_CSS_JS['styles'] as $item) {                      
                     $this->styles[] = PATH . ADMIN_TEMPLATE . trim($item, '/');
                 }
             }
