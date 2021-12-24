@@ -25,7 +25,7 @@ const USER_CSS_JS = [
     'scripts' => [],
 ];
 
-use core\base\exceptions\RouteException;
+use core\base\exception\RouteException;
 
 spl_autoload_register(function ($class_name) {
 

@@ -3,13 +3,11 @@
 namespace core\base\model;
 
 use core\base\controller\Singleton;
-use core\base\exceptions\DBException;
+use core\base\exception\DBException;
 use mysqli;
 
-class Model extends ModelMethods
-{	
-	use Singleton;
-	
+abstract class Model extends ModelMethods
+{		
 	protected $db;
 
 /*
@@ -19,13 +17,13 @@ class Model extends ModelMethods
 |		
 */
 
-	protected function __construct()
+	protected function connect()
 	{
 		$this->db = @new mysqli(HOST, USER, PASS, DB_NAME);
 
 		if($this->db->connect_error)
 		{
-			throw new DBException('Ошибка подключения к базе данных: ' . $this->db->connect_errno . ' ' . $this->db->connect_error);
+			throw new DbException('Ошибка подключения к базе данных: ' . $this->db->connect_errno . ' ' . $this->db->connect_error);
 		}
 		$this->db->query("SET NAMES UTF8");
 	}

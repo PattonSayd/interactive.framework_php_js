@@ -1,8 +1,9 @@
 <?php 
 namespace core\admin\controller;
 
+use core\admin\model\AdminModel;
 use core\base\controller\Controller;
-use core\base\exceptions\RouteException;
+use core\base\exception\RouteException;
 use core\base\model\Model;
 use core\base\settings\Settings;
 
@@ -27,7 +28,7 @@ abstract class AdminController extends Controller
         $this->title = 'VG engine';
 
         if(!$this->model) 
-            $this->model = Model::instance();
+            $this->model = AdminModel::instance();
 
         if(!$this->menu)
             $this->menu = Settings::get('projectTable');
@@ -87,90 +88,48 @@ abstract class AdminController extends Controller
             throw new RouteException('Не найдены поля в таблице - ' . $this->table, 2);
         
     }
-    
-# -------------------- CREATE DATA -----------------------------------------------
-    
-    protected function createData($arr = [])
+
+# -------------------- EXTENSION -------------------------------------------------
+
+    protected function extension($args = [], $settings = false )
     {
-        $fields = [];
-        $order = [];
-        $order_direction = [];
+        $filename = explode('_', $this->table);
+        $className = '';
 
-        if (!$this->columns['id_row'])
-            return $this->data = [];
+        foreach ($filename as $item) {
+            $className .= ucfirst($item);
+        }
 
-        $fields[] = $this->columns['id_row'] . ' as id';
+        if (!$settings){
+            $path = Settings::get('extension');
+        }elseif(is_object($settings)){
+            $path = $settings::get('extension');
+        }else{
+            $path = $settings;
+        }
 
-        if ($this->columns['name'])
-            $fields['name'] = 'name';
+        $class = $path . $className . 'Extension';
+                                 
+        if(is_readable($_SERVER['DOCUMENT_ROOT'] . PATH . $class . '.php')){
+             
+            $class = str_replace('/', '\\', $class);
 
-        if ($this->columns['image'])
-            $fields['image'] = 'image';
+            $ext = $class::instance();
 
-        if (count($fields) < 3)
-            foreach ($this->columns as $key => $value) {
-                if (!$fields['name'] && strpos($key, 'name') !== false) {
-                    $fields['name'] = $key . ' as name';
-                }
-                if (!$fields['image'] && strpos($key, 'image') === 0) {
-                    $fields['image'] = $key . ' as image';
-                }
+            foreach ($this as $name => $value) {
+                $ext->$name = &$this->$name; 
             }
 
-        /** fields ************************/
+            return $ext->extension($args);
 
-        if ($arr['fields']) {
-            if (is_array($arr['fields'])) {
-                $fields = Settings::instance()->arrayMergeRecursive($fields, $arr['fields']);
-            } else {
-                $fields[] = $arr['fields'];
-            }
+        }else{
+            $file = $_SERVER['DOCUMENT_ROOT'] . PATH . $path . $this->table .  '.php';
+
+            extract($args);
+
+            if(is_readable($file))
+                return include $file;
         }
-        
-        /** parent_id *********************/
-
-        if ($this->columns['parent_id']) {
-            if (!in_array('parent_id', $fields))
-                $fields[] = 'parent_id';
-            $order[] = 'parent_id';
-        }
-        /** menu position *****************/ 
-
-        if ($this->columns['menu_position']) {
-            $order[] = 'menu_position';
-        } elseif ($this->columns['date']) {
-            if ($order)
-                $order_direction = ['ASC', 'DESC'];
-            else
-                $order_direction[] = ['DESK'];
-
-            $order[] = 'date';
-        }
-
-        /** order *************************/
-
-        if ($arr['order']) {
-            if (is_array($arr['order'])) {
-                $order = Settings::instance()->arrayMergeRecursive($order, $arr['order']);
-            } else {
-                $order[] = $arr['order'];
-            }
-        }
-
-        /** order direction ***************/
-
-        if ($arr['order_direction']) {
-            if (is_array($arr['order_direction'])) {
-                $order_direction = Settings::instance()->arrayMergeRecursive($order_direction, $arr['order_direction']);
-            } else {
-                $order_direction[] = $arr['order_direction'];
-            }
-        }
-
-        $this->data = $this->model->select($this->table, [
-            'fields' => $fields,
-            'order' => $order,
-            'order_direction' => $order_direction
-        ]);
+        return false;
     }
 }

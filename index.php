@@ -9,9 +9,9 @@ session_start();
 require_once 'config.php';
 require_once 'core/base/settings/int_settings.php';
 
-use core\base\exceptions\RouteException;
+use core\base\exception\RouteException;
 use core\base\controller\RouteController;
-use core\base\exceptions\DBException;
+use core\base\exception\DBException;
 
 try {
     

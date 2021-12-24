@@ -13,7 +13,10 @@ trait Singleton{
         }
         self::$_instance = new self;
 
-        return self::$_instance;
+        if(method_exists(self::$_instance, 'connect'))
+            self::$_instance->connect();
+
+         return self::$_instance;
     }
 
     private function __construct()
@@ -22,5 +25,3 @@ trait Singleton{
     { }
     
 }
-
-?>

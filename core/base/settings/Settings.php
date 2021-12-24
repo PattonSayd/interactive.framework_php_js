@@ -10,7 +10,7 @@ class Settings
 
     private $car = 'BMW';
 
-    # put a slash(/) at the end of the path
+    # put a slash(/) at the end of the PATH
     private $routes = [
         'admin' => [
             'alias' => 'admin',
@@ -48,6 +48,8 @@ class Settings
     ];
     
     private $defaultTable = 'users';
+
+    private $extension = 'core/admin/extension/';
 
     
  

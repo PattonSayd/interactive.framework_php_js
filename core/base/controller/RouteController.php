@@ -3,7 +3,7 @@
 namespace core\base\controller;
 
 use core\base\controller\Controller;
-use core\base\exceptions\RouteException;
+use core\base\exception\RouteException;
 use core\base\settings\Settings;
  
 class RouteController extends Controller

@@ -1,6 +1,6 @@
 <?php 
 
-namespace core\base\exceptions;
+namespace core\base\exception;
 
 use core\base\controller\Methods;
 
