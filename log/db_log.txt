@@ -138,3 +138,23 @@ Fault: 17-12-2021 23:30:04 - Ошибка в SLQ запросе: INSERT INTO lik
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 51
 
+Fault: 25-12-2021 1:36:46 - Ошибка в SLQ запросе: SELECT users.id as id, users.name, users.image, users.0, users.parent_id FROM users   ORDER BY users.parent_id ASC, users.menu_position ASC  - 1054 Unknown column 'users.0' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 25-12-2021 1:36:49 - Ошибка в SLQ запросе: SELECT users.id as id, users.name, users.image, users.0, users.parent_id FROM users   ORDER BY users.parent_id ASC, users.menu_position ASC  - 1054 Unknown column 'users.0' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 25-12-2021 1:37:43 - Ошибка в SLQ запросе: SELECT users.id as id, users.name, users.image, users.0, users.4, users.2, users.parent_id FROM users   ORDER BY users.parent_id ASC, users.menu_position ASC  - 1054 Unknown column 'users.0' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 25-12-2021 13:05:49 - Ошибка подключения к базе данных: 2002 Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 25
+
+Fault: 25-12-2021 13:07:21 - Ошибка подключения к базе данных: 2002 Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 25
+

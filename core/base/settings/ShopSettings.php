@@ -22,8 +22,6 @@ class ShopSettings
         ],
     ]; 
 
-    private $color = 'yellow';
-
     static public function getInstance()
     {
         if(self::$_instance instanceof self)

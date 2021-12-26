@@ -4,7 +4,6 @@ namespace core\admin\controller;
 use core\admin\model\AdminModel;
 use core\base\controller\Controller;
 use core\base\exception\RouteException;
-use core\base\model\Model;
 use core\base\settings\Settings;
 
 abstract class AdminController extends Controller
@@ -24,26 +23,26 @@ abstract class AdminController extends Controller
     protected function inputData()
     {        
         $this->init(true);
-
+                  
         $this->title = 'VG engine';
 
         if(!$this->model) 
             $this->model = AdminModel::instance();
 
-        if(!$this->menu)
-            $this->menu = Settings::get('projectTable');
+        // if(!$this->menu)
+        //     $this->menu = Settings::get('projectTable');
 
-        if(!$this->adminPath)
-            $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
+        // if(!$this->adminPath)
+        //     $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
 
-        if(!$this->templateArr)
-            $this->templateArr = Settings::get('templateArr');
+        // if(!$this->templateArr)
+        //     $this->templateArr = Settings::get('templateArr');
 
-        if (!$this->formTemplates)
-            $this->formTemplates = PATH . Settings::get('formTemplates');
+        // if (!$this->formTemplates)
+        //     $this->formTemplates = PATH . Settings::get('formTemplates');
 
-        if (!$this->messages)
-            $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'informationMessages.php';
+        // if (!$this->messages)
+        //     $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'informationMessages.php';
         
         $this->sendNoCacheHeaders();
     }
@@ -91,7 +90,7 @@ abstract class AdminController extends Controller
 
 # -------------------- EXTENSION -------------------------------------------------
 
-    protected function extension($args = [], $settings = false )
+    protected function extension($args = [], $settings = false)
     {
         $filename = explode('_', $this->table);
         $className = '';
@@ -130,6 +129,7 @@ abstract class AdminController extends Controller
             if(is_readable($file))
                 return include $file;
         }
+
         return false;
     }
 }

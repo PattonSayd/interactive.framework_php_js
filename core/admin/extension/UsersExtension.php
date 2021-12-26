@@ -8,8 +8,11 @@ class UsersExtension
 {
     use Singleton;
 
+    protected $a;
+
     public function extension($args = [])
     {
-        exit();
+        $this->a = 13;
+        return $this->a;
     }
 }

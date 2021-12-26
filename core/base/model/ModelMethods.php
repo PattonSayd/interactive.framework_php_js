@@ -53,7 +53,7 @@ abstract class ModelMethods
 
 		$where = ''; 
 
-		if (is_array($set['where']) &&  !empty($set['where'])){
+		if (!empty($set['where']) && is_array($set['where'])){
 
 			$set['operand'] = is_array($set['operand']) &&  !empty($set['operand'])  ? $set['operand'] : ['='];
 			$set['condition'] = is_array($set['condition']) &&  !empty($set['condition'])  ? $set['condition'] : ['AND'];
@@ -169,9 +169,9 @@ abstract class ModelMethods
 
         $order_by = ''; 
 
-        if (is_array($set['order']) &&  !empty($set['order'])){
+        if (!empty($set['order'] && is_array($set['order']))){
 
-            $set['order_direction'] = is_array($set['order_direction']) &&  !empty($set['order_direction'])  ? $set['order_direction'] : ['ASC'];
+            $set['order_direction'] = !empty($set['order_direction']) && is_array($set['order_direction']) ? $set['order_direction'] : ['ASC'];
 
             $order_by = 'ORDER BY '; 
 
@@ -179,7 +179,7 @@ abstract class ModelMethods
             
             foreach($set['order'] as $order){
 
-                if ($set['order_direction'][$direct_count]) {
+                if (!empty($set['order_direction'][$direct_count])) {
                     $order_direction = strtoupper($set['order_direction'][$direct_count]);
                     $direct_count++;
 
@@ -243,7 +243,7 @@ abstract class ModelMethods
         $join = '';
         $where = '';
 
-        if ($set['join']) {
+        if (!empty($set['join'])) {
 
             $join_table = $table;
 

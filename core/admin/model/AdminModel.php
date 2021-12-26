@@ -8,6 +8,5 @@ use core\base\model\Model;
 class AdminModel extends Model
 {
     use Singleton;
-
-    public function test(){}
+    
 }

@@ -14,7 +14,7 @@ class ShowController extends AdminController
 
         $this->createData();  
 
-        return $this->extension();
+        return $this->extension(get_defined_vars());
 
     }
 
@@ -23,7 +23,7 @@ class ShowController extends AdminController
 protected function createData($arr = [])
 {
     $fields = [];
-    $order = [];
+    $order = [];    
     $order_direction = [];
 
     if (!$this->columns['id_row'])
@@ -49,7 +49,7 @@ protected function createData($arr = [])
 
     /** fields ************************/
 
-    if ($arr['fields']) {
+    if (isset($arr['fields'])) {
         if (is_array($arr['fields'])) {
             $fields = Settings::instance()->arrayMergeRecursive($fields, $arr['fields']);
         } else {
@@ -80,7 +80,7 @@ protected function createData($arr = [])
 
     /** order *************************/
 
-    if ($arr['order']) {
+    if (isset($arr['order'])) {
         if (is_array($arr['order'])) {
             $order = Settings::instance()->arrayMergeRecursive($order, $arr['order']);
         } else {
@@ -90,7 +90,7 @@ protected function createData($arr = [])
 
     /** order direction ***************/
 
-    if ($arr['order_direction']) {
+    if (!empty($arr['order_direction'])) {
         if (is_array($arr['order_direction'])) {
             $order_direction = Settings::instance()->arrayMergeRecursive($order_direction, $arr['order_direction']);
         } else {

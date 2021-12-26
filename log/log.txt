@@ -66,3 +66,11 @@ Fault: 21-12-2021 13:31:40 - Method core\admin\controller\ShowController::reques
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 51
 
+Fault: 24-12-2021 23:39:37 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 24-12-2021 23:39:38 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+

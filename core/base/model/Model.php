@@ -2,7 +2,6 @@
 
 namespace core\base\model;
 
-use core\base\controller\Singleton;
 use core\base\exception\DBException;
 use mysqli;
 

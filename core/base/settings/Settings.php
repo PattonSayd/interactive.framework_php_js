@@ -8,8 +8,6 @@ class Settings
 {
     use Singleton;
 
-    private $car = 'BMW';
-
     # put a slash(/) at the end of the PATH
     private $routes = [
         'admin' => [
