@@ -64,7 +64,9 @@ abstract class Controller
         $data = $this->$inputData(); # fucn 'inputData()' or func 'page()'
 
         if(method_exists($this, $outputData)){
-            $this->page = $this->$outputData($data);                              # 'outputData'
+            $this->page = $this->$outputData($data);
+
+            // if($page) $this->page = $page; 
 
         }else if($data){
             $this->page = $data;
@@ -103,7 +105,7 @@ abstract class Controller
         ob_start();
         
         if (!@include_once $path . '.php') {
-            throw new RouteException('Template no exists ' . $path);
+            throw new RouteException('Отсутствует шаблон - ' . $path);
         }
 
         return ob_get_clean();
@@ -122,6 +124,8 @@ abstract class Controller
         }else{
             echo $this->page;
         }
+
+        exit;
     }
 
 # -------------------- INIT ------------------------------------------------

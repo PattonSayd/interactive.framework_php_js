@@ -61,20 +61,15 @@ class Settings
         $properties = [];
 
         foreach ($this as $name => $item) {
-            
             $property = $class::get($name);
-
             $properties[$name] = $property;
 
             if (is_array($item) && is_array($property)) {
-
                 $properties[$name] = $this->arrayMergeRecursive($this->$name , $property);
-
                 continue;
             }
 
             if(!$property){
-                
                 $properties[$name] = $this->$name;
             }
         }
@@ -82,21 +77,16 @@ class Settings
     }    
 
     public function arrayMergeRecursive(){
-
         $arrays = func_get_args();  
 #          0:                 1:
         $base = array_shift($arrays);
 
         foreach ($arrays as $array) {
-
             foreach ($array as $key => $value) {
-
                 if (is_array($value) && is_array($base[$key]))
                     $base[$key] = $this->arrayMergeRecursive($base[$key], $value);
-               
                 else {
                     if(is_int($key)) {
-
                         if (!in_array($value, $base)) 
                             array_push($base, $value);
 

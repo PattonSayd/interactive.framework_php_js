@@ -13,6 +13,8 @@ abstract class AdminController extends Controller
     protected $table;
     protected $data;
     protected $columns;
+
+    protected $adminPath;
   
     protected $menu;
     protected $title;
@@ -32,8 +34,8 @@ abstract class AdminController extends Controller
         // if(!$this->menu)
         //     $this->menu = Settings::get('projectTable');
 
-        // if(!$this->adminPath)
-        //     $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
+        if(!$this->adminPath)
+            $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
 
         // if(!$this->templateArr)
         //     $this->templateArr = Settings::get('templateArr');
@@ -45,6 +47,27 @@ abstract class AdminController extends Controller
         //     $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'informationMessages.php';
         
         $this->sendNoCacheHeaders();
+    }
+
+# ------------------- OUTPUT DATA -----------------------------------------------
+
+    protected function outputData()
+    {
+        if(!$this->content){
+            
+            $args = func_get_arg(0);
+            $parameters = !empty($args) ? $args : [];
+
+            if (!$this->template)
+                $this->template = ADMIN_TEMPLATE . 'show';
+
+            $this->content = $this->render($this->template, $parameters);
+        }
+
+        $this->header = $this->render(ADMIN_TEMPLATE . 'include/header');
+        $this->footer = $this->render(ADMIN_TEMPLATE . 'include/footer');
+
+        return $this->render(ADMIN_TEMPLATE . 'layouts/default');
     }
     
 # -------------------- SEND NO CAHCE HEADERS -------------------------------------

@@ -12,7 +12,6 @@ class UsersExtension
 
     public function extension($args = [])
     {
-        $this->a = 13;
-        return $this->a;
+       
     }
 }
