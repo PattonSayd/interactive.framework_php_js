@@ -249,13 +249,13 @@ var App = function () {
             navItemClass = 'nav-item',
             navItemOpenClass = 'nav-item-open',
             navLinkClass = 'nav-link',
-            navSubmenuClass = 'nav-group-sub',
+            // navSubmenuClass = 'nav-group-sub',
             navSlidingSpeed = 250;
 
         // Configure collapsible functionality
         $('.' + navClass).each(function() {
             $(this).find('.' + navItemClass).has('.' + navSubmenuClass).children('.' + navItemClass + ' > ' + '.' + navLinkClass).not('.disabled').on('click', function (e) {
-                e.preventDefault();
+                // e.preventDefault();
 
                 // Simplify stuff
                 var $target = $(this),

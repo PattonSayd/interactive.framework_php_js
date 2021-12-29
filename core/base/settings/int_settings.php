@@ -33,6 +33,10 @@ const ADMIN_CSS_JS = [
         'resources/js/blockui.min.js',
         'resources/js/prism.min.js',
         'resources/js/app.js',
+        'resources/js/datatables.min.js',
+        'resources/js/buttons.min.js',
+        'resources/js/select2.min.js',
+        'resources/js/datatables_extension_colvis.js',
     ],
 ];
 

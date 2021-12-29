@@ -158,3 +158,31 @@ Fault: 25-12-2021 13:07:21 - Ошибка подключения к базе д�
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 25
 
+Fault: 28-12-2021 20:07:55 - Ошибка в SLQ запросе: SHOW COLUMNS FROM fds - 1146 Table 'interactive.store.fds' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 0:04:57 - Ошибка в SLQ запросе: SHOW COLUMNS FROM index.html - 1146 Table 'index.html' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 0:10:26 - Ошибка в SLQ запросе: SHOW COLUMNS FROM index.html - 1146 Table 'index.html' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 0:10:27 - Ошибка в SLQ запросе: SHOW COLUMNS FROM index.html - 1146 Table 'index.html' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 1:31:15 - Ошибка в SLQ запросе: SHOW COLUMNS FROM like - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'like' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 1:31:27 - Ошибка в SLQ запросе: SHOW COLUMNS FROM  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 1:31:39 - Ошибка в SLQ запросе: SHOW COLUMNS FROM  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

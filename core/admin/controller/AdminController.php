@@ -31,8 +31,8 @@ abstract class AdminController extends Controller
         if(!$this->model) 
             $this->model = AdminModel::instance();
 
-        // if(!$this->menu)
-        //     $this->menu = Settings::get('projectTable');
+        if(!$this->menu)
+            $this->menu = Settings::get('projectTable');
 
         if(!$this->adminPath)
             $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';

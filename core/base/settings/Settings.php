@@ -40,14 +40,21 @@ class Settings
         ]
     ];
     
+    private $defaultTable = 'users';
+
+    private $extension = 'core/admin/extension/';
+
     private $templates = [
         'text' => ['name', 'phone', 'address'],
         'textarea' => ['content', 'keywolds']
     ];
-    
-    private $defaultTable = 'users';
 
-    private $extension = 'core/admin/extension/';
+    private $projectTable = [
+        'users' => ['name' => 'Пользователи', 'icon' => 'icon-user'],
+        'likes' => ['name' => 'Реакции', 'icon' => 'icon-stars']
+    ];
+    
+    
 
     
  

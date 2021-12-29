@@ -25,11 +25,17 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 
 		<div class="navbar-brand">
-			<a href="index.html" class="d-inline-block">
-				<img src="/<?=ADMIN_TEMPLATE?>/resources/images/logo_light.png" alt="">
+			<a href="<?=PATH?>" class="d-inline-block">
+				<img src="<?=PATH.ADMIN_TEMPLATE?>/resources/images/logo_light.png" alt="">
 			</a>
 		</div>
 
+		<div class="d-md-none">
+			<button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+				<i class="icon-paragraph-justify3"></i>
+			</button>
+		</div>
+		
 		<div class="collapse navbar-collapse justify-content-between" id="navbar-mobile">
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -65,7 +71,7 @@
 	</div>
 	<!-- Navbar -->
 
-
+	
 	<!-- Page -->
 	<div class="page-content">
 
@@ -119,16 +125,28 @@
 
 						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
 						
-						<li class="nav-item nav-item-submenu">
+						
 
-							<a href="#" class="nav-link">
-                                <i class="icon-copy"></i> 
-                            </a>
-							<ul class="nav nav-group-sub" data-submenu-title="Layouts">
-								<li class="nav-item"></li>
-							</ul>
+						<?php if($this->menu) :?>
+							<?php foreach($this->menu as $table =>$value) :?>
 
-						</li>
+								<li class="nav-item nav-item-submenu">
+									<a href="<?=$this->adminPath?>show/<?=$table?>" class="nav-link">
+										<i class="<?=$value['icon'] ? $value['icon'] : 'icon-home4'?>"></i>
+										<span><?=$value['name'] ? $value['name'] : $table?></span>
+									</a>
+
+									<ul class="nav nav-group-sub" data-submenu-title="<?=$value['name'] ? $value['name'] : $table?>">
+										<li class="nav-item">
+										
+										</li>
+									</ul>
+								</li>
+																	
+								
+							<?php endforeach; ?>
+						<?php endif;?>
+
 
 					</ul>
 				</div>
@@ -164,7 +182,7 @@
 				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
 					<div class="d-flex">
 						<div class="breadcrumb">
-							<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
 							<a href="sidebar_mini_hide.html" class="breadcrumb-item">Sidebars</a>
 							<span class="breadcrumb-item active">Mini hideable</span>
 						</div>

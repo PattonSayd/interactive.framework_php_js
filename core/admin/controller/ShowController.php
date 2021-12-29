@@ -14,7 +14,7 @@ class ShowController extends AdminController
 
         $this->createData();  
 
-        // return $this->extension(get_defined_vars());
+        return $this->extension(get_defined_vars());
 
     }
 
@@ -31,18 +31,18 @@ class ShowController extends AdminController
     
         $fields[] = $this->columns['id_row'] . ' as id';
 
-        if ($this->columns['name'])
+        if (!empty($this->columns['name']))
             $fields['name'] = 'name';
 
-        if ($this->columns['image'])
+        if (!empty($this->columns['image']))
             $fields['image'] = 'image';
 
         if (count($fields) < 3)
             foreach ($this->columns as $key => $value) {
-                if (!$fields['name'] && strpos($key, 'name') !== false) {
+                if (!empty($fields['name']) && @strpos($key, 'name') !== false) {
                     $fields['name'] = $key . ' as name';
                 }
-                if (!$fields['image'] && strpos($key, 'image') === 0) {
+                if (!empty($fields['image']) && @strpos($key, 'image') === 0) {
                     $fields['image'] = $key . ' as image';
                 }
             }
@@ -59,7 +59,7 @@ class ShowController extends AdminController
         
         /** parent_id *********************/
 
-        if ($this->columns['parent_id']) {
+        if (!empty($this->columns['parent_id'])) {
             if (!in_array('parent_id', $fields))
                 $fields[] = 'parent_id';
             $order[] = 'parent_id';
@@ -67,9 +67,9 @@ class ShowController extends AdminController
 
         /** menu position *****************/ 
 
-        if ($this->columns['menu_position']) {
+        if (!empty($this->columns['menu_position'])) {
             $order[] = 'menu_position';
-        } elseif ($this->columns['date']) {
+        } elseif (!empty($this->columns['date'])) {
             if ($order)
                 $order_direction = ['ASC', 'DESC'];
             else
