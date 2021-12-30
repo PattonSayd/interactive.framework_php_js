@@ -8,11 +8,12 @@ class ShowController extends AdminController
 {
     protected function inputData()
     {
-        $this->parentInputData(); # parent::inputData() не вызываем из-за плагина 
+        if(!$this->userId)
+            $this->parentInputData(); # parent::inputData() не вызываем из-за плагина 
 
         $this->createTableData();
 
-        $this->createData();  
+        $this->createData(['fields' => 'surname']);  
 
         return $this->extension(get_defined_vars());
 
@@ -39,10 +40,10 @@ class ShowController extends AdminController
 
         if (count($fields) < 3)
             foreach ($this->columns as $key => $value) {
-                if (!empty($fields['name']) && @strpos($key, 'name') !== false) {
+                if (!empty($fields['name']) && strpos($key, 'name') !== false) {
                     $fields['name'] = $key . ' as name';
                 }
-                if (!empty($fields['image']) && @strpos($key, 'image') === 0) {
+                if (!empty($fields['image']) && strpos($key, 'image') === 0) {
                     $fields['image'] = $key . ' as image';
                 }
             }

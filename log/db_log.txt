@@ -186,3 +186,23 @@ Fault: 29-12-2021 1:31:39 - Ошибка в SLQ запросе: SHOW COLUMNS FRO
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 29-12-2021 14:15:07 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 14:16:51 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 14:16:53 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 14:16:55 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-12-2021 15:50:03 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

@@ -19,6 +19,9 @@ abstract class AdminController extends Controller
     protected $menu;
     protected $title;
 
+    protected $translate;
+    protected $blocks = [];
+
 
 # -------------------- INPUT DATA ------------------------------------------------
 
@@ -58,8 +61,8 @@ abstract class AdminController extends Controller
             $args = func_get_arg(0);
             $parameters = !empty($args) ? $args : [];
 
-            if (!$this->template)
-                $this->template = ADMIN_TEMPLATE . 'show';
+            // if (!$this->template)
+            //     $this->template = ADMIN_TEMPLATE . 'show';
 
             $this->content = $this->render($this->template, $parameters);
         }
@@ -154,5 +157,56 @@ abstract class AdminController extends Controller
         }
 
         return false;
+    }
+
+# -------------------- CREATE OUTPUT DATA ----------------------------------------
+
+    protected function createOutputData($settings = false)      // vg-rows['id]
+    {                                                           // vg-img['name]
+        if (!$settings)                                         // vg-content[]
+            $settings = Settings::instance();
+
+        $blocks = $settings::get('blockNeedle');
+        $this->translate = $settings::get('translate');
+
+        if(!$blocks || !is_array($blocks)){
+
+            foreach ($this->columns as $name => $value) {
+                if($name === 'id_row')
+                    continue;
+
+                if(!$this->translate[$name])
+                    $this->translate[$name][] = $name; // [] по умолчанию вставляется 0
+
+                $this->blocks[0][] = $name;
+            }
+            return;
+        }  
+
+        $default = array_keys($blocks)[0];
+
+        foreach ($this->columns as $name => $value) {
+            if ($name === 'id_row')
+                continue;
+
+            $insert = false;
+
+            foreach ($blocks as $block => $value) {
+                if(!array_key_exists($block, $this->blocks))
+                    $this->blocks[$block] = [];
+
+                if(in_array($name, $value)){
+                    $this->blocks[$block][] = $name;
+                    $insert = true;
+                    break;
+                }  
+            }
+            if(!$insert)
+                $this->blocks[$default][] = $name;
+
+            if(!$this->translate[$name])
+                $this->translate[$name][] = $name;
+        }
+        return;
     }
 }

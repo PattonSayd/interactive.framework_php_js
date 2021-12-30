@@ -15,7 +15,7 @@
 				<tr>
 					<th>Id</th>
 					<th>Name</th>
-					<th>Job Title</th>
+					<th>Surname</th>
 					<th>DOB</th>
 					<th>Status</th>
 					<th>Salary</th>
@@ -30,7 +30,7 @@
 					<tr>
 						<td><?=$data['id']?></td>
 						<td><?=$data['name']?></td>
-						<td>Traffic Court Referee</td>
+						<td><?=$data['surname']?></td>
 						<td>22 Jun 1972</td>
 						<td><span class="badge badge-success">Active</span></td>
 						<td>$85,600</td>

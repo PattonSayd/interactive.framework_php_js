@@ -53,6 +53,25 @@ class Settings
         'users' => ['name' => 'Пользователи', 'icon' => 'icon-user'],
         'likes' => ['name' => 'Реакции', 'icon' => 'icon-stars']
     ];
+
+    private $blockNeedle = [
+        'vg-rows' => [],
+        'vg-img' => ['img', 'gallery_img' , 'new_gallery_img'],
+        'vg-content' => ['content'],
+    ];
+
+    private $translate = [
+        'name' => ['Название', 'Не болee 100 символов'],
+        'content' => ['Описание', 'Не менее 50 символов'],
+        'visible' => ['Видимость', 'Поумолчанию: показать'],
+        'keywords' => ['Ключевые слова', 'Не менее 50 символов'],
+        'filters' => ['Фильтры'],
+        'menu_position' => ['Позиция меню'],
+        'parent_id' => ['Родительская позиция'],
+        'img' => ['Фоновый рисунок'],
+        'gallery_img' => ['Галерея'],
+        'new_gallery_img' => ['Новая галерея'],
+    ];
     
     
 
