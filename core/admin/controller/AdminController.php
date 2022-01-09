@@ -13,6 +13,7 @@ abstract class AdminController extends Controller
     protected $table;
     protected $data;
     protected $columns;
+    protected $foreignData;
 
     protected $adminPath;
   
@@ -159,14 +160,14 @@ abstract class AdminController extends Controller
         return false;
     }
 
-# -------------------- CREATE OUTPUT DATA ----------------------------------------
+# -------------------- CREATE BLOCK ----------------------------------------
 
-    protected function createOutputData($settings = false)      // vg-rows['id]
+    protected function createBlock($settings = false)           // vg-rows['id]
     {                                                           // vg-img['name]
         if (!$settings)                                         // vg-content[]
             $settings = Settings::instance();
 
-        $blocks = $settings::get('blockNeedle');
+        $blocks = $settings::get('block');
         $this->translate = $settings::get('translate');
 
         if(!$blocks || !is_array($blocks)){
@@ -208,5 +209,112 @@ abstract class AdminController extends Controller
                 $this->translate[$name][] = $name;
         }
         return;
+    }
+
+# -------------------- CREATE FOREİGN DATA ---------------------------------------
+
+    protected function createForeignData($settings = false)
+    {
+        if (!$settings) $settings =  Settings::instance();
+
+        $root = $settings::get('root');
+
+        $keys = $this->model->foreignKeys($this->table);
+
+        if ($keys) {
+            foreach ($keys as $item) {
+                if (in_array($this->table, $root['tables'])) {
+                    $this->foreignData['COLUMN_NAME'][0]['id'] = 'NULL';
+                    $this->foreignData['COLUMN_NAME'][0]['name'] = $root['name'];
+                }
+            }
+        } elseif (isset($this->columns['parent_id'])) {
+    
+            $arr['COLUMN_NAME'] = 'parent_id';
+            $arr['REFERENCED_COLUMN_NAME'] = $this->columns['id_row'];
+            $arr['REFERENCED_TABLE_NAME'] = $this->table;
+
+            $this->createForeignProperty($arr, $root);
+        }
+    }
+
+# -------------------- CREATE FOREİGN PROPERTY -----------------------------------
+
+    protected function createForeignProperty($arr, $root)
+    {
+        $where = false;
+        $operand = false;
+
+        if (in_array($this->table, $root['tables'])) {
+            $this->foreignData[$arr['COLUMN_NAME']][0]['id'] = 'NULL';
+            $this->foreignData[$arr['COLUMN_NAME']][0]['name'] = $root['name'];
+        }
+
+        $orderData = $this->createOrderData($arr['REFERENCED_TABLE_NAME']);
+
+        if ($this->data) {
+            if ($arr['REFERENCED_TABLE_NAME'] === $this->table) {
+                $where[$this->columns['id_row']] = $this->data[$this->columns['id_row']];
+                $operand[] = '<>';
+            }
+        }
+
+        $foreign = $this->model->select($arr['REFERENCED_TABLE_NAME'], [
+            'fields' => [$arr['REFERENCED_COLUMN_NAME'] . ' as id', $orderData['name'], $orderData['parent_id']],
+            'where' => $where,
+            'operand' => $operand,
+            'order' => $orderData['order']
+        ]);
+
+        if ($foreign) {
+            if (isset($this->foreignData[$arr['COLUMN_NAME']])) {
+
+                foreach ($foreign as $value) {
+                    $this->foreignData[$arr['COLUMN_NAME']][] = $value;
+                }
+            } else {
+                $this->foreignData[$arr['COLUMN_NAME']] = $foreign;
+            }
+        }
+    }
+
+# -------------------- CREATE ORDER DATA -----------------------------------------
+
+    protected function createOrderData($table)
+    {
+        $columns = $this->model->showColumns($table); # $columns = $this->columns
+
+        if(!$columns)
+            throw new RouteException('Отсутствуют поля в таблице ' . $table);
+
+        $name = '';
+        $order_name = '';
+
+        if($columns['name']) {
+            $order_name = $name = 'name';
+        }else{
+            foreach($columns as $key => $value){
+                if(strpos($key, 'name') !== false){
+                    $order_name = $key;
+                    $name =  $key . ' as name';
+                }
+            }
+
+            if(!$name)
+                $name = $columns['id_row'] . ' as name'; // непринципиално
+        }
+
+        $parent_id = '';
+        $order = [];
+
+        if(!empty($columns['parent_id']))
+            $order[] = $parent_id = 'parent_id';
+
+        if(!empty($columns['menu_position'])) 
+            $order[] = 'menu_position';
+        else 
+            $order[] = $order_name;
+
+        return compact('name', 'parent_id', 'order', 'columns');
     }
 }

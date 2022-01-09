@@ -9206,3 +9206,83 @@ Fault: 29-12-2021 15:50:37 - Неверное имя файла для подк�
 file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
 In line 55
 
+Fault: 30-12-2021 2:17:56 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 30-12-2021 2:17:57 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 30-12-2021 2:17:57 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 30-12-2021 2:18:04 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 30-12-2021 13:48:36 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 31-12-2021 13:53:20 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:04 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:15 - Неверное имя файла для подключения - core/admin/controller/EditController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:18 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 55
+
+Fault: 02-01-2022 16:00:29 - Class "core\admin\controller\AddController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 07-01-2022 16:04:28 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 07-01-2022 16:47:31 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 07-01-2022 16:47:31 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 07-01-2022 17:40:05 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 09-01-2022 18:02:01 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 09-01-2022 18:02:11 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 09-01-2022 18:18:58 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 09-01-2022 18:36:32 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+

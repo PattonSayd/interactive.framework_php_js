@@ -2,7 +2,7 @@
 
 namespace core\admin\controller;
 
-class ShowController extends AdminController
+class AddController extends AdminController
 {
     protected function inputData()
     {
@@ -11,8 +11,9 @@ class ShowController extends AdminController
 
         $this->createTableData();
 
-        $this->createOutputData();
+        $this->createForeignData();
 
+        $this->createBlock(); #createOutputData
 
     }
 }

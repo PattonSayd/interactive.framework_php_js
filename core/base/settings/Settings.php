@@ -54,10 +54,10 @@ class Settings
         'likes' => ['name' => 'Реакции', 'icon' => 'icon-stars']
     ];
 
-    private $blockNeedle = [
+    private $block = [
         'vg-rows' => [],
-        'vg-img' => ['img', 'gallery_img' , 'new_gallery_img'],
-        'vg-content' => ['content'],
+        'vg-img' => [],
+        'vg-content' => [],
     ];
 
     private $translate = [
@@ -71,6 +71,11 @@ class Settings
         'img' => ['Фоновый рисунок'],
         'gallery_img' => ['Галерея'],
         'new_gallery_img' => ['Новая галерея'],
+    ];
+
+    private $root = [
+        'name' => 'Корневая',
+        'tables' => ['articlexs'],
     ];
     
     
