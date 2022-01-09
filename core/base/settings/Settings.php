@@ -75,7 +75,11 @@ class Settings
 
     private $root = [
         'name' => 'Корневая',
-        'tables' => ['articlexs'],
+        'tables' => ['articles'],
+    ];
+
+    private $radio = [
+        'visible' => ['Показать', 'Скрыть', 'default' => 'Показать']
     ];
     
     

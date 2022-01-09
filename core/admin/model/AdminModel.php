@@ -9,7 +9,7 @@ class AdminModel extends Model
 {
     use Singleton;
     
-    public function foreignKeys($table, $key = false)
+    public function getForeignKeys($table, $key = false)
     {  
         $db = DB_NAME;
         $where = false; 

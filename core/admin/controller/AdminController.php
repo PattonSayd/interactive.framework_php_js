@@ -219,16 +219,13 @@ abstract class AdminController extends Controller
 
         $root = $settings::get('root');
 
-        $keys = $this->model->foreignKeys($this->table);
+        $keys = $this->model->getForeignKeys($this->table);
 
         if ($keys) {
             foreach ($keys as $item) {
-                if (in_array($this->table, $root['tables'])) {
-                    $this->foreignData['COLUMN_NAME'][0]['id'] = 'NULL';
-                    $this->foreignData['COLUMN_NAME'][0]['name'] = $root['name'];
-                }
+                $this->createForeignProperty($item, $root);
             }
-        } elseif (isset($this->columns['parent_id'])) {
+        } elseif (!empty($this->columns['parent_id'])) {
     
             $arr['COLUMN_NAME'] = 'parent_id';
             $arr['REFERENCED_COLUMN_NAME'] = $this->columns['id_row'];
@@ -246,7 +243,7 @@ abstract class AdminController extends Controller
         $operand = false;
 
         if (in_array($this->table, $root['tables'])) {
-            $this->foreignData[$arr['COLUMN_NAME']][0]['id'] = 'NULL';
+            $this->foreignData[$arr['COLUMN_NAME']][0]['id'] = 'NULL'; 
             $this->foreignData[$arr['COLUMN_NAME']][0]['name'] = $root['name'];
         }
 
@@ -267,8 +264,7 @@ abstract class AdminController extends Controller
         ]);
 
         if ($foreign) {
-            if (isset($this->foreignData[$arr['COLUMN_NAME']])) {
-
+            if ($this->foreignData[$arr['COLUMN_NAME']]) {
                 foreach ($foreign as $value) {
                     $this->foreignData[$arr['COLUMN_NAME']][] = $value;
                 }
@@ -317,4 +313,22 @@ abstract class AdminController extends Controller
 
         return compact('name', 'parent_id', 'order', 'columns');
     }
+
+# -------------------- CREATE RADIO ----------------------------------------------
+
+    protected function createRadio($settings = false)
+    {
+        if (!$settings) $settings = Settings::instance();
+
+        $radio = $settings::get('radio');
+
+        if($radio){
+            foreach($this->columns as $name => $value){
+                if(!empty($radio[$name])){
+                    $this->foreignData[$name] = $radio[$name];
+                }
+            }
+        }
+    }
 }
+
