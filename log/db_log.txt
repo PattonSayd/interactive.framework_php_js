@@ -1,0 +1,68 @@
+Fault: 10-01-2022 23:23:45 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:23:52 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:24:00 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:24:01 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:24:14 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:24:15 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:25:08 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:29:10 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 10-01-2022 23:30:07 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name, likes. FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM likes   ORDER BY likes. ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 0:02:56 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name FROM likes   ORDER BY likes. ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 0:07:02 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.id as name FROM likes   ORDER BY  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:50:13 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:50:42 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE users.parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE users.parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:51:01 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE users.parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE users.parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:52:25 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE users.parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE users.parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:53:23 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE users.parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE users.parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 1:53:41 - Ошибка в SLQ запросе: SELECT users.COUNT(*) as count FROM users  WHERE users.parent_id = '1'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*) as count FROM users  WHERE users.parent_id = '1'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

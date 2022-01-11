@@ -22,13 +22,13 @@ abstract class ModelMethods
     {
 		$set['fields'] = is_array($set['fields']) &&  !empty($set['fields']) ? $set['fields'] : ['*'];
 
-		$table = $table ? $table . '.' : '';
+		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
 
 		$fields = ''; 
 
 		foreach($set['fields'] as $field){
-
-			$fields .= $table . $field . ', ';
+            if(!empty($field))
+			    $fields .= $table . $field . ', ';  
 		}
 
 		return $fields;
@@ -49,14 +49,17 @@ abstract class ModelMethods
 
     protected function createWhere($set, $table = false, $instruction = 'WHERE')
     {
-		$table = $table ? $table . '.' : '';
+		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
 
+        if(!empty($set['where']) &&  is_string($set['where']))
+            return $instruction . ' ' . trim($set['where']);
+        
 		$where = ''; 
 
 		if (!empty($set['where']) && is_array($set['where'])){
 
-			$set['operand'] = is_array($set['operand']) &&  !empty($set['operand'])  ? $set['operand'] : ['='];
-			$set['condition'] = is_array($set['condition']) &&  !empty($set['condition'])  ? $set['condition'] : ['AND'];
+			$set['operand'] = !empty($set['operand']) && is_array($set['operand']) ? $set['operand'] : ['='];
+			$set['condition'] = !empty($set['condition']) && is_array($set['condition']) ? $set['condition'] : ['AND'];
 
 			$where = $instruction; 
 
@@ -165,11 +168,11 @@ abstract class ModelMethods
 
     protected function createOrder($set, $table = false)
     {
-        $table = $table ? $table . '.' : '';
+        $table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
 
         $order_by = ''; 
 
-        if (!empty($set['order'] && is_array($set['order']))){
+        if (!empty($set['order']) && is_array($set['order'])){
 
             $set['order_direction'] = !empty($set['order_direction']) && is_array($set['order_direction']) ? $set['order_direction'] : ['ASC'];
 
@@ -469,54 +472,5 @@ abstract class ModelMethods
 
         return rtrim($update, ',');
     }
-
-
-
-
-
-
-
-
-    
-	/** $table   - Таблица базы данных
-	 *  $set  - array
-	 *  'fields'          => ['id', 'name'],
-	 *  'no_concat'       => false/true Если True не присоединять имя таблицы к полям и where
-	 *  'where'           => ['id' => '1, 2, 3, 4', 'fio' => 'DeviJones', 'name' => 'Patton', 'surname' => 'Sayd', color=>['red', 'green', 'blue'],
-	 *  'operand'         => ['=', '<>', 'IN', '%LIKE%', ''NOT IN],
-	 *  'condition'       => ['OR', AND'],
-	 *  'order'           => ['fio', 'name'],
-	 *  'order_direction' => ['ASC', 'DESC'],
-	 *  'limit'           => '1'
-	 * 
-	 * 
-	 *  'join'            =>  [
-	 * 		
-		* 	   'join_table1' =>  [
-		* 	      'table'			 => 'join_table1',
-		* 	      'fields' 			 => ['id as j_id', 'name as j_name'],
-		* 	      'type'  			 => 'left',
-		* 	      'where'            => ['name' => 'Yellow'],
-		* 	      'operand'     	 => ['='],
-		* 	      'condition'	     => ['OR'],
-		* 	      'on'			     => ['id', 'parent_id'],
-		* 	      'group_condition'  => 'AND'
-		* 	  ],
-		*
-		* 	   'join_table2' => [
-		* 	        'fields'         => ['id as j2_id', 'name as j2_name'],
-		* 	        'type'           => 'left',
-		* 	        'where'          => ['name' => 'Yellow'],
-		* 	        'operand'        => ['<>'],
-		* 	        'condition'      => ['and'],
-		* 	        'on' => [
-		* 	               'table'  =>'test',
-		* 	               'fields' => ['id', 'parent_id']
-		* 	                			]
-		* 		],	
-	 *		
-	 */
-
-
     
 }

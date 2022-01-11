@@ -180,7 +180,7 @@ abstract class Model extends ModelMethods
 			}else {
 				$where = false;
 
-				$columns = $this->showColumns($table);
+				$columns = $this->getColumns($table);
 
 				if(!$columns) return false;
 						// id						
@@ -216,7 +216,7 @@ abstract class Model extends ModelMethods
 
 		$where = $this->createWhere($set, $table);
 
-		$columns = $this->showColumns($table);
+		$columns = $this->getColumns($table);
 
 		if (!$columns) return false;
 
@@ -251,13 +251,13 @@ abstract class Model extends ModelMethods
 
 /*
 |--------------------------------------------------------------------------
-|					SHOW COLUMNS
+|					GET COLUMNS
 |--------------------------------------------------------------------------
 |   
 |   
 */
 	
-	final public function showColumns($table)
+	final public function getColumns($table)
 	{
 			$query = "SHOW COLUMNS FROM $table";
 
@@ -279,3 +279,45 @@ abstract class Model extends ModelMethods
 	}
 	
 }
+
+
+
+
+	/** $table   - Таблица базы данных
+	 *  $set  - array
+	 *  'fields'          => ['id', 'name'],
+	 *  'no_concat'       => false/true Если True не присоединять имя таблицы к полям и where
+	 *  'where'           => ['id' => '1, 2, 3, 4', 'fio' => 'DeviJones', 'name' => 'Patton', 'surname' => 'Sayd', color=>['red', 'green', 'blue'],
+	 *  'operand'         => ['=', '<>', 'IN', '%LIKE%', ''NOT IN],
+	 *  'condition'       => ['OR', AND'],
+	 *  'order'           => ['fio', 'name'],
+	 *  'order_direction' => ['ASC', 'DESC'],
+	 *  'limit'           => '1'
+	 * 
+	 * 
+	 *  'join'            =>  [
+	 * 		
+		* 	   'join_table1' =>  [
+		* 	      'table'			 => 'join_table1',
+		* 	      'fields' 			 => ['id as j_id', 'name as j_name'],
+		* 	      'type'  			 => 'left',
+		* 	      'where'            => ['name' => 'Yellow'],
+		* 	      'operand'     	 => ['='],
+		* 	      'condition'	     => ['OR'],
+		* 	      'on'			     => ['id', 'parent_id'],
+		* 	      'group_condition'  => 'AND'
+		* 	  ],
+		*
+		* 	   'join_table2' => [
+		* 	        'fields'         => ['id as j2_id', 'name as j2_name'],
+		* 	        'type'           => 'left',
+		* 	        'where'          => ['name' => 'Yellow'],
+		* 	        'operand'        => ['<>'],
+		* 	        'condition'      => ['and'],
+		* 	        'on' => [
+		* 	               'table'  =>'test',
+		* 	               'fields' => ['id', 'parent_id']
+		* 	                			]
+		* 		],	
+	 *		
+	 */

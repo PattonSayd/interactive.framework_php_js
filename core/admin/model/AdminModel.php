@@ -23,7 +23,7 @@ class AdminModel extends Model
          WHERE TABLE_SCHEMA = '$db' 
          AND TABLE_NAME = '$table' 
          AND CONSTRAINT_NAME <> 'PRIMERY' 
-         AND REFERENCED_TABLE_NAME is not null $where"; // <> не равно
+         AND REFERENCED_TABLE_NAME is not null $where";
 
         return $this->queryFunc($query);
     }

@@ -108,7 +108,7 @@ abstract class AdminController extends Controller
             }
         }
 
-        $this->columns = $this->model->showColumns($this->table);
+        $this->columns = $this->model->getColumns($this->table);
 
         if(!$this->columns)
             throw new RouteException('Не найдены поля в таблице - ' . $this->table, 2);
@@ -168,6 +168,7 @@ abstract class AdminController extends Controller
             $settings = Settings::instance();
 
         $blocks = $settings::get('block');
+
         $this->translate = $settings::get('translate');
 
         if(!$blocks || !is_array($blocks)){
@@ -176,7 +177,7 @@ abstract class AdminController extends Controller
                 if($name === 'id_row')
                     continue;
 
-                if(!$this->translate[$name])
+                if(empty($this->translate[$name]))
                     $this->translate[$name][] = $name; // [] по умолчанию вставляется 0
 
                 $this->blocks[0][] = $name;
@@ -205,7 +206,7 @@ abstract class AdminController extends Controller
             if(!$insert)
                 $this->blocks[$default][] = $name;
 
-            if(!$this->translate[$name])
+            if(empty($this->translate[$name]))
                 $this->translate[$name][] = $name;
         }
         return;
@@ -264,7 +265,7 @@ abstract class AdminController extends Controller
         ]);
 
         if ($foreign) {
-            if ($this->foreignData[$arr['COLUMN_NAME']]) {
+            if (!empty($this->foreignData[$arr['COLUMN_NAME']])) {
                 foreach ($foreign as $value) {
                     $this->foreignData[$arr['COLUMN_NAME']][] = $value;
                 }
@@ -278,7 +279,7 @@ abstract class AdminController extends Controller
 
     protected function createOrderData($table)
     {
-        $columns = $this->model->showColumns($table); # $columns = $this->columns
+        $columns = $this->model->getColumns($table); # $columns = $this->columns
 
         if(!$columns)
             throw new RouteException('Отсутствуют поля в таблице ' . $table);
@@ -286,7 +287,7 @@ abstract class AdminController extends Controller
         $name = '';
         $order_name = '';
 
-        if($columns['name']) {
+        if(!empty($columns['name'])) {
             $order_name = $name = 'name';
         }else{
             foreach($columns as $key => $value){
@@ -329,6 +330,71 @@ abstract class AdminController extends Controller
                 }
             }
         }
+    }
+
+# -------------------- CREATE MENU POSITION --------------------------------------
+
+    protected function createMenuPosition($settings = false)
+    {
+        $where = false;
+
+        if (isset($this->columns['menu_position'])) {
+
+            if (!$settings)
+                $settings =  Settings::instance();
+
+            $root = $settings::get('root');
+
+            if (!empty($this->columns['parent_id'])) {
+
+                if (in_array($this->table, $root['tables'])) {
+                    $where = 'parent_id IS NULL OR parent_id = 0';
+
+                } else {
+                    $parent = $this->model->getForeignKeys($this->table, 'parent_id');
+
+                    if ($parent) {
+
+                        $parent = $parent[0];
+
+                        if ($this->table === $parent['REFERENCED_TABLE_NAME']) {
+                            $where = 'parent_id IS NULL OR parent_id = 0';
+                        } else {
+                            $columns = $this->model->getColumns($parent['REFERENCED_TABLE_NAME']);
+
+                            if (isset($columns['parent_id'])) {
+                                $order[] = 'parent_id';
+                            } else {
+                                $order[] = $parent['REFERENCED_COLUMN_NAME'];
+                            }
+
+                            $id = $this->model->select($parent['REFERENCED_TABLE_NAME'], [
+                                'fields' => [$parent['REFERENCED_COLUMN_NAME']],
+                                'order' => $order,
+                                'limit' => 1,
+                            ])[0][$parent['REFERENCED_COLUMN_NAME']];
+
+                            if($id) $where = ['parent_id' => $id];
+                        }
+                    } else {
+                        $where = 'parent_id IS NULL OR parent_id = 0';
+                    }
+                }
+            }
+
+            $menu_position = $this->model->select($this->table, [
+                'fields' => ['COUNT(*) as count'],
+                'where' => $where,
+                'no_concat' => true
+            ])[0]['count'] + (int)!$this->data;
+
+            for ($i = 1; $i <= $menu_position; $i++) {
+
+                $this->foreignData['menu_position'][$i - 1]['id'] = $i;
+                $this->foreignData['menu_position'][$i - 1]['name'] = $i;
+            }
+        }
+        return;
     }
 }
 

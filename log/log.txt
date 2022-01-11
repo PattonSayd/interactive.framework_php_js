@@ -6,3 +6,47 @@ Fault: 10-01-2022 0:23:49 - Отсутствует шаблон - core/admin/vie
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 108
 
+Fault: 11-01-2022 1:23:39 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 51
+
+Fault: 11-01-2022 1:56:07 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 1:56:09 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 1:59:05 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 1:59:08 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:00:06 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:00:51 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:02:54 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:02:56 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:03:21 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+
+Fault: 11-01-2022 2:05:28 - Отсутствует шаблон - core/admin/view/add
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 108
+

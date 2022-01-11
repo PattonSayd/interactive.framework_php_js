@@ -11,6 +11,8 @@ class AddController extends AdminController
         $this->createTableData();
 
         $this->createForeignData();
+
+        $this->createMenuPosition(); 
         
         $this->createRadio();
 
