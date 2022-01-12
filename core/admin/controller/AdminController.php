@@ -345,7 +345,7 @@ abstract class AdminController extends Controller
 
             $root = $settings::get('root');
 
-            if (!empty($this->columns['parent_id'])) {
+            if (isset($this->columns['parent_id'])) {
 
                 if (in_array($this->table, $root['tables'])) {
                     $where = 'parent_id IS NULL OR parent_id = 0';

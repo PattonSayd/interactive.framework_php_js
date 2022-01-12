@@ -66,3 +66,11 @@ Fault: 11-01-2022 1:53:41 - Ошибка в SLQ запросе: SELECT users.COU
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 11-01-2022 21:53:43 - Ошибка в SLQ запросе: INSERT INTO articles (fields,files,visible) VALUE ('darticles','img.jpg','1') - 1054 Unknown column 'fields' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 11-01-2022 21:54:45 - Ошибка в SLQ запросе: INSERT INTO articles (name,img,menu_position) VALUE ('pribanbass','1.jpeg',NULL),('folkie','2.jpeg','1') - 1054 Unknown column 'img' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

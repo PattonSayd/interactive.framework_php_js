@@ -75,7 +75,7 @@ class Settings
 
     private $root = [
         'name' => 'Корневая',
-        'tables' => ['articles'],
+        'tables' => ['users'],
     ];
 
     private $radio = [

@@ -343,26 +343,22 @@ abstract class ModelMethods
 
                 foreach($items as $row =>$value){
                     
-                    if($except && in_array($row, $except))
-                        continue;
+                    if($except && in_array($row, $except)) continue;
 
-                    if(!$check_fields)
-                        $insert['fields'] .= $row . ',';
+                    if(!$check_fields) $insert['fields'] .= $row . ',';
 
-                    if(in_array($value, $this->sql_func)){
+                    if(in_array($value, $this->sql_func))
                         $insert['value'] .= $value . ',';
 
-                    }elseif($value == 'NULL' || $value == NULL){
+                    elseif($value == 'NULL' || $value == NULL)
                         $insert['value'] .= "NULL" . ',';
 
-                    }else{
+                    else
                         $insert['value'] .= "'" . addslashes($value) . "',";
-                    }
                     
                     $a++;
 
-                    if($a === $count_fields)
-                        break;         // ОБЕЗОПАСИТЬ ЛИШНЕЕ ВХОЖДЕНИЕ В VALUE
+                    if($a === $count_fields) break; # ОБЕЗОПАСИТЬ ЛИШНЕЕ ВХОЖДЕНИЕ В VALUE
                 }
 
                 if($a < $count_fields){
@@ -401,7 +397,7 @@ abstract class ModelMethods
                         $insert['value'] .= "NULL" . ',';
 
                     }else{
-                        $insert['value'] .= "'" . addslashes($value) . "',";
+                         $insert['value'] .= "'" . addslashes($value) . "',";
                     }
 
                 }
