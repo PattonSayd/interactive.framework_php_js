@@ -13,7 +13,7 @@ class ShowController extends AdminController
 
         $this->createTableData();
 
-        $this->createData(['fields' => 'surname']);  
+        $this->createData();  
 
         return $this->extension(get_defined_vars());
 

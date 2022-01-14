@@ -18,7 +18,7 @@ class AddController extends AdminController
 
         $this->createBlock(); 
 
-        $this->manyAdd();
+        // $this->manyAdd();
 
     }
 

@@ -20,8 +20,8 @@
 					<th>Status</th>
 					<th>Salary</th>
 					<th>Edition</th>
-					
 				</tr>
+			
 			</thead>
 			<tbody>
 

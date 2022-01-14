@@ -74,3 +74,19 @@ Fault: 11-01-2022 21:54:45 - Ошибка в SLQ запросе: INSERT INTO art
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 12-01-2022 16:35:51 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-01-2022 16:37:08 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-01-2022 16:37:18 - Ошибка в SLQ запросе: SELECT likes.id as id, likes.surname FROM likes     - 1054 Unknown column 'likes.surname' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-01-2022 0:08:52 - Ошибка в SLQ запросе: SHOW COLUMNS FROM users? - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

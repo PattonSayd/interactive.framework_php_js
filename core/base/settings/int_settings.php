@@ -37,6 +37,10 @@ const ADMIN_CSS_JS = [
         'resources/js/buttons.min.js',
         'resources/js/select2.min.js',
         'resources/js/datatables_extension_colvis.js',
+        'resources/js/tagsinput.min.js',
+        'resources/js/form_floating_labels.js',
+        'resources/js/validate.min.js',
+        'resources/js/form_validation.js',
     ],
 ];
 
