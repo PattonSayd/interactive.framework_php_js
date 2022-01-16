@@ -8,74 +8,66 @@
 
             <form action="#" class="form-validate-jquery">
 
-                <fieldset class="mb-3">
+                <div class="row mb-3">
+                    <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
+                <?php if(!$this->noDelete && $this->data) : ?>
+                    <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['id_row']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                <?php endif; ?>
+                </div>
+                
+                <fieldset class="mb-3 row">
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Name <span class="text-danger">*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="basic" class="form-control" required placeholder="Enter name...">
-                        </div>
-                    </div>
+                    <?php
+                        foreach ($this->blocks as $class => $block) {
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Menu position</label>
-                        <div class="col-lg-10">
-                            <select class="form-control">
-                                <option value="opt1">Default select box</option>
-                                <option value="opt2">Option 2</option>
-                            </select>
-                        </div>
-                    </div>
+                            if(is_int($class)) $class = 'col-lg-12';
+                            
+                            echo '<div class=" '. $class . '">';
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Parend id</label>
-                        <div class="col-lg-10">
-                            <select class="form-control">
-                                <option value="opt1">Default select box</option>
-                                <option value="opt2">Option 2</option>
-                            </select>
-                        </div>
-                    </div>
+                            if($block){
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Keywords</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control tags-input" placeholder="Tags..." data-fouc>
-                        </div>
-                    </div>
+                                foreach ($block as $row){
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Visible</label>
-                        <div class="col-lg-10">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="custom-stacked-radio" id="custom_radio_stacked_unchecked" checked>
-                                <label class="custom-control-label" for="custom_radio_stacked_unchecked">Yes</label>
-                            </div>
+                                    foreach ($this->templateArr as $template => $items) {
 
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="custom-stacked-radio" id="custom_radio_stacked_checked">
-                                <label class="custom-control-label" for="custom_radio_stacked_checked">No</label>
-                            </div>
-                        </div>
-                    </div>
+                                        if(in_array($row, $items)){
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Content</label>
-                        <div class="col-lg-10">
-                            <textarea rows="3" cols="3" class="form-control" placeholder="Textarea"></textarea>
-                        </div>
-                    </div>
+                                            if(!@include $_SERVER['DOCUMENT_ROOT'] . $this->formTemplates . $template . '.php'){
+                                                throw new \core\base\exception\RouteException('Не найден шаблон ' . $_SERVER['DOCUMENT_ROOT'] . $this->formTemplates . $template . '.php');
+                                                
+                                            }
 
+                                            break;
+                                            
+                                        }
+                                    }         
+                                }                               
+                            } 
+                            echo '</div>';                          
+                        }
+                    ?>               
+                    
                 </fieldset>
 
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
+                <div class="row flex-row-reverse">
+                    <button type="submit" class="btn mr-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
+                <?php if(!$this->noDelete && $this->data) : ?>
+                    <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['id_row']]?>"" class="btn mr-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                <?php endif; ?>
                 </div>
+
+                <?php if($this->data) : ?>
+                    <input type="hidden" name="<?= $this->columns['id_row'];?>" value="<?= $this->data[$this->columns['id_row']];?>">
+                <?php endif ?>
+
+                <input type="hidden" name="table" value="<?= $this->table;?>">
+
             </form>
         </div>
     </div>
 	<!-- /form inputs -->
 	
 </div>
+
 <!-- /content area -->
 

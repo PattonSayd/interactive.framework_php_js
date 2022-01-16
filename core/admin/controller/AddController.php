@@ -4,6 +4,8 @@ namespace core\admin\controller;
 
 class AddController extends AdminController
 {
+    protected $action = 'add';
+
     protected function inputData()
     {
         if(!$this->userId) $this->parentInputData(); # parent::inputData() не вызываем из-за плагина 
@@ -24,27 +26,27 @@ class AddController extends AdminController
 
 
 
-    protected function manyAdd()
-    {
-        $fields = [
-            'name' => 'rood', 
-            'menu_position' => 5,
-            'visible'=> 3
+    // protected function manyAdd()
+    // {
+    //     $fields = [
+    //         'name' => 'rood', 
+    //         'menu_position' => 5,
+    //         'visible'=> 3
 
-        ];
+    //     ];
 
-        $this->model->insert('articles', [
-            'fields' => [
-                'name' => 'rood', 
-                'menu_position' => 5,
-                'visible'=> 3
-            ],  
+    //     $this->model->insert('articles', [
+    //         'fields' => [
+    //             'name' => 'rood', 
+    //             'menu_position' => 5,
+    //             'visible'=> 3
+    //         ],  
             
-            'files' => [
-                'image' => 'TT.png',
-                'gallery_image' => ['R1.png', 'R2.png', 'R3.png'],
-            ],  
-        ]);
-    }
+    //         'files' => [
+    //             'image' => 'TT.png',
+    //             'gallery_image' => ['R1.png', 'R2.png', 'R3.png'],
+    //         ],  
+    //     ]);
+    // }
 
 }

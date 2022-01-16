@@ -23,6 +23,10 @@ abstract class AdminController extends Controller
     protected $translate;
     protected $blocks = [];
 
+    protected $templateArr;
+    protected $formTemplates;
+    protected $noDelete;
+
 
 # -------------------- INPUT DATA ------------------------------------------------
 
@@ -41,11 +45,11 @@ abstract class AdminController extends Controller
         if(!$this->adminPath)
             $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
 
-        // if(!$this->templateArr)
-        //     $this->templateArr = Settings::get('templateArr');
+        if(!$this->templateArr)
+            $this->templateArr = Settings::get('templateArr');
 
-        // if (!$this->formTemplates)
-        //     $this->formTemplates = PATH . Settings::get('formTemplates');
+        if (!$this->formTemplates)
+            $this->formTemplates = PATH . Settings::get('formTemplates');
 
         // if (!$this->messages)
         //     $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'informationMessages.php';

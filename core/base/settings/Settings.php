@@ -44,9 +44,18 @@ class Settings
 
     private $extension = 'core/admin/extension/';
 
-    private $templates = [
-        'text' => ['name', 'phone', 'address'],
-        'textarea' => ['content', 'keywolds']
+    private $formTemplates = 'core/admin/view/include/form/';
+
+    private $templateArr = [
+       # template => rows DB    
+        'input'     => ['name'],
+        'select'    => ['parent_id', 'menu_position'],
+        'radio'     => ['visible'],
+        'keywords'  => ['keywords'],
+        'image'     => ['image'],
+        'gallery'   => ['gallery_image'],
+        'textarea'  => ['content'],
+
     ];
 
     private $projectTable = [
@@ -55,9 +64,9 @@ class Settings
     ];
 
     private $block = [
-        'vg-rows' => [],
-        'vg-img' => [],
-        'vg-content' => [],
+        'col-lg-6 vl' => [],
+        'col-lg-6 vr' => ['image', 'content'],
+        'col-lg-12' => [], # default
     ];
 
     private $translate = [
