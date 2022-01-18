@@ -60,35 +60,35 @@ class Settings
 
     private $projectTable = [
         'users' => ['name' => 'Пользователи', 'icon' => 'icon-user'],
-        'likes' => ['name' => 'Реакции', 'icon' => 'icon-stars']
+        'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars']
     ];
 
     private $block = [
-        'col-lg-6 vl' => [],
-        'col-lg-6 vr' => ['image', 'content'],
-        'col-lg-12' => [], # default
+        'col-lg-6 vl'   => [],
+        'col-lg-6 vr'   => ['image', 'content'],
+        'col-lg-12'     => [],
     ];
 
     private $translate = [
-        'name' => ['Название', 'Не болee 100 символов'],
+        'name' => ['Название', 'Не более 50 символов'],
         'content' => ['Описание', 'Не менее 50 символов'],
-        'visible' => ['Видимость', 'Поумолчанию: показать'],
-        'keywords' => ['Ключевые слова', 'Не менее 50 символов'],
+        'visible' => ['Видимость', 'По умолчанию: показать'],
+        'keywords' => ['Ключевые слова'],
         'filters' => ['Фильтры'],
         'menu_position' => ['Позиция меню'],
         'parent_id' => ['Родительская позиция'],
-        'img' => ['Фоновый рисунок'],
-        'gallery_img' => ['Галерея'],
-        'new_gallery_img' => ['Новая галерея'],
+        'image' => ['Фоновый рисунок'],
+        'gallery_image' => ['Галерея'],
+        'new_gallery_image' => ['Новая галерея'],
     ];
 
     private $root = [
         'name' => 'Корневая',
-        'tables' => ['users'],
+        'tables' => [],
     ];
 
     private $radio = [
-        'visible' => ['Показать', 'Скрыть', 'default' => 'Показать']
+        'visible' => [1 => 'Показать', 0 => 'Скрыть', 'default' => 'Показать']
     ];
     
     

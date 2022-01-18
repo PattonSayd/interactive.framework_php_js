@@ -41,6 +41,8 @@ const ADMIN_CSS_JS = [
         'resources/js/form_floating_labels.js',
         'resources/js/validate.min.js',
         'resources/js/form_validation.js',
+        'resources/js/uniform.min.js',
+        'resources/js/form_checkboxes_radios.js',
     ],
 ];
 

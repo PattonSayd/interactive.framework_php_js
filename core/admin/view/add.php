@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="#" class="form-validate-jquery">
+            <form action="<?=$this->adminPath . $this->action?>" class="form-validate-jquery">
 
                 <div class="row mb-3">
                     <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
