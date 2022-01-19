@@ -182,9 +182,19 @@
 				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
 					<div class="d-flex">
 						<div class="breadcrumb">
-							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-							<a href="sidebar_mini_hide.html" class="breadcrumb-item">Sidebars</a>
-							<span class="breadcrumb-item active">Mini hideable</span>
+
+							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/show" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+								<?php 
+									foreach ($this->parameters as $key => $value){
+									
+										if($key == $this->table && empty($value)){
+											echo '<span class="breadcrumb-item active">' . $this->menu[$this->table]['name'] . '</span>';
+										}
+									}
+								?>
+
+							<!-- <span class="breadcrumb-item active">Mini hideable</span> -->
+
 						</div>
 
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

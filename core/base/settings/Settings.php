@@ -11,9 +11,9 @@ class Settings
     # put a slash(/) at the end of the PATH
     private $routes = [
         'admin' => [
-            'alias' => 'admin',
-            'path' => 'core/admin/controller/',
-            'hrUrl' => false,
+            'alias'  => 'admin',
+            'path'   => 'core/admin/controller/',
+            'hrUrl'  => false,
             'routes' => [
                  'dash' => 'info' # url .../dash   connected InfoController
             ]
@@ -21,21 +21,21 @@ class Settings
         'settings' => [
             'path' => 'core/base/settings/'
         ],
-        'plugins' => [
-            'path' => 'core/plugins/',
+        'plugins'   => [
+            'path'  => 'core/plugins/',
             'hrUrl' => false,
-            'dir' => ''
+            'dir'   => ''
         ],
         'user' =>[
-            'path'=> 'core/user/controller/',
-            'hrUrl' => true,
+            'path'   => 'core/user/controller/',
+            'hrUrl'  => true,
             'routes' => [
                 'hello' => 'info/page/first', # url = hello, controller = InfoController, inputMethod = hello, outputMethod = first
             ]
         ],
         'default' => [
-            'controller' => 'IndexController',
-            'inputMethod' => 'inputData',
+            'controller'   => 'IndexController',
+            'inputMethod'  => 'inputData',
             'outputMethod' => 'outputData'
         ]
     ];
@@ -46,44 +46,43 @@ class Settings
 
     private $formTemplates = 'core/admin/view/include/form/';
 
-    private $templateArr = [
+    private $templates = [
        # template => rows DB    
-        'input'     => ['name'],
-        'select'    => ['parent_id', 'menu_position'],
-        'radio'     => ['visible'],
-        'keywords'  => ['keywords'],
-        'image'     => ['image'],
-        'gallery'   => ['gallery_image'],
-        'textarea'  => ['content'],
+        'input'    => ['name'],
+        'select'   => ['parent_id', 'menu_position'],
+        'radio'    => ['visible'],
+        'keywords' => ['keywords'],
+        'image'    => ['image'],
+        'gallery'  => ['gallery_image'],
+        'textarea' => ['content'],
 
     ];
 
     private $projectTable = [
-        'users' => ['name' => 'Пользователи', 'icon' => 'icon-user'],
+        'users'    => ['name' => 'Пользователи', 'icon' => 'icon-user'],
         'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars']
     ];
 
     private $block = [
-        'col-lg-6 vl'   => [],
-        'col-lg-6 vr'   => ['image', 'content'],
-        'col-lg-12'     => [],
+        'col-lg-6 vl' => [],
+        'col-lg-6 vr' => ['image', 'content'],
+        'col-lg-12'   => [],
     ];
 
     private $translate = [
-        'name' => ['Название', 'Не более 50 символов'],
-        'content' => ['Описание', 'Не менее 50 символов'],
-        'visible' => ['Видимость', 'По умолчанию: показать'],
-        'keywords' => ['Ключевые слова'],
-        'filters' => ['Фильтры'],
+        'name'          => ['Название', 'Не более 50 символов'],
+        'content'       => ['Описание', 'Не менее 50 символов'],
+        'visible'       => ['Видимость', 'По умолчанию: показать'],
+        'keywords'      => ['Ключевые слова'],
+        'filters'       => ['Фильтры'],
         'menu_position' => ['Позиция меню'],
-        'parent_id' => ['Родительская позиция'],
-        'image' => ['Фоновый рисунок'],
+        'parent_id'     => ['Родительская позиция'],
+        'image'         => ['Фоновый рисунок'],
         'gallery_image' => ['Галерея'],
-        'new_gallery_image' => ['Новая галерея'],
     ];
 
     private $root = [
-        'name' => 'Корневая',
+        'name'   => 'Корневая',
         'tables' => [],
     ];
 
@@ -91,7 +90,14 @@ class Settings
         'visible' => [1 => 'Показать', 0 => 'Скрыть', 'default' => 'Показать']
     ];
     
-    
+    private $validation = [
+        'name'     => ['empty' => true, 'trim' => true],
+        'price'    => ['int' => true],
+        'login'    => ['empty' => true, 'trim' => true],
+        'password' => ['crypt' => true, 'empty' => true],
+        'keywords' => ['count' => 70, 'trim' => true],
+        'content'  => ['count' => 160, 'trim' => true],
+    ];
 
     
  

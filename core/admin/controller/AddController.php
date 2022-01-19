@@ -10,6 +10,8 @@ class AddController extends AdminController
     {
         if(!$this->userId) $this->parentInputData(); # parent::inputData() не вызываем из-за плагина 
 
+        $this->checkPost();
+
         $this->createTableData();
 
         $this->createForeignData();
@@ -20,13 +22,13 @@ class AddController extends AdminController
 
         $this->createBlock(); 
 
-        $this->data = [
-            'name' => 'Fair',
-            'keywords' => 'Worry',
-            'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
-            'image' => 'akat.jpg',
-            'gallery_image' => json_encode(['ety.jpg', 'pus.jpg']),
-        ];
+        // $this->data = [
+        //     'name' => 'Fair',
+        //     'keywords' => 'Worry',
+        //     'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
+        //     'image' => 'akat.jpg',
+        //     'gallery_image' => json_encode(['ety.jpg', 'pus.jpg']),
+        // ];
         
 
         // $this->manyAdd();

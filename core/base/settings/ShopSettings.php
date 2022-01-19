@@ -7,12 +7,12 @@ use core\base\settings\Settings;
 
 class ShopSettings
 {   
-    use Singleton;
+    use Singleton{ instance as traitInstance; }
     
     private $settings;
     
     private $templates = [
-        'text' => ['price', 'short', 'name'],
+        'input' => ['price', 'short', 'name'],
         'textarea' => ['goods_content']
     ];
 
@@ -22,12 +22,12 @@ class ShopSettings
         ],
     ]; 
 
-    static public function getInstance()
+    static public function instance()
     {
         if(self::$_instance instanceof self)
             return self::$_instance;
         
-        self::instance()->settings = Settings::instance();
+        self::traitInstance()->settings = Settings::instance();
 
         $properties = self::$_instance->settings->clueProperties(get_class());
 
@@ -39,7 +39,7 @@ class ShopSettings
 
     public static function get($property)
     {
-        return self::getInstance()->$property;  
+        return self::instance()->$property;  
     }
 
     protected function setProperty($properties)

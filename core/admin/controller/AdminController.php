@@ -23,7 +23,7 @@ abstract class AdminController extends Controller
     protected $translate;
     protected $blocks = [];
 
-    protected $templateArr;
+    protected $templates;
     protected $formTemplates;
     protected $noDelete;
 
@@ -45,8 +45,8 @@ abstract class AdminController extends Controller
         if(!$this->adminPath)
             $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
 
-        if(!$this->templateArr)
-            $this->templateArr = Settings::get('templateArr');
+        if(!$this->templates)
+            $this->templates = Settings::get('templates');
 
         if (!$this->formTemplates)
             $this->formTemplates = PATH . Settings::get('formTemplates');
@@ -400,5 +400,85 @@ abstract class AdminController extends Controller
         }
         return;
     }
-}
 
+# -------------------- CHECK POST ------------------------------------------------
+
+    protected function checkPost($settings = false)
+    {
+        if ($this->isPost()) {
+
+            $this->clearPostFields($settings);
+
+            $this->table = $this->clearStr($_POST['table']);
+
+            unset($_POST['table']);
+
+            if($this->table) {
+                $this->createTableData($settings);
+
+                $this->EditData();  // ADD and EDIT METHOD                 
+            }
+        }
+    }
+
+# -------------------- CLEAR POST FIELDS -----------------------------------------
+
+    protected function clearPostFields($settings, &$arr = [])
+    {
+        if (!$arr) $arr = &$_POST;
+
+        if (!$settings) $settings =  Settings::instance();
+
+        $id = isset($_POST[$this->columns['id_row']]) ?  $_POST[$this->columns['id_row']] : false;
+
+        $validate =  Settings::get('validation');
+        
+        if(!$this->translate) $this->translate = $settings::get('translate');
+
+        foreach ($arr as $key => $value) {
+
+            if(is_array($value)) {
+                $this->clearPostFields($settings, $value);
+            }else{
+                if(is_numeric($value))
+                    $arr[$key] = $this->clearNum($value);
+                
+                if ($validate) {
+                    if (!empty($validate[$key])) {
+                        if ($this->translate[$key])
+                            $answer = $this->translate[$key][0];
+                        else 
+                            $answer = $key;
+
+                        if (!empty($validate[$key]['crypt'])) {
+                            if ($id) {
+                                if (empty($value)) {
+                                    unset($arr[$key]);
+                                    continue;
+                                }
+
+                                $arr[$key] = md5($value);
+                            }
+                        }
+
+                        if (!empty($validate[$key]['empty']))
+                            $this->emptyFields($value, $answer, $arr);
+
+                        if (!empty($validate[$key]['trim']))
+                            $arr[$key] = trim($value);
+
+                        if (!empty($validate[$key]['int']))
+                            $arr[$key] = $this->clearNum($value);
+
+                        if (!empty($validate[$key]['count']))
+                            $arr[$key] = $this->countChar($value, $validate[$key]['count'], $answer, $arr);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+
+}

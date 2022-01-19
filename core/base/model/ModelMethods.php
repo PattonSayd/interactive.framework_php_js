@@ -261,9 +261,9 @@ abstract class ModelMethods
 
                 if ($join) $join .= ' ';
 
-                if ($value['on'] && $value['on']) {
+                if ($value['on']) {
 
-                    if($value['on']['fields'] && is_array($value['on']['fields']) && count($value['on']['fields']) === 2){
+                    if(isset($value['on']['fields']) && is_array($value['on']['fields']) && count($value['on']['fields']) === 2){
                         $join_fields = $value['on']['fields'];
 
                     }elseif(count($value['on']) === 2){
@@ -273,25 +273,25 @@ abstract class ModelMethods
                         continue;
                     }
 
-                    if (!$value['type'])
+                    if (empty($value['type']))
                         $join .= ' LEFT JOIN ';
                     else
                         $join .= trim(strtoupper($value['type'])) . ' JOIN ';
 
                     $join .= $key . ' ON ';
 
-                    if ($value['on']['table'])
+                    if (!empty($value['on']['table']))
                         $join_temp_table = $value['on']['table'];
                     else
                         $join_temp_table = $join_table;
 
-                    $join .= '.' . $join_fields[0] . ' = ' . $key . '.' . $join_fields[1];
+                    $join .= $join_temp_table . '.' . $join_fields[0] . ' = ' . $key . '.' . $join_fields[1];
 
                     $join_table = $key;
 
                     if ($new_where) {
 
-                        if ($value['where'])
+                        if (!empty($value['where']))
                             $new_where = false;
 
                         $group_condition = 'WHERE';
@@ -300,7 +300,7 @@ abstract class ModelMethods
                         $group_condition = $value['group_condition'] ? strtoupper($value['group_condition']) : 'AND';
                     }
 
-                    $fields .= $this->createFields($value, $key, $set['join_structure']);
+                    $fields .= $this->createFields($value, $key); # $set['join_structure'] 
                     $where .= $this->createWhere($value, $key, $group_condition);
                 }
             }

@@ -122,3 +122,27 @@ Fault: 18-01-2022 1:39:13 - Ошибка в SLQ запросе: SELECT comments.
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 18-01-2022 16:35:02 - Ошибка в SLQ запросе: SELECT users.id, users.name, comments.id as c_id, comments.name as c_name FROM users  LEFT JOIN comments ON .parent_id = comments.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= comments.id' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 18-01-2022 17:06:20 - Ошибка в SLQ запросе: SELECT comments.id, comments.name, users.id as c_id, users.name as c_name FROM comments  LEFT JOIN users ON comments.id = users.panent_id    - 1054 Unknown column 'users.panent_id' in 'on clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 18-01-2022 17:20:12 - Ошибка в SLQ запросе: SELECT users.id, users.name, comments.id as c_id, comments.name as c_name FROM users  LEFT JOIN comments ON comments.parent_id = comments.id    - 1054 Unknown column 'comments.parent_id' in 'on clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 18-01-2022 17:37:46 - Ошибка в SLQ запросе: SELECT users.id, users.name, comments.id as c_id, comments.name as c_name FROM users  LEFT JOIN comments ON ds.id = comments.parent_id    - 1054 Unknown column 'ds.id' in 'on clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 18-01-2022 17:37:56 - Ошибка в SLQ запросе: SELECT users.id, users.name, comments.id as c_id, comments.name as c_name FROM users  LEFT JOIN comments ON ds.id = comments.parent_id    - 1054 Unknown column 'ds.id' in 'on clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 18-01-2022 22:37:56 - Ошибка в SLQ запросе: SHOW COLUMNS FROM  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
