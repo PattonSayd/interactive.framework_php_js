@@ -1,12 +1,21 @@
-
+ 
 <!-- Content area -->
 <div class="content">
 
+    <?php if(isset($_SESSION['res']['answer'])) :?>
+    <div class="col-lg-8 mx-auto">
+        <div class="alert alert-warning alert-rounded alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            <span class="font-weight-semibold">Warning!</span> <?=$_SESSION['res']['answer']?>
+        </div>
+    </div>
+   <?php unset($_SESSION['res']);?>
+    <?php endif; ?>
     <!-- Form inputs -->
     <div class="card">
         <div class="card-body">
 
-            <form action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery">
+            <form action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
 
                 <div class="row mb-3">
                     <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>

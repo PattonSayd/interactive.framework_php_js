@@ -19,30 +19,49 @@ const QTY_LINKS = 3;
 const ADMIN_CSS_JS = [  
 
     'styles' => [
-        'resources/css/icons/styles.css',
-        'resources/css/assets/bootstrap.min.css',
-        'resources/css/assets/bootstrap_limitless.min.css',
-        'resources/css/assets/layout.min.css',
-        'resources/css/assets/components.min.css',
-        'resources/css/assets/colors.min.css',
+        'main' => [
+            'resources/css/icons/styles.css',
+            'resources/css/assets/bootstrap.min.css',
+            'resources/css/assets/bootstrap_limitless.min.css',
+            'resources/css/assets/layout.min.css',
+            'resources/css/assets/components.min.css',
+            'resources/css/assets/colors.min.css',
+        ]
     ],
 
     'scripts' => [
-        'resources/js/jquery.min.js',
-        'resources/js/bootstrap.bundle.min.js',
-        'resources/js/blockui.min.js',
-        'resources/js/prism.min.js',
-        'resources/js/app.js',
-        'resources/js/datatables.min.js',
-        'resources/js/buttons.min.js',
-        'resources/js/select2.min.js',
-        'resources/js/datatables_extension_colvis.js',
-        'resources/js/tagsinput.min.js',
-        'resources/js/form_floating_labels.js',
-        'resources/js/validate.min.js',
-        'resources/js/form_validation.js',
-        'resources/js/uniform.min.js',
-        'resources/js/form_checkboxes_radios.js',
+        'main' => [
+            'resources/js/jquery.min.js',
+            'resources/js/bootstrap.bundle.min.js',
+            'resources/js/blockui.min.js',
+            'resources/js/prism.min.js',
+            'resources/js/app.js',
+        ],
+        
+        'show' => [
+            'resources/js/select2.min.js',
+            'resources/js/datatables_extension_colvis.js',
+            'resources/js/datatables.min.js',
+            'resources/js/buttons.min.js',
+        ],
+
+        'add' => [
+            'resources/js/tagsinput.min.js',
+            'resources/js/form_floating_labels.js',
+            'resources/js/validate.min.js',
+            'resources/js/form_validation.js',
+            'resources/js/typeahead.bundle.min.js',
+            'resources/js/bootstrap_multiselect.js',
+            'resources/js/tokenfield.min.js',
+            'resources/js/formatter.min.js',
+            'resources/js/touchspin.min.js',
+            'resources/js/maxlength.min.js',
+            'resources/js/uniform.min.js',
+            'resources/js/form_checkboxes_radios.js',
+            'resources/js/switchery.min.js',
+            'resources/js/switch.min.js',
+        ],
+        
     ],
 ];
 

@@ -10,6 +10,7 @@ session_start();
 
 require_once 'config.php';
 require_once 'core/base/settings/int_settings.php';
+require_once 'libraries/function.php';
 
 use core\base\exception\RouteException;
 use core\base\controller\RouteController;

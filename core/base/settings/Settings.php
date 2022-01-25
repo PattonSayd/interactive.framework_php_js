@@ -46,6 +46,9 @@ class Settings
 
     private $formTemplates = 'core/admin/view/include/form/';
 
+    private $messages = 'core/base/messages/';
+
+
     private $templates = [
        # template => rows DB    
         'input'    => ['name'],

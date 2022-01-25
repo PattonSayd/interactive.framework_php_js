@@ -20,6 +20,9 @@ abstract class AdminController extends Controller
     protected $menu;
     protected $title;
 
+    protected $messages;
+    protected $settings;
+
     protected $translate;
     protected $blocks = [];
 
@@ -51,8 +54,8 @@ abstract class AdminController extends Controller
         if (!$this->formTemplates)
             $this->formTemplates = PATH . Settings::get('formTemplates');
 
-        // if (!$this->messages)
-        //     $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'informationMessages.php';
+        if (!$this->messages)
+            $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'infoMessages.php';
         
         $this->sendNoCacheHeaders();
     }
@@ -416,7 +419,7 @@ abstract class AdminController extends Controller
             if($this->table) {
                 $this->createTableData($settings);
 
-                $this->EditData();  // ADD and EDIT METHOD                 
+                // $this->EditData();  // ADD and EDIT METHOD                 
             }
         }
     }
@@ -429,7 +432,7 @@ abstract class AdminController extends Controller
 
         if (!$settings) $settings =  Settings::instance();
 
-        $id = isset($_POST[$this->columns['id_row']]) ?  $_POST[$this->columns['id_row']] : false;
+        $id = isset($_POST[isset($this->columns['id_row'])]) ?  $_POST[$this->columns['id_row']] : false; # edit
 
         $validate =  Settings::get('validation');
         
@@ -476,9 +479,49 @@ abstract class AdminController extends Controller
                 }
             }
         }
+             
         return true;
     }
 
+# -------------------- EMPTY FIELDS ----------------------------------------------
 
+    protected function emptyFields($value, $answer, $arr = [])
+    {
+        if(empty($value)) {
+            $_SESSION['res']['answer'] = '<span class="error">' . $this->messages['empty'] . ' ' . $answer .  '</span>';
+            $this->addSessionData($arr);
+        }
+    }
+
+# -------------------- ADD SESSION DATA ------------------------------------------
+
+    protected function addSessionData($arr = [])
+    {
+        if (!$arr)
+            $arr = $_POST;
+
+        foreach ($arr as $key => $value) {
+            $_SESSION['res'][$key] = $value;
+        }
+
+        $this->redirect();
+    }
+
+# -------------------- COUNT CHAR --------------------------------------------------
+
+    protected function countChar($value, $counter, $answer, $arr)
+    {
+        if (mb_strlen($value) > $counter) {
+
+            $str_res = mb_str_replace('$1', $answer, $this->messages['count']);
+            $str_res = mb_str_replace('$2', $counter, $str_res);
+
+            $_SESSION['res']['answer'] = '<span class="error">' . $str_res .  '</span>';
+
+            $this->addSessionData($arr);
+        }
+
+        return $value;
+    }
 
 }

@@ -113,6 +113,8 @@ class RouteController extends Controller
      {
             $route = [];
 
+            $this->pageAction = ($explode_url[0]);
+
             if (!empty($explode_url[0])) {
                 
                 if (!empty($this->routes[$var]['routes'][$explode_url[0]])){

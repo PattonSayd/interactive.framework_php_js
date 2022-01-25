@@ -11,8 +11,7 @@
                    required placeholder="Enter name..."
                    value="<?=isset($_SESSION['res'][$row]) ? 
                                 htmlspecialchars($_SESSION['res'][$row]) : 
-                                htmlspecialchars($this->data[$row])?>"
-                   >
+                                htmlspecialchars($this->data[$row])?>">
         </div>
     </div>
-</div>  
+</div>      
