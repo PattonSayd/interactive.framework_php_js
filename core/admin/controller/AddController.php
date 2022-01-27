@@ -46,7 +46,7 @@ class AddController extends AdminController
 
     //     ];
 
-    //     $this->model->insert('articles', [
+    //     $this->model->add('articles', [
     //         'fields' => [
     //             'name' => 'rood', 
     //             'menu_position' => 5,

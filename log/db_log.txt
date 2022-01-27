@@ -190,3 +190,19 @@ Fault: 21-01-2022 17:15:43 - Ошибка в SLQ запросе: SHOW COLUMNS FR
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 26-01-2022 20:29:34 - Ошибка в SLQ запросе: INSERT INTO users (name,keywords,visible,menu_position,parent_id,content,created_at) VALUE ('one post1','feel,pool,dreep,fool',NULL,'2','2','redInfo',NOW()) - 1048 Column 'visible' cannot be null
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 26-01-2022 20:30:19 - Ошибка в SLQ запросе: INSERT INTO users (name,keywords,visible,menu_position,parent_id,content,created_at) VALUE ('Iphone','greey,punk,red,gold',NULL,'3','2','Mega phone new Iphone',NOW()) - 1048 Column 'visible' cannot be null
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 26-01-2022 20:33:25 - Ошибка в SLQ запросе: INSERT INTO users (name,keywords,visible,menu_position,parent_id,content,created_at) VALUE ('fsdfd',NULL,NULL,'1','1',NULL,NOW()) - 1048 Column 'visible' cannot be null
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 26-01-2022 20:34:10 - Ошибка в SLQ запросе: INSERT INTO users (name,keywords,visible,menu_position,parent_id,content,created_at) VALUE ('redf',NULL,NULL,'1','1',NULL,NOW()) - 1048 Column 'visible' cannot be null
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

@@ -419,7 +419,7 @@ abstract class AdminController extends Controller
             if($this->table) {
                 $this->createTableData($settings);
 
-                // $this->EditData();  // ADD and EDIT METHOD                 
+                $this->editData();  // ADD and EDIT METHOD                 
             }
         }
     }
@@ -488,7 +488,10 @@ abstract class AdminController extends Controller
     protected function emptyFields($value, $answer, $arr = [])
     {
         if(empty($value)) {
-            $_SESSION['res']['answer'] = '<span class="error">' . $this->messages['empty'] . ' ' . $answer .  '</span>';
+            $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
+                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                             <span class="font-weight-semibold">Warning!</span> '.$this->messages['empty'].'>
+                                         </div>';
             $this->addSessionData($arr);
         }
     }
@@ -513,15 +516,104 @@ abstract class AdminController extends Controller
     {
         if (mb_strlen($value) > $counter) {
 
-            $str_res = mb_str_replace('$1', $answer, $this->messages['count']);
+            $str_res = mb_str_replace('$1', '<span class="font-weight-bold">' . $answer. '</span>', $this->messages['count']);
             $str_res = mb_str_replace('$2', $counter, $str_res);
 
-            $_SESSION['res']['answer'] = '<span class="error">' . $str_res .  '</span>';
+            $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
+                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                             <span class="font-weight-semibold">Warning!</span> '.$str_res .'
+                                         </div>';
 
             $this->addSessionData($arr);
         }
 
         return $value;
+    }
+
+# -------------------- EDIT DATA -------------------------------------------------
+
+    protected function editData($returnID = false)
+    {
+        $id = false;
+        $where = false;
+        $method = 'add';
+
+        if(!empty($_POST['return_id'])) $returnID = true;        
+
+        if (isset($_POST[$this->columns['id_row']])) {
+
+            $id = is_numeric($_POST[$this->columns['id_row']]) ? $this->clearNum($_POST[$this->columns['id_row']]) : $this->clearStr($_POST[$this->columns['id_row']]);  // ЕСЛИ id В mysql СОДЕРЖЕТСЯ СТРОКА
+
+            if($id) {
+                $where = [$this->columns['id_row'] => $id];
+                $method = 'edit';
+            }
+        }
+
+        foreach ($this->columns as $key => $value) {
+
+            if ($key === 'id_row')
+                continue;
+
+            if ($value['Type'] === 'date' || $value['Type'] === 'datetime') {
+                       
+                if (!isset($_POST[$key])) $_POST[$key] = 'NOW()';
+            }
+        }        
+
+        // $this->createFile();
+
+        // if($id && method_exists($this, 'checkFiles'))
+        //     $this->checkFiles($id);
+
+        // $this->createAlias($id);
+
+        // $this->updateMenuPosition($id);
+
+        // $except = $this->checkExceptFields(); 
+
+        $res_id = $this->model->$method($this->table, [
+            'files' => $this->fileArray,
+            'where' => $where,
+            'return_id' => true,
+            // 'except' => $except,
+        ]);
+
+        if (!$id && $method === 'add') {
+            $_POST[$this->columns['id_row']] = $res_id;
+
+            $answerSuccess = $this->messages['addSuccess'];
+            $answerFail = $this->messages['addFail'];
+        } else {
+            $answerSuccess = $this->messages['editSuccess'];
+            $answerFail = $this->messages['editFail'];
+        }
+
+        // $this->checkManyToMAny();
+
+        $this->extension(get_defined_vars());
+
+        // $result = $this->checkAlias($_POST[$this->columns['id_row']]);
+
+        if ($res_id) {
+
+            $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
+                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                             <span class="font-weight-semibold">Well done!</span> '.$answerSuccess .'
+                                         </div>';
+
+            if (!$returnID) $this->redirect();
+
+            return $_POST[$this->columns['id_row']];
+
+        } else {
+            $_SESSION['res']['answer'] = '<div class="alert alert-danger alert-styled-left alert-dismissible">
+                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                             <span class="font-weight-semibold">Oh snap!</span> '.$answerFail .'
+                                         </div>';
+
+            if (!$returnID) $this->redirect();
+        }
     }
 
 }

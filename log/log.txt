@@ -8338,3 +8338,1099 @@ Fault: 25-01-2022 17:28:08 - Неверное имя файла для подк�
 file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
 In line 80
 
+Fault: 25-01-2022 20:03:48 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:43:24 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:43:33 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:44:05 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:44:10 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:51:58 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:52:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:52:50 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:52:56 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:53:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:55:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:55:16 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:55:23 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 21:55:32 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:02:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:02:23 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:02:29 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:02:39 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:05:08 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:05:14 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:06:14 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:06:19 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:06:56 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:02 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:12 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:12 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:29 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:46 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:47 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:47 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:55 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:56 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:07:56 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:32 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:33 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:33 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:42 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:42 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:55 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:55 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:08:55 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:40 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:41 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:41 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:52 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:52 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:58 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:58 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:09:58 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:27 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:27 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:27 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:33 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:33 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:33 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:47 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:47 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:47 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:53 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:10:53 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:11 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:11 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:18 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:18 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:18 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:39 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:11:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:15 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:16 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:16 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:21 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:21 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:30 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:35 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:42 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:48 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:59 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:12:59 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:13:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:14:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:14:35 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:14:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:15:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:15:07 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:15:23 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:17:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:17:07 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:17:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:17:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:18:20 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:18:27 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:18:56 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:19:02 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:19:47 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:19:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:21:16 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:21:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 22:21:35 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 25-01-2022 23:57:55 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 0:59:34 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 0:59:39 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 1:00:25 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 1:00:33 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 1:10:20 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 1:10:20 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 1:11:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:53:22 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:53:35 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:54:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:54:14 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:54:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:54:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:56:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:56:51 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:57:09 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 16:58:24 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:01:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:28:45 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:28:48 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:28:58 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:28:58 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:22 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:22 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:37 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:31:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:32:13 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:32:14 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:32:14 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:06 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:06 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:10 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:10 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:10 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:34 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:34 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:33:34 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:22 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:22 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:30 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:34:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:35:24 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:35:24 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:36:04 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:36:08 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:36:08 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:41:16 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:41:16 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:41:22 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:41:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:41:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:11 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:12 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:26 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:27 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:42:27 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:31 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:37 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:45 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:46 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:43:50 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:46:53 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:47:01 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 17:47:09 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:08:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:08:24 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:08:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:08:31 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:13 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:14 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:19 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:31 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:09:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:10:13 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:10:13 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:10:13 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:11:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:11:00 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:11:13 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:17:13 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:17:14 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:17:27 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:10 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:10 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:36 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:52 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:52 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:18:54 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:30:56 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:30:57 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:30:57 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:31:24 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:31:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:31:30 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:31:40 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:31:40 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:32:12 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:32:29 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:32:29 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:32:33 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:36:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:36:41 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:36:45 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:21 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:25 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:26 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:31 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:37:35 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:39:28 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:39:29 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 18:39:32 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:05 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:09 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:15 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:15 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:43 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:43 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:12:54 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:13:02 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:13:12 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:14:48 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 53
+
+Fault: 26-01-2022 19:14:49 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:14:57 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:18:10 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:18:17 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:18:32 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:18:40 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:19:55 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:00 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:12 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:29 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:32 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:46 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:51 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:20:59 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:21:11 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:21:42 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:21:51 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:23:08 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:23:14 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:23:27 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 19:46:02 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:23:04 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:28:34 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:29:39 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:29:41 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:06 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:08 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:31 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:34 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 26-01-2022 20:33:39 - Неверное имя файла для подключения - core/user/controller/CoreController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 27-01-2022 15:09:27 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 27-01-2022 15:09:28 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 27-01-2022 15:11:49 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+
+Fault: 27-01-2022 15:49:48 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 53
+
+Fault: 27-01-2022 16:20:19 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 80
+

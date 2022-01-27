@@ -29,6 +29,17 @@ var App = function () {
     var _transitionsEnabled = function() {
         $('body').removeClass('no-transitions');
     };
+    
+    // Enable all transitions
+    var _alertSetIntervat = function() {
+
+        var alertSet = $('.alert-setInterval').parent();
+
+        setTimeout(function() {
+            alertSet.hide('fast');
+        }, 380);
+        
+    };
 
 
     // Sidebars
@@ -478,8 +489,7 @@ var App = function () {
             e.preventDefault();
             $(this).parents('.card-footer').find('.footer-elements').toggleClass('d-none');
         });
-    };
-
+    }; 
 
     //
     // Return objects assigned to module
@@ -495,6 +505,7 @@ var App = function () {
         // Enable transitions when page is fully loaded
         initAfterLoad: function() {
             _transitionsEnabled();
+            _alertSetIntervat();
         },
 
         // Initialize all sidebars
@@ -545,7 +556,7 @@ var App = function () {
 
         initHeaderElementsToggle: function() {
             _headerElements();
-        },
+        }, 
 
         // Initialize core
         initCore: function() {
@@ -573,3 +584,5 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
     App.initAfterLoad();
 });
+
+

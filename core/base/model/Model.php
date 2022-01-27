@@ -32,7 +32,7 @@ abstract class Model extends ModelMethods
 |					QUERU FUNCTION
 |--------------------------------------------------------------------------
 |
-|  c - CREATE(INSERT),
+|  c - CREATE(ADD),
 |  r - READ(SELECT), 
 |  u - UPDATE(EDIT),
 |  d - DELETE  
@@ -123,7 +123,7 @@ abstract class Model extends ModelMethods
 
 /*
 |--------------------------------------------------------------------------
-|					INSERT
+|					ADD
 |--------------------------------------------------------------------------
 |   
 |  string $table - табоица для добавления данных
@@ -138,7 +138,7 @@ abstract class Model extends ModelMethods
 |  "INSERT INTO table (field, field2) VALUE ('field', 'field2')" 
 */
 
-	final public function insert($table, $set = [])
+	final public function add($table, $set = [])
 	{
 		$set['fields'] = !empty($set['fields']) && (is_array($set['fields'])) ? $set['fields'] : $_POST;
 
@@ -150,9 +150,9 @@ abstract class Model extends ModelMethods
 		
 		$set['return_id'] = $set['return_id'] ? true : false;
 		
-		$insert = $this->createInsert($set['fields'], $set['files'], $set['except']);
+		$add = $this->createAdd($set['fields'], $set['files'], $set['except']);
 
-		$query = "INSERT INTO $table {$insert['fields']} VALUE {$insert['value']}";
+		$query = "INSERT INTO $table {$add['fields']} VALUE {$add['value']}";
 
 		return $this->queryFunc($query, $crud = 'c', $set['return_id']);
 	}

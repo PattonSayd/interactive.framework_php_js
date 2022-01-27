@@ -7,6 +7,7 @@
             <div class="col-lg-12">
                 <input 
                     type="text" 
+                    name="<?=$row?>" 
                     class="form-control tags-input" 
                     value="<?=isset($_SESSION['res'][$row]) ? 
                                 htmlspecialchars($_SESSION['res'][$row]) : 

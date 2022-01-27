@@ -217,16 +217,16 @@ var FloatingLabels = function() {
         });
     };
 
-    // Select2
-    var _componentSelect2 = function() {
-        if (!$().select2) {
-            console.warn('Warning - select2.min.js is not loaded.');
-            return;
-        }
+    // // Select2
+    // var _componentSelect2 = function() {
+    //     if (!$().select2) {
+    //         console.warn('Warning - select2.min.js is not loaded.');
+    //         return;
+    //     }
 
-        // Basic select
-        $('.form-control-select2').select2();
-    };
+    //     // Basic select
+    //     $('.form-control-select2').select2();
+    // };
 
 
     //
@@ -244,7 +244,7 @@ var FloatingLabels = function() {
             _componentMaxlength();
             _componentUniform();
             _componentMultiselect();
-            _componentSelect2();
+            // _componentSelect2();
         }
     }
 }();

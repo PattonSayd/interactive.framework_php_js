@@ -311,7 +311,7 @@ abstract class ModelMethods
 
 /*
 |--------------------------------------------------------------------------
-|                   CREATE INSERT  
+|                   CREATE ADD  
 |--------------------------------------------------------------------------
 |   
 |  'except' => ['field']
@@ -319,11 +319,11 @@ abstract class ModelMethods
 |  table (field, field2) VALUE ('field', 'field2')
 */
 
-    protected function createInsert ($fields, $files, $except)
+    protected function createAdd ($fields, $files, $except)
     {
-        $insert = [];
-        $insert['fields'] = '(';
-        $insert['value'] = false;
+        $add = [];
+        $add['fields'] = '(';
+        $add['value'] = false;
 
         $array_type = array_keys($fields)[0];
 
@@ -334,7 +334,7 @@ abstract class ModelMethods
 
             foreach($fields as $key => $items){
 
-                $insert['value'] .= '(';
+                $add['value'] .= '(';
 
                 if(!$count_fields)
                     $count_fields = count($fields[$key]);
@@ -345,16 +345,16 @@ abstract class ModelMethods
                     
                     if($except && in_array($row, $except)) continue;
 
-                    if(!$check_fields) $insert['fields'] .= $row . ',';
+                    if(!$check_fields) $add['fields'] .= $row . ',';
 
                     if(in_array($value, $this->sql_func))
-                        $insert['value'] .= $value . ',';
+                        $add['value'] .= $value . ',';
 
-                    elseif($value == 'NULL' || $value == NULL)
-                        $insert['value'] .= "NULL" . ',';
+                    elseif($value == 'NULL' || $value === NULL || $value === '')
+                        $add['value'] .= "NULL" . ',';
 
                     else
-                        $insert['value'] .= "'" . addslashes($value) . "',";
+                        $add['value'] .= "'" . addslashes($value) . "',";
                     
                     $a++;
 
@@ -363,23 +363,23 @@ abstract class ModelMethods
 
                 if($a < $count_fields){
                     for(; $a < $count_fields; $a++){
-                        $insert['value'] .= "NULL" . ',';
+                        $add['value'] .= "NULL" . ',';
                     }
                 }
                 
-                $insert['value'] = rtrim($insert['value'], ',') . '),';
+                $add['value'] = rtrim($add['value'], ',') . '),';
 
                 if(!$check_fields){
                     $check_fields = true;
-                    $insert['fields'] = rtrim($insert['fields'], ',') . ')';
+                    $add['fields'] = rtrim($add['fields'], ',') . ')';
                 }
             }
 
-            $insert['value'] = rtrim($insert['value'], ',');
+            $add['value'] = rtrim($add['value'], ',');
             
         }else{
             
-            $insert['value'] = '(';
+            $add['value'] = '(';
             
             if($fields){
 
@@ -388,16 +388,16 @@ abstract class ModelMethods
                     if($except && in_array($row, $except))
                         continue;
 
-                    $insert['fields'] .= $row . ',';
+                    $add['fields'] .= $row . ',';
 
                     if(in_array($value, $this->sql_func)){
-                        $insert['value'] .= $value . ',';
+                        $add['value'] .= $value . ',';
 
-                    }elseif($value == 'NULL' || $value == NULL){
-                        $insert['value'] .= "NULL" . ',';
+                    }elseif($value == 'NULL' || $value === NULL || $value === ''){
+                        $add['value'] .= "NULL" . ',';
 
                     }else{
-                         $insert['value'] .= "'" . addslashes($value) . "',";
+                         $add['value'] .= "'" . addslashes($value) . "',";
                     }
 
                 }
@@ -407,21 +407,21 @@ abstract class ModelMethods
 
                 foreach($files as $row => $file){
                     
-                    $insert['fields'] .= $row . ',';
+                    $add['fields'] .= $row . ',';
 
                     if(is_array($file))
-                        $insert['value'] .= "'" . addslashes(json_encode($file)) . "',";
+                        $add['value'] .= "'" . addslashes(json_encode($file)) . "',";
                     else
-                        $insert['value'] .= "'" . addslashes($file) . "',";
+                        $add['value'] .= "'" . addslashes($file) . "',";
                 }
             }
 
-            foreach($insert as $key => $arr){ 
-                $insert[$key] = rtrim($arr, ',') . ')';
+            foreach($add as $key => $arr){ 
+                $add[$key] = rtrim($arr, ',') . ')';
             }
             
         }
-        return $insert;
+        return $add;
     }
     
 /*
