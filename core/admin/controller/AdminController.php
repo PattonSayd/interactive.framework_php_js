@@ -20,6 +20,8 @@ abstract class AdminController extends Controller
     protected $menu;
     protected $title;
 
+    protected $alias;
+
     protected $messages;
     protected $settings;
 
@@ -566,17 +568,17 @@ abstract class AdminController extends Controller
         // if($id && method_exists($this, 'checkFiles'))
         //     $this->checkFiles($id);
 
-        // $this->createAlias($id);
+        $this->createAlias($id);
 
         // $this->updateMenuPosition($id);
 
-        // $except = $this->checkExceptFields(); 
+        $except = $this->checkExceptFields(); 
 
         $res_id = $this->model->$method($this->table, [
             'files' => $this->fileArray,
             'where' => $where,
             'return_id' => true,
-            // 'except' => $except,
+            'except' => $except,
         ]);
 
         if (!$id && $method === 'add') {
@@ -593,7 +595,7 @@ abstract class AdminController extends Controller
 
         $this->extension(get_defined_vars());
 
-        // $result = $this->checkAlias($_POST[$this->columns['id_row']]);
+        $result = $this->checkAlias($_POST[$this->columns['id_row']]);
 
         if ($res_id) {
 
@@ -614,6 +616,100 @@ abstract class AdminController extends Controller
 
             if (!$returnID) $this->redirect();
         }
+    }
+
+# -------------------- CHECK EXCEPT FIELDS ---------------------------------------
+
+    protected function checkExceptFields($arr = [])
+    {
+        if (!$arr) $arr = $_POST;
+
+        $except = [];
+
+        if ($arr) {
+            foreach ($arr as $key => $value)
+
+                if (!isset($this->columns[$key]))
+                    $except[] = $key;
+        }
+
+        return $except; 
+    }
+
+# -------------------- CREATE ALIAS ----------------------------------------------
+
+    protected function createAlias($id = false)
+    {
+        if (isset($this->columns['alias'])) {
+
+            if (!isset($_POST['alias'])) {
+
+                if ($_POST['name']) {
+                    $alias_str = $this->clearStr($_POST['name']);
+                } else {
+                    foreach ($_POST as $key => $value) {
+
+                        if (strpos($key, 'name') !== false && $value) {
+                            $alias_str = $this->clearStr($value);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                $alias_str = $_POST['alias'] = $this->clearStr($_POST['alisa']);
+            }
+
+            $textModify = new \libraries\TextModify();
+            $alias = $textModify->translit($alias_str);
+
+            $where['alias'] = $alias;
+            $operand[] = '=';
+
+            if ($id) {
+                $where[$this->columns['id_row']] = $id;
+                $operand[] = '<>';
+            }
+
+            $res_alias = $this->model->select($this->table, [
+                'fields' => ['alias'],
+                'where' => $where,
+                'operand' => $operand,
+                'limit' => 1,
+            ]);
+
+            if (!$res_alias) {
+                $_POST['alias'] = $alias;
+                
+            } else {  // для редактирования
+                $this->alias = $alias;
+                $_POST['alias'] = '';
+            }
+
+            if ($_POST['alias'] && $id) {
+                method_exists($this, 'checkOldAlias') && $this->checkOldAlias($id);
+            }
+        }
+    }
+
+# -------------------- CHECK ALIAS -----------------------------------------------
+
+    protected function checkAlias($id)
+    {
+        if ($id) {
+
+            if ($this->alias) {
+                $this->alias .= '-' . $id;
+
+                $this->model->edit($this->table, [
+                    'fields' => ['alias' => $this->alias],
+                    'where' => [$this->columns['id_row'] => $id]
+                ]);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

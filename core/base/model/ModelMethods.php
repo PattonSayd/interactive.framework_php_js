@@ -447,7 +447,7 @@ abstract class ModelMethods
                 if(in_array($value, $this->sql_func))
                     $update .= $value . ',';  
 
-                elseif($value === 'NULL' || $value === NULL || $value === '')
+                elseif($value == 'NULL' || $value === NULL || $value === '')
                     $update .= 'NULL' . ',';
 
                 else 
