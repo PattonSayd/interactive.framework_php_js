@@ -5,6 +5,7 @@ use core\admin\model\AdminModel;
 use core\base\controller\Controller;
 use core\base\exception\RouteException;
 use core\base\settings\Settings;
+use libraries\FileEdit;
 
 abstract class AdminController extends Controller
 {
@@ -21,6 +22,7 @@ abstract class AdminController extends Controller
     protected $title;
 
     protected $alias;
+    protected $fileArray;
 
     protected $messages;
     protected $settings;
@@ -562,7 +564,7 @@ abstract class AdminController extends Controller
             }
         }        
 
-        // $this->createFile();
+        $this->createFile();
 
         // if($id && method_exists($this, 'checkFiles'))
         //     $this->checkFiles($id);
@@ -739,5 +741,13 @@ abstract class AdminController extends Controller
                 ]);
             }
         }
+    }
+
+# -------------------- CREATE FILE -----------------------------------------------
+
+    protected function createFile()
+    { 
+        $fileEdit = new FileEdit;
+        $this->fileArray = $fileEdit->addFile();
     }
 }

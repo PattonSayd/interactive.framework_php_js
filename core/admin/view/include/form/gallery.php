@@ -6,10 +6,10 @@
         </label>
         <div class="col-lg-12 d-flex flex-wrap">
             <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a" >
-                <button type="button" class="btn btn-light w-100 h-100" onclick="document.getElementById('gallery_file').click();">
+                <button type="button" class="btn btn-light w-100 h-100" onclick="document.getElementById('<?=$row?>').click();">
                     <i class="icon-plus2" style="font-size:60px;"></i>
                 </button>
-                <input type="file" style="display:none;" id="gallery_file" name="<?=$row?>[]"/>
+                <input type="file" style="display:none;" id="<?=$row?>" name="<?=$row?>[]" multiple/>
             </div>
             <?php if ($this->data[$row]) :?>
                 <?php $this-> data[$row] = json_decode($this->data[$row]);?>

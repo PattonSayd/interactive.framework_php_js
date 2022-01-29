@@ -11,6 +11,7 @@
                     style="background-color: #f2f2f1; color: #677d8a; border: 1px solid #b7b7b7; border-bottom:3px solid #b5b5b5" 
                     onclick="document.getElementById('<?=$row?>').click();"><i class="icon-folder-open3"></i>
             </button>
+            
             <input type="file" style="display:none;" id="<?=$row?>" name="<?=$row?>"/>
 
             <button type="button" 
