@@ -32,7 +32,6 @@ abstract class AdminController extends Controller
     protected $formTemplates;
     protected $noDelete;
 
-
 # -------------------- INPUT DATA ------------------------------------------------
 
     protected function inputData()
@@ -712,4 +711,33 @@ abstract class AdminController extends Controller
         return false;
     }
 
+# -------------------- CHECK OLD ALIAS -------------------------------------------
+
+    protected function checkOldAlias($id)
+    {
+        $tables = $this->model->getTables();
+
+        if (in_array('old_alias', $tables)) {
+
+            $old_alias = $this->model->select($this->table, [   // получаем текущий ALIAS 
+                'fields' => ['alias'],
+                'where' => [$this->columns['id_row'] => $id]
+            ])[0]['alias'];
+
+            if ($old_alias && $old_alias !== $_POST['alias']) {
+
+                $this->model->delete('old_alias', [   // удаляем текущеe значение поля OLD_ALIAS,  если в нем существует значение
+                    'where' => ['alias' => $old_alias, 'table_name' => $this->table]
+                ]);
+
+                $this->model->delete('old_alias', [
+                    'where' => ['alias' => $_POST['alias'], 'table_name' => $this->table]
+                ]);
+
+                $this->model->add('old_alias', [
+                    'field' => ['alias' => $old_alias, 'table_name' => $this->table, 'table_id' => $id]
+                ]);
+            }
+        }
+    }
 }

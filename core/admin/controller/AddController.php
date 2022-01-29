@@ -5,6 +5,8 @@ namespace core\admin\controller;
 class AddController extends AdminController
 {
     protected $action = 'add';
+    
+# -------------------- INPUT DATA ------------------------------------------------
 
     protected function inputData()
     {

@@ -206,3 +206,15 @@ Fault: 26-01-2022 20:34:10 - Ошибка в SLQ запросе: INSERT INTO use
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 29-01-2022 1:00:24 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,keywords,visible,menu_position,parent_id,content,created_at,alias) VALUE ('Android',NULL,'1','1','1',NULL,NOW(),'android') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-01-2022 1:00:24 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,keywords,visible,menu_position,parent_id,content,created_at,alias) VALUE ('Android',NULL,'1','1','1',NULL,NOW(),'android') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-01-2022 1:00:24 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,keywords,visible,menu_position,parent_id,content,created_at,alias) VALUE ('Android',NULL,'1','1','1',NULL,NOW(),'android') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

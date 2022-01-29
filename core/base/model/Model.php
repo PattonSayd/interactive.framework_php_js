@@ -280,5 +280,31 @@ abstract class Model extends ModelMethods
 				
 		return $columns;
 	}
+
+/*
+|--------------------------------------------------------------------------
+|					GET TABLE
+|--------------------------------------------------------------------------
+|   
+|   SHOW TABLES
+*/
+
+	final public function getTables()
+	{
+		$query = "SHOW TABLES";
+
+		$tables = $this->queryFunc($query);
+
+		$table_arr = [];
+
+		if($tables){
+
+			foreach ($tables as $table) {
+
+				$table_arr[] = reset($table);	// возв. alias
+			}
+		}
+		return $table_arr;
+	}
 	
 }
