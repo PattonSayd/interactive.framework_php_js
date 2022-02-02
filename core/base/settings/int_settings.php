@@ -36,6 +36,8 @@ const ADMIN_CSS_JS = [
             'resources/js/blockui.min.js',
             'resources/js/prism.min.js',
             'resources/js/app.js',
+            'resources/js/ajax_sitemap.js',
+            'resources/js/scripts.js',
         ],
         
         'show' => [

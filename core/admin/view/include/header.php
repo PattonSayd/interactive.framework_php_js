@@ -172,9 +172,7 @@
 
 					<div class="header-elements d-none">
 						<div class="d-flex justify-content-center">
-							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
-							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
-							<a href="#" class="btn btn-link btn-float text-default"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/createsitemap" class="btn btn-link btn-float text-default"><i class="icon-lan2 text-primary"></i> <span>Sitemap</span></a>
 						</div>
 					</div>
 				</div>

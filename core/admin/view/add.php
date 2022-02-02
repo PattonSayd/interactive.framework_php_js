@@ -6,7 +6,6 @@
     <div class="mx-auto">
         <?=$_SESSION['res']['answer']?>
     </div>
-   <?php unset($_SESSION['res']);?>
    <?php endif; ?>
     <!-- Form inputs -->
     <div class="card">
@@ -72,7 +71,9 @@
         </div>
     </div>
 	<!-- /form inputs -->
-	
+	<?php if(isset($_SESSION['res']['answer'])) :?>
+        <?php unset($_SESSION['res']);?>
+   <?php endif; ?>
 </div>
 
 <!-- /content area -->

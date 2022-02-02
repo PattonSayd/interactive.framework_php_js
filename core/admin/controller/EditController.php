@@ -10,7 +10,7 @@ class EditController extends AdminController
 
     protected function inputData()
     {
-        if(!$this->userId) $this->parentInputData();
+        if(!$this->userId) $this->parent_inputData();
               
     }
 

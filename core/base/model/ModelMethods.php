@@ -27,7 +27,9 @@ abstract class ModelMethods
 		$fields = ''; 
 
 		foreach($set['fields'] as $field){
-            if(!empty($field))
+            if($field == '*')
+                $fields .= $field;
+            elseif(!empty($field))
 			    $fields .= $table . $field . ', ';  
 		}
 

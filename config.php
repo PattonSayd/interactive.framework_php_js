@@ -2,7 +2,7 @@
 
 defined('VG_ACCESS') or die('Access denied');
 
-const SITE_URL = 'https://interactive.store';
+const SITE_URL = 'https://sayt.az';
 const PATH = '/';
 
 const HOST = 'localhost';

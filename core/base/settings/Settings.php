@@ -99,7 +99,7 @@ class Settings
         'login'    => ['empty' => true, 'trim' => true],
         'password' => ['crypt' => true, 'empty' => true],
         'keywords' => ['count' => 70, 'trim' => true],
-        'content'  => ['count' => 160, 'trim' => true],
+        'content'  => ['count' => 1, 'trim' => true],
     ];
 
     

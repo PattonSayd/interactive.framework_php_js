@@ -15,7 +15,7 @@ abstract class Controller
     protected $content;
     protected $footer;
     
-    protected $pageAction;
+    protected $actionPage;
     protected $page;
     protected $errors;
     
@@ -41,7 +41,6 @@ abstract class Controller
             $object = new \ReflectionMethod($controller, 'request');  
             
             $arqs = [                   
-                    'pageAction' => $this->pageAction, # []
                     'parametrs' => $this->parameters, # []
                     'inputMethod' => $this->inputMethod, # inputData
                     'outputMethod' => $this->outputMethod, # outputData
@@ -58,8 +57,7 @@ abstract class Controller
 
     public function request($arqs)
     {        
-        $this->pageAction = $arqs['pageAction'];
-        
+        $this->actionPage = explode('controller', strtolower((new \ReflectionClass($this))->getShortName()))[0]; # [0] => index;
         $this->parameters = $arqs['parametrs'];
 
         $inputData = $arqs['inputMethod']; # default 'inputData' or url '/page'
@@ -91,7 +89,7 @@ abstract class Controller
         extract($parameters); # если не массив, @ - отключаем warnings
         
         if(!$path) {
-            $class = new \ReflectionClass($this); # ex. core\user\controller\IndexController
+            $class = new \ReflectionClass($this); # name => core\user\controller\IndexController
 
             $space = str_replace('\\', '/', $class->getNamespaceName() . '\\'); # core/user/controller/
 
@@ -103,7 +101,7 @@ abstract class Controller
                 $template = ADMIN_TEMPLATE;
             }
             
-            $path = $template . explode('controller', strtolower((new \ReflectionClass($this))->getShortName()))[0]; # [0] => index;
+            $path = $template . $this->actionPage; # [0] => index;
         }
 
         ob_start();
@@ -151,7 +149,7 @@ abstract class Controller
             foreach(ADMIN_CSS_JS as $tag => $items) {
                 if (ADMIN_CSS_JS[$tag]) {
                     foreach($items as $key => $paths) {
-                        if($key == 'main' || $this->pageAction == $key){
+                        if($key == 'main' || $this->actionPage == $key){
                             foreach ($paths as $path){
                                 $this->$tag[] = PATH . ADMIN_TEMPLATE . trim($path, '/');
                             }

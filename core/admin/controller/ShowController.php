@@ -8,8 +8,7 @@ class ShowController extends AdminController
 {
     protected function inputData()
     {
-        if(!$this->userId)
-            $this->parentInputData(); # parent::inputData() не вызываем из-за плагина 
+        if(!$this->userId) $this->parent_inputData(); # parent::inputData() не вызываем из-за плагина 
 
         $this->createTableData();
 

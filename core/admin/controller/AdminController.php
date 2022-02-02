@@ -96,7 +96,7 @@ abstract class AdminController extends Controller
 
 # -------------------- PARENT INPUT DATA -----------------------------------------
 
-    protected function parentInputData()
+    protected function parent_inputData()
     {
         self::inputData(); # $this
     }
@@ -452,9 +452,9 @@ abstract class AdminController extends Controller
                 if ($validate) {
                     if (!empty($validate[$key])) {
                         if ($this->translate[$key])
-                            $answer = $this->translate[$key][0];
+                            $name = $this->translate[$key][0];
                         else 
-                            $answer = $key;
+                            $name = $key;
 
                         if (!empty($validate[$key]['crypt'])) {
                             if ($id) {
@@ -468,7 +468,7 @@ abstract class AdminController extends Controller
                         }
 
                         if (!empty($validate[$key]['empty']))
-                            $this->emptyFields($value, $answer, $arr);
+                            $this->emptyFields($value, $name, $arr);
 
                         if (!empty($validate[$key]['trim']))
                             $arr[$key] = trim($value);
@@ -477,7 +477,7 @@ abstract class AdminController extends Controller
                             $arr[$key] = $this->clearNum($value);
 
                         if (!empty($validate[$key]['count']))
-                            $arr[$key] = $this->countChar($value, $validate[$key]['count'], $answer, $arr);
+                            $arr[$key] = $this->countChar($value, $validate[$key]['count'], $name, $arr);
                     }
                 }
             }
@@ -488,13 +488,13 @@ abstract class AdminController extends Controller
 
 # -------------------- EMPTY FIELDS ----------------------------------------------
 
-    protected function emptyFields($value, $answer, $arr = [])
+    protected function emptyFields($value, $name, $arr = [])
     {
         if(empty($value)) {
             $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
                                              <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Warning!</span> '.$this->messages['empty'].'>
-                                         </div>';
+                                             <span class="font-weight-semibold">Warning!</span> ' . $this->messages['empty'] . '<span class="font-weight-bold"> ' . mb_strtolower($name) . '</span>' .
+                                         '</div>';
             $this->addSessionData($arr);
         }
     }
@@ -503,8 +503,7 @@ abstract class AdminController extends Controller
 
     protected function addSessionData($arr = [])
     {
-        if (!$arr)
-            $arr = $_POST;
+        if (!$arr) $arr = $_POST;
 
         foreach ($arr as $key => $value) {
             $_SESSION['res'][$key] = $value;
@@ -515,16 +514,18 @@ abstract class AdminController extends Controller
 
 # -------------------- COUNT CHAR --------------------------------------------------
 
-    protected function countChar($value, $counter, $answer, $arr)
+    protected function countChar($value, $count, $name, $arr)
     {
-        if (mb_strlen($value) > $counter) {
+        if (mb_strlen($value) > $count) {
 
-            $str_res = mb_str_replace('$1', '<span class="font-weight-bold">' . $answer. '</span>', $this->messages['count']);
-            $str_res = mb_str_replace('$2', $counter, $str_res);
+            $message = sprintf($this->messages['count'], '<span class="font-weight-bold">' . mb_strtolower($name) . '</span>', $count);
+           
+            // $message = mb_str_replace('$1', '<span class="font-weight-bold">' . mb_strtolower($name) . '</span>', $this->messages['count']);
+            // $message = mb_str_replace('$2', $count, $message);
 
             $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
                                              <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Warning!</span> '.$str_res .'
+                                             <span class="font-weight-semibold">Warning!</span> '. $message .'
                                          </div>';
 
             $this->addSessionData($arr);
@@ -602,7 +603,7 @@ abstract class AdminController extends Controller
 
             $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
                                              <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Well done!</span> '.$answerSuccess .'
+                                             <span class="font-weight-semibold">Well done!</span> '. $answerSuccess .'
                                          </div>';
 
             if (!$returnID) $this->redirect();
@@ -612,7 +613,7 @@ abstract class AdminController extends Controller
         } else {
             $_SESSION['res']['answer'] = '<div class="alert alert-danger alert-styled-left alert-dismissible">
                                              <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Oh snap!</span> '.$answerFail .'
+                                             <span class="font-weight-semibold">Oh snap!</span> '. $answerFail .'
                                          </div>';
 
             if (!$returnID) $this->redirect();
