@@ -25,6 +25,6 @@ class AdminModel extends Model
          AND CONSTRAINT_NAME <> 'PRIMERY' 
          AND REFERENCED_TABLE_NAME is not null $where";
 
-        return $this->queryFunc($query);
+        return $this->query($query);
     }
 }

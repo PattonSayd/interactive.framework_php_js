@@ -39,7 +39,7 @@ abstract class Model extends ModelMethods
 |		
 */
 
-	final public function queryFunc($query, $crud = 'r', $return_id = false)
+	final public function query($query, $crud = 'r', $return_id = false)
 	{
 		$result = $this->db->query($query);
 
@@ -118,7 +118,7 @@ abstract class Model extends ModelMethods
 
 		$query = "SELECT $fields FROM $table $join $where $order $limit";
 
- 		return $this->queryFunc($query);
+ 		return $this->query($query);
 	}
 
 /*
@@ -154,7 +154,7 @@ abstract class Model extends ModelMethods
 
 		$query = "INSERT INTO $table {$add['fields']} VALUE {$add['value']}";
 
-		return $this->queryFunc($query, $crud = 'c', $set['return_id']);
+		return $this->query($query, $crud = 'c', $set['return_id']);
 	}
 
 
@@ -200,7 +200,7 @@ abstract class Model extends ModelMethods
 
 		$query = "UPDATE $table SET $update $where";
 
-		return $this->queryFunc($query, $crud = 'u');
+		return $this->query($query, $crud = 'u');
 		
 	}
 
@@ -249,7 +249,7 @@ abstract class Model extends ModelMethods
 
 			$query = 'DELETE ' . $table . $join_tables . ' FROM ' . $table . ' ' . $join . ' ' . $where;
 		}
-		return $this->queryFunc($query, $crud = 'u');
+		return $this->query($query, $crud = 'u');
 	}
 
 /*
@@ -264,7 +264,7 @@ abstract class Model extends ModelMethods
 	{
 			$query = "SHOW COLUMNS FROM $table";
 
-			$res = $this->queryFunc($query);
+			$res = $this->query($query);
 
 			$columns = [];
 
@@ -293,7 +293,7 @@ abstract class Model extends ModelMethods
 	{
 		$query = "SHOW TABLES";
 
-		$tables = $this->queryFunc($query);
+		$tables = $this->query($query);
 
 		$table_arr = [];
 

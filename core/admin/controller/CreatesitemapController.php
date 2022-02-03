@@ -28,7 +28,7 @@ class CreatesitemapController extends AdminController
     /** 
      * @param int/максимальное количество допутимых ссылок
      */
-    protected $max_links = 200;
+    protected $max_links = 5000;
 
     /**
      * @param string/имя файла для логирования ошибок    
@@ -44,29 +44,88 @@ class CreatesitemapController extends AdminController
      * @param array/фильтрация   
      */
     protected $filter_array = [
-        'url' => ['en'],   //- исключаемые ссылки 
+        'url' => [],   //- исключаемые ссылки 
         'get' => []
     ];
 
 # -------------------- INPUT DATA ------------------------------------------------ 
 
-    public function inputData($links_counter = 1, $redirect = true)
+    public function inputData($links_count = 1, $redirect = true)
     {   
-        if(!function_exists('curl_init')){
+        if(!function_exists('curl_init'))
+            $this->cancel(0, 'Library CURL absent. Creation of site map imposable' , $log_message = '', true);
 
-            $this->writeLog('Oтсутствует библиотека CURL');
+        if(!$this->userId) $this->parent_inputData();
 
-            $_SESSION['res']['answer'] = '<div class="alert alert-info alert-styled-left alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                <span class="font-weight-semibold">Warning! </span>Library CURL apsent. Creation of sitemap imposible.</span></div>'; 
-            $this->redirect();
-        }
+        if(!$this->checkParsingTable())
+            $this->cancel(0, 'You have problem with database table parsing_data', $log_message = '', true);
 
         set_time_limit(0);
 
-        if(file_exists($_SERVER['DOCUMENT_ROOT'] . PATH . 'log/' . $this->parsingLogFile))
-            @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . 'log/' . $this->parsingLogFile);
+        $reserve = $this->model->select('parsing_data')[0]; 
 
+        $table_rows = [];
+        
+        foreach($reserve as $name => $item){
+            $table_rows[$name] = '';
+            
+            if($item){
+                $this->$name = json_decode($item);  # all_links OR temp_links
+            }elseif($name === 'all_links' || $name === 'temp_links' ){
+                $this->$name = [SITE_URL];
+            }
+        }
+
+        $this->max_links = (int)$links_count > 1 ? ceil($this->max_links / $links_count) : $this->max_links;
+
+        while($this->temp_links){
+
+            $temp_links_count = count($this->temp_links);
+
+            $links = $this->temp_links;
+
+            $this->temp_links = [];
+
+            if($temp_links_count > $this->max_links){
+
+                $links = array_chunk($links, ceil($temp_links_count / $this->max_links));
+
+                $count_chunks = count($links);
+
+                for($i = 0; $i < $count_chunks; $i++){
+
+                    $this->parsing($links[$i]);
+
+                    unset($links[$i]);
+
+                    if($links){
+
+                        foreach($table_rows as $name => $item){
+
+                            if($name === 'temp_links') $table_rows[$name] =  json_encode(array_merge(...$links));
+                            else $table_rows[$name] = json_encode($this->$name);
+                        }
+
+                        $this->model->edit('parsing_data', [
+                            'fields' => $table_rows
+                        ]);
+                    }
+                }   
+
+            }else{
+                $this->parsing($links);
+            }
+
+            foreach ($table_rows as $name => $item) {
+
+                $table_rows[$name] = json_encode($this->$name);
+            }
+
+            $this->model->edit('parsing_data', [
+                'fields' => $table_rows
+            ]);
+        }
+        
         $this->parsing(SITE_URL);
             
         $this->createSitemap();
@@ -206,8 +265,44 @@ class CreatesitemapController extends AdminController
     
     protected function cancel($success = 0, $message = '', $log_message = '', $exit = false)
     {
-        
+        $alert = [];
+
+        $alert['success'] = $success;
+        $alert['message'] = $message ? $message : 'ERROR PARSING';
+        $log_message = $log_message ? $log_message : $alert['message'];
+        $class = 'success';
+
+        if(!$alert['success']){
+            $class = 'error';
+            $this->writeLog($log_message, 'parsing_log.txt');
+        }
+
+        if($exit){
+            $alert['message'] = '<div class="' . $class . '">' . $alert['message'] . '</div>' ;
+
+            exit(json_encode($alert));
+        }
     }
+
+# -------------------- CHECK PARSING TABLE ---------------------------------------  
+
+    protected function checkParsingTable()
+    {
+        $tables = $this->model->getTables();
+
+        if(!in_array('parsing_data', $tables)){
+            
+            $query = "CREATE TABLE parsing_data (all_links longtext, temp_links longtext, bad_links longtext)";
+
+             if(!$this->model->query($query, 'c') ||
+                !$this->model->add('parsing_data',
+                     ['fields' => ['all_links' => '', 'temp_links' => '', 'bad_links' => '']])){
+                    return false;
+             }
+        }
+        return true;
+    }
+    
     
 # -------------------- CREATE SITE MAP -------------------------------------------
 
@@ -217,3 +312,6 @@ class CreatesitemapController extends AdminController
 
     }
 }
+//'<div class="alert alert-info alert-styled-left alert-dismissible">
+// <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+// <span class="font-weight-semibold">Warning! </span>Library CURL apsent. Creation of sitemap imposible.</span></div>'; 
