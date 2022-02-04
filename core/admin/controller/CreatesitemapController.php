@@ -79,7 +79,6 @@ class CreatesitemapController extends AdminController
         $this->max_links = (int)$links_count > 1 ? ceil($this->max_links / $links_count) : $this->max_links;
 
         while($this->temp_links){
-
             $temp_links_count = count($this->temp_links);
 
             $links = $this->temp_links;
@@ -87,19 +86,16 @@ class CreatesitemapController extends AdminController
             $this->temp_links = [];
 
             if($temp_links_count > $this->max_links){
-
                 $links = array_chunk($links, ceil($temp_links_count / $this->max_links));
 
                 $count_chunks = count($links);
 
                 for($i = 0; $i < $count_chunks; $i++){
-
                     $this->parsing($links[$i]);
 
                     unset($links[$i]);
 
                     if($links){
-
                         foreach($table_rows as $name => $item){
 
                             if($name === 'temp_links') $table_rows[$name] =  json_encode(array_merge(...$links));
@@ -117,7 +113,6 @@ class CreatesitemapController extends AdminController
             }
 
             foreach ($table_rows as $name => $item) {
-
                 $table_rows[$name] = json_encode($this->$name);
             }
 
@@ -141,20 +136,53 @@ class CreatesitemapController extends AdminController
 
     protected function parsing($urls, $index = 0)
     {    
-        if($urls === '/' || $urls === SITE_URL . '/') return; 
+        if(!$urls) return;
 
-        $curl = curl_init();
+        $curlMulty = curl_multi_init();
 
-        curl_setopt($curl, CURLOPT_URL, $urls);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HEADER, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 120);
-        curl_setopt($curl, CURLOPT_RANGE, 0 - 4194304);
+        $curl = [];
 
-        $out = curl_exec($curl);
+       foreach($urls as $i => $url){
 
-        curl_close($curl);
+            $curl[$i] = curl_init(); # инициализация библиотеки 'cURL' 
+
+            curl_setopt($curl[$i], CURLOPT_URL, $url); # загружаемый URL 
+            curl_setopt($curl[$i], CURLOPT_RETURNTRANSFER, true); # возврат результата
+            curl_setopt($curl[$i], CURLOPT_HEADER, true); # включения заголовков в выводов 
+            curl_setopt($curl[$i], CURLOPT_FOLLOWLOCATION, 1); # следования любому заголовку "Location: " 
+            curl_setopt($curl[$i], CURLOPT_TIMEOUT, 120); # максимально позволенное количество секунд для выполнения cURL-функции 
+            curl_setopt($curl[$i], CURLOPT_ENCODING, 'gzip,deflate'); # позволяет декодировать запрос
+
+            curl_multi_add_handle($curlMulty, $curl[$i]); # добавление дескрипторов(cURL_MULTI, cURL)
+        }
+
+        do{
+            $status = curl_multi_exec($curlMulty, $active); # запускает подсоединения текущего дескриптора cURL
+            $info = curl_multi_info_read($curlMulty); # возвращает информацию о текущих операциях
+          
+            if(false !== $info){  
+
+                if($info['result'] !== 0){
+
+                    $i = array_search($info['handle'], $curl);
+                    
+                    $error = curl_errno($curl[$i]);
+                    $message = curl_error($curl[$i]);
+                    $header = curl_getinfo($curl[$i]);
+
+                    if($error != 0){
+
+                        $this->cancel(0, 'Error loading ' . $header['url'] . ' http code: ' . $header['http_code']  . ' error: ' . $error . ' message ' . $message);
+                    }
+                }
+            }
+
+            if($status > 0){
+
+                $this->cancel(0, curl_multi_strerror($status));
+            }
+            
+        }while($status === CURLM_CALL_MULTI_PERFORM || $active); # если CURLM_CALL_MULTI_PERFORM не будет работать то: $status > $active 
 
         if(!preg_match('/Content-Type:\s+text\/html/ui', $out)){
             unset($this->all_links[$index]);
@@ -190,7 +218,7 @@ class CreatesitemapController extends AdminController
                         $ext = addslashes($ext);
                         $ext = str_replace('.', '\.', $ext);
 
-                        if (preg_match('/' . $ext . '(\s*?$|\?[^\/]*$)/ui', $link)) { // +++++++++++++++++++++++
+                        if (preg_match('/' . $ext . '(\s*?$|\?[^\/]*$)/ui', $link)) {
                             continue 2;
                         }
                     }
@@ -202,7 +230,10 @@ class CreatesitemapController extends AdminController
 
                 $site_url = mb_str_replace('.', '\.', mb_str_replace('/', '\/', SITE_URL));
 
-                if (!in_array($link, $this->bad_links) && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link) && strpos($link, SITE_URL) === 0 && !in_array($link, $this->all_links)) {
+                if (!in_array($link, $this->bad_links) 
+                        && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link)
+                        && strpos($link, SITE_URL) === 0
+                        && !in_array($link, $this->all_links)) {
 
                     if($this->filter($link)){
 
