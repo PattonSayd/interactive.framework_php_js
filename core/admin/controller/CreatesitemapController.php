@@ -122,6 +122,20 @@ class CreatesitemapController extends AdminController
         }
         
         $this->parsing(SITE_URL);
+
+        if($this->all_links){
+
+            foreach($this->all_links as $key => $link){
+
+                if(!$this->filter($link) || in_array($link, $this->bad_links)){
+
+                    unset($this->all_links[$key]);
+                    
+                } 
+                
+            }
+            
+        }
             
         $this->createSitemap();
 
@@ -184,68 +198,52 @@ class CreatesitemapController extends AdminController
             
         }while($status === CURLM_CALL_MULTI_PERFORM || $active); # если CURLM_CALL_MULTI_PERFORM не будет работать то: $status > $active 
 
-        if(!preg_match('/Content-Type:\s+text\/html/ui', $out)){
-            unset($this->all_links[$index]);
+        $result = [];
+        
+        foreach($urls as $i => $url){
 
-            $this->all_links = array_values($this->all_links);
+           $result[$i] = curl_multi_getcontent($curl[$i]);
+           curl_multi_remove_handle($curlMulty, $curl[$i]); # удаление дескрипторов(cURL_MULTI, cURL)
+           curl_close($curl[$i]);
 
-            return;
-        }
+            # Регулярные выражения
+            #   
+            #  preg_match - выполняет проверку на соответствие регулярные  
+            #  u - поиск и по многобаитовым кодировкам 
+            #  i - регистры 
+            #  s+ - пробел 1 и более раз 
+            #  \ - экронирование
+            #  d - спецсимволы, цифры 
+            #  .? - точка, ? -может быть или нет 
+             
+           
+            if (!preg_match('/Content-Type:\s+text\/html/ui', $result[$i])) {
 
-        if(!preg_match('/HTTP\/\d\.?\d?\s+20\d/ui', $out)){
-            $this->writeLog('Некорректная директория сайта - ' . $urls, $this->parsingLogFile);
+                $this->bad_links[] = $url;
+                
+                $this->cancel(0, 'Incorrect content type ' . $url);
 
-            unset($this->all_links[$index]);
-
-            $this->all_links = array_values($this->all_links);
-
-            return;
-        }
-
-        preg_match_all('/<a\s*?[^>]*?href\s*?=(["\'])(.+?)\1[^>]*?>/ui', $out, $links);
-
-        if ($links[2]) {
-
-            foreach ($links[2] as $link) {
-
-                # если в 'url' присутствует конечный слэш
-                if ($link === '/' || $link === SITE_URL . '/') {
-                    continue;
-                }
-
-                foreach ($this->file_array as $ext) {
-                    if ($ext) {
-                        $ext = addslashes($ext);
-                        $ext = str_replace('.', '\.', $ext);
-
-                        if (preg_match('/' . $ext . '(\s*?$|\?[^\/]*$)/ui', $link)) {
-                            continue 2;
-                        }
-                    }
-                }
-
-                if (strpos($link, '/') === 0) {
-                    $link = SITE_URL . $link;
-                }
-
-                $site_url = mb_str_replace('.', '\.', mb_str_replace('/', '\/', SITE_URL));
-
-                if (!in_array($link, $this->bad_links) 
-                        && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link)
-                        && strpos($link, SITE_URL) === 0
-                        && !in_array($link, $this->all_links)) {
-
-                    if($this->filter($link)){
-
-
-                        // $this->temp_links[] = $link;
-                        $this->all_links[] = $link;
-
-                        $this->parsing($link, count($this->all_links));
-                    }
-                }
+                continue;
             }
-        } 
+
+            #        ex. /HTTP/1.1 206    /HTTP/1.?1?__206
+            if (!preg_match('/HTTP\/\d\.?\d?\s+20\d/ui', $result[$i])) {
+
+                $this->bad_links[] = $url;
+
+                $this->cancel(0, 'Incorrect server code ' . $url);
+
+                continue;
+            }
+
+            $this->createLinks($result[$i]);
+       }
+
+       curl_multi_close($curlMulty);
+        
+       
+
+       
 
     }
 
@@ -253,7 +251,45 @@ class CreatesitemapController extends AdminController
 
     protected function createLinks($content)
     {
-        
+        if($content){
+
+            preg_match_all('/<a\s*?[^>]*?href\s*?=(["\'])(.+?)\1[^>]*?>/ui', $content, $links);
+
+            if ($links[2]) {
+
+                foreach ($links[2] as $link) {
+
+                    # если в 'url' присутствует конечный слэш
+                    if ($link === '/' || $link === SITE_URL . '/') {
+                        continue;
+                    }
+
+                    foreach ($this->file_array as $ext) {
+
+                        if ($ext) {
+                            $ext = addslashes($ext);
+                            $ext = str_replace('.', '\.', $ext);
+
+                            if (preg_match('/' . $ext . '(\s*?$|\?[^\/]*$)/ui', $link)) {
+                                continue 2;
+                            }
+                        }
+                    }
+
+                    if (strpos($link, '/') === 0) {
+                        $link = SITE_URL . $link;
+                    }
+
+                    $site_url = mb_str_replace('.', '\.', mb_str_replace('/', '\/', SITE_URL));
+
+                    if (!in_array($link, $this->bad_links) && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link) && strpos($link, SITE_URL) === 0 && !in_array($link, $this->all_links)) {
+
+                        $this->temp_links[] = $link;
+                        $this->all_links[] = $link;
+                    }
+                }
+            }  
+        }
     }
 
 # -------------------- FILTER ----------------------------------------------------
@@ -339,7 +375,51 @@ class CreatesitemapController extends AdminController
 
     protected function createSitemap()
     {
+        $dom = new \DOMDocument('1.0', 'utf-8'); # представляет все содержимое HTML- или XML-документа
+
+        $dom->formatOutput = true; # форматирует вывод, добавляя отступы и дополнительные пробелы
+
+        $root = $dom->createElement('urlset'); # <urlset>элемент</urlset>
+
+        $root->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        $root->setAttribute('xmlns:xls', 'http://w3.org/2001/XMLSchema-instance');
+        $root->setAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
+
+        $dom->appendChild($root);
+
+        $exs = simplexml_import_dom($dom); # экранирует - элемент
         
+        if($this->all_links){
+
+            $date = new \DateTime();
+            $lastMod = $date->format('Y-m-d') . 'T' . $date->format('H:i:s+01:00');
+                    # (array) 0: http://site.org/page/
+            foreach($this->all_links as $item){
+                           # page   <=   /page/  <=  http://site.org/page/
+                $elem = trim(mb_substr($item, mb_strlen(SITE_URL)), '/');
+
+                $elem = explode('/', $elem);
+
+                $count = '0.' . (count($elem) - 1);
+
+                $priority = 1 - (float)$count;
+
+                if($priority == 1) $priority = '1.0';
+
+                $urlMain = $exs->addChild('url');  # <url>элемент</url>
+
+                $urlMain->addChild('loc', htmlspecialchars($item));  # <loc>http://site.org/page/</loc>
+
+                $urlMain->addChild('lastmod', $lastMod);
+
+                $urlMain->addChild('changefreq', 'weekly'); # вхождение раз в неделю | 'daily' - ежедневно
+
+                $urlMain->addChild('priority', $priority);
+
+            }
+        }
+
+        $dom->save($_SERVER['DOCUMENT_ROOT'] . PATH . 'sitemap.xml');
 
     }
 }

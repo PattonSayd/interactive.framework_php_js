@@ -1,2 +1,4 @@
 Fault: 03-02-2022 0:54:55 - Некорректная директория сайта - https://sayt.az/web-site
 Fault: 03-02-2022 0:55:08 - Некорректная директория сайта - https://sayt.az/web-sayt
+Fault: 04-02-2022 23:57:45 - Incorrect server code https://sayt.az/web-site
+Fault: 04-02-2022 23:57:45 - Incorrect server code https://sayt.az/web-sayt

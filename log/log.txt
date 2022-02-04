@@ -10226,3 +10226,7 @@ Fault: 02-02-2022 17:22:46 - Class "core\user\controller\Robots.txtController" d
 file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
 In line 52
 
+Fault: 04-02-2022 23:54:39 - Class "core\user\controller\Robots.txtController" does not exist
+file C:\xampp\htdocs\public_html\core\base\controller\Controller.php
+In line 52
+
