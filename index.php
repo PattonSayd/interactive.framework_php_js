@@ -12,13 +12,12 @@ require_once 'config.php';
 require_once 'core/base/settings/int_settings.php';
 require_once 'libraries/function.php';
 
+use core\base\controller\Route;
 use core\base\exception\RouteException;
-use core\base\controller\RouteController;
 use core\base\exception\DBException;
 
 try {
-    
-    RouteController::instance()->route();
+    Route::routeDirection();
     
 } catch (RouteException $e) {
     exit($e->getMessage());

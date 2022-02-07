@@ -83,7 +83,7 @@ trait Methods{
 
             foreach ($this->scripts as $script) {
 
-                echo '<script src="' . $script . '"></script>';
+                echo '<script src="' . $script . '" type="text/javascript"></script>';
                 
             }
         }

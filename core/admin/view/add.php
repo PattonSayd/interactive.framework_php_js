@@ -1,4 +1,3 @@
- 
 <!-- Content area -->
 <div class="content">
 

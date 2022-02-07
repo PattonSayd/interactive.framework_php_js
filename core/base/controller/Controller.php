@@ -29,7 +29,7 @@ abstract class Controller
     protected $scripts;
 
     protected $userId;
-    // protected $data;
+    protected $data;
 
 # ----------------- ROUTE -----------------------------------------------------
 

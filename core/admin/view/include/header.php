@@ -8,15 +8,7 @@
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
-    <?php foreach ($this->styles as $style): ?>
-	    <link href="<?=$style?>" rel="stylesheet" type="text/css">
-    <?php endforeach; ?>
-    
-	<!-- Core JS files -->
-	<?php foreach ($this->scripts as $script): ?>
-	    <script src="<?=$script?>" defer type="text/javascript"></script>
-    <?php endforeach; ?>
-
+	<?php $this->getStyles() ?>
 </head>
 
 <body class="sidebar-xs">

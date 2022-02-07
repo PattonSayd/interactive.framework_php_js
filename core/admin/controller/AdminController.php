@@ -12,7 +12,6 @@ abstract class AdminController extends Controller
     protected $model;
 
     protected $table;
-    protected $data;
     protected $columns;
     protected $foreignData;
 
