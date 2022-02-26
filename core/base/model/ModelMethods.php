@@ -20,7 +20,7 @@ abstract class ModelMethods
 
     protected function createFields($set, $table = false)
     {
-		$set['fields'] = is_array($set['fields']) &&  !empty($set['fields']) ? $set['fields'] : ['*'];
+		$set['fields'] = !empty($set['fields']) && is_array($set['fields']) ? $set['fields'] : ['*'];
 
 		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
 

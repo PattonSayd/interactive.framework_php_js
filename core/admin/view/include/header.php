@@ -164,7 +164,7 @@
 
 					<div class="header-elements d-none">
 						<div class="d-flex justify-content-center">
-							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/createsitemap" class="btn btn-link btn-float text-default"><i class="icon-lan2 text-primary"></i> <span>Sitemap</span></a>
+							<a href="#" class="btn btn-link btn-float text-default sitemap-button"><i class="icon-lan2 text-primary"></i> <span>Sitemap</span></a>
 						</div>
 					</div>
 				</div>

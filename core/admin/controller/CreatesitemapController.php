@@ -3,7 +3,6 @@ namespace core\admin\controller;
 
 use core\admin\controller\AdminController;
 use core\base\controller\Methods;
-use DateTime;
 
 class CreatesitemapController extends AdminController
 {
@@ -28,7 +27,7 @@ class CreatesitemapController extends AdminController
     /** 
      * @param int/максимальное количество допутимых ссылок
      */
-    protected $max_links = 5000;
+    protected $max_links = 200;
 
     /**
      * @param string/имя файла для логирования ошибок    
@@ -38,35 +37,47 @@ class CreatesitemapController extends AdminController
     /**
      * @param array/расщирения файлов    
      */
-    protected $file_array = ['jpg', 'png', 'jpeg', 'xls', 'xlsx', 'pdf', 'mp3', 'mp3'];
+    protected $file_array = [];
 
     /**
      * @param array/фильтрация   
      */
     protected $filter_array = [
-        'url' => [],   //- исключаемые ссылки 
+        'url' => ['order'],   //- исключаемые ссылки 
         'get' => []
     ];
 
 # -------------------- INPUT DATA ------------------------------------------------ 
 
-    public function inputData($links_count = 1, $redirect = true)
+    protected function inputData($links_count = 1, $redirect = true)
     {   
-        if(!function_exists('curl_init'))
-            $this->cancel(0, 'Library CURL absent. Creation of site map imposable' , $log_message = '', true);
+        $links_count = $this->clearNum($links_count);
+        
+        # -----------------------------------------------
+        # если не зарегистрирована функция "cURL_INIT", 
+        # свяжитесь с поставщиками веб-серверов
+        # для установки библиотеки
+        # "CURL_INIT" для вашего хоста 
+        # -----------------------------------------------
 
-        if(!$this->userId) $this->parent_inputData();
+        if(!function_exists('curl_init')){
+            $this->cancel(0, 'Library CURL as absent. Creation of site map imposable' , $log_message = '', true);
+        }
 
-        if(!$this->checkParsingTable())
+        if (!$this->userId) $this->parent_inputData(); # parent::inputData
+
+        if (!$this->checkParsingTable()){
             $this->cancel(0, 'You have problem with database table parsing_data', $log_message = '', true);
+        }
+       
+        set_time_limit(0); # (0) снимает ограничения времени выполнения скрипта 
 
-        set_time_limit(0);
-
-        $reserve = $this->model->select('parsing_data')[0]; 
+        $reserve = $this->model->select('parsing_data')[0];
 
         $table_rows = [];
         
         foreach($reserve as $name => $item){
+
             $table_rows[$name] = '';
             
             if($item){
@@ -76,9 +87,8 @@ class CreatesitemapController extends AdminController
             }
         }
 
-        $this->max_links = (int)$links_count > 1 ? ceil($this->max_links / $links_count) : $this->max_links;
-
         while($this->temp_links){
+
             $temp_links_count = count($this->temp_links);
 
             $links = $this->temp_links;
@@ -86,16 +96,19 @@ class CreatesitemapController extends AdminController
             $this->temp_links = [];
 
             if($temp_links_count > $this->max_links){
+
                 $links = array_chunk($links, ceil($temp_links_count / $this->max_links));
 
                 $count_chunks = count($links);
 
                 for($i = 0; $i < $count_chunks; $i++){
+
                     $this->parsing($links[$i]);
 
                     unset($links[$i]);
 
                     if($links){
+
                         foreach($table_rows as $name => $item){
 
                             if($name === 'temp_links') $table_rows[$name] =  json_encode(array_merge(...$links));
@@ -120,35 +133,43 @@ class CreatesitemapController extends AdminController
                 'fields' => $table_rows
             ]);
         }
-        
-        $this->parsing(SITE_URL);
 
-        if($this->all_links){
-
-            foreach($this->all_links as $key => $link){
-
-                if(!$this->filter($link) || in_array($link, $this->bad_links)){
-
-                    unset($this->all_links[$key]);
-                    
-                } 
-                
-            }
-            
+        foreach ($table_rows as $name => $item) {
+            $table_rows[$name] = '';
         }
-            
+
+        $this->model->edit('parsing_data', [    #- обнуления строк БД 
+            'fields' => $table_rows
+        ]);
+        
+
+        $this->parsing(SITE_URL);
+        
+        if($this->all_links){
+            foreach($this->all_links as $key => $link){
+                if(!$this->filter($link) 
+                    || in_array($link, $this->bad_links)) unset($this->all_links[$key]); 
+            }
+        }
+
         $this->createSitemap();
 
-        !$_SESSION['res']['answer'] && $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
-                                                            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                                            <span class="font-weight-semibold">Well done!</span> Sitemap is crealed.</div>';
+        if($redirect){
+            !$_SESSION['res']['answer'] && $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
+                                                                         <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                                                         <span class="font-weight-semibold">Well done!</span> Sitemap is crealed.</div>';
 
-        $this->redirect();
+            $this->redirect(); 
+
+        }else{
+            $this->cancel('1', 'Site is created! ' . count($this->all_links) . ' links', '', true);
+        }
+        
     }
 
 # -------------------- PARSING ---------------------------------------------------
 
-    protected function parsing($urls, $index = 0)
+    protected function parsing($urls)
     {    
         if(!$urls) return;
 
@@ -156,7 +177,14 @@ class CreatesitemapController extends AdminController
 
         $curl = [];
 
-       foreach($urls as $i => $url){
+        # $site = [];
+
+        # if(is_string($urls)){
+        #     $site[] = $urls;
+        # }elseif(is_array($urls))
+        #     $site = $urls;
+
+        foreach($urls as $i => $url){
 
             $curl[$i] = curl_init(); # инициализация библиотеки 'cURL' 
 
@@ -171,7 +199,7 @@ class CreatesitemapController extends AdminController
         }
 
         do{
-            $status = curl_multi_exec($curlMulty, $active); # запускает подсоединения текущего дескриптора cURL
+            $status = curl_multi_exec($curlMulty, $active); # запускает подсоединения текущего дескриптора cURL 
             $info = curl_multi_info_read($curlMulty); # возвращает информацию о текущих операциях
           
             if(false !== $info){  
@@ -196,8 +224,8 @@ class CreatesitemapController extends AdminController
                 $this->cancel(0, curl_multi_strerror($status));
             }
             
-        }while($status === CURLM_CALL_MULTI_PERFORM || $active); # если CURLM_CALL_MULTI_PERFORM не будет работать то: $status > $active 
-
+        }while($status === CURLM_CALL_MULTI_PERFORM || $active); # $active > 3
+        
         $result = [];
         
         foreach($urls as $i => $url){
@@ -208,13 +236,13 @@ class CreatesitemapController extends AdminController
 
             # Регулярные выражения
             #   
-            #  preg_match - выполняет проверку на соответствие регулярные  
-            #  u - поиск и по многобаитовым кодировкам 
-            #  i - регистры 
-            #  s+ - пробел 1 и более раз 
-            #  \ - экронирование
-            #  d - спецсимволы, цифры 
-            #  .? - точка, ? -может быть или нет 
+            #  preg_match/выполняет проверку на соответствие регулярные  
+            #  u/поиск и по многобаитовым кодировкам 
+            #  i/регистры 
+            #  s+/пробел 1 и более раз 
+            #  \/экронирование
+            #  d/спецсимволы, цифры 
+            #  .?/точка, ? -может быть или нет 
              
            
             if (!preg_match('/Content-Type:\s+text\/html/ui', $result[$i])) {
@@ -240,10 +268,6 @@ class CreatesitemapController extends AdminController
        }
 
        curl_multi_close($curlMulty);
-        
-       
-
-       
 
     }
 
@@ -253,7 +277,7 @@ class CreatesitemapController extends AdminController
     {
         if($content){
 
-            preg_match_all('/<a\s*?[^>]*?href\s*?=(["\'])(.+?)\1[^>]*?>/ui', $content, $links);
+            preg_match_all('/<a\s*?[^>]*?href\s*?=(["\'])(.+?)\1[^>]*?>/ui', $content, $links); 
 
             if ($links[2]) {
 
@@ -282,7 +306,10 @@ class CreatesitemapController extends AdminController
 
                     $site_url = mb_str_replace('.', '\.', mb_str_replace('/', '\/', SITE_URL));
 
-                    if (!in_array($link, $this->bad_links) && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link) && strpos($link, SITE_URL) === 0 && !in_array($link, $this->all_links)) {
+                    if (!in_array($link, $this->bad_links) 
+                        && !preg_match('/^(' . $site_url . ')?\/?#[^\/]*?$/ui', $link)
+                        && strpos($link, SITE_URL) === 0 
+                        && !in_array($link, $this->all_links)) {
 
                         $this->temp_links[] = $link;
                         $this->all_links[] = $link;
@@ -308,13 +335,13 @@ class CreatesitemapController extends AdminController
 
                         if($type === 'url'){
 
-                            if(preg_match('/^[^\?]*' . $item . '/ui',  $link)){   // +++++++++++++++++++++
+                            if(preg_match('/^[^\?]*' . $item . '/ui',  $link)){
                                 return false;
                             }
                         } 
 
                         if($type === 'get'){
-                                        # '/id?order=ASC&name=Jones$amp;secondname=Devi'
+                            # '/id?order=ASC&name=Jones$amp;secondname=Devi'
                             if(preg_match('/(\?|&amp;|=|&)' .$item . '(=|&amp;|&|$)/ui',  $link)){
                                 return false;
                             }
@@ -326,29 +353,6 @@ class CreatesitemapController extends AdminController
         }
 
         return true;
-    }
-    
-# -------------------- CANCEL ----------------------------------------------------
-    
-    protected function cancel($success = 0, $message = '', $log_message = '', $exit = false)
-    {
-        $alert = [];
-
-        $alert['success'] = $success;
-        $alert['message'] = $message ? $message : 'ERROR PARSING';
-        $log_message = $log_message ? $log_message : $alert['message'];
-        $class = 'success';
-
-        if(!$alert['success']){
-            $class = 'error';
-            $this->writeLog($log_message, 'parsing_log.txt');
-        }
-
-        if($exit){
-            $alert['message'] = '<div class="' . $class . '">' . $alert['message'] . '</div>' ;
-
-            exit(json_encode($alert));
-        }
     }
 
 # -------------------- CHECK PARSING TABLE ---------------------------------------  
@@ -364,12 +368,41 @@ class CreatesitemapController extends AdminController
              if(!$this->model->query($query, 'c') ||
                 !$this->model->add('parsing_data',
                      ['fields' => ['all_links' => '', 'temp_links' => '', 'bad_links' => '']])){
-                    return false;
+
+                        return false;
              }
         }
+
         return true;
     }
     
+# -------------------- CANCEL ----------------------------------------------------
+    
+    protected function cancel($success = 0, $message = '', $log_message = '', $exit = false)
+    {
+        $alert = [];
+
+        $alert['success'] = $success;
+        $alert['message'] = $message ? $message : 'ERROR PARSING';
+        $log_message = $log_message ? $log_message : $alert['message'];
+
+        $class = 'success';
+
+        if(!$alert['success']){
+            $class = 'error';
+
+            $this->writeLog($log_message, $file = 'parsing_log.txt');
+        }
+
+        if($exit){
+            $alert['message'] = '<div class="alert alert-'.$class.' alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
+                                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                <span class="font-weight-semibold">Well done!</span>' . $alert['message'] . '</div>';;
+            
+
+            exit(json_encode($alert));
+        }
+    }
     
 # -------------------- CREATE SITE MAP -------------------------------------------
 
@@ -423,6 +456,3 @@ class CreatesitemapController extends AdminController
 
     }
 }
-//'<div class="alert alert-info alert-styled-left alert-dismissible">
-// <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-// <span class="font-weight-semibold">Warning! </span>Library CURL apsent. Creation of sitemap imposible.</span></div>'; 
