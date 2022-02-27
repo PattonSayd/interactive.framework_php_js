@@ -15,6 +15,10 @@ require_once 'libraries/function.php';
 use core\base\controller\Route;
 use core\base\exception\RouteException;
 use core\base\exception\DBException;
+use core\base\model\Crypt;
+
+$crypt = Crypt::instance();
+$crypt->encrypt('Yellow123');
 
 try {
     Route::routeDirection();
