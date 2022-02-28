@@ -8,28 +8,21 @@ class Crypt
 {
     use Singleton;
 
-    private $crypt_method = 'AES-128-CBC'; // метод Шифрования
-    private $hash_algorithm = 'sha256'; // алгоритм хештрования
-    private $hash_length = 32; // длинны хэша для алгаритма 256 (32symb)   
+    private $crypt_method = 'AES-128-CBC'; # метод Шифрования
+    private $hash_algorithm = 'sha256'; # алгоритм хештрования
+    private $hash_length = 32; # длинны хэша для алгаритма 256 (32symb)   
     
     public function encrypt($str)
     {
-        $ivlen = openssl_cipher_iv_length($this->crypt_method); // получения длины
+        $ivlen = openssl_cipher_iv_length($this->crypt_method); # получения длины
 
-        $iv = openssl_random_pseudo_bytes($ivlen); // сгенирировать псевдослучайную последовательность
+        $iv = openssl_random_pseudo_bytes($ivlen); # сгенирировать псевдослучайную последовательность
 
         $ciphel = openssl_encrypt($str, $this->crypt_method, CRYPT_KEY, OPENSSL_RAW_DATA, $iv);
 
         $hmac = hash_hmac($this->hash_algorithm, $ciphel, CRYPT_KEY, true);
 
-        $encode = $this->cryptCombine($ciphel, $iv, $hmac);
-
-        $r = $this->decrypt($encode);
-
-        // $ciphel_comb = '112233445566778899';
-        // $iv_comb = 'abcdefghijklmnop';
-        // $hmac_comb = '00000000000000000000000000000000';
-        
+        return $this->cryptCombine($ciphel, $iv, $hmac);        
     }
 
     public function decrypt($str)
@@ -48,27 +41,35 @@ class Crypt
         return false;
     }
 
+    # -----------------------------------------------
+    # CIPHEL = '112233445566778899'; 
+    # IV = 'abcdefg';
+    # HMAC = '000000';
+    # 
+    # RESULT HASH = 1122a33b445c0000005667d78899efg; 
+    # -----------------------------------------------
+
     public function cryptCombine($str, $iv, $hmac)
     {
         $new_str = '';
 
         $strlen = strlen($str);
 
-        $counter = (int)ceil(strlen(CRYPT_KEY) / ($strlen + $this->hash_length));
+        $count = (int)ceil(strlen(CRYPT_KEY) / ($strlen + $this->hash_length));
 
         $progress = 1;
 
-        if($counter >= $strlen) $counter = 1;
+        if($count >= $strlen) $count = 1;
 
         for($i = 0; $i < $strlen; $i++) {
 
-            if($counter < $strlen){
+            if($count < $strlen){
             
-                if($counter === $i){
+                if($count === $i){
 
                     $new_str .= substr($iv, $progress - 1, 1);
                     $progress++;
-                    $counter += $progress;  
+                    $count += $progress;  
                 }
 
             }else{
@@ -103,7 +104,7 @@ class Crypt
 
         $str = str_replace($crypt_data['hmac'], '', $str);
 
-        $counter = (int)ceil(strlen(CRYPT_KEY) / (strlen($str) - $ivlen + $this->hash_length)); 
+        $count = (int)ceil(strlen(CRYPT_KEY) / (strlen($str) - $ivlen + $this->hash_length)); 
 
         $progress = 2;
 
@@ -114,11 +115,11 @@ class Crypt
             
             if($ivlen + strlen($crypt_data['str']) < strlen($str) ){
                 
-                if($i === $counter){
+                if($i === $count){
 
-                    $crypt_data['iv'] .= substr($str, $counter, 1); 
+                    $crypt_data['iv'] .= substr($str, $count, 1); 
                     $progress++;
-                    $counter += $progress; 
+                    $count += $progress; 
 
                 }else{
                     $crypt_data['str'] .= substr($str, $i, 1);
