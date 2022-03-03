@@ -183,7 +183,7 @@ abstract class AdminController extends Controller
         if(!$blocks || !is_array($blocks)){
 
             foreach ($this->columns as $name => $value) {
-                if($name === 'id_row')
+                if($name === 'primary_key')
                     continue;
 
                 if(empty($this->translate[$name]))
@@ -197,7 +197,7 @@ abstract class AdminController extends Controller
         $default = array_keys($blocks)[0];
 
         foreach ($this->columns as $name => $value) {
-            if ($name === 'id_row')
+            if ($name === 'primary_key')
                 continue;
 
             $insert = false;
@@ -238,7 +238,7 @@ abstract class AdminController extends Controller
         } elseif (!empty($this->columns['parent_id'])) {
     
             $arr['COLUMN_NAME'] = 'parent_id';
-            $arr['REFERENCED_COLUMN_NAME'] = $this->columns['id_row'];
+            $arr['REFERENCED_COLUMN_NAME'] = $this->columns['primary_key'];
             $arr['REFERENCED_TABLE_NAME'] = $this->table;
 
             $this->createForeignProperty($arr, $root);
@@ -261,7 +261,7 @@ abstract class AdminController extends Controller
 
         if ($this->data) {
             if ($arr['REFERENCED_TABLE_NAME'] === $this->table) {
-                $where[$this->columns['id_row']] = $this->data[$this->columns['id_row']];
+                $where[$this->columns['primary_key']] = $this->data[$this->columns['primary_key']];
                 $operand[] = '<>';
             }
         }
@@ -307,7 +307,7 @@ abstract class AdminController extends Controller
             }
 
             if(!$name)
-                $name = $columns['id_row'] . ' as name'; // непринципиално
+                $name = $columns['primary_key'] . ' as name'; // непринципиално
         }
 
         $parent_id = '';
@@ -434,7 +434,7 @@ abstract class AdminController extends Controller
 
         if (!$settings) $settings =  Settings::instance();
 
-        $id = isset($_POST[isset($this->columns['id_row'])]) ?  $_POST[$this->columns['id_row']] : false; # edit
+        $id = isset($_POST[isset($this->columns['primary_key'])]) ?  $_POST[$this->columns['primary_key']] : false; # edit
 
         $validate =  Settings::get('validation');
         
@@ -543,19 +543,19 @@ abstract class AdminController extends Controller
 
         if(!empty($_POST['return_id'])) $returnID = true;        
 
-        if (isset($_POST[$this->columns['id_row']])) {
+        if (isset($_POST[$this->columns['primary_key']])) {
 
-            $id = is_numeric($_POST[$this->columns['id_row']]) ? $this->clearNum($_POST[$this->columns['id_row']]) : $this->clearStr($_POST[$this->columns['id_row']]);  // ЕСЛИ id В mysql СОДЕРЖЕТСЯ СТРОКА
+            $id = is_numeric($_POST[$this->columns['primary_key']]) ? $this->clearNum($_POST[$this->columns['primary_key']]) : $this->clearStr($_POST[$this->columns['primary_key']]);  // ЕСЛИ id В mysql СОДЕРЖЕТСЯ СТРОКА
 
             if($id) {
-                $where = [$this->columns['id_row'] => $id];
+                $where = [$this->columns['primary_key'] => $id];
                 $method = 'edit';
             }
         }
 
         foreach ($this->columns as $key => $value) {
 
-            if ($key === 'id_row')
+            if ($key === 'primary_key')
                 continue;
 
             if ($value['Type'] === 'date' || $value['Type'] === 'datetime') {
@@ -583,7 +583,7 @@ abstract class AdminController extends Controller
         ]);
 
         if (!$id && $method === 'add') {
-            $_POST[$this->columns['id_row']] = $res_id;
+            $_POST[$this->columns['primary_key']] = $res_id;
 
             $answerSuccess = $this->messages['addSuccess'];
             $answerFail = $this->messages['addFail'];
@@ -596,7 +596,7 @@ abstract class AdminController extends Controller
 
         $this->extension(get_defined_vars());
 
-        $result = $this->checkAlias($_POST[$this->columns['id_row']]);
+        $result = $this->checkAlias($_POST[$this->columns['primary_key']]);
 
         if ($res_id) {
 
@@ -607,7 +607,7 @@ abstract class AdminController extends Controller
 
             if (!$returnID) $this->redirect();
 
-            return $_POST[$this->columns['id_row']];
+            return $_POST[$this->columns['primary_key']];
 
         } else {
             $_SESSION['res']['answer'] = '<div class="alert alert-danger alert-styled-left alert-dismissible">
@@ -667,7 +667,7 @@ abstract class AdminController extends Controller
             $operand[] = '=';
 
             if ($id) {
-                $where[$this->columns['id_row']] = $id;
+                $where[$this->columns['primary_key']] = $id;
                 $operand[] = '<>';
             }
 
@@ -703,7 +703,7 @@ abstract class AdminController extends Controller
 
                 $this->model->edit($this->table, [
                     'fields' => ['alias' => $this->alias],
-                    'where' => [$this->columns['id_row'] => $id]
+                    'where' => [$this->columns['primary_key'] => $id]
                 ]);
 
                 return true;
@@ -723,7 +723,7 @@ abstract class AdminController extends Controller
 
             $old_alias = $this->model->select($this->table, [   // получаем текущий ALIAS 
                 'fields' => ['alias'],
-                'where' => [$this->columns['id_row'] => $id]
+                'where' => [$this->columns['primary_key'] => $id]
             ])[0]['alias'];
 
             if ($old_alias && $old_alias !== $_POST['alias']) {

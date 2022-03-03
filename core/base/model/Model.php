@@ -115,12 +115,12 @@ abstract class Model extends ModelMethods
 
 		$query = "SELECT $fields FROM $table $join $where $order $limit";
 
- 		$result = $this->query($query);
+ 		$data = $this->query($query);
 
-		if(isset($set['join_structure']) && $set['join_structure'] && $result)
-			$result = $this->joinStructure($table, $result);
+		if(isset($set['join_structure']) && $set['join_structure'] && $data)
+ 			$data = $this->joinStructure($data, $table);
 
-		return $result;
+		return $data;
 	}
 
 /*
@@ -189,11 +189,11 @@ abstract class Model extends ModelMethods
 
 				if(!$columns) return false;
 						// id						
-				if($columns['id_row'] && $set['fields'][$columns['id_row']]){
+				if($columns['primary_key'] && $set['fields'][$columns['primary_key']]){
 
-					$where = 'WHERE ' . $columns['id_row'] . '=' . $set['fields'][$columns['id_row']];
+					$where = 'WHERE ' . $columns['primary_key'] . '=' . $set['fields'][$columns['primary_key']];
 
-					unset($set['fields'][$columns['id_row']]);
+					unset($set['fields'][$columns['primary_key']]);
 				}
 			}
 		}
@@ -227,8 +227,8 @@ abstract class Model extends ModelMethods
 
 		if (is_array($set['fields']) && !empty($set['fields'])) {
 
-			if ($columns['id_row']) {
-				$key = array_search($columns['id_row'], $set['fields']);  # Если пришел первичный(id-PRİ) ключ то удаляет его с массива
+			if ($columns['primary_key']) {
+				$key = array_search($columns['primary_key'], $set['fields']);  # Если пришел первичный(id-PRİ) ключ то удаляет его с массива
 
 				if ($key !== false)
 					unset($set['fields'][$key]);
@@ -280,12 +280,12 @@ abstract class Model extends ModelMethods
 
 					if ($row['Key'] === 'PRI') {
 
-						if(!isset($this->table_rows[$table]['id_row'])){
-							$this->table_rows[$table]['id_row'] = $row['Field'];
+						if(!isset($this->table_rows[$table]['primary_key'])){
+							$this->table_rows[$table]['primary_key'] = $row['Field'];
 
 						}else{
-							if(!isset($this->table_rows[$table]['multi_id_row'])) $this->table_rows[$table]['multi_id_row'][] = $this->table_rows[$table]['id_row'];
-							$this->table_rows[$table]['multi_id_row'][] = $row['Field'];
+							if(!isset($this->table_rows[$table]['multi_primary_key'])) $this->table_rows[$table]['multi_primary_key'][] = $this->table_rows[$table]['primary_key'];
+							$this->table_rows[$table]['multi_primary_key'][] = $row['Field'];
 						}
 					}
 				}

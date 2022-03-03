@@ -26,10 +26,10 @@ class ShowController extends AdminController
         $order = [];    
         $order_direction = [];
 
-        if (!$this->columns['id_row'])
+        if (!$this->columns['primary_key'])
             return $this->data = [];
     
-        $fields[] = $this->columns['id_row'] . ' as id';
+        $fields[] = $this->columns['primary_key'] . ' as id';
 
         if (!empty($this->columns['name']))
             $fields['name'] = 'name';

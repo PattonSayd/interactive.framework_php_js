@@ -28,7 +28,7 @@ abstract class ModelMethods
 
             $this->getColumns($table); # вызывается из admin/AdmonModel or user/UserModel
         
-            if(isset($this->table_rows[$table]['multi_id_row'])) $set['fields'] = [];
+            if(isset($this->table_rows[$table]['multi_primary_key'])) $set['fields'] = [];
         }
 
         $concat_table = ($table && empty($set['no_concat'])) ? $table . '.' : '';
@@ -39,7 +39,7 @@ abstract class ModelMethods
                 $fields = $concat_table . '*,';
             }else{  
                 foreach($this->table_rows[$table] as $key => $item){
-                    if($key !== 'id_row' && $key !== 'multi_id_row'){
+                    if($key !== 'primary_key' && $key !== 'multi_primary_key'){
                         $fields .= $concat_table . $key . ' as TABLE' . $table . 'TABLE_' . $key . ',';
                     }
                 }
@@ -54,14 +54,12 @@ abstract class ModelMethods
 
                 if($field){
                     if($join && $join_structure){
-
-                        if(preg_match('/^(.+)?\s+as\s+(.+)/i', $field, $matches)){
+                        if(preg_match('/^(.+)?\s+as\s+(.+)/i', $field, $matches))
                             $fields .= $concat_table . $matches[1] . ' as TABLE' . $table . 'TABLE_' . $matches[2] . ',';
-
-                        }else{
+                        else
                             $fields .= $concat_table . $field . ' as TABLE' . $table . 'TABLE_' . $field . ','; 
-                        }
-
+                        
+ 
                     }else{
                         $fields .= $concat_table . $field . ', ';
                     }
@@ -72,9 +70,9 @@ abstract class ModelMethods
             if(!$id_field && $join_structure){
 
                 if($join)
-                    $fields .= $concat_table . $this->table_rows[$table]['id_row'] . ' as TABLE' . $table . 'TABLE_' . $this->table_rows[$table]['id_row'] . ',';
+                    $fields .= $concat_table . $this->table_rows[$table]['primary_key'] . ' as TABLE' . $table . 'TABLE_' . $this->table_rows[$table]['primary_key'] . ',';
                 else 
-                    $fields .= $concat_table . $this->table_rows[$table]['id_row'] . ',';
+                    $fields .= $concat_table . $this->table_rows[$table]['primary_key'] . ',';
             }
         }
 
@@ -520,9 +518,50 @@ abstract class ModelMethods
 |   
 */
 
-    protected function joinStructure($result, $table)
+    protected function joinStructure($data, $table)
     {
+        $join = [];
         
+        $id = $this->table_rows[$table]['primary_key'];
+
+        foreach ($data as $items) {
+
+            if($items) {
+
+                if(!isset($join[$items[$id]])) $join[$items[$id]] = [];
+
+                foreach($items as $key => $value){
+
+                    if(preg_match('/TABLE(.+)?TABLE/u', $key, $matches)){
+                        $table_name = $matches[1];
+
+                        if(!isset($this->table_rows[$table_name]['multi_primary_key'])){
+                            $join_id = $items[$matches[0] . '_' . $this->table_rows[$table_name]['primary_key']];
+ 
+                        }else{
+                            $join_id = '';
+
+                            foreach($this->table_rows[$table_name]['multi_primary_key'] as $multi){
+                                $join_id .= $items[$matches[0] . '_' . $multi];
+
+                            }
+                        }
+
+                        $row = preg_replace('/TABLE(.+)TABLE_/u', '', $key);
+
+                        if($join_id && !isset($join[$items[$id]]['join'][$table_name][$join_id][$row]))
+                            $join[$items[$id]]['join'][$table_name][$join_id][$row] = $value;
+                        
+
+                        continue;
+                    }
+
+                    $join[$items[$id]][$key] = $value;
+                }
+            }
+        }
+
+        return $join;
     }
     
 }
