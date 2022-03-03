@@ -5,7 +5,7 @@ namespace core\base\model;
 abstract class ModelMethods
 {    
     protected $sql_func = ['RAND()', 'NOW()'];
-    protected $tableRows;
+    protected $table_rows;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +18,67 @@ abstract class ModelMethods
 |   SELECT table.id, table.name FROM table
 */
 
-    protected function createFields($set, $table = false)
+    protected function createFields($set, $table = false, $join = false)
     {
-		$set['fields'] = !empty($set['fields']) && is_array($set['fields']) ? $set['fields'] : ['*'];
+		$fields = '';
+        $join_structure = false;
 
-		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
+        if(($join || isset($set['join_structure']) && $set['join_structure']) && $table){
+            $join_structure = true;
 
-		$fields = ''; 
+            $this->getColumns($table); # вызывается из admin/AdmonModel or user/UserModel
+        
+            if(isset($this->table_rows[$table]['multi_id_row'])) $set['fields'] = [];
+        }
 
-		foreach($set['fields'] as $field){
-            if($field == '*')
-                $fields .= $field;
-            elseif(!empty($field))
-			    $fields .= $table . $field . ', ';  
-		}
+        $concat_table = ($table && empty($set['no_concat'])) ? $table . '.' : '';
 
-		return $fields;
+        if(!isset($set['fields']) || !is_array($set['fields']) || !$set['fields']){
+
+            if(!$join){
+                $fields = $concat_table . '*,';
+            }else{  
+                foreach($this->table_rows[$table] as $key => $item){
+                    if($key !== 'id_row' && $key !== 'multi_id_row'){
+                        $fields .= $concat_table . $key . ' as TABLE' . $table . 'TABLE_' . $key . ',';
+                    }
+                }
+            }
+        }else{
+            $id_field = false;
+
+            foreach($set['fields'] as $field) {
+                
+                if($join_structure && !$id_field && $this->table_rows[$table] === $field)
+                    $id_field = true;
+
+                if($field){
+                    if($join && $join_structure){
+
+                        if(preg_match('/^(.+)?\s+as\s+(.+)/i', $field, $matches)){
+                            $fields .= $concat_table . $matches[1] . ' as TABLE' . $table . 'TABLE_' . $matches[2] . ',';
+
+                        }else{
+                            $fields .= $concat_table . $field . ' as TABLE' . $table . 'TABLE_' . $field . ','; 
+                        }
+
+                    }else{
+                        $fields .= $concat_table . $field . ', ';
+                    }
+                    
+                }
+            }
+
+            if(!$id_field && $join_structure){
+
+                if($join)
+                    $fields .= $concat_table . $this->table_rows[$table]['id_row'] . ' as TABLE' . $table . 'TABLE_' . $this->table_rows[$table]['id_row'] . ',';
+                else 
+                    $fields .= $concat_table . $this->table_rows[$table]['id_row'] . ',';
+            }
+        }
+
+        return $fields;
     }
 
 /*
@@ -270,10 +315,7 @@ abstract class ModelMethods
 
                     }elseif(count($value['on']) === 2){
                         $join_fields = $value['on'];
-
-                    }else{
-                        continue;
-                    }
+                    }else{continue;}
 
                     if (empty($value['type']))
                         $join .= ' LEFT JOIN ';
@@ -302,7 +344,7 @@ abstract class ModelMethods
                         $group_condition = $value['group_condition'] ? strtoupper($value['group_condition']) : 'AND';
                     }
 
-                    $fields .= $this->createFields($value, $key); # $set['join_structure'] 
+                    $fields .= $this->createFields($value, $key, $set['join_structure']); # $set['join_structure'] 
                     $where .= $this->createWhere($value, $key, $group_condition);
                 }
             }
@@ -469,6 +511,18 @@ abstract class ModelMethods
         }
 
         return rtrim($update, ',');
+    }
+
+/*
+|--------------------------------------------------------------------------
+|                   JOIN STRUCTURE  
+|--------------------------------------------------------------------------
+|   
+*/
+
+    protected function joinStructure($result, $table)
+    {
+        
     }
     
 }

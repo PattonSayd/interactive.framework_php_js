@@ -230,3 +230,19 @@ Fault: 26-02-2022 19:50:40 - Ошибка в SLQ запросе: UPDATE parsing_
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 02-03-2022 15:53:56 - Ошибка в SLQ запросе: SELECT * FROM teacher     - 1146 Table 'interactive.store.teacher' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 02-03-2022 18:22:47 - Ошибка в SLQ запросе: SHOW COLUMNS FROM teacher - 1146 Table 'interactive.store.teacher' doesn't exist
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 02-03-2022 19:11:09 - Ошибка в SLQ запросе: SELECT  FROM comments     - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM comments' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 02-03-2022 19:21:07 - Ошибка в SLQ запросе: SELECT  FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_i...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

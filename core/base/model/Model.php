@@ -98,8 +98,6 @@ abstract class Model extends ModelMethods
 	{
 		$fields = $this->createFields($set, $table);
 		$order = $this->createOrder($set, $table);
-
-		 
 		$where = $this->createWhere($set, $table);
 
 		if (!$where) $new_where = true;
@@ -113,12 +111,16 @@ abstract class Model extends ModelMethods
 
 		$fields = rtrim($fields, ', ');
 
-
 		$limit = !empty($set['limit']) ? 'LIMIT ' .  $set['limit'] : '';
 
 		$query = "SELECT $fields FROM $table $join $where $order $limit";
 
- 		return $this->query($query);
+ 		$result = $this->query($query);
+
+		if(isset($set['join_structure']) && $set['join_structure'] && $result)
+			$result = $this->joinStructure($table, $result);
+
+		return $result;
 	}
 
 /*
@@ -261,24 +263,38 @@ abstract class Model extends ModelMethods
 */
 	
 	final public function getColumns($table)
-	{
+	{	
+		if(!isset($this->table_rows[$table]) || !$this->table_rows[$table]) {
+	
 			$query = "SHOW COLUMNS FROM $table";
 
 			$res = $this->query($query);
 
-			$columns = [];
+			$this->table_rows[$table] = [];
 
 			if($res){
 
 				foreach($res as $row) {
-					$columns[$row['Field']] =  $row; // ячейка с бызы данных
 
-					if ($row['Key'] === 'PRI')
-						$columns['id_row'] = $row['Field'];
+					$this->table_rows[$table][$row['Field']] =  $row; // ячейка с бызы данных
+
+					if ($row['Key'] === 'PRI') {
+
+						if(!isset($this->table_rows[$table]['id_row'])){
+							$this->table_rows[$table]['id_row'] = $row['Field'];
+
+						}else{
+							if(!isset($this->table_rows[$table]['multi_id_row'])) $this->table_rows[$table]['multi_id_row'][] = $this->table_rows[$table]['id_row'];
+							$this->table_rows[$table]['multi_id_row'][] = $row['Field'];
+						}
 					}
 				}
-				
-		return $columns;
+			}
+		}
+		
+		
+
+		return $this->table_rows[$table];
 	}
 
 /*
