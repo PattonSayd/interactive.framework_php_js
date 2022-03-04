@@ -25,6 +25,11 @@ $m->select('comments', [
         'pages' => [
             'fields' => ['name as page_name'],
             'on' => ['page_id', 'id']
+        ],
+
+        'pages pes' => [
+            'fields' => ['contrex'],
+            'on' => ['page_id', 'id']
             ]
         ],
     'join_structure' => true

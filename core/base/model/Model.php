@@ -265,36 +265,45 @@ abstract class Model extends ModelMethods
 	final public function getColumns($table)
 	{	
 		if(!isset($this->table_rows[$table]) || !$this->table_rows[$table]) {
-	
-			$query = "SHOW COLUMNS FROM $table";
 
-			$res = $this->query($query);
+			$arr = $this->createPseudonymForTable($table);
 
-			$this->table_rows[$table] = [];
+			if(isset($this->table_rows[$arr['table']]))
+				return $this->table_rows[$arr['pseudo']] = $this->table_rows[$arr['table']];
 
-			if($res){
+			$query = "SHOW COLUMNS FROM {$arr['table']}";
 
-				foreach($res as $row) {
+			$columns = $this->query($query);
 
-					$this->table_rows[$table][$row['Field']] =  $row; // ячейка с бызы данных
+			$this->table_rows[$arr['table']] = [];
+
+			if($columns){
+
+				foreach($columns as $row) {
+
+					$this->table_rows[$arr['table']][$row['Field']] =  $row; // ячейка с бызы данных
 
 					if ($row['Key'] === 'PRI') {
 
-						if(!isset($this->table_rows[$table]['primary_key'])){
-							$this->table_rows[$table]['primary_key'] = $row['Field'];
+						if(!isset($this->table_rows[$arr['table']]['primary_key'])){
+							$this->table_rows[$arr['table']]['primary_key'] = $row['Field'];
 
 						}else{
-							if(!isset($this->table_rows[$table]['multi_primary_key'])) $this->table_rows[$table]['multi_primary_key'][] = $this->table_rows[$table]['primary_key'];
-							$this->table_rows[$table]['multi_primary_key'][] = $row['Field'];
+							if(!isset($this->table_rows[$arr['table']]['multi_primary_key'])) 
+								$this->table_rows[$arr['table']]['multi_primary_key'][] = $this->table_rows[$arr['table']]['primary_key'];
+								
+							$this->table_rows[$arr['table']]['multi_primary_key'][] = $row['Field'];
 						}
 					}
 				}
 			}
 		}
 		
+		if(isset($arr) && $arr['table'] !== $arr['pseudo']) 
+			return $this->table_rows[$arr['pseudo']] = $this->table_rows[$arr['table']];
 		
 
-		return $this->table_rows[$table];
+		return $this->table_rows[$arr['table']];
 	}
 
 /*

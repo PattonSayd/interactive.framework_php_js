@@ -20,6 +20,19 @@ abstract class ModelMethods
 
     protected function createFields($set, $table = false, $join = false)
     {
+        if(array_key_exists('fields', $set) && $set['fields'] === null) return '';
+
+        $concat_table = '';
+        $pseudo_table = $table;
+
+        if(!isset($set['no_concat'])){
+
+            $arr = $this->createPseudonymForTable($table);
+
+            $concat_table = $arr['pseudo'] . '.';
+            $pseudo_table = $arr['pseudo'];
+        }
+        
 		$fields = '';
         $join_structure = false;
 
@@ -31,16 +44,14 @@ abstract class ModelMethods
             if(isset($this->table_rows[$table]['multi_primary_key'])) $set['fields'] = [];
         }
 
-        $concat_table = ($table && empty($set['no_concat'])) ? $table . '.' : '';
-
         if(!isset($set['fields']) || !is_array($set['fields']) || !$set['fields']){
 
             if(!$join){
                 $fields = $concat_table . '*,';
             }else{  
-                foreach($this->table_rows[$table] as $key => $item){
+                foreach($this->table_rows[$pseudo_table] as $key => $item){
                     if($key !== 'primary_key' && $key !== 'multi_primary_key'){
-                        $fields .= $concat_table . $key . ' as TABLE' . $table . 'TABLE_' . $key . ',';
+                        $fields .= $concat_table . $key . ' as TABLE' . $pseudo_table . 'TABLE_' . $key . ',';
                     }
                 }
             }
@@ -49,15 +60,15 @@ abstract class ModelMethods
 
             foreach($set['fields'] as $field) {
                 
-                if($join_structure && !$id_field && $this->table_rows[$table] === $field)
+                if($join_structure && !$id_field && $this->table_rows[$pseudo_table] === $field)
                     $id_field = true;
 
                 if($field){
                     if($join && $join_structure){
                         if(preg_match('/^(.+)?\s+as\s+(.+)/i', $field, $matches))
-                            $fields .= $concat_table . $matches[1] . ' as TABLE' . $table . 'TABLE_' . $matches[2] . ',';
+                            $fields .= $concat_table . $matches[1] . ' as TABLE' . $pseudo_table . 'TABLE_' . $matches[2] . ',';
                         else
-                            $fields .= $concat_table . $field . ' as TABLE' . $table . 'TABLE_' . $field . ','; 
+                            $fields .= $concat_table . $field . ' as TABLE' . $pseudo_table . 'TABLE_' . $field . ','; 
                         
  
                     }else{
@@ -70,9 +81,9 @@ abstract class ModelMethods
             if(!$id_field && $join_structure){
 
                 if($join)
-                    $fields .= $concat_table . $this->table_rows[$table]['primary_key'] . ' as TABLE' . $table . 'TABLE_' . $this->table_rows[$table]['primary_key'] . ',';
+                    $fields .= $concat_table . $this->table_rows[$pseudo_table]['primary_key'] . ' as TABLE' . $pseudo_table . 'TABLE_' . $this->table_rows[$pseudo_table]['primary_key'] . ',';
                 else 
-                    $fields .= $concat_table . $this->table_rows[$table]['primary_key'] . ',';
+                    $fields .= $concat_table . $this->table_rows[$pseudo_table]['primary_key'] . ',';
             }
         }
 
@@ -515,7 +526,12 @@ abstract class ModelMethods
 |--------------------------------------------------------------------------
 |                   JOIN STRUCTURE  
 |--------------------------------------------------------------------------
-|   
+|   SELECT
+|       table.field1, table.field2,
+|       table_table2.t_id as TABLEtable_table2TABLE_t_id,
+|       table_table2.t2_id as TABLEtable_table2TABLE_t2_id, 
+|       table2.field as TABLEtableTABLE_field,
+|       table2.filed2 as TABLEtableTABLE_field2
 */
 
     protected function joinStructure($data, $table)
@@ -562,6 +578,33 @@ abstract class ModelMethods
         }
 
         return $join;
+    }
+
+/*
+|--------------------------------------------------------------------------
+|                   CREATE PSEUDONYM FOR TABLE        
+|--------------------------------------------------------------------------
+|   
+*/
+
+    protected function createPseudonymForTable($table)
+    {
+        $arr = [];
+
+        if(preg_match('/\s+/i', $table)){
+
+            $table = preg_replace('/\s{2,}/i', ' ', $table);
+
+            $table_name = explode(' ', $table);
+
+            $arr['table'] = trim($table_name[0]);
+            $arr['pseudo'] = trim($table_name[1]);
+
+        }else{
+            $arr['pseudo'] = $arr['table'] = $table;
+        }
+
+        return $arr;
     }
     
 }

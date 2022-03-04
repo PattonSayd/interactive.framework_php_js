@@ -11186,3 +11186,7 @@ Fault: 03-03-2022 2:16:19 - Неверное имя файла для подкл
 file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
 In line 82
 
+Fault: 04-03-2022 1:53:18 - Неверное имя файла для подключения - core/user/controller/Global_assetsController
+file C:\xampp\htdocs\public_html\core\base\settings\int_settings.php
+In line 82
+

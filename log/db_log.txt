@@ -246,3 +246,15 @@ Fault: 02-03-2022 19:21:07 - Ошибка в SLQ запросе: SELECT  FROM co
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 04-03-2022 3:56:41 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pages pes.id as TABLEpages pesTABLE_id,pages pes. as TABLEpages pesTABLE_ FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.id as TABLEpages pesTABLE_id,pages pes. as TABLEpages pesTABLE_ FROM comment...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 04-03-2022 12:34:47 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pages pes.id as TABLEpages pesTABLE_id,pages pes. as TABLEpages pesTABLE_ FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.id as TABLEpages pesTABLE_id,pages pes. as TABLEpages pesTABLE_ FROM comment...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 04-03-2022 13:10:51 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pages pes.contrex as TABLEpages pesTABLE_contrex,pages pes. as TABLEpages pesTABLE_ FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.contrex as TABLEpages pesTABLE_contrex,pages pes. as TABLEpages pesTABLE_ FR...' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
