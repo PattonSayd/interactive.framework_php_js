@@ -258,3 +258,35 @@ Fault: 04-03-2022 13:10:51 - Ошибка в SLQ запросе: SELECT comments
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 05-03-2022 12:18:58 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pes.contrex as TABLEpesTABLE_contrex,pes.id as TABLEpesTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pes.id' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 14:06:04 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pes.contrex as TABLEpesTABLE_contrex,pes.id as TABLEpesTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pes.id' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 14:27:14 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,pes.contrex as TABLEpesTABLE_contrex,pes.id as TABLEpesTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages pes ON pages.page_id = pages pes.id    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'pes.id' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 15:27:52 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,color.contrex as TABLEcolorTABLE_contrex,color.id as TABLEcolorTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = Array.com_id  LEFT JOIN pages ON comments_pages.page_id = Array.id  LEFT JOIN pages color ON pages.parent_id = Array.id    - 1054 Unknown column 'color.contrex' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 15:28:31 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,color.contrex as TABLEcolorTABLE_contrex,color.id as TABLEcolorTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments.com_id  LEFT JOIN pages ON comments_pages.page_id = comments.id  LEFT JOIN pages color ON pages.parent_id = comments.id    - 1054 Unknown column 'color.contrex' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 15:40:36 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,color.contrex as TABLEcolorTABLE_contrex,color.id as TABLEcolorTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages color ON pages.parent_id = color.id    - 1054 Unknown column 'color.contrex' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 16:21:14 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,comments_pages.com_id as TABLEcomments_pagesTABLE_com_id,comments_pages.page_id as TABLEcomments_pagesTABLE_page_id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,color.contrex as TABLEcolorTABLE_contrex,color.id as TABLEcolorTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages color ON pages.parent_id = color.id    - 1054 Unknown column 'color.contrex' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 05-03-2022 16:29:37 - Ошибка в SLQ запросе: SELECT comments.name, comments.content, comments.id,pages.name as TABLEpagesTABLE_page_name,pages.id as TABLEpagesTABLE_id,color.contrex as TABLEcolorTABLE_contrex,color.id as TABLEcolorTABLE_id FROM comments  LEFT JOIN comments_pages ON comments.id = comments_pages.com_id  LEFT JOIN pages ON comments_pages.page_id = pages.id  LEFT JOIN pages color ON pages.parent_id = color.id    - 1054 Unknown column 'color.contrex' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

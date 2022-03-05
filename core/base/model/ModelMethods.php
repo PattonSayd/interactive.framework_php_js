@@ -105,6 +105,8 @@ abstract class ModelMethods
 
     protected function createWhere($set, $table = false, $instruction = 'WHERE')
     {
+        $table = ($table && (!isset($set['no_concat']) || !$set['no_concat'])) ? $this->createPseudonymForTable($table)['pseudo'] . '.' : '';
+
 		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
 
         if(!empty($set['where']) &&  is_string($set['where']))
@@ -210,8 +212,7 @@ abstract class ModelMethods
     }
 
 
-/*
-|--------------------------------------------------------------------------
+/* -----------------------
 |                   CREATE ORDER
 |--------------------------------------------------------------------------
 |   
@@ -224,13 +225,15 @@ abstract class ModelMethods
 
     protected function createOrder($set, $table = false)
     {
-        $table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
+        $table = ($table && (!isset($set['no_concat']) || !$set['no_concat'])) ? $this->createPseudonymForTable($table)['pseudo'] . '.' : '';
 
         $order_by = ''; 
 
-        if (!empty($set['order']) && is_array($set['order'])){
+        if (isset($set['order']) && $set['order']){
 
-            $set['order_direction'] = !empty($set['order_direction']) && is_array($set['order_direction']) ? $set['order_direction'] : ['ASC'];
+            $set['order'] = (array)$set['order'];
+
+            $set['order_direction'] = isset($set['order_direction']) && $set['order_direction'] ? (array)$set['order_direction'] : ['ASC'];
 
             $order_by = 'ORDER BY '; 
 
@@ -246,12 +249,12 @@ abstract class ModelMethods
                     $order_direction = strtoupper($set['order_direction'][$direct_count - 1]); # 'order_direction' => ['ASC', 'DESC', (DESC)],
                 }
 
-                if(is_int($order)) 
-                    $order_by .= $order . ' ' . $order_direction . ', ';
-                    
+                if(in_array($order, $this->sql_func)) 
+                    $order_by .= $order . ',';
+                elseif(is_int($order)) 
+                    $order_by .= $order . ' ' . $order_direction . ',';
                 else 
-                    $order_by .= $table . $order . ' ' . $order_direction . ', ';
-                
+                    $order_by .= $table . $order . ' ' . $order_direction . ',';
             }
 
             $order_by = rtrim($order_by, ', ');
@@ -309,46 +312,39 @@ abstract class ModelMethods
             foreach ($set['join'] as $key => $value) {
 
                 if (is_int($key)) {
-                    if (!$value['table']) 
-                        continue;
-                    else 
-                        $key = $value['table'];
+                    if (!$value['table']) continue;
+                    else $key = $value['table'];
                 }
+
+                $concat_table = $this->createPseudonymForTable($key)['pseudo'];
 
                 if ($join) $join .= ' ';
 
-                if ($value['on']) {
+                if (isset($value['on']) && $value['on']) {
+                    
+                    if(isset($value['on']['fields']) && 
+                       is_array($value['on']['fields']) && 
+                       count($value['on']['fields']) === 2) $join_fields = $value['on']['fields'];
+                    elseif(count($value['on']) === 2) $join_fields = $value['on'];
+                    else continue;
 
-                    if(isset($value['on']['fields']) && is_array($value['on']['fields']) && count($value['on']['fields']) === 2){
-                        $join_fields = $value['on']['fields'];
-
-                    }elseif(count($value['on']) === 2){
-                        $join_fields = $value['on'];
-                    }else{continue;}
-
-                    if (empty($value['type']))
-                        $join .= ' LEFT JOIN ';
-                    else
-                        $join .= trim(strtoupper($value['type'])) . ' JOIN ';
+                    if (empty($value['type'])) $join .= ' LEFT JOIN ';
+                    else $join .= trim(strtoupper($value['type'])) . ' JOIN ';
 
                     $join .= $key . ' ON ';
 
-                    if (!empty($value['on']['table']))
-                        $join_temp_table = $value['on']['table'];
-                    else
-                        $join_temp_table = $join_table;
+                    if (!empty($value['on']['table'])) $join_temp_table = $value['on']['table'];
+                    else $join_temp_table = $join_table;
 
-                    $join .= $join_temp_table . '.' . $join_fields[0] . ' = ' . $key . '.' . $join_fields[1];
+                    $join .= $this->createPseudonymForTable($join_temp_table)['pseudo'];
+
+                    $join .= '.' . $join_fields[0] . ' = ' . $concat_table . '.' . $join_fields[1];
 
                     $join_table = $key;
 
                     if ($new_where) {
-
-                        if (!empty($value['where']))
-                            $new_where = false;
-
+                        if (!empty($value['where'])) $new_where = false;
                         $group_condition = 'WHERE';
-
                     } else {
                         $group_condition = $value['group_condition'] ? strtoupper($value['group_condition']) : 'AND';
                     }
@@ -538,7 +534,7 @@ abstract class ModelMethods
     {
         $join = [];
         
-        $id = $this->table_rows[$table]['primary_key'];
+        $id = $this->table_rows[$this->createPseudonymForTable($table)['pseudo']]['primary_key'];
 
         foreach ($data as $items) {
 

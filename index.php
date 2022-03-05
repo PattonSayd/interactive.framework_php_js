@@ -17,22 +17,28 @@ use core\base\controller\Route;
 use core\base\exception\RouteException;
 use core\base\exception\DBException;
 
+
 $m = AdminModel::instance();
 $m->select('comments', [
     'fields' => ['name', 'content'],
     'join' => [
-        'comments_pages' => ['on' => ['id', 'com_id']],
+        'comments_pages' => [
+            'fields' => null,
+            'on' => ['id', 'com_id']
+        ],
+        
         'pages' => [
             'fields' => ['name as page_name'],
             'on' => ['page_id', 'id']
         ],
 
-        'pages pes' => [
+        'pages color' => [
             'fields' => ['contrex'],
-            'on' => ['page_id', 'id']
+            'on' => ['parent_id', 'id']
             ]
         ],
-    'join_structure' => true
+    'join_structure' => true,
+    'order_by' => 'RAND()',
 ]);
 
 try {
