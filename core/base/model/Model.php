@@ -303,7 +303,7 @@ abstract class Model extends ModelMethods
 			return $this->table_rows[$arr['pseudo']] = $this->table_rows[$arr['table']];
 		
 
-		return $this->table_rows[$arr['table']];
+		return $this->table_rows[$table];
 	}
 
 /*

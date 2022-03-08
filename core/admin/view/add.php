@@ -24,9 +24,10 @@
                     <?php
                         foreach ($this->blocks as $class => $block) {
 
-                            if(is_int($class)) $class = 'col-lg-12';
+                            if($class === 'l-section' || $class === 'r-section') $col = 'col-lg-6';
+                            else$col = 'col-lg-12';
                             
-                            echo '<div class=" '. $class . '">';
+                            echo '<div class=" '. $col . '">';
 
                             if($block){
 

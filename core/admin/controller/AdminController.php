@@ -171,9 +171,9 @@ abstract class AdminController extends Controller
 
 # -------------------- CREATE BLOCK ----------------------------------------
 
-    protected function createBlock($settings = false)           // vg-rows['id]
-    {                                                           // vg-img['name]
-        if (!$settings)                                         // vg-content[]
+    protected function createBlock($settings = false)           
+    {                                                           
+        if (!$settings)                                         
             $settings = Settings::instance();
 
         $blocks = $settings::get('block');
@@ -257,7 +257,7 @@ abstract class AdminController extends Controller
             $this->foreignData[$arr['COLUMN_NAME']][0]['name'] = $root['name'];
         }
 
-        $orderData = $this->createOrderData($arr['REFERENCED_TABLE_NAME']);
+        $rows = $this->createаForeignRows($arr['REFERENCED_TABLE_NAME']);
 
         if ($this->data) {
             if ($arr['REFERENCED_TABLE_NAME'] === $this->table) {
@@ -267,10 +267,10 @@ abstract class AdminController extends Controller
         }
 
         $foreign = $this->model->select($arr['REFERENCED_TABLE_NAME'], [
-            'fields' => [$arr['REFERENCED_COLUMN_NAME'] . ' as id', $orderData['name'], $orderData['parent_id']],
+            'fields' => [$arr['REFERENCED_COLUMN_NAME'] . ' as id', $rows['name'], $rows['parent_id']],
             'where' => $where,
             'operand' => $operand,
-            'order' => $orderData['order']
+            'order' => $rows['order']
         ]);
 
         if ($foreign) {
@@ -284,9 +284,9 @@ abstract class AdminController extends Controller
         }
     }
 
-# -------------------- CREATE ORDER DATA -----------------------------------------
+# -------------------- CREATE FOREIGN ROWS ---------------------------------------
 
-    protected function createOrderData($table)
+    protected function createаForeignRows($table)
     {
         $columns = $this->model->getColumns($table); # $columns = $this->columns
 
@@ -294,14 +294,14 @@ abstract class AdminController extends Controller
             throw new RouteException('Отсутствуют поля в таблице ' . $table);
 
         $name = '';
-        $order_name = '';
+        $row_name = '';
 
         if(!empty($columns['name'])) {
-            $order_name = $name = 'name';
+            $row_name = $name = 'name';
         }else{
             foreach($columns as $key => $value){
                 if(strpos($key, 'name') !== false){
-                    $order_name = $key;
+                    $row_name = $key;
                     $name =  $key . ' as name';
                 }
             }
@@ -313,16 +313,297 @@ abstract class AdminController extends Controller
         $parent_id = '';
         $order = [];
 
-        if(!empty($columns['parent_id']))
-            $order[] = $parent_id = 'parent_id';
+        if (!empty($columns['parent_id'])) $order[] = $parent_id = 'parent_id';
 
-        if(!empty($columns['menu_position'])) 
-            $order[] = 'menu_position';
-        else 
-            $order[] = $order_name;
+        if (!empty($columns['menu_position'])) $order[] = 'menu_position';
+        else $order[] = $row_name;
 
         return compact('name', 'parent_id', 'order', 'columns');
     }
+
+# -------------------- CREATE MANY TO MANY ---------------------------------------
+    
+    protected function createManyToMany($settings = false)
+    {
+        if (!$settings)
+            $settings = $this->settings ?: Settings::instance();
+
+        $manyToMany = $settings::get('manyToMany');
+        $blocks = $settings::get('block');
+
+        if($manyToMany){
+
+            foreach($manyToMany as $pivot_table => $tables){
+
+                $main_table_key = array_search($this->table, $tables);
+
+                if($main_table_key !== false){
+
+                    $extra_table_key = $main_table_key ? 0 : 1;
+
+                    $checkbox = $settings::get('templates')['checkbox'];
+                       
+                    if(!$checkbox || !in_array($tables[$extra_table_key], $checkbox))
+                        continue;
+
+                    if(!isset($this->translate[$tables[$extra_table_key]])){
+                        if(isset($settings::get('projectTable')[$tables[$extra_table_key]]))
+                            $this->translate[$tables[$extra_table_key]] = [$settings::get('projectTable')[$tables[$extra_table_key]]['name']];
+                    }
+
+                    $rows = $this->createаForeignRows($tables[$extra_table_key]);
+
+                    $insert = false;
+                    
+                    if($blocks){
+
+                        foreach($blocks as $key => $item) {
+                            
+                            if(in_array($tables[$extra_table_key], $item)) {
+
+                                $this->blocks[$key][] = $tables[$extra_table_key];
+                                $insert = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(!$insert) $this->blocks[array_keys($this->blocks)[0]][] = $tables[$extra_table_key]; 
+
+                    $foreign = [];
+
+                    if($this->data){
+
+                        $res = $this->model->select($pivot_table, [
+                            'fields' => [$tables[$extra_table_key] . '_' . $rows['columns']['primary_key']],
+                            'where' => [$this->table . '_' . $this->columns['primary_key'] => $this->data[$this->columns['primary_key']]],
+                        ]);
+
+                        if($res){
+                            foreach($res as $item) {
+
+                                $foreign[] = $item[$tables[$extra_table_key] . '_' . $rows['columns']['primary_key']];
+                            }
+                        }
+                    }
+                    
+                    if(isset($tables['type'])){
+
+                        $data = $this->model->select($tables[$extra_table_key], [
+                            'fields' => [$rows['columns']['primary_key'] . ' as id', $rows['name'], $rows['parent_id']],
+                            'order' => $rows['order']
+                        ]);
+                        
+                        if($data){
+
+                            $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['name'] = 'Select';
+
+                            foreach($data as $item){
+                                
+                                if($tables['type'] === 'root' && $rows['parent_id']){
+
+                                    if($item[$rows['parent_id']] === null)
+                                        $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['sub'][] = $item;
+
+                                }elseif($tables['type'] === 'child' && $rows['parent_id']) {
+
+                                    if ($item[$rows['parent_id']] !== null)
+                                        $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['sub'][] = $item;
+
+                                }else{
+                                    $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['sub'][] = $item;
+                                }
+
+                                if(in_array($item['id'], $foreign))
+                                    $this->data[$tables[$extra_table_key]][$tables[$extra_table_key]][] = $item['id'];
+                            }
+                        }
+
+                    }elseif($rows['parent_id']){
+                        $parent = $tables[$extra_table_key];
+
+                        $keys = $this->model->getForeignKeys($tables[$extra_table_key]);
+
+                        if($keys){
+                            
+                            foreach($keys as $item) {
+                                if($item['COLUMN_NAME'] === 'parent_id'){
+
+                                    $parent = $item['REFERENCED_TABLE_NAME'];
+                                    break;  
+                                }
+                            }
+                        }
+
+                        if($parent === $tables[$extra_table_key]){
+
+                            $data = $this->model->select($tables[$extra_table_key], [
+                                'fields' => [$rows['columns']['primary_key'] . ' as id', $rows['name'], $rows['parent_id']],
+                                'order' => $rows['order']
+                            ]);
+
+                            if($data){
+                                while(($key = key($data)) !== null){
+
+                                    if(!$data[$key]['parent_id']){
+
+                                        $this->foreignData[$tables[$extra_table_key]][$data[$key]['id']]['name'] = $data[$key]['name'];
+
+                                        unset($data[$key]);
+                                        reset($data);
+                                        continue;
+
+                                    }else{                      
+                                        if(isset($this->foreignData[$tables[$extra_table_key]][$data[$key][$rows['parent_id']]])){
+
+                                            $this->foreignData[$tables[$extra_table_key]][$data[$key][$rows['parent_id']]]['sub'][$data[$key]['id']] = $data[$key];
+
+                                            if(in_array($data[$key]['id'], $foreign))
+                                                $this->data[$tables[$extra_table_key]][$data[$key][$rows['parent_id']]][] = $data[$key]['id'];
+
+                                            unset($data[$key]);
+                                            reset($data);
+                                            continue;
+
+                                        }else{
+                                            foreach($this->foreignData[$tables[$extra_table_key]] as $id => $item) {
+
+                                                $parent_id = $data[$key][$rows['parent_id']];
+                                                
+                                                if(isset($item['sub']) && $item['sub'] && isset($item['sub'][$parent_id])){
+
+                                                    $this->foreignData[$tables[$extra_table_key]][$id]['sub'][$data[$key]['id']] = $data[$key];
+
+                                                    if(in_array($data[$key]['id'], $foreign))
+                                                        $this->data[$tables[$extra_table_key]][$id][] = $data[$key]['id'];
+                                                    
+                                                    unset($data[$key]);
+                                                    reset($data);
+                                                    continue 2;
+                                                }
+                                            }
+                                        }
+
+                                        next($data);
+                                    }
+                                }
+                            }
+
+                        }else{
+                            $parent_rows = $this->createаForeignRows($parent);
+
+                            $data = $this->model->select($parent, [
+                                'fields' => [$parent_rows['name']],
+                                'join' => [
+                                    $tables[$extra_table_key] =>[
+                                        'fields' => [$rows['columns']['primary_key'] . ' as id', $rows['name']],
+                                        'on' => [$parent_rows['columns']['primary_key'], $rows['parent_id']], 
+                                    ]
+                                ],
+                                'join_structure' => true,
+                            ]);
+
+                            foreach($data as $key => $item) {
+
+                                if(isset($item['join'][$tables[$extra_table_key]]) && $item['join'][$tables[$extra_table_key]]){
+
+                                    $this->foreignData[$tables[$extra_table_key]][$key]['name'] = $item['name'];
+                                    $this->foreignData[$tables[$extra_table_key]][$key]['sub'] = $item['join'][$tables[$extra_table_key]];
+
+                                    foreach($item['join'][$tables[$extra_table_key]] as $value){
+
+                                        if(in_array($value['id'], $foreign))
+                                            $this->data[$tables[$extra_table_key]][$key][] = $value['id'];
+                                    }
+                                }   
+                            }
+                        }
+
+                    }else{
+                        $data = $this->model->select($tables[$extra_table_key], [
+                            'fields' => [$rows['columns']['primary_key'] . ' as id', $rows['name'], $rows['parent_id']],
+                            'order' => $rows['order']
+                        ]);
+
+                        if($data) {
+                            $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['name'] = 'Выбрать';
+
+                            foreach($data as $item) {
+                                $this->foreignData[$tables[$extra_table_key]][$tables[$extra_table_key]]['sub'][] = $item;
+
+                                if(in_array($item['id'], $foreign)){
+                                    $this->data[$tables[$extra_table_key]][$tables[$extra_table_key]][] = $item['id'];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+# -------------------- CHECK MANY TO MANY ------------------------------------------
+
+    protected function checkManyToMany($settings = false)
+    {
+        if (!$settings) $settings = $this->settings ? $this->settings : Settings::instance();
+
+        $manyToMany = $settings::get('manyToMany');
+
+        if($manyToMany) {
+            foreach($manyToMany as $pivot_table => $tables) {
+
+                $main_table_key = array_search($this->table, $tables);
+
+                if($main_table_key !== false) {
+                    $extra_table_key = $main_table_key ? 0 : 1; 
+
+                    $checkbox = $settings::get('templates')['checkbox'];
+
+                    if(empty($checkbox) || !in_array($tables[$extra_table_key], $checkbox))
+                        continue;
+
+                    $columns = $this->model->getColumns($tables[$extra_table_key]);
+
+                    $main_row = $this->table . '_' . $this->columns['primary_key'];
+
+                    $extra_row = $tables[$extra_table_key] . '_' . $columns['primary_key'];
+
+                    $this->model->delete($pivot_table, [
+                        'where' => [$main_row => $_POST[$this->columns['primary_key']]]
+                    ]);
+
+                    if(isset($_POST[$tables[$extra_table_key]])) {
+
+                        $fields = [];
+                        $i = 0;
+
+                        foreach($_POST[$tables[$extra_table_key]] as $value) {
+
+                            foreach($value as $item) {
+
+                                if($item) {
+                                    $fields[$i][$main_row] = $_POST[$this->columns['primary_key']];
+
+                                    $fields[$i][$extra_row] = $item; 
+
+                                    $i++;
+                                    
+                                }
+                            }
+                        }
+
+                        if($fields) {
+                            $this->model->insert($pivot_table, [
+                                'fields' => $fields
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 # -------------------- CREATE RADIO ----------------------------------------------
 
@@ -750,4 +1031,7 @@ abstract class AdminController extends Controller
         $fileEdit = new FileEdit;
         $this->fileArray = $fileEdit->addFile();
     }
+
+    
+    
 }

@@ -12,34 +12,9 @@ require_once 'config.php';
 require_once 'core/base/settings/int_settings.php';
 require_once 'libraries/function.php';
 
-use core\admin\model\AdminModel;
 use core\base\controller\Route;
 use core\base\exception\RouteException;
 use core\base\exception\DBException;
-
-
-$m = AdminModel::instance();
-$m->select('comments', [
-    'fields' => ['name', 'content'],
-    'join' => [
-        'comments_pages' => [
-            'fields' => null,
-            'on' => ['id', 'com_id']
-        ],
-        
-        'pages' => [
-            'fields' => ['name as page_name'],
-            'on' => ['page_id', 'id']
-        ],
-
-        'pages color' => [
-            'fields' => ['contrex'],
-            'on' => ['parent_id', 'id']
-            ]
-        ],
-    'join_structure' => true,
-    'order_by' => 'RAND()',
-]);
 
 try {
     Route::routeDirection();

@@ -265,7 +265,7 @@ var App = function () {
 
         // Configure collapsible functionality
         $('.' + navClass).each(function() {
-            $(this).find('.' + navItemClass).has('.' + navSubmenuClass).children('.' + navItemClass + ' > ' + '.' + navLinkClass).not('.disabled').on('click', function (e) {
+             $(this).find('.' + navItemClass).has('.' + navSubmenuClass).children('.' + navItemClass + ' > ' + '.' + navLinkClass).not('.disabled').on('click', function (e) {
                 // e.preventDefault();
 
                 // Simplify stuff
@@ -531,7 +531,7 @@ var App = function () {
 
         // Initialize all navigations
         initNavigations: function() {
-            _navigationSidebar();
+            // _navigationSidebar();
             _navigationNavbar();
         },
 

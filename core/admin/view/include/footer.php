@@ -28,7 +28,7 @@
 	</div>
 	<!-- Page -->
 	<script>
-		const PATH = <?=PATH?>;
+		const PATH = "<?=PATH?>";
 		const ADMIN_MODE = 1;
 	</script>
 	<?php $this->getScripts() ?>

@@ -290,3 +290,23 @@ Fault: 05-03-2022 16:29:37 - Ошибка в SLQ запросе: SELECT comments
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 07-03-2022 22:48:23 - Ошибка в SLQ запросе: SELECT users.alias FROM users  WHERE users..alias = 'fdsfds'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '..alias = 'fdsfds'   LIMIT 1' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 07-03-2022 22:50:19 - Ошибка в SLQ запросе: SELECT users.alias FROM users  WHERE users..alias = 'fdsfds'   LIMIT 1 - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '..alias = 'fdsfds'   LIMIT 1' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 08-03-2022 15:40:57 - Ошибка в SLQ запросе: DELETE comments_pages FROM comments_pages  WHERE comments_pages.comments_id IS NULL  - 1054 Unknown column 'comments_pages.comments_id' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 08-03-2022 16:19:07 - Ошибка в SLQ запросе: SELECT pages. as id, pages.name FROM pages   ORDER BY pages.name ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as id, pages.name FROM pages   ORDER BY pages.name ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 08-03-2022 16:19:15 - Ошибка в SLQ запросе: SELECT pages. as id, pages.name FROM pages   ORDER BY pages.name ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as id, pages.name FROM pages   ORDER BY pages.name ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

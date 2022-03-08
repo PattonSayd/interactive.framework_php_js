@@ -24,6 +24,8 @@ class AddController extends AdminController
 
         $this->createBlock(); 
 
+        $this->createManyToMany();
+
         // $this->data = [
         //     'name' => 'Fair',
         //     'keywords' => 'Worry',

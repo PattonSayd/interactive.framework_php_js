@@ -54,6 +54,7 @@ class Settings
         'input'    => ['name'],
         'select'   => ['parent_id', 'menu_position'],
         'radio'    => ['visible'],
+        'checkbox' => ['pages'],
         'keywords' => ['keywords'],
         'image'    => ['image'],
         'gallery'  => ['gallery_image'],
@@ -63,13 +64,14 @@ class Settings
 
     private $projectTable = [
         'users'    => ['name' => 'Пользователи', 'icon' => 'icon-user'],
-        'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars']
+        'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars'],
+        'pages'    => ['name' => 'Страницы', 'icon' => 'icon-book2']
     ];
 
     private $block = [
-        'col-lg-6 vl' => [],
-        'col-lg-6 vr' => ['image', 'content'],
-        'col-lg-12'   => [],
+        'l-section' => [],
+        'r-section' => ['image', 'gallery_image'],
+        'c-section'   => [],
     ];
 
     private $translate = [
@@ -77,7 +79,6 @@ class Settings
         'content'       => ['Описание', 'Не менее 50 символов'],
         'visible'       => ['Видимость', 'По умолчанию: показать'],
         'keywords'      => ['Ключевые слова'],
-        'filters'       => ['Фильтры'],
         'menu_position' => ['Позиция меню'],
         'parent_id'     => ['Родительская позиция'],
         'image'         => ['Фоновый рисунок'],
@@ -99,7 +100,11 @@ class Settings
         'login'    => ['empty' => true, 'trim' => true],
         'password' => ['crypt' => true, 'empty' => true],
         'keywords' => ['count' => 70, 'trim' => true],
-        'content'  => ['count' => 1, 'trim' => true],
+        'content'  => ['count' => 100, 'trim' => true],
+    ];
+
+    private $manyToMany = [
+        'comments_pages' => ['comments', 'pages'] # 3 ячейка: type => 'child' || 'root' || 'all' ИЛИ ПУСТОТА;
     ];
 
     
@@ -107,7 +112,7 @@ class Settings
     public static function get($property)
     {
         return self::instance()->$property;  
-    }
+    }  
 
     public function clueProperties($class)
     {

@@ -107,8 +107,6 @@ abstract class ModelMethods
     {
         $table = ($table && (!isset($set['no_concat']) || !$set['no_concat'])) ? $this->createPseudonymForTable($table)['pseudo'] . '.' : '';
 
-		$table = ($table && !isset($set['no_concat'])) ? $table . '.' : '';
-
         if(!empty($set['where']) &&  is_string($set['where']))
             return $instruction . ' ' . trim($set['where']);
         

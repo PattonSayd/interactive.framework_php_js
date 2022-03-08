@@ -175,7 +175,7 @@
 
 							<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/show" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
 								<?php 
-									foreach ($this->parameters as $key => $value){
+									foreach ($this->parameters as $key => $value){  // ????
 									
 										if($key == $this->table && empty($value)){
 											echo '<span class="breadcrumb-item active">' . $this->menu[$this->table]['name'] . '</span>';

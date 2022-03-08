@@ -2,11 +2,9 @@
 
 namespace core\admin\controller;
 
-use core\base\controller\Controller;
-use core\base\model\Model;
 use core\base\settings\Settings;
 
-class IndexController extends Controller
+class IndexController extends AdminController
 {
     public function inputData()
     {
