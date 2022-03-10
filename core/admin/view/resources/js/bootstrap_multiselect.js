@@ -569,16 +569,16 @@
                 var isSelectAllOption = $target.val() === this.options.selectAllValue;
 
                 // Apply or unapply the configured selected class.
-                if (this.options.selectedClass) {
-                    if (checked) {
-                        $target.closest('.multiselect-item')
-                            .addClass(this.options.selectedClass);
-                    }
-                    else {
-                        $target.closest('.multiselect-item')
-                            .removeClass(this.options.selectedClass);
-                    }
-                }
+                // if (this.options.selectedClass) {
+                //     if (checked) {
+                //         $target.closest('.multiselect-item')
+                //             .addClass(this.options.selectedClass);
+                //     }
+                //     else {
+                //         $target.closest('.multiselect-item')
+                //             .removeClass(this.options.selectedClass);
+                //     }
+                // }
 
                 // Get the corresponding option.
                 var value = $target.val();

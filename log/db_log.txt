@@ -310,3 +310,7 @@ Fault: 08-03-2022 16:19:15 - Ошибка в SLQ запросе: SELECT pages. a
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 10-03-2022 20:10:25 - Ошибка в SLQ запросе: DELETE comments_pages FROM comments_pages  WHERE comments_pages.comments_id = '8'  - 1054 Unknown column 'comments_pages.comments_id' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

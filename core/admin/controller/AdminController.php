@@ -347,6 +347,7 @@ abstract class AdminController extends Controller
                         continue;
 
                     if(!isset($this->translate[$tables[$extra_table_key]])){
+
                         if(isset($settings::get('projectTable')[$tables[$extra_table_key]]))
                             $this->translate[$tables[$extra_table_key]] = [$settings::get('projectTable')[$tables[$extra_table_key]]['name']];
                     }
@@ -594,7 +595,7 @@ abstract class AdminController extends Controller
                         }
 
                         if($fields) {
-                            $this->model->insert($pivot_table, [
+                            $this->model->add($pivot_table, [
                                 'fields' => $fields
                             ]);
                         }
@@ -873,7 +874,7 @@ abstract class AdminController extends Controller
             $answerFail = $this->messages['editFail'];
         }
 
-        // $this->checkManyToMAny();
+        $this->checkManyToMAny();
 
         $this->extension(get_defined_vars());
 

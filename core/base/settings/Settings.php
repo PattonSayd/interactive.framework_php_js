@@ -65,13 +65,14 @@ class Settings
     private $projectTable = [
         'users'    => ['name' => 'Пользователи', 'icon' => 'icon-user'],
         'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars'],
-        'pages'    => ['name' => 'Страницы', 'icon' => 'icon-book2']
+        'pages'    => ['name' => 'Страницы', 'icon' => 'icon-book2'],
+        'color'    => ['name' => 'Цвета', 'icon' => 'icon-book2']
     ];
 
     private $block = [
         'l-section' => [],
         'r-section' => ['image', 'gallery_image'],
-        'c-section'   => [],
+        'c-section' => [],
     ];
 
     private $translate = [
@@ -83,6 +84,7 @@ class Settings
         'parent_id'     => ['Родительская позиция'],
         'image'         => ['Фоновый рисунок'],
         'gallery_image' => ['Галерея'],
+        'pages'         => ['Вложенные страницы']
     ];
 
     private $root = [
@@ -104,7 +106,7 @@ class Settings
     ];
 
     private $manyToMany = [
-        'comments_pages' => ['comments', 'pages'] # 3 ячейка: type => 'child' || 'root' || 'all' ИЛИ ПУСТОТА;
+        'comments_pages' => ['comments', 'pages'] # 3 ячейка: 'type' => 'child' || 'root' || 'all' ИЛИ ПУСТОТА;
     ];
 
     
