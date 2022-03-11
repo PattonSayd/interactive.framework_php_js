@@ -6,9 +6,9 @@
         <?php if($this->foreignData[$row]) :?>
                 <?php foreach($this->foreignData[$row] as $name => $value) :?>
                     <?php if($value['sub']) :?>
-                        <div class="d-block w-100 mb-2">
+                        <div class="d-block w-100 mb-2" style="cursor: pointer">
                             <div class="col-lg-12">
-                                <div class="borde form-control d-flex justify-content-between" style="cursor: pointer">
+                                <div class="borde form-control d-flex justify-content-between">
                                     <span><?=$value['name']?></span>
                                     <span>Select all <i class="icon-arrow-down22"></i></span>
                                 </div>

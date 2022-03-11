@@ -89,7 +89,7 @@ class Settings
 
     private $root = [
         'name'   => 'Корневая',
-        'tables' => [],
+        'tables' => ['pages'],
     ];
 
     private $radio = [

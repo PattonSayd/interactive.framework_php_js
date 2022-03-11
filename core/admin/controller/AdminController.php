@@ -853,7 +853,7 @@ abstract class AdminController extends Controller
 
         $this->createAlias($id);
 
-        // $this->updateMenuPosition($id);
+        $this->updateMenuPosition($id);
 
         $except = $this->checkExceptFields(); 
 
@@ -917,6 +917,25 @@ abstract class AdminController extends Controller
         }
 
         return $except; 
+    }
+
+# -------------------- CREATE ALIAS ----------------------------------------------
+
+    protected function updateMenuPosition($id = 'false')
+    {
+        if(isset($_POST['menu_position'])){
+
+                $where = false;
+
+                if ($id && $this->columns['primary_key'])
+                    $where = [$this->columns['primary_key'] => $id];
+
+                if(array_key_exists('parent_id', $_POST))
+                    $this->model->updateMenuPosition($this->table, 'menu_position', $where, $_POST['menu_position'], ['where' => 'parent_id']);
+                else
+                    $this->model->updateMenuPosition($this->table, 'menu_position', $where, $_POST['menu_position']);
+        }
+
     }
 
 # -------------------- CREATE ALIAS ----------------------------------------------
