@@ -25,7 +25,7 @@
                                                     name="<?=$row?>[<?=$name?>][]"
                                                     data-fouc
                                                     <?php if(isset($this->data)){
-                                                        if(in_array($item['id'], $this->data[$row]['name'])) 
+                                                        if(in_array($item['id'], $this->data[$row][$name])) 
                                                             echo 'checked';
                                                         }?>>
                                                 <?=$item['name']?>

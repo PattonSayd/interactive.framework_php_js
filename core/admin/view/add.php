@@ -13,7 +13,7 @@
             <form action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
 
                 <div class="row mb-3">
-                    <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
+                    <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#f0fff0; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
                 <?php if(!$this->noDelete && $this->data) : ?>
                     <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
                 <?php endif; ?>

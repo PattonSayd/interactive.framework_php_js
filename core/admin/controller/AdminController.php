@@ -67,12 +67,10 @@ abstract class AdminController extends Controller
     protected function outputData()
     {
         if(!$this->content){
-            
             $args = func_get_arg(0);
             $parameters = !empty($args) ? $args : [];
 
-            // if (!$this->template)
-            //     $this->template = ADMIN_TEMPLATE . 'show';
+            // if (!$this->template) $this->template = ADMIN_TEMPLATE . 'show';
 
             $this->content = $this->render($this->template, $parameters);
         }

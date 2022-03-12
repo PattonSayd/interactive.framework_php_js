@@ -95,11 +95,10 @@ abstract class Controller
 
             $route = Settings::get('routes');
 
-            if($space === $route['user']['path']){
+            if($space === $route['user']['path'])
                 $template = TEMPLATE;  
-            }else{ 
+            else 
                 $template = ADMIN_TEMPLATE;
-            }
             
             $path = $template . $this->actionPage; # [0] => index;
         }

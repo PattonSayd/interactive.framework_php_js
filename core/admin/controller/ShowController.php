@@ -14,7 +14,7 @@ class ShowController extends AdminController
 
         $this->createData();  
 
-        return $this->extension(get_defined_vars());
+        return $this->extension();
 
     }
 
