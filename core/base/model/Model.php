@@ -150,7 +150,7 @@ abstract class Model extends ModelMethods
 
 		$set['except'] = !empty($set['except']) && (is_array($set['except'])) ? $set['except'] : false;
 		
-		$set['return_id'] = $set['return_id'] ? true : false;
+		$set['return_id'] = isset($set['return_id']) ? true : false;
 		
 		$add = $this->createAdd($set['fields'], $set['files'], $set['except']);
 
@@ -225,7 +225,7 @@ abstract class Model extends ModelMethods
 
 		if (!$columns) return false;
 
-		if (is_array($set['fields']) && !empty($set['fields'])) {
+		if (!empty($set['fields']) && is_array($set['fields'])) {
 
 			if ($columns['primary_key']) {
 				$key = array_search($columns['primary_key'], $set['fields']);  # Если пришел первичный(id-PRİ) ключ то удаляет его с массива
@@ -247,7 +247,7 @@ abstract class Model extends ModelMethods
 
 			$join = $join_arr['join'];
 
-			$join_tables = $join_arr['tables'] ? $join_arr['tables'] : '';
+			$join_tables = !empty($join_arr['tables']) ? $join_arr['tables'] : '';
 
 			$query = 'DELETE ' . $table . $join_tables . ' FROM ' . $table . ' ' . $join . ' ' . $where;
 		}

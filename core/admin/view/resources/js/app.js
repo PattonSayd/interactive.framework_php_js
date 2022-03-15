@@ -32,12 +32,6 @@ var App = function () {
     
     // Enable all transitions
     var _alertSetIntervat = function() {
-
-        var alertSet = $('.alert-setInterval').parent();
-
-        setTimeout(function() {
-            alertSet.hide('fast');
-        }, 380);
         
     };
 

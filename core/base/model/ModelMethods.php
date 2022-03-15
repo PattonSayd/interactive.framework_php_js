@@ -126,7 +126,7 @@ abstract class ModelMethods
 
 				$where .= ' '; 
 				
-				if ($set['operand'][$operand_count]) {
+				if (isset($set['operand'][$operand_count])) {
 					$operand = $set['operand'][$operand_count];
 					$operand_count++;
 
@@ -134,7 +134,7 @@ abstract class ModelMethods
 					$operand = $set['operand'][$operand_count - 1];
 				}
 
-				if ($set['condition'][$condition_count]) {
+				if (isset($set['condition'][$condition_count])) {
 					$condition = $set['condition'][$condition_count];
 					$condition_count++;
 

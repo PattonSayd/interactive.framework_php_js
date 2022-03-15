@@ -314,3 +314,119 @@ Fault: 10-03-2022 20:10:25 - Ошибка в SLQ запросе: DELETE comments
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 12-03-2022 22:07:07 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:07:18 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:13:37 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:13:39 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:13:55 - Ошибка в SLQ запросе: DELETE comments FROM comments  WHERE comments.id = '1'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:14:00 - Ошибка в SLQ запросе: DELETE comments FROM comments  WHERE comments.id = '1'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:19:04 - Ошибка в SLQ запросе: DELETE comments FROM comments  WHERE comments.id = '3'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:19:13 - Ошибка в SLQ запросе: DELETE comments FROM comments  WHERE comments.id = '3'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:19:26 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:19:47 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:34:23 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:57:20 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 22:57:40 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 23:11:58 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 12-03-2022 23:56:00 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '8'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 13-03-2022 0:18:46 - Ошибка в SLQ запросе: DELETE comments FROM comments  WHERE comments.id = '3'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `comments` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 13-03-2022 0:24:54 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 13-03-2022 0:25:41 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 13-03-2022 0:25:53 - Ошибка в SLQ запросе: DELETE pages FROM pages  WHERE pages.id = '9'  - 1451 Cannot delete or update a parent row: a foreign key constraint fails (`interactive.store`.`pages`, CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`))
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 13-03-2022 17:18:38 - Ошибка подключения к базе данных: 2002 Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 25
+
+Fault: 14-03-2022 0:11:41 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('imgdsfds',NULL,NULL,'1','1',NULL,'29',NOW(),'imgdsfds') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:11:24 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('one post12e4','q',NULL,'1','1',NULL,'406',NOW(),'one-post12e4') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:12:00 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('fdsfdshm',NULL,NULL,'1','1',NULL,'404',NOW(),'fdsfdshm') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:18:34 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('fdsfdsfsdf',NULL,NULL,'1','1',NULL,'404',NOW(),'fdsfdsfsdf') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:18:44 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('fdsfdsfsdf','s',NULL,'1','1',NULL,'404',NOW(),'fdsfdsfsdf') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:38:20 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('one postа',NULL,NULL,'1','2',NULL,'400',NOW(),'one-posta') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 14-03-2022 23:38:30 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('one postа',NULL,NULL,'1','2',NULL,'400',NOW(),'one-posta') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 15-03-2022 10:50:00 - Ошибка в SLQ запросе: INSERT INTO old_alias (name,content,keywords,visible,menu_position,parent_id,id,created_at,alias) VALUE ('one postа',NULL,NULL,'1','2',NULL,'400',NOW(),'one-posta') - 1054 Unknown column 'name' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 15-03-2022 15:50:46 - Ошибка в SLQ запросе: SELECT users.gallery FROM users  WHERE users. = '396'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= '396'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

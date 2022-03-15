@@ -2,9 +2,9 @@
 <div class="content">
 
     <?php if(isset($_SESSION['res']['answer'])) :?>
-    <div class="mx-auto">
-        <?=$_SESSION['res']['answer']?>
-    </div>
+        <div class="gn-alert gn-hide">
+            <?=$_SESSION['res']['answer']?>
+        </div>
    <?php endif; ?>
     <!-- Form inputs -->
     <div class="card">

@@ -155,12 +155,16 @@ class CreatesitemapController extends AdminController
         $this->createSitemap();
 
         if($redirect){
-            !$_SESSION['res']['answer'] && $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
-                                                                         <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                                                         <span class="font-weight-semibold">Well done!</span> Sitemap is crealed.</div>';
+            !$_SESSION['res']['answer'] && $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-success">
+                                                                            <span><i class="gn-icon gn-success-color gn-success"></i></span>
+                                                                            <span class="gn-msg gn-success-color"><b>Well done! </b> Sitemap is crealed.</span> 
+                                                                            <span class="gn-btn-close">
+                                                                            <span class="gn-close gn-success-color-hover"><i class="gn-close-icon gn-success-color icon-cross"></i></span>
+                                                                            </span>
+                                                                        </div>';
 
             $this->redirect(); 
-
+ 
         }else{
             $this->cancel('1', 'Site is created! ' . count($this->all_links) . ' links', '', true);
         }

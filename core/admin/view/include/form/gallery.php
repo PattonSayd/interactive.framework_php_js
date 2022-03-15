@@ -14,11 +14,18 @@
             <?php if ($this->data[$row]) :?>
                 <?php $this-> data[$row] = json_decode($this->data[$row]);?>
                     <?php foreach ($this->data[$row] as $value) :?>
-                        <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a" >
-                            <a href="#">
-                                <img class="w-100" src="<?=PATH . UPLOAD_DIR . $value?>" alt="...">
-                            </a>
-                        </div>      
+
+                        <a href="<?=$this->adminPath . 
+                                    'delete/' . 
+                                    $this->table . '/' .  
+                                    $this->data[$this->columns['primary_key']] .
+                                    '/' . $row . '/' .
+                                    base64_encode($value)?>">
+
+                            <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a">
+                                <img src="<?=PATH . UPLOAD_DIR . $value?>" style="object-fit: cover; max-width: 100%; max-height: 100%" accept="image/*,image/jpeg,image/png,image/gif" alt="...">
+                            </div>      
+                         </a>   
                      <?php endforeach; ?>
                 <?php for($i=0; $i < 2; $i++) { ?>
                     <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a" ></div>

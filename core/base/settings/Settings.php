@@ -57,10 +57,12 @@ class Settings
         'checkbox' => ['pages'],
         'keywords' => ['keywords'],
         'image'    => ['image'],
-        'gallery'  => ['gallery_image'],
+        'gallery'  => ['gallery'],
         'textarea' => ['content'],
 
     ];
+
+    private $fileTemplates = ['image', 'gallery'];
 
     private $projectTable = [
         'users'    => ['name' => 'Пользователи', 'icon' => 'icon-user'],
@@ -71,7 +73,7 @@ class Settings
 
     private $block = [
         'l-section' => [],
-        'r-section' => ['image', 'gallery_image'],
+        'r-section' => ['image', 'gallery'],
         'c-section' => [],
     ];
 
@@ -83,13 +85,13 @@ class Settings
         'menu_position' => ['Позиция меню'],
         'parent_id'     => ['Родительская позиция'],
         'image'         => ['Фоновый рисунок'],
-        'gallery_image' => ['Галерея'],
+        'gallery'       => ['Галерея'],
         'pages'         => ['Вложенные страницы']
     ];
 
     private $root = [
-        'name'   => 'Корневая',
-        'tables' => ['pages'],
+        'name'   => 'root',
+        'tables' => ['pages', 'comments', 'users'],
     ];
 
     private $radio = [
@@ -102,7 +104,7 @@ class Settings
         'login'    => ['empty' => true, 'trim' => true],
         'password' => ['crypt' => true, 'empty' => true],
         'keywords' => ['count' => 70, 'trim' => true],
-        'content'  => ['count' => 100, 'trim' => true],
+        'content'  => ['count' => 1, 'trim' => true],
     ];
 
     private $manyToMany = [

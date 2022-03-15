@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <select class="form-control" name="<?=$row?>">
                 <?php foreach($this->foreignData[$row] as $value) :?>
-                    <option value="<?=$value['id']?>" <?=$this->dta[$row] == $value['id'] ? 'selected' : '';?>>
+                    <option value="<?=$value['id']?>" <?=$this->data[$row] == $value['id'] ? 'selected' : '';?>>
                         <?=$value['name']?>
                     </option>
                 <?php endforeach; ?>

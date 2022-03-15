@@ -670,7 +670,7 @@ abstract class AdminController extends Controller
                     }
                 }
             }
-
+            
             $menu_position = $this->model->select($this->table, [
                 'fields' => ['COUNT(*) as count'],
                 'where' => $where,
@@ -770,10 +770,13 @@ abstract class AdminController extends Controller
     protected function emptyFields($value, $name, $arr = [])
     {
         if(empty($value)) {
-            $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
-                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Warning!</span> ' . $this->messages['empty'] . '<span class="font-weight-bold"> ' . mb_strtolower($name) . '</span>' .
-                                         '</div>';
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-warning">
+                                            <span><i class="gn-icon gn-warning-color icon-exclamation"></i></span>
+                                            <span class="gn-msg gn-warning-color"><b>Warning! </b> '.$this->messages['empty'] .'</span> 
+                                            <span class="gn-btn-close">
+                                            <span class="gn-close gn-warning-color-hover"><i class="gn-close-icon gn-warning-color icon-cross"></i></span>
+                                            </span>
+                                        </div>';           
             $this->addSessionData($arr);
         }
     }
@@ -797,15 +800,18 @@ abstract class AdminController extends Controller
     {
         if (mb_strlen($value) > $count) {
 
-            $message = sprintf($this->messages['count'], '<span class="font-weight-bold">' . mb_strtolower($name) . '</span>', $count);
+            $message = sprintf($this->messages['count'], '<u>' . mb_strtolower($name) . '</u>', $count);
            
             // $message = mb_str_replace('$1', '<span class="font-weight-bold">' . mb_strtolower($name) . '</span>', $this->messages['count']);
             // $message = mb_str_replace('$2', $count, $message);
 
-            $_SESSION['res']['answer'] = '<div class="alert alert-warning alert-styled-left alert-dismissible">
-                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Warning!</span> '. $message .'
-                                         </div>';
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-warning">
+                                            <span><i class="gn-icon gn-warning-color icon-exclamation"></i></span>
+                                            <span class="gn-msg gn-warning-color"><b>Warning! </b> '. $message .'</span> 
+                                            <span class="gn-btn-close">
+                                            <span class="gn-close gn-warning-color-hover"><i class="gn-close-icon gn-warning-color icon-cross"></i></span>
+                                            </span>
+                                        </div>'; 
 
             $this->addSessionData($arr);
         }
@@ -846,8 +852,8 @@ abstract class AdminController extends Controller
 
         $this->createFile();
 
-        // if($id && method_exists($this, 'checkFiles'))
-        //     $this->checkFiles($id);
+        if($id && method_exists($this, 'fileExistenceCheck'))
+            $this->fileExistenceCheck($id);
 
         $this->createAlias($id);
 
@@ -876,24 +882,32 @@ abstract class AdminController extends Controller
 
         $this->extension(get_defined_vars());
 
-        $result = $this->checkAlias($_POST[$this->columns['primary_key']]);
+        $this->checkAlias($_POST[$this->columns['primary_key']]);
 
         if ($res_id) {
+            if($this->action === "add"){$class = 'gn-success'; $icon = 'icon-checkmark-circle';}
+                elseif($this->action === "edit"){$class = 'gn-primary'; $icon = 'icon-rotate-cw3';}
 
-            $_SESSION['res']['answer'] = '<div class="alert alert-success alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
-                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Well done!</span> '. $answerSuccess .'
-                                         </div>';
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before '.$class.'">
+                                            <span><i class="gn-icon '.$class.'-color '.$icon.'"></i></span>
+                                            <span class="gn-msg '.$class.'-color"><b>Well done! </b> '. $answerSuccess .'</span> 
+                                            <span class="gn-btn-close">
+                                            <span class="gn-close '.$class.'-color-hover"><i class="gn-close-icon '.$class.'-color icon-cross"></i></span>
+                                            </span>
+                                          </div>';
 
             if (!$returnID) $this->redirect();
 
             return $_POST[$this->columns['primary_key']];
 
         } else {
-            $_SESSION['res']['answer'] = '<div class="alert alert-danger alert-styled-left alert-dismissible">
-                                             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                             <span class="font-weight-semibold">Oh snap!</span> '. $answerFail .'
-                                         </div>';
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-error">
+                                            <span><i class="gn-icon gn-error-color icon-blocked"></i></span>
+                                            <span class="gn-msg gn-error-color"><b>Oh snap! </b> '. $answerFail .'</span> 
+                                            <span class="gn-btn-close">
+                                            <span class="gn-close gn-error-color-hover"><i class="gn-close-icon gn-error-color icon-cross"></i></span>
+                                            </span>
+                                        </div>';
 
             if (!$returnID) $this->redirect();
         }
@@ -1036,7 +1050,7 @@ abstract class AdminController extends Controller
                 ]);
 
                 $this->model->add('old_alias', [
-                    'field' => ['alias' => $old_alias, 'table_name' => $this->table, 'table_id' => $id]
+                    'fields' => ['alias' => $old_alias, 'table_name' => $this->table, 'table_id' => $id]
                 ]);
             }
         }
@@ -1049,7 +1063,41 @@ abstract class AdminController extends Controller
         $fileEdit = new FileEdit;
         $this->fileArray = $fileEdit->addFile();
     }
+    
+# -------------------- CHECK FILES -----------------------------------------------
 
-    
-    
+    protected function fileExistenceCheck($id) # обезопасить от перезаписи файлов
+    {
+        if ($this->fileArray) {
+
+            $data = $this->model->select($this->table, [
+                'fields' => array_keys($this->fileArray),
+                'where' => [$this->columns['primary_key'] => $id]
+            ]);
+
+            if ($data) {
+
+                $data = $data[0];
+
+                foreach ($this->fileArray as $key => $item) {
+
+                    if (!empty($data[$key]) && is_array($item)) {
+
+                        $fileArr = json_decode($data[$key]);
+
+                        if ($fileArr) {
+
+                            foreach ($fileArr as $file) {
+
+                                $this->fileArray[$key][] = $file;
+                            }
+                        }
+                    } elseif (!empty($data[$key])) {
+
+                        @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . UPLOAD_DIR . $data[$key]);
+                    }
+                }
+            }
+        }
+    }
 }

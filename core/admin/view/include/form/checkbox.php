@@ -1,11 +1,11 @@
 <div class="form-group col-lg-12">
     <div class="row">
-        <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
-            <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
-        </label>
         <?php if($this->foreignData[$row]) :?>
                 <?php foreach($this->foreignData[$row] as $name => $value) :?>
                     <?php if($value['sub']) :?>
+                        <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
+                            <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
+                        </label>
                         <div class="d-block w-100 mb-2" style="cursor: pointer">
                             <div class="col-lg-12">
                                 <div class="borde form-control d-flex justify-content-between">
@@ -24,10 +24,13 @@
                                                     value="<?=$item['id']?>" 
                                                     name="<?=$row?>[<?=$name?>][]"
                                                     data-fouc
-                                                    <?php if(isset($this->data)){
-                                                        if(in_array($item['id'], $this->data[$row][$name])) 
+                                                    <?php 
+                                                    if(isset($this->data)){
+                                                        if(empty($this->data[$row][$name])) echo '';
+                                                        elseif(in_array($item['id'], $this->data[$row][$name])) 
                                                             echo 'checked';
-                                                        }?>>
+                                                        }
+                                                    ?>>
                                                 <?=$item['name']?>
                                             </label>
                                         </div>
