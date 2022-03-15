@@ -37,6 +37,14 @@ abstract class AdminController extends Controller
 
     protected function inputData()
     {        
+        if(!MS_MODE){
+
+            if(preg_match('/msie|trident.+?rv\s*:/', $_SERVER['HTTP_USER_AGENT'])){
+
+                exit('Вы используете устаревшую версию браузера. Пожалуйста, обновитесь до актуальной версии.'); // EX. Ссылка на скачку браузера
+            }
+        }
+        
         $this->init(true);
                   
         $this->title = 'VG engine';
@@ -1064,7 +1072,7 @@ abstract class AdminController extends Controller
         $this->fileArray = $fileEdit->addFile();
     }
     
-# -------------------- CHECK FILES -----------------------------------------------
+# -------------------- FILE EXISTENCE CHECH --------------------------------------    
 
     protected function fileExistenceCheck($id) # обезопасить от перезаписи файлов
     {

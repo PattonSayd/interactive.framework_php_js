@@ -159,7 +159,7 @@ class DeleteController extends AdminController
 
                             $updateFlag = true;
 
-                            @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . UPLOAD_DIR . $value); 
+                            @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . UPLOAD_DIR . $item); 
                             
                             unset($data[$key]);
 
