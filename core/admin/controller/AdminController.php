@@ -893,14 +893,11 @@ abstract class AdminController extends Controller
         $this->checkAlias($_POST[$this->columns['primary_key']]);
 
         if ($res_id) {
-            if($this->action === "add"){$class = 'gn-success'; $icon = 'icon-checkmark-circle';}
-                elseif($this->action === "edit"){$class = 'gn-primary'; $icon = 'icon-rotate-cw3';}
-
-            $_SESSION['res']['answer'] = '<div class="gn-item gn-before '.$class.'">
-                                            <span><i class="gn-icon '.$class.'-color '.$icon.'"></i></span>
-                                            <span class="gn-msg '.$class.'-color"><b>Well done! </b> '. $answerSuccess .'</span> 
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-success">
+                                            <span><i class="gn-icon gn-success-color icon-checkmark-circle"></i></span>
+                                            <span class="gn-msg gn-success-color"><b>Well done! </b> '. $answerSuccess .'</span> 
                                             <span class="gn-btn-close">
-                                            <span class="gn-close '.$class.'-color-hover"><i class="gn-close-icon '.$class.'-color icon-cross"></i></span>
+                                            <span class="gn-close gn-success-color-hover"><i class="gn-close-icon gn-success-color icon-cross"></i></span>
                                             </span>
                                           </div>';
 

@@ -178,7 +178,7 @@ abstract class Model extends ModelMethods
 
 		if (!$set['fields'] && !$set['files']) return false; 
 
-		if(!$set['all_rows']){
+		if(empty($set['all_rows'])){
 
 			if($set['where']){
 				$where = $this->createWhere($set);

@@ -52,8 +52,7 @@ function createFile(){
 
                     parentContainer = this.closest('.gallery-container') // находим родитель контейнера 
   
-                    if (!parentContainer)
-                        return false;
+                    if (!parentContainer) return false;
 
                     container = parentContainer.querySelectorAll('.empty-container');
 
@@ -83,8 +82,7 @@ function createFile(){
 
                         if (multiple) {
 
-                            if (typeof fileStore[fileName] === "undefined")
-                                fileStore[fileName] = [];
+                            if (typeof fileStore[fileName] === "undefined") fileStore[fileName] = [];
 
                             let elId = fileStore[fileName].push(this.files[i]) - 1;
 
@@ -119,30 +117,31 @@ function createFile(){
                 container.querySelector('img').setAttribute('src', e.target.result);
 
                 container.classList.remove('empty-container');
-
             }
 
         }
 
         function deleteNewFiles(elId, fileName, attributeName, container) {
 
-            container.onclick = function () {
+            container.addEventListener('click', function () {
 
                 this.remove();
 
                 delete fileStore[fileName][elId]
-            }
+            })
 
         }
 
-        let form = document.querySelector('#main-form');        
+        
+
+        let form = document.querySelector('#add-form');        
 
         if(form){
 
             form.onsubmit = function(e){
 
-                if(!isEmpty(fileStore)){ // если массив не пуст
-
+                if(!isEmpty(fileStore)){ 
+                    
                     e.preventDefault();
 
                     let formData = new FormData(this);
@@ -195,3 +194,9 @@ function createFile(){
 }
 
 
+function isEmpty(arr) {
+    for(let i in arr){
+        return false;
+    }
+    return true;
+}

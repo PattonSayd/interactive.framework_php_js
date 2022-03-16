@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
+            <form id="add-form" action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
 
                 <div class="row mb-3">
                     <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#f0fff0; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
