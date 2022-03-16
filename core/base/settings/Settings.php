@@ -56,7 +56,7 @@ class Settings
         'radio'    => ['visible'],
         'checkbox' => ['pages'],
         'keywords' => ['keywords'],
-        'image'    => ['image'],
+        'image'    => ['image', 'new_gallary'],
         'gallery'  => ['gallery'],
         'textarea' => ['content'],
 
@@ -73,7 +73,7 @@ class Settings
 
     private $block = [
         'l-section' => [],
-        'r-section' => ['image', 'gallery'],
+        'r-section' => ['image', 'new_gallary', 'gallery',],
         'c-section' => [],
     ];
 

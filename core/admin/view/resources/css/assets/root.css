@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
+
+/* start GN - NOTIFICATION ALERT */
 body
   {
     width: 100%;
@@ -181,3 +183,18 @@ color: rgba(211, 152, 3, 0.905);
     transform: translateX(101%);
   }
 }
+/* end GN - NOTIFICATION ALERT */
+
+/* start GN - GALLERY */
+.gn-gallery-container{
+    width:100px; 
+    height:100px; 
+    border:2px dotted #8a8a8a
+}
+
+.gn-img-size{
+   object-fit: cover;
+   max-width: 100%; 
+   max-height: 100%
+}
+/* end GN - GALLERY */

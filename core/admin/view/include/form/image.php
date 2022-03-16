@@ -1,5 +1,5 @@
 
-<div class="form-group col-lg-12">
+<div class="form-group col-lg-12 img-container">
     <div class="row">
         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
@@ -28,9 +28,9 @@
                             id="<?=$row?>-delete">
                 </a>
             <?php endif;?>
-            <div class="d-flex justify-content-center align-items-center mt-1" style="width:400px; height:400px; border:2px dotted #8a8a8a;">
+            <div class="d-flex justify-content-center align-items-center mt-1 img-show" style="width:400px; height:400px; border:2px dotted #8a8a8a;">
                 <?php if ($this->data[$row]) : ?>
-                    <img src="<?=PATH . UPLOAD_DIR . $this->data[$row]?>" style="object-fit: cover; max-width: 100%; max-height: 100%" accept="image/*,image/jpeg,image/png,image/gif">
+                    <img src="<?=PATH . UPLOAD_DIR . $this->data[$row]?>" class="gn-img-size" accept="image/*,image/jpeg,image/png,image/gif">
                 <?php endif; ?>
             </div>
         </div>

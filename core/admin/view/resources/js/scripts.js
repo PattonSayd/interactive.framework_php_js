@@ -50,12 +50,12 @@ function createFile(){
 
                     multiple = true;
 
-                    parentContainer = this.closest('.gallery_container') // находим родитель контейнера 
-
+                    parentContainer = this.closest('.gallery-container') // находим родитель контейнера 
+  
                     if (!parentContainer)
                         return false;
 
-                    container = parentContainer.querySelectorAll('.empty_container');
+                    container = parentContainer.querySelectorAll('.empty-container');
 
                     if (container.length < this.files.length) {
 
@@ -63,19 +63,19 @@ function createFile(){
 
                             let elem = document.createElement('div');
 
-                            elem.classList.add('vg-dotted-square', 'vg-center', 'empty_container');
+                            elem.classList.add('d-flex', 'align-items-center', 'justify-content-center', 'mb-1', 'mr-1', 'empty-container', 'gn-gallery-container');
 
                             parentContainer.append(elem);
                         }
 
-                        container = parentContainer.querySelectorAll('.empty_container');
+                        container = parentContainer.querySelectorAll('.empty-container');
 
                     }
                 }
 
                 let fileName = item.name;
 
-                let attributeName = fileName.replace(/[\[\]]/g, '');
+                let attributeName = fileName.replace(/[\[\]]/g, ''); // вырезаем gallery[] = gallery
 
                 for (let i in this.files) {
 
@@ -95,7 +95,7 @@ function createFile(){
                             deleteNewFiles(elId, fileName, attributeName, container[i]);
 
                         } else {
-                            container = this.closest('.img_container').querySelector('.img_show');
+                            container = this.closest('.img-container').querySelector('.img-show');
 
                             showImage(this.files[i], container);
                         }
@@ -114,11 +114,11 @@ function createFile(){
 
             reader.onload = e => {
 
-                container.innerHTML = '<img class="img_item" src="">';
+                container.innerHTML = '<img class="gn-img-size" src="">';
 
                 container.querySelector('img').setAttribute('src', e.target.result);
 
-                container.classList.remove('empty_container');
+                container.classList.remove('empty-container');
 
             }
 
