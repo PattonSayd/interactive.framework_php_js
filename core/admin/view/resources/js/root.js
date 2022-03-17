@@ -13,9 +13,6 @@ var Root = function () {
         
     };
 
-    window.onbeforeunload = function () {
-      }
-
     var _alertClose = function() { 
                
         $('.gn-close').click(function(){

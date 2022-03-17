@@ -4,18 +4,19 @@ namespace core\admin\controller;
 
 class AjaxController extends AdminController
 {
-
     public function ajax()
     {
-        if(isset($this->data['ajax'])){
+        if(isset($this->ajax_data['ajax'])){
 
             $this->parent_inputData();
 
-            switch ($this->data['ajax']) {
+            foreach($this->ajax_data as $key => $v) $this->ajax_data[$key] = $this->clearStr($v);
+
+            switch ($this->ajax_data['ajax']) {
 
                 case 'sitemap':
                     
-                    return (new CreatesitemapController())->inputData($this->data['links_counter'], false);
+                    return (new CreatesitemapController())->inputData($this->ajax_data['links_counter'], false);
 
                     break;
 
@@ -28,9 +29,24 @@ class AjaxController extends AdminController
                     return json_encode(['success' => 1]);
                     
                     break;
+                
+                case 'change_parent':
+
+                    return $this->changeParent();
+                    
             }
         }
 
         return json_encode(['success' => '0', 'message' => 'NO AJAX DATA']);
     }
+
+    protected function changeParent()
+    {
+        return $this->model->select($this->ajax_data['table'],[
+            'fields' => ['COUNT(*) as count'],
+            'where' => ['parent_id' => $this->ajax_data['parent_id']],
+            'no_concat' => true
+        ])[0]['count'] + $this->ajax_data['iterations'];
+    }
+    
 }

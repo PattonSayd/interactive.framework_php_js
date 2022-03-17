@@ -26,7 +26,7 @@ function createSitemap() {
     
 }
 
-createFile();  
+
 
 function createFile(){
     
@@ -152,7 +152,7 @@ function createFile(){
 
                             formData.delete(i); 
 
-                            let rowName = i.replace(/[/[/]]/g, '');
+                            let rowName = i.replace(/[\[\]]/g, '');
 
                             fileStore[i].forEach((item, index) => {
 
@@ -200,3 +200,71 @@ function isEmpty(arr) {
     }
     return true;
 }
+
+
+function chanceMenuPosition(){
+
+    let form = document.querySelector('#add-form');
+
+    if(form){
+
+        let select_parent = form.querySelector('select[name=parent_id]');
+        let select_position = form.querySelector('select[name=menu_position]');
+
+        if(select_parent && select_position){
+
+            let default_parent = select_parent.value;
+
+            let default_position = +select_position.value;
+
+            select_parent.addEventListener('change', function(){
+
+                let default_select = false;
+
+                if (this.value === default_parent) default_select = true; 
+
+                Ajax({
+                    data: {
+                        table : form.querySelector('input[name=table]').value,
+                        'parent.id' : this.value,
+                        ajax : 'change_parent',
+                        iterations : !form.querySelector('#table_id') ? 1 : +!default_select // "+" переобразовывает в int
+
+                    }
+                }).then(res=>{
+
+                    res = +res;
+
+                    if(!res) alert('Произошла внутренняя ошибкa');
+
+                    let new_select = document.createElement('select');
+
+                    new_select.setAttribute('name', 'menu_position');
+
+                    new_select.classList.add('form-control');
+
+                    for(let i = 1; i <= res; i++){
+
+                        let selected = default_select && i === default_position ? 'selected' : '';
+
+                        new_select.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
+                        
+                    }
+                      
+                    select_position.before(new_select);
+
+                    select_position.remove();
+
+                    select_position = new_select;
+                })
+                
+            })
+            
+        }
+        
+    }
+    
+}
+
+createFile();  
+chanceMenuPosition()

@@ -54,6 +54,8 @@
                     
                 </fieldset>
 
+                <input type="hidden" name="table" value="<?=$this->table;?>">
+
                 <div class="row flex-row-reverse">
                     <button type="submit" class="btn mr-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
                 <?php if(!$this->noDelete && $this->data) : ?>
@@ -62,11 +64,8 @@
                 </div>
 
                 <?php if($this->data) : ?>
-                    <input type="hidden" name="<?=$this->columns['primary_key'];?>" value="<?=$this->data[$this->columns['primary_key']];?>">
+                    <input id="table_id" type="hidden" name="<?=$this->columns['primary_key'];?>" value="<?=$this->data[$this->columns['primary_key']];?>">
                 <?php endif ?>
-
-                <input type="hidden" name="table" value="<?=$this->table;?>">
-
             </form>
         </div>
     </div>

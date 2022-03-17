@@ -30,6 +30,7 @@ abstract class Controller
 
     protected $userId;
     protected $data;
+    protected $ajax_data;
 
 # ----------------- ROUTE -----------------------------------------------------
 
