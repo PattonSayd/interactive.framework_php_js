@@ -209,6 +209,7 @@ function chanceMenuPosition(){
     if(form){
 
         let select_parent = form.querySelector('select[name=parent_id]');
+        
         let select_position = form.querySelector('select[name=menu_position]');
 
         if(select_parent && select_position){
@@ -266,5 +267,152 @@ function chanceMenuPosition(){
     
 }
 
+
+function blockParametrs(){
+    
+    let wraps = document.querySelectorAll('.select-wrap');
+
+    if(wraps.length) {
+
+        let select_all_index = []
+
+        wraps.forEach(item => {
+
+            let next = item.nextElementSibling;
+
+            if(next && next.classList.contains('option-wrap')){
+
+                item.addEventListener('click', e => {
+
+                    if (e.target.tagName === "LABEL") return;
+
+                    if(!e.target.classList.contains('select-all')){
+
+                        next.slideToggle(150);
+                        
+                    }else{
+
+                    
+                        let index = [...document.querySelectorAll('.select-all')].indexOf(e.target);
+
+                        if(typeof select_all_index[index] === 'undefined') select_all_index[index] = false;
+
+                        select_all_index[index] = !select_all_index[index];
+
+                        next.querySelectorAll('input[type="checkbox"]').forEach(el => {
+
+                            el.checked = select_all_index[index];
+
+                            if(el.checked)
+                                el.closest('.checkbox-container').querySelector('.select-all').classList.add('select-bold');
+                            else
+                                el.closest('.checkbox-container').querySelector('.select-all').classList.remove('select-bold');
+                        })
+
+                    }
+                })
+            }
+
+            let select_all = item.querySelector('.select-all');
+
+            next.querySelectorAll('input[type="checkbox"]').forEach(box => {
+
+                box.addEventListener('change', function(){
+
+                    if(box.checked == false){ select_all.classList.remove('select-bold')}
+
+                    var len = [].slice.call(next.querySelectorAll('input[type="checkbox"]')).filter(function(e) { return e.checked; }).length;
+                    
+                    if(len === next.querySelectorAll('input[type="checkbox"]').length){select_all.classList.add('select-bold')}
+                    
+                })
+            })
+            
+        })
+        
+    }
+
+    
+}
+
+
+
+
+Element.prototype.slideToggle = function(time, callback){
+
+    let _time = typeof time === 'number' ? time : 400
+
+    callback = typeof time === 'function' ? time : callback
+
+    if(getComputedStyle(this)['display'] === 'none'){
+
+        this.style.transition = null;
+
+        this.style.overflow = 'hidden';
+
+        this.style.maxHeight = 0;
+
+        this.style.display = 'block';  
+
+        this.style.transition = _time + 'ms';   
+
+        this.style.maxHeight = this.scrollHeight + 'px';  
+        
+        setTimeout(() => {
+
+            callback && callback()
+            
+        }, _time)
+
+    }else{
+        this.style.transition = _time + 'ms';  
+
+        this.style.maxHeight = 0;
+
+        setTimeout(() => {
+
+            this.style.transition = null;
+
+            this.style.display = 'none';  
+            
+            callback && callback()
+            
+        }, _time)
+
+    }
+    
+}
+
+function checkedBox(){
+    
+    window.addEventListener('DOMContentLoaded', function(){ 
+
+        
+
+        document.querySelectorAll('.select-all').forEach(el => {
+
+            let input = el.closest('.checkbox-container').querySelectorAll('.checked-box');
+           
+            let check = true;
+            
+            input.forEach(box => {
+
+                if(!box.checked) check = box.checked  
+                
+            })
+            
+            if(check) {
+                // document.querySelector('.lable-select').add('select-bold') 
+            }
+
+        })
+
+        
+     })
+    
+}
+
+checkedBox()
 createFile();  
+blockParametrs()
 chanceMenuPosition()

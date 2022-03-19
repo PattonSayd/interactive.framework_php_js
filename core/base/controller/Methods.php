@@ -10,7 +10,7 @@ trait Methods{
     {
         if(is_array($str)){
             foreach($str as $key => $value){
-                $str[$key] = trim(strip_tags($value));
+                $str[$key] = $this->clearStr($value);
                 return $str;
             }
         }else {
