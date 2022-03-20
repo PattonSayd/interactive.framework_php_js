@@ -211,7 +211,7 @@ color: rgba(211, 152, 3, 0.905);
 }
 
 .gn-checkbox input[type=checkbox]{
-  display: flex;
+  display: none;
 }
 
 /* Checkboxes */

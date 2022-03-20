@@ -1,5 +1,5 @@
 
-<div class="form-group col-lg-12 img-container">
+<div class="form-group col-lg-12 img-container img-wrapper">
     <div class="row">
         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>

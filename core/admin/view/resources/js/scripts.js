@@ -100,7 +100,50 @@ function createFile(){
                     }
                 }
             }
+            
+            let area = item.closest('.img-wrapper');
+
+            if(area){
+
+                dragAndDrop(area, item);
+                
+            }
+            
         });
+
+        function dragAndDrop(area, input){
+
+             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName, index) => {
+
+                area.addEventListener(eventName, e => {
+
+                    e.preventDefault();
+
+                    e.stopPropagation();
+
+                    if(index < 2) {
+
+                        area.style.backgroundImage = 'linear-gradient(to right, rgba(53, 91, 125, 0.25), rgba(108, 91, 123, 0.25), rgba(192, 108, 132, 0.25))';
+                        
+                    }else{
+
+                        area.style.background = 'transparent';
+                        
+                        if(index === 3){ 
+
+                            input.files = e.dataTransfer.files;
+
+                            input.dispatchEvent(new Event('change'));
+                            
+                        }
+                        
+                    }
+                    
+                })
+                 
+             })
+            
+        }
 
         function showImage(item, container) {
 
@@ -131,8 +174,6 @@ function createFile(){
             })
 
         }
-
-        
 
         let form = document.querySelector('#add-form');        
 
@@ -387,8 +428,6 @@ function checkedBox(){
     
     window.addEventListener('DOMContentLoaded', function(){ 
 
-        
-
         document.querySelectorAll('.select-all').forEach(el => {
 
             let input = el.closest('.checkbox-container').querySelectorAll('.checked-box');
@@ -402,7 +441,8 @@ function checkedBox(){
             })
             
             if(check) {
-                // document.querySelector('.lable-select').add('select-bold') 
+               
+                el.classList.add('select-bold') 
             }
 
         })
