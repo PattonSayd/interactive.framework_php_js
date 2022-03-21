@@ -2,7 +2,7 @@
 <div class="content">
 
     <?php if(isset($_SESSION['res']['answer'])) :?>
-        <div class="gn-alert gn-hide">
+        <div class="gn-alert gn-hide" tabindex="-1">
             <?=$_SESSION['res']['answer']?>
         </div>
    <?php endif; ?>

@@ -5,10 +5,18 @@ var Root = function () {
         $('.gn-alert').addClass("gn-show");
         $('.gn-alert').removeClass("gn-hide");
         $('.gn-alert').addClass("gn-alert-show");
-        setTimeout(function(){
-            $('.gn-alert').removeClass("gn-show");
+        $('.gn-alert').attr("tabindex",-1).focus()
+        // setTimeout(function(){
+        //     $('.gn-alert').removeClass("gn-show");
+        //     $('.gn-alert').addClass("gn-hide");
+        // },3000)
+        
+        $('.gn-alert').blur(function(){
+            $('.gn-close').removeClass("gn-show")
             $('.gn-alert').addClass("gn-hide");
-        },3000)
+            
+        });
+        
 
         
     };

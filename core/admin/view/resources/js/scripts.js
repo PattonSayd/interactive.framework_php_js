@@ -424,7 +424,7 @@ Element.prototype.slideToggle = function(time, callback){
     
 }
 
-function checkedBox(){
+function showSelectCheckbox(){
     
     window.addEventListener('DOMContentLoaded', function(){ 
 
@@ -452,7 +452,98 @@ function checkedBox(){
     
 }
 
-checkedBox()
+
+function showHideMenuSearch(){
+
+    let search = document.querySelector('.gn-search');
+
+    let icon = document.querySelector('.gn-search-icon');
+
+    let div = document.querySelector('.gn-search-input');
+
+    let dropdown = document.querySelector('.gn-dropdown');
+
+    icon.addEventListener('click', () =>{
+
+        search.classList.toggle('active');
+
+    })
+
+    div.addEventListener('blur', () =>{
+
+        search.classList.remove('active');
+        dropdown.classList.remove('active');
+    })
+
+    div.addEventListener('click', () =>{
+
+        dropdown.classList.add('active');
+    })
+    
+}
+
+
+let searchResultHover = (() => {
+
+    let dropdown = document.querySelector('.gn-dropdown');
+
+    let search_input = document.querySelector('.gn-search-input');
+
+    let default_input_value = null;
+
+    function searchKeyDouwn(e){
+
+
+        
+    }
+
+    function setDefaultValue(e){
+        
+        search_input.value = default_input_value;
+        
+    }
+    
+    dropdown.addEventListener('mouseleave', setDefaultValue);
+
+    window.addEventListener('keydown', searchKeyDouwn);
+
+    
+    return () => {
+
+        setTimeout(() =>{
+
+            default_input_value = search_input.value;
+
+            if(dropdown.children.length){
+
+                let children = [...dropdown.children];
+
+                children.forEach(item => {
+
+                    item.addEventListener('mouseover', () => {
+
+                        children.forEach(el => el.classList.remove('gn-search-act'));
+                        
+                        item.classList.add('gn-search-act');
+
+                        search_input.value = item.innerText
+                    })
+
+                    
+                    
+                })
+                
+            }
+            
+        }, 5000);
+        
+    }
+    
+})()
+
+searchResultHover()
+showHideMenuSearch()
+showSelectCheckbox()
 createFile();  
 blockParametrs()
 chanceMenuPosition()

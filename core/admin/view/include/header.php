@@ -31,11 +31,16 @@
 		<div class="collapse navbar-collapse justify-content-between" id="navbar-mobile">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-hide d-none d-md-block" data-popup="tooltip-demo" title="Hide mini" data-placement="bottom" data-container="body" data-trigger="hover">
-						<i class="icon-lan3"></i>
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" data-popup="tooltip-demo" title="Expand main" data-placement="bottom" data-container="body" data-trigger="hover">
+						<i class="icon-paragraph-justify3"></i>
 					</a>
 				</li>
+						
+				
 			</ul>
+
+			
+
 
 			<!-- <span class="navbar-text ml-md-3 mr-md-auto">
 				<span class="badge bg-success">Online</span>
@@ -160,9 +165,24 @@
 					<div class="page-title d-flex">
 						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Sidebars</span> - Mini Hideable</h4>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
-					</div>
+					</div>			
 
 					<div class="header-elements d-none">
+
+						<form method="post" class="position-relative gn-form-search" action="<?PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/show">
+							<div class="gn-search mr-4">
+								<div class="gn-search-icon"></div>
+								<div class="gn-search-input-div">
+									<input type="text" placeholder="Type to Search..." class="gn-search-input"> 
+								</div>
+							</div>
+							<div class="gn-dropdown">
+								<a href="">Link</a>
+								<a href="">Link</a>
+								<a href="">Link</a>
+							</div>
+						</form>
+						
 						<div class="d-flex justify-content-center">
 							<a href="#" class="btn btn-link btn-float text-default sitemap-button"><i class="icon-lan2 text-primary"></i> <span>Sitemap</span></a>
 						</div>
