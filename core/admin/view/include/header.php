@@ -97,7 +97,7 @@
 					<div class="card-body">
 						<div class="media">
 							<div class="mr-3">
-								<a href="#"><img src="https://www.pngitem.com/pimgs/m/111-1114839_circle-people-icon-flat-png-avatar-icon-transparent.png" width="38" height="38" class="rounded-circle" alt=""></a>
+								<a href="#"><img src="https://www.meme-arsenal.com/memes/f829154b6247042d8821a19015eb2f7c.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
 							</div>
 
 							<div class="media-body">
@@ -169,7 +169,7 @@
 
 					<div class="header-elements d-none">
 
-						<form method="post" class="position-relative gn-form-search" action="<?PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/show">
+						<form method="post" autocomplete="off" class="position-relative gn-form-search" action="<?PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/search">
 							<div class="gn-search mr-4">
 								<div class="gn-search-icon"></div>
 								<div class="gn-search-input-div">
@@ -177,9 +177,9 @@
 								</div>
 							</div>
 							<div class="gn-dropdown">
-								<a href="">Link</a>
-								<a href="">Link</a>
-								<a href="">Link</a>
+								<a href="">Link1</a>
+								<a href="">Link2</a>
+								<a href="">Link3</a>
 							</div>
 						</form>
 						

@@ -1,22 +1,19 @@
 <!-- Content area -->
 <div class="content">
-
     <?php if(isset($_SESSION['res']['answer'])) :?>
         <div class="gn-alert gn-hide" tabindex="-1">
             <?=$_SESSION['res']['answer']?>
         </div>
    <?php endif; ?>
-    <!-- Form inputs -->
-    <div class="card">
-        <div class="card-body">
-
+    <!-- Form inputs -->    
             <form id="add-form" action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
-
                 <div class="row mb-3">
-                    <button type="submit" class="btn ml-2" style="background-color: #00b389; color:#f0fff0; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
-                <?php if(!$this->noDelete && $this->data) : ?>
-                    <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
-                <?php endif; ?>
+                    <div class="col-12">
+                        <button type="submit" class="btn" style="background-color: #00b389; color:#f0fff0; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
+                    <?php if(!$this->noDelete && $this->data) : ?>
+                        <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                    <?php endif; ?>
+                    </div>
                 </div>
                 
                 <fieldset class="mb-3 row">
@@ -24,8 +21,9 @@
                     <?php
                         foreach ($this->blocks as $class => $block) {
 
-                            if($class === 'l-section' || $class === 'r-section') $col = 'col-lg-6';
-                            else$col = 'col-lg-12';
+                            if($class === 'l-section') $col = 'col-lg-6 sortable-lrows';
+                            elseif($class === 'r-section') $col = 'col-lg-6 sortable-rrows';
+                            else $col = 'col-lg-12 sortable-crows';
                             
                             echo '<div class=" '. $col . '">';
 
@@ -56,19 +54,20 @@
 
                 <input type="hidden" name="table" value="<?=$this->table;?>">
 
-                <div class="row flex-row-reverse">
-                    <button type="submit" class="btn mr-2" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
-                <?php if(!$this->noDelete && $this->data) : ?>
-                    <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn mr-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
-                <?php endif; ?>
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <button type="submit" class="btn" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
+                    <?php if(!$this->noDelete && $this->data) : ?>
+                        <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn mr-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                    <?php endif; ?>
+                    </div>
                 </div>
 
                 <?php if($this->data) : ?>
                     <input id="table_id" type="hidden" name="<?=$this->columns['primary_key'];?>" value="<?=$this->data[$this->columns['primary_key']];?>">
                 <?php endif ?>
             </form>
-        </div>
-    </div>
+      
 	<!-- /form inputs -->
 	<?php if(isset($_SESSION['res']['answer'])) :?>
         <?php unset($_SESSION['res']);?>

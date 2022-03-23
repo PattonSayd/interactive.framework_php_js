@@ -1,9 +1,10 @@
-<div class="form-group col-lg-12">
-    <div class="row">
+<div class="col-lg-12 mb-1">
+    <div class="row pb-3" style="background: #fff;border: 1px solid rgba(0,0,0,.125); box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%)">
         <?php if($this->foreignData[$row]) :?>
                 <?php foreach($this->foreignData[$row] as $name => $value) :?>
                     <?php if($value['sub']) :?>
                         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
+                            <span style="float:right;cursor:pointer; color: #a8a7a7;"><i class="icon-move-alt1"></i></span>
                             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
                         </label>
                         <div class="d-block w-100 mb-2 checkbox-container">

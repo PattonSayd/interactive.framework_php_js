@@ -62,7 +62,7 @@ function createFile(){
 
                             let elem = document.createElement('div');
 
-                            elem.classList.add('d-flex', 'align-items-center', 'justify-content-center', 'mb-1', 'mr-1', 'empty-container', 'gn-gallery-container');
+                            elem.classList.add('d-flex', 'align-items-center', 'justify-content-center', 'mb-1', 'mr-1', 'empty-container', 'gn-dotted-square');
 
                             parentContainer.append(elem);
                         }
@@ -111,7 +111,7 @@ function createFile(){
             
         });
 
-        function dragAndDrop(area, input){
+        function dragAndDrop(area, inputItem){
 
              ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName, index) => {
 
@@ -131,9 +131,9 @@ function createFile(){
                         
                         if(index === 3){ 
 
-                            input.files = e.dataTransfer.files;
+                            inputItem.files = e.dataTransfer.files;
 
-                            input.dispatchEvent(new Event('change'));
+                            inputItem.dispatchEvent(new Event('change'));
                             
                         }
                         
@@ -493,8 +493,31 @@ let searchResultHover = (() => {
 
     function searchKeyDouwn(e){
 
-
+        if((document.querySelector('.gn-form-search').classList.contains('gn-search-reverse')) || 
+            (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
         
+        let drop = [...dropdown.children];
+
+        if(drop.length){
+
+            e.preventDefault();
+            
+            let active_item = dropdown.querySelector('.gn-search-active');
+
+            let active_index = active_item ? drop.indexOf(active_item) : -1;
+
+            if(e.key === 'ArrowUp')
+                active_index = active_index <= 0 ? drop.length - 1 : --active_index;
+            else
+                active_index = active_index === drop.length - 1 ? 0 : ++active_index;
+ 
+            drop.forEach(item => item.classList.remove('gn-search-active'));
+
+            drop[active_index].classList.add('gn-search-active');
+
+            search_input.value = drop[active_index].innerText;
+            
+        }
     }
 
     function setDefaultValue(e){
@@ -513,8 +536,10 @@ let searchResultHover = (() => {
         setTimeout(() =>{
 
             default_input_value = search_input.value;
+           
+        },4000);
 
-            if(dropdown.children.length){
+         if(dropdown.children.length){
 
                 let children = [...dropdown.children];
 
@@ -522,24 +547,163 @@ let searchResultHover = (() => {
 
                     item.addEventListener('mouseover', () => {
 
-                        children.forEach(el => el.classList.remove('gn-search-act'));
+                        children.forEach(el => el.classList.remove('gn-search-active'));
                         
-                        item.classList.add('gn-search-act');
+                        item.classList.add('gn-search-active');
 
                         search_input.value = item.innerText
-                    })
-
-                    
-                    
+                    })                   
                 })
-                
             }
-            
-        }, 5000);
-        
     }
     
 })()
+
+
+
+Element.prototype.sortable = (function() {
+
+    var dragEl, nextEl;
+
+    function _unDraggable(elements){
+
+        if(elements && elements.length){
+
+            for(let i = 0; i < elements.length; i++){
+
+                if(!elements[i].hasAttribute('draggable')){
+
+                    elements[i].draggable = false;
+
+                    _unDraggable(elements[i].children);
+                    
+                } 
+            } 
+        }  
+    }
+
+    function _onDragStart(e){
+
+        e.stopPropagation();
+
+        this.tempTarget = null
+
+        dragEl = e.target;
+
+        nextEl = dragEl.nextSibling;
+
+        e.dataTransfer.dropEffect = 'move';
+
+        this.addEventListener('dragover', _onDragOver, false)
+
+        this.addEventListener('dragend', _onDragEnd, false)
+    }
+
+    function _onDragOver(e){
+  
+        e.preventDefault();
+        e.stopPropagation();
+
+        e.dataTransfer.dropEffect = 'move';
+
+        let target;
+
+        if(e.target !== this.tempTarget){
+
+            this.tempTarget = e.target;
+
+            target = e.target.closest('[draggable=true]');
+        }
+
+        if(target && target !== dragEl && target.parentElement === this){
+
+            let rect = target.getBoundingClientRect();
+
+            let next = (e.clientY - rect.top)/(rect.bottom - rect.top) > .5;
+
+            this.insertBefore(dragEl, next && target.nextElementSibling || target);
+        }       
+    }
+
+    function _onDragEnd(e) {
+
+        e.preventDefault();
+
+        this.removeEventListener('dragover', _onDragOver, false)
+
+        this.removeEventListener('dragover', _onDragEnd, false)
+
+        if(nextEl !== dragEl.nextsibling){
+
+            this.onUpdate && this.onUpdate(dragEl)
+        }
+    }
+    
+    return function(options){
+
+        options = options || {}
+
+        this.onUpdate = options.stop || null;
+
+        let excludedElements = options.excludedElements && options.excludedElements.split(/,*\s+/) || null; //
+
+        [...this.children].forEach(item => {
+
+            let draggable = true;
+            
+            if(excludedElements){
+
+                for(let i in excludedElements){
+
+                    if(excludedElements.hasOwnProperty(i) && item.matches(excludedElements[i])) {
+
+                        draggable = false;
+
+                        break
+                        
+                    }
+                } 
+            }
+
+            item.draggable = draggable;
+
+            _unDraggable(item.children)
+            
+        })
+
+        this.removeEventListener('dragstart', _onDragStart, false)
+
+        this.addEventListener('dragstart', _onDragStart, false)
+        
+    }
+    d
+})();
+
+
+
+let galleries = document.querySelectorAll('.gallery-container');
+
+if(galleries.length){
+
+    galleries.forEach(item => {
+
+        item.sortable({
+            
+            excludedElements: '.button-div .empty-container',
+            stop: function (dragEl){
+
+                console.log(dragEl)
+                
+            }
+        })
+        
+    })
+    
+}
+
+document.querySelector('.sortable-lrows').sortable()
+document.querySelector('.sortable-rrows').sortable()
+document.querySelector('.sortable-crows').sortable()
 
 searchResultHover()
 showHideMenuSearch()

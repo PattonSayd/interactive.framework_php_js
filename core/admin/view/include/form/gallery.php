@@ -1,40 +1,45 @@
 
-<div class="form-group col-lg-12 img-wrapper">
-    <div class="row">
+<div class="col-lg-12 img-wrapper mb-1">
+    <div class="row pb-3" style="background: #fff;border: 1px solid rgba(0,0,0,.125); box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%)">
         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
+            <span style="float:right;cursor:pointer; color: #a8a7a7;"><i class="icon-move-alt1"></i></span>
             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
         </label>
         <div class="col-lg-12 d-flex flex-wrap gallery-container">
-            <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a" >
+            <div class="d-flex align-items-center justify-content-center mb-1 mr-1 button-div" style="width:100px; height:100px; border:2px dotted #8a8a8a" >
                 <button type="button" class="btn btn-light w-100 h-100" onclick="document.getElementById('<?=$row?>').click();">
                     <i class="icon-plus2" style="font-size:60px;"></i>
                 </button>
                 <input type="file" style="display:none;" id="<?=$row?>" name="<?=$row?>[]" multiple/>
             </div>
+
             <?php if ($this->data[$row]) :?>
+
                 <?php $this-> data[$row] = json_decode($this->data[$row]);?>
-                    <?php foreach ($this->data[$row] as $value) :?>
 
-                        <a href="<?=$this->adminPath . 
-                                    'delete/' . 
-                                    $this->table . '/' .  
-                                    $this->data[$this->columns['primary_key']] .
-                                    '/' . $row . '/' .
-                                    base64_encode($value)?>">
+                <?php foreach ($this->data[$row] as $value) :?>
 
-                            <div class="d-flex align-items-center justify-content-center mb-1 mr-1" style="width:100px; height:100px; border:2px dotted #8a8a8a">
-                                <img src="<?=PATH . UPLOAD_DIR . $value?>" style="object-fit: cover; max-width: 100%; max-height: 100%" accept="image/*,image/jpeg,image/png,image/gif" alt="...">
-                            </div>      
-                         </a>   
-                     <?php endforeach; ?>
+                    <a href="<?=$this->adminPath . 'delete/' .  $this->table . '/' .  
+                                $this->data[$this->columns['primary_key']] .
+                                '/' . $row . '/' . base64_encode($value)?>"
+                                class="d-flex align-items-center justify-content-center gn-dotted-square mb-1 mr-1"
+                                                             
+                                >
+                        <img src="<?=PATH . UPLOAD_DIR . $value?>" class="gn-img-size" alt="...">  
+                    </a>   
+                    
+                <?php endforeach; ?>
+
                 <?php for($i=0; $i < 2; $i++) { ?>
-                    <div class="d-flex align-items-center justify-content-center mb-1 mr-1 empty-container gn-gallery-container"></div>
+                    <div class="d-flex align-items-center justify-content-center mb-1 mr-1 empty-container gn-dotted-square"></div>
                 <?php } ?>
-                
+                    
             <?php else: ?>
+
                 <?php for($i=0; $i < 9; $i++) { ?>
-                    <div class="d-flex align-items-center justify-content-center mb-1 mr-1 empty-container gn-gallery-container"></div>
+                    <div class="d-flex align-items-center justify-content-center mb-1 mr-1 empty-container gn-dotted-square"></div>
                 <?php } ?>
+
             <?php endif; ?>
         </div>
     </div>
