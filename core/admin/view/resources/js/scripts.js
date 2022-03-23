@@ -1,3 +1,9 @@
+/*...................................................................
+.....................................................................
+..........CREATE SITEMAP.............................................
+.....................................................................
+.....................................................................
+*/ 
 document.querySelector('.sitemap-button').onclick = (e) =>{
     
     e.preventDefault();
@@ -25,8 +31,12 @@ function createSitemap() {
         });
     
 }
-
-
+/*...................................................................
+.....................................................................
+..........CREATE FILE................................................
+.....................................................................
+.....................................................................
+*/ 
 
 function createFile(){
     
@@ -88,7 +98,7 @@ function createFile(){
 
                             container[i].setAttribute(`data-deleteFileId-${attributeName}`, elId);
 
-                            showImage(this.files[i], container[i]);
+                            showImage(this.files[i], container[i], function(){parentContainer.sortable({ excludedElements: '.button-div .empty-container'})});
 
                             deleteNewFiles(elId, fileName, attributeName, container[i]);
 
@@ -145,7 +155,7 @@ function createFile(){
             
         }
 
-        function showImage(item, container) {
+        function showImage(item, container, callback) {
 
             let reader = new FileReader();
 
@@ -160,6 +170,8 @@ function createFile(){
                 container.querySelector('img').setAttribute('src', e.target.result);
 
                 container.classList.remove('empty-container');
+
+                callback && callback()
             }
 
         }
@@ -180,6 +192,12 @@ function createFile(){
         if(form){
 
             form.onsubmit = function(e){
+
+                createJsSortable(form)
+
+                e.preventDefault()
+
+                return false
 
                 if(!isEmpty(fileStore)){ 
                     
@@ -234,7 +252,12 @@ function createFile(){
     }
 }
 
-
+/*...................................................................
+.....................................................................
+..........IS EMPTY...................................................
+.....................................................................
+.....................................................................
+*/ 
 function isEmpty(arr) {
     for(let i in arr){
         return false;
@@ -242,8 +265,13 @@ function isEmpty(arr) {
     return true;
 }
 
-
-function chanceMenuPosition(){
+/*...................................................................
+.....................................................................
+..........CHANGE MENU POSITION.......................................
+.....................................................................
+.....................................................................
+*/ 
+function changeMenuPosition(){
 
     let form = document.querySelector('#add-form');
 
@@ -308,7 +336,12 @@ function chanceMenuPosition(){
     
 }
 
-
+/*...................................................................
+.....................................................................
+..........BLOCK PARAMETERS...........................................
+.............................checbox select all......................
+.....................................................................
+*/ 
 function blockParametrs(){
     
     let wraps = document.querySelectorAll('.select-wrap');
@@ -332,8 +365,6 @@ function blockParametrs(){
                         next.slideToggle(150);
                         
                     }else{
-
-                    
                         let index = [...document.querySelectorAll('.select-all')].indexOf(e.target);
 
                         if(typeof select_all_index[index] === 'undefined') select_all_index[index] = false;
@@ -376,9 +407,12 @@ function blockParametrs(){
     
 }
 
-
-
-
+/*...................................................................
+.....................................................................
+..........SLIDE TOGGLE...............................................
+.............................slide dropdown checkbox.................
+.....................................................................
+*/ 
 Element.prototype.slideToggle = function(time, callback){
 
     let _time = typeof time === 'number' ? time : 400
@@ -424,6 +458,13 @@ Element.prototype.slideToggle = function(time, callback){
     
 }
 
+
+/*...................................................................
+.....................................................................
+..........SHOW SELECT CHECKBOX.......................................
+....................................loading selected chechboxes......
+.....................................................................
+*/
 function showSelectCheckbox(){
     
     window.addEventListener('DOMContentLoaded', function(){ 
@@ -452,7 +493,12 @@ function showSelectCheckbox(){
     
 }
 
-
+/*...................................................................
+.....................................................................
+..........SHOH HIDE MENU SEARCH......................................
+.....................................................................
+.....................................................................
+*/ 
 function showHideMenuSearch(){
 
     let search = document.querySelector('.gn-search');
@@ -482,7 +528,12 @@ function showHideMenuSearch(){
     
 }
 
-
+/*...................................................................
+.....................................................................
+..........CHANGE MENU POSITION.......................................
+.....................................................................
+.....................................................................
+*/ 
 let searchResultHover = (() => {
 
     let dropdown = document.querySelector('.gn-dropdown');
@@ -491,7 +542,7 @@ let searchResultHover = (() => {
 
     let default_input_value = null;
 
-    function searchKeyDouwn(e){
+    function searchKeyDouwn(e){ 
 
         if((document.querySelector('.gn-form-search').classList.contains('gn-search-reverse')) || 
             (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
@@ -560,7 +611,12 @@ let searchResultHover = (() => {
 })()
 
 
-
+/*...................................................................
+.....................................................................
+..........DRAG'N'DROP................................................
+............................moving images on the gallery.............
+.....................................................................
+*/ 
 Element.prototype.sortable = (function() {
 
     var dragEl, nextEl;
@@ -676,38 +732,99 @@ Element.prototype.sortable = (function() {
         this.addEventListener('dragstart', _onDragStart, false)
         
     }
-    d
 })();
 
 
-
 let galleries = document.querySelectorAll('.gallery-container');
-
 if(galleries.length){
-
     galleries.forEach(item => {
-
         item.sortable({
-            
             excludedElements: '.button-div .empty-container',
-            stop: function (dragEl){
-
-                console.log(dragEl)
-                
-            }
+            stop: function (dragEl){console.log(dragEl)}
         })
-        
     })
-    
 }
-
 document.querySelector('.sortable-lrows').sortable()
 document.querySelector('.sortable-rrows').sortable()
 document.querySelector('.sortable-crows').sortable()
+
+/*...................................................................
+.....................................................................
+..........CREATE JS SORTABLE.........................................
+.............................sorting moved images....................
+.....................................................................
+*/ 
+function createJsSortable(form){
+
+    if(form){
+
+        let sortable = form.querySelectorAll('input[type=file][multiple]');
+
+        if(sortable.length){
+
+            sortable.forEach(item => {
+
+                let container = item.closest('.gallery-container');
+
+                let name = item.getAttribute('name');
+
+                if(name && container){
+                    
+                    name = name.replace(/\[\]/g, '');
+
+                    let inputSorting = form.querySelector(`input[name="js-sorting[${name}]"]`);
+
+                    if(!inputSorting){
+
+                        inputSorting = document.createElement('input');
+
+                        inputSorting.name = `js-sorting[${name}]`;
+
+                        form.append(inputSorting);
+                        
+                    }
+
+                    let res = []
+
+                    for(let i in container.children){
+
+                        if(container.children.hasOwnProperty(i)){
+
+                            if(!container.children[i].matches('.button-div') && !container.children[i].matches('.empty-container')){
+
+                                if(container.children[i].tagName === 'A'){
+
+                                    res.push(container.children[i].querySelector('img').getAttribute('src'));
+                                    
+                                }else{
+
+                                    res.push(container.children[i].getAttribute(`data-deletefileid-${name}`))
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    console.log(res)
+                    inputSorting.value = JSON.stringify(res)
+                    
+                }
+                
+            })
+            
+        }
+    
+    }
+    
+}
+
+
 
 searchResultHover()
 showHideMenuSearch()
 showSelectCheckbox()
 createFile();  
 blockParametrs()
-chanceMenuPosition()
+changeMenuPosition()

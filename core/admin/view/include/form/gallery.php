@@ -1,12 +1,12 @@
 
 <div class="col-lg-12 img-wrapper mb-1">
-    <div class="row pb-3" style="background: #fff;border: 1px solid rgba(0,0,0,.125); box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%)">
+    <div class="row pb-3" style="background:#fff;border:1px solid rgba(0,0,0,.125);box-shadow:0 2px 5px 0 rgb(0 0 0 / 5%)">
         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
-            <span style="float:right;cursor:pointer; color: #a8a7a7;"><i class="icon-move-alt1"></i></span>
+            <span style="float:right;cursor:pointer;color: #a8a7a7;"><i class="icon-move-alt1"></i></span>
             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
         </label>
         <div class="col-lg-12 d-flex flex-wrap gallery-container">
-            <div class="d-flex align-items-center justify-content-center mb-1 mr-1 button-div" style="width:100px; height:100px; border:2px dotted #8a8a8a" >
+            <div class="d-flex align-items-center justify-content-center mb-1 mr-1 button-div gn-dotted-square">
                 <button type="button" class="btn btn-light w-100 h-100" onclick="document.getElementById('<?=$row?>').click();">
                     <i class="icon-plus2" style="font-size:60px;"></i>
                 </button>
@@ -22,9 +22,7 @@
                     <a href="<?=$this->adminPath . 'delete/' .  $this->table . '/' .  
                                 $this->data[$this->columns['primary_key']] .
                                 '/' . $row . '/' . base64_encode($value)?>"
-                                class="d-flex align-items-center justify-content-center gn-dotted-square mb-1 mr-1"
-                                                             
-                                >
+                                class="d-flex align-items-center justify-content-center gn-dotted-square mb-1 mr-1">
                         <img src="<?=PATH . UPLOAD_DIR . $value?>" class="gn-img-size" alt="...">  
                     </a>   
                     

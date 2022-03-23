@@ -29,7 +29,7 @@
                             id="<?=$row?>-delete">
                 </a>
             <?php endif;?>
-            <div class="d-flex justify-content-center align-items-center mt-1 img-show" style="width:400px; height:400px; border:2px dotted #8a8a8a;">
+            <div class="d-flex justify-content-center align-items-center mt-1 img-show img-dotted-container">
                 <?php if ($this->data[$row]) : ?>
                     <img src="<?=PATH . UPLOAD_DIR . $this->data[$row]?>" class="gn-img-size" accept="image/*,image/jpeg,image/png,image/gif">
                 <?php endif; ?>
