@@ -173,7 +173,8 @@
 							<div class="gn-search mr-4">
 								<div class="gn-search-icon"></div>
 								<div class="gn-search-input-div">
-									<input type="text" placeholder="Type to Search..." class="gn-search-input"> 
+									<input type="text" name="search" placeholder="Type to Search..." class="gn-search-input"> 
+									<input type="hidden" name="search_table" value="<?=$this->table?>"> 
 								</div>
 							</div>
 							<div class="gn-dropdown">

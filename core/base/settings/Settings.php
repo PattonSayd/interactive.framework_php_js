@@ -73,7 +73,7 @@ class Settings
 
     private $block = [
         'l-section' => [],
-        'r-section' => ['image', 'new_gallary', 'gallery',],
+        'r-section' => ['image', 'gallery'],
         'c-section' => [],
     ];
 

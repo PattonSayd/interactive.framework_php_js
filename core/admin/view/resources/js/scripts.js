@@ -584,7 +584,7 @@ let searchResultHover = (() => {
 
             default_input_value = search_input.value;
            
-        },4000);
+        },9000);
 
          if(dropdown.children.length){
 
@@ -740,9 +740,16 @@ if(galleries.length){
         })
     })
 }
-document.querySelector('.sortable-lrows').sortable()
-document.querySelector('.sortable-rrows').sortable()
-document.querySelector('.sortable-crows').sortable()
+let fieldset = document.querySelector('#fieldset');
+
+if(fieldset){
+
+    [...fieldset.children].forEach(item => {
+
+        item.sortable()
+    })
+    
+}
 
 /*...................................................................
 .....................................................................
@@ -774,6 +781,8 @@ function createJsSortable(form){
 
                         inputSorting = document.createElement('input');
 
+                        inputSorting.setAttribute('type', 'hidden');
+                        
                         inputSorting.name = `js-sorting[${name}]`;
 
                         form.append(inputSorting);
@@ -815,7 +824,44 @@ function createJsSortable(form){
 }
 
 
+/*...................................................................
+.....................................................................
+..........SEARCH.....................................................
+.....................................................................
+.....................................................................
+*/ 
+function search(){
 
+    let searchInput = document.querySelector('input[name=search]');
+
+    if(searchInput){
+
+        searchInput.oninput = () => {
+
+            if(searchInput.value.length > 1){
+
+                Ajax({
+                        data: {
+                            data: searchInput.value,
+                            table: document.querySelector('input[name="search_table"]').value,
+                            ajax: 'search'
+                        }
+                    
+                    
+                }).then(res => {
+                    console.log(res)
+                })
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+
+search()
 searchResultHover()
 showHideMenuSearch()
 showSelectCheckbox()

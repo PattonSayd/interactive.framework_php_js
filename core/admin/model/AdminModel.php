@@ -118,4 +118,27 @@ class AdminModel extends Model
 
     }
     
+    public function search($data, $current_table = false, $qty = false)
+    {
+
+        $db_tables = $this->getTables();
+
+        $data = addslashes($data);
+
+        $arr = preg_split('/(,|\.)?\s+/', $data, 0, PREG_SPLIT_NO_EMPTY);
+
+        $search_array = [];
+        
+        for(;;){
+
+            if(!$arr) break;
+
+            $search_array[] = implode(' ', $arr);
+
+            unset($arr[count($arr) - 1]);   
+
+        }
+        
+    }
+    
 }

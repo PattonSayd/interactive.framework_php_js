@@ -33,11 +33,25 @@ class AjaxController extends AdminController
                 case 'change_parent':
 
                     return $this->changeParent();
-                    
+                    break;
+                
+                case 'search':
+
+                    return $this->search();
+                    break;
+
             }
         }
 
         return json_encode(['success' => '0', 'message' => 'NO AJAX DATA']);
+    }
+
+    protected function search()
+    {
+        $data = $this->clearStr($this->ajax_data['data']);
+        $table = $this->clearStr($this->ajax_data['table']);
+
+        return $this->model->search($data, $table, 20);
     }
 
     protected function changeParent()

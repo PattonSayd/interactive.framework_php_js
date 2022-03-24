@@ -16,14 +16,13 @@
                     </div>
                 </div>
                 
-                <fieldset class="mb-3 row">
+                <fieldset class="mb-3 row" id="fieldset">
 
                     <?php
                         foreach ($this->blocks as $class => $block) {
 
-                            if($class === 'l-section') $col = 'col-lg-6 sortable-lrows';
-                            elseif($class === 'r-section') $col = 'col-lg-6 sortable-rrows';
-                            else $col = 'col-lg-12 sortable-crows';
+                            if($class === 'l-section' || $class === 'r-section') $col = 'col-lg-6';
+                            else $col = 'col-lg-12 ';
                             
                             echo '<div class=" '. $col . '">';
 
