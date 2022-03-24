@@ -430,3 +430,11 @@ Fault: 15-03-2022 15:50:46 - Ошибка в SLQ запросе: SELECT users.ga
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 24-03-2022 1:22:40 - Ошибка в SLQ запросе: SELECT  FROM users  WHERE users.id = '2'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM users  WHERE users.id = '2'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 24-03-2022 2:03:24 - Ошибка в SLQ запросе: SELECT  FROM users  WHERE users.id = '2'    - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM users  WHERE users.id = '2'' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

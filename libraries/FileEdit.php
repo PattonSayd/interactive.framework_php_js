@@ -35,7 +35,7 @@ class FileEdit
                         $res_name = $this->createFile($file_arr);
 
                         if($res_name)
-                            $this->imgArray[$key][] = $res_name;
+                            $this->imgArray[$key][$i] = $res_name;
                         
                     }
                     

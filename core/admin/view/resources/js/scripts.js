@@ -195,10 +195,6 @@ function createFile(){
 
                 createJsSortable(form)
 
-                e.preventDefault()
-
-                return false
-
                 if(!isEmpty(fileStore)){ 
                     
                     e.preventDefault();
@@ -807,9 +803,7 @@ function createJsSortable(form){
                         }
                         
                     }
-                    console.log(res)
                     inputSorting.value = JSON.stringify(res)
-                    
                 }
                 
             })

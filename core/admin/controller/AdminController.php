@@ -331,8 +331,7 @@ abstract class AdminController extends Controller
     
     protected function createManyToMany($settings = false)
     {
-        if (!$settings)
-            $settings = $this->settings ?: Settings::instance();
+        if (!$settings) $settings = $this->settings ?: Settings::instance();
 
         $manyToMany = $settings::get('manyToMany');
         $blocks = $settings::get('block');
@@ -349,8 +348,7 @@ abstract class AdminController extends Controller
 
                     $checkbox = $settings::get('templates')['checkbox'];
                        
-                    if(!$checkbox || !in_array($tables[$extra_table_key], $checkbox))
-                        continue;
+                    if(!$checkbox || !in_array($tables[$extra_table_key], $checkbox)) continue;
 
                     if(!isset($this->translate[$tables[$extra_table_key]])){
 
@@ -369,7 +367,9 @@ abstract class AdminController extends Controller
                             if(in_array($tables[$extra_table_key], $item)) {
 
                                 $this->blocks[$key][] = $tables[$extra_table_key];
+
                                 $insert = true;
+
                                 break;
                             }
                         }
@@ -858,10 +858,7 @@ abstract class AdminController extends Controller
             }
         }        
 
-        $this->createFile();
-
-        if($id && method_exists($this, 'fileExistenceCheck'))
-            $this->fileExistenceCheck($id);
+        $this->createFiles($id);
 
         $this->createAlias($id);
 
@@ -1061,45 +1058,95 @@ abstract class AdminController extends Controller
         }
     }
 
-# -------------------- CREATE FILE -----------------------------------------------
+# -------------------- CREATE FILES -----------------------------------------------
 
-    protected function createFile()
+    protected function createFiles($id)
     { 
         $fileEdit = new FileEdit;
+
         $this->fileArray = $fileEdit->addFile();
+
+        if($id) $this->fileExistenceCheck($id);
+
+        if(!empty($_POST['js-sorting']) && $this->fileArray){
+
+            foreach($_POST['js-sorting'] as $key => $value){
+
+                if(!empty($value) && !empty($this->fileArray[$key])){
+
+                    $file_array = json_decode($value);
+
+                    if($file_array) $this->fileArray[$key] = $this->sortingFiles($file_array, $this->fileArray[$key]); 
+                    
+                }
+                
+            }
+            
+        } 
     }
     
+# -------------------- SORTING FILES -------------------------------------- -----   
+
+    protected function sortingFiles($file_array, $array)
+    {
+        $res = [];
+
+        foreach ($file_array as $file){
+
+            if(!is_numeric($file))
+                $file = substr($file, strlen(PATH . UPLOAD_DIR));
+            else
+                $file = $array[$file];
+
+            if($file && in_array($file, $array))
+                $res[] = $file;
+        }
+
+        return $res;        
+    }
+
 # -------------------- FILE EXISTENCE CHECH --------------------------------------    
 
     protected function fileExistenceCheck($id) # обезопасить от перезаписи файлов
     {
-        if ($this->fileArray) {
+        if ($id) {
 
-            $data = $this->model->select($this->table, [
-                'fields' => array_keys($this->fileArray),
-                'where' => [$this->columns['primary_key'] => $id]
-            ]);
+            $arr_keys = [];
 
-            if ($data) {
+            if(!empty($this->fileArray)) $arr_keys = array_keys($this->fileArray);
 
-                $data = $data[0];
+            if(!empty($_POST['js-sorting'])) $arr_keys = array_merge($arr_keys, array_keys($_POST['js-sorting']));
 
-                foreach ($this->fileArray as $key => $item) {
+            if($arr_keys){
 
-                    if (!empty($data[$key]) && is_array($item)) {
+                $arr_keys = array_unique($arr_keys);
 
-                        $fileArr = json_decode($data[$key]);
+                $data = $this->model->select($this->table, [
+                    'fields' => $arr_keys,
+                    'where' => [$this->columns['primary_key'] => $id]
+                ]);
+    
+                if ($data) {
+    
+                    $data = $data[0];
+    
+                    foreach ($data as $key => $item) {
 
-                        if ($fileArr) {
+                        if((!empty($this->fileArray[$key]) && is_array($this->fileArray[$key])) || !empty($_POST['js-sorting'][$key])){
 
-                            foreach ($fileArr as $file) {
-
-                                $this->fileArray[$key][] = $file;
+                            $fileArr = json_decode($item);
+    
+                            if ($fileArr) {
+    
+                                foreach ($fileArr as $file) {
+    
+                                    $this->fileArray[$key][] = $file;
+                                }
                             }
+                        }elseif (!empty($this->fileArray[$key])) {
+    
+                            @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . UPLOAD_DIR . $item);
                         }
-                    } elseif (!empty($data[$key])) {
-
-                        @unlink($_SERVER['DOCUMENT_ROOT'] . PATH . UPLOAD_DIR . $data[$key]);
                     }
                 }
             }
