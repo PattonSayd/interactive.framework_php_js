@@ -1064,7 +1064,7 @@ abstract class AdminController extends Controller
     { 
         $fileEdit = new FileEdit;
 
-        $this->fileArray = $fileEdit->addFile();
+        $this->fileArray = $fileEdit->addFile($this->table);
 
         if($id) $this->fileExistenceCheck($id);
 

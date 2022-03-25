@@ -79,7 +79,7 @@ class Settings
 
     private $translate = [
         'name'          => ['Название', 'Не более 50 символов'],
-        'content'       => ['Описание', 'Не менее 50 символов'],
+        'content'       => ['Описание', 'Не менее 1000 символов'],
         'visible'       => ['Видимость', 'По умолчанию: показать'],
         'keywords'      => ['Ключевые слова'],
         'menu_position' => ['Позиция меню'],
@@ -104,7 +104,7 @@ class Settings
         'login'    => ['empty' => true, 'trim' => true],
         'password' => ['crypt' => true, 'empty' => true],
         'keywords' => ['count' => 70, 'trim' => true],
-        'content'  => ['count' => 1, 'trim' => true],
+        'content'  => ['trim' => true],
     ];
 
     private $manyToMany = [

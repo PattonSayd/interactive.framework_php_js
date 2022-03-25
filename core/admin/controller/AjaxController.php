@@ -2,6 +2,8 @@
 
 namespace core\admin\controller;
 
+use libraries\FileEdit;
+
 class AjaxController extends AdminController
 {
     public function ajax()
@@ -38,6 +40,18 @@ class AjaxController extends AdminController
                 case 'search':
 
                     return $this->search();
+                    break;
+
+                case 'wysiwyg':
+
+                    $fileEdit = new FileEdit();
+
+                    $fileEdit->setUniqueFile(false);
+
+                    $file = $fileEdit->addFile($this->clearStr($this->ajax_data['table']) . '/content_file/');
+                    
+                    return ['location' => PATH . UPLOAD_DIR . $file[key($file)]];
+                    
                     break;
 
             }
