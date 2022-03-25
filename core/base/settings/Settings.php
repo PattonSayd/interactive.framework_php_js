@@ -44,7 +44,7 @@ class Settings
 
     private $extension = 'core/admin/extension/';
 
-    private $formTemplates = 'core/admin/view/include/form/';
+    private $formTemplatesPath = 'core/admin/view/include/form/';
 
     private $messages = 'core/base/messages/';
 
@@ -71,10 +71,10 @@ class Settings
         'color'    => ['name' => 'Цвета', 'icon' => 'icon-book2']
     ];
 
-    private $block = [
-        'l-section' => [],
-        'r-section' => ['image', 'gallery'],
-        'c-section' => [],
+    private $blocks = [
+        'left' => [],
+        'right' => ['image', 'gallery'],
+        'center' => ['content'],
     ];
 
     private $translate = [

@@ -61,6 +61,9 @@ const ADMIN_CSS_JS = [
             'resources/js/form_checkboxes_radios.js',
             'resources/js/switchery.min.js',
             'resources/js/switch.min.js',
+            'resources/js/switch.min.js',
+            'resources/js/tinymce/tinymce.min.js',
+            'resources/js/tinymce/tinymce_init.js' 
         ],
         
     ],

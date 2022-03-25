@@ -21,8 +21,8 @@
                     <?php
                         foreach ($this->blocks as $class => $block) {
 
-                            if($class === 'l-section' || $class === 'r-section') $col = 'col-lg-6';
-                            else $col = 'col-lg-12 ';
+                            if($class === 'left' || $class === 'right') $col = 'col-lg-6 ' . $class;
+                            else $col = 'col-lg-12 ' . $class;
                             
                             echo '<div class=" '. $col . '">';
 
@@ -34,8 +34,8 @@
 
                                         if(in_array($row, $items)){
 
-                                            if(!@include $_SERVER['DOCUMENT_ROOT'] . $this->formTemplates . $template . '.php'){
-                                                throw new \core\base\exception\RouteException('Не найден шаблон ' . $_SERVER['DOCUMENT_ROOT'] . $this->formTemplates . $template . '.php');
+                                            if(!@include $_SERVER['DOCUMENT_ROOT'] . $this->formTemplatesPath . $template . '.php'){
+                                                throw new \core\base\exception\RouteException('Не найден шаблон ' . $_SERVER['DOCUMENT_ROOT'] . $this->formTemplatesPath . $template . '.php');
                                                 
                                             }
 

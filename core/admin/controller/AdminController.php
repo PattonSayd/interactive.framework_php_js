@@ -30,7 +30,7 @@ abstract class AdminController extends Controller
     protected $blocks = [];
 
     protected $templates;
-    protected $formTemplates;
+    protected $formTemplatesPath;
     protected $noDelete;
 
 # -------------------- INPUT DATA ------------------------------------------------
@@ -47,7 +47,7 @@ abstract class AdminController extends Controller
         
         $this->init(true);
                   
-        $this->title = 'VG engine';
+        $this->title = 'GN engine';
 
         if(!$this->model) 
             $this->model = AdminModel::instance();
@@ -61,8 +61,8 @@ abstract class AdminController extends Controller
         if(!$this->templates)
             $this->templates = Settings::get('templates');
 
-        if (!$this->formTemplates)
-            $this->formTemplates = PATH . Settings::get('formTemplates');
+        if (!$this->formTemplatesPath)
+            $this->formTemplatesPath = PATH . Settings::get('formTemplatesPath');
 
         if (!$this->messages)
             $this->messages = include $_SERVER['DOCUMENT_ROOT'] . PATH . Settings::get('messages') . 'infoMessages.php';
@@ -182,7 +182,7 @@ abstract class AdminController extends Controller
         if (!$settings)                                         
             $settings = Settings::instance();
 
-        $blocks = $settings::get('block');
+        $blocks = $settings::get('blocks');
 
         $this->translate = $settings::get('translate');
 
@@ -334,7 +334,7 @@ abstract class AdminController extends Controller
         if (!$settings) $settings = $this->settings ?: Settings::instance();
 
         $manyToMany = $settings::get('manyToMany');
-        $blocks = $settings::get('block');
+        $blocks = $settings::get('blocks');
 
         if($manyToMany){
 
