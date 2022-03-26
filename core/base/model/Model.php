@@ -90,7 +90,7 @@ abstract class Model extends ModelMethods
 |  'order_direction'  => ['ASC', 'DESC'],  default: 'ASC'
 |  'limit'            => '1'
 | 
-|  "SELECT fields FROM table join where order limit"
+|  "SELECT name FROM table $join $where $order limit"
 */
 
 
@@ -115,6 +115,8 @@ abstract class Model extends ModelMethods
 
 		$query = "SELECT $fields FROM $table $join $where $order $limit";
 
+		if(!empty($set['return_query'])) return $query;
+
  		$data = $this->query($query);
 
 		if(isset($set['join_structure']) && $set['join_structure'] && $data)
@@ -137,7 +139,7 @@ abstract class Model extends ModelMethods
 |  return_id	=> true|false - возвпащать или нет идентификатор вставленной записи 
 |  return mixed 
 |   
-|  "INSERT INTO table (field, field2) VALUE ('field', 'field2')" 
+|  "INSERT INTO table (id, name) VALUE ('1', 'test')" 
 */
 
 	final public function add($table, $set = [])
@@ -211,7 +213,7 @@ abstract class Model extends ModelMethods
 |					DELETE
 |--------------------------------------------------------------------------
 |    
-|  DELETE FROM table WHERE field = field
+|  DELETE FROM table WHERE name = 'test'
 |  
 */
 
@@ -330,6 +332,44 @@ abstract class Model extends ModelMethods
 			}
 		}
 		return $table_arr;
+	}
+
+	/*
+|--------------------------------------------------------------------------
+|					BUILD UNION
+|--------------------------------------------------------------------------
+|   SELECT COUNT(*) as count FROM (SELECT id, name, visibile FROM table WHERE name = 'test' OR content = 'test'
+|   UNION all
+|   SELECT id, name, null FROM table_2 WHERE name = 'test' or new_name = 'test' ORDER BY DESC) as temp_table 
+|    
+*/
+
+	final public function buildUnion($table, $set)
+	{
+		if(array_key_exists('fields', $set) && $set['fields'] === null) return $this;
+
+		if(!array_key_exists('fields', $set) || empty($set['fields'])){
+
+			$set['fields'] = [];
+
+			$columns = $this->getColumns($table);
+
+			unset($columns['primary_key'], $columns['multi_primary_key']);
+
+			foreach($columns as $column => $value){
+				$set['fields'][] = $column;
+			}			     
+		}
+
+		$this->union[$table] = $set;
+		$this->union[$table]['return_query'] = true;
+
+		return $this;
+		
+	}
+
+	public function test(){
+		$a = 1;
 	}
 	
 }

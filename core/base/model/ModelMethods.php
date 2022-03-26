@@ -6,6 +6,7 @@ abstract class ModelMethods
 {    
     protected $sql_func = ['RAND()', 'NOW()'];
     protected $table_rows;
+    protected $union = [];
 
 /*
 |--------------------------------------------------------------------------
@@ -96,11 +97,11 @@ abstract class ModelMethods
 |--------------------------------------------------------------------------
 |   
 |   'table'           => 'table'
-|   'where'           => ['id' => '1, 2, 3', 'game' => 'chess', 'name' => 'phil',  'color'=>['red', 'green']],
+|   'where'           => ['id' => '1, 2, 3', 'game' => 'chess', 'name' => 'phil',  'color'=>['black', 'white']],
 |   'operand'         => ['<>', '=', '%LIKE', 'NOT IN'],  default: '=',
 |	'condition'       => ['OR', 'AND']    default: 'AND'
 |   
-|   "WHERE table.id <> '1, 2, 3' OR table.game = 'chess' AND table.name LIKE '%phil' AND table.color NOT IN ('red', 'green') "
+|   "WHERE table.id <> '1, 2, 3' OR table.game = 'chess' AND table.name LIKE '%phil' AND table.color NOT IN ('black', 'white') "
 */
 
     protected function createWhere($set, $table = false, $instruction = 'WHERE')
@@ -521,7 +522,7 @@ abstract class ModelMethods
 |                   JOIN STRUCTURE  
 |--------------------------------------------------------------------------
 |   SELECT
-|       table.field1, table.field2,
+|       table.id, table.field2,
 |       table_table2.t_id as TABLEtable_table2TABLE_t_id,
 |       table_table2.t2_id as TABLEtable_table2TABLE_t2_id, 
 |       table2.field as TABLEtableTABLE_field,

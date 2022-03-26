@@ -203,11 +203,15 @@ class AdminModel extends Model
             }
 
             if($where){
-
-                //$this->buildUnion();
-                
-            } 
+                $this->buildUnion($table,[
+                    'fields' => $fields,
+                    'where' => $where,
+                    'no_concat' => true
+                ]);
+            }
         }  
+
+        $this->test();
 
         $order_direction = null;
         
@@ -218,6 +222,9 @@ class AdminModel extends Model
             $order_direction = 'DESC';
             
         }
+
+      
+        
     }
 
     protected function createWhereOrder($search_rows, $search_array, $order_rows, $table)
@@ -244,32 +251,18 @@ class AdminModel extends Model
 
                             $str = "($row LIKE '%$item%')";
 
-                            if(!in_array($str, $order)){
-
-                                $order[] = $str;
-                                
-                            }
-                            
+                            if(!in_array($str, $order)) $order[] = $str;
                         }
 
-                        if(isset($columns[$row])){
-
-                            $where .= "$row LIKE '%$item%' OR ";
-                        }
-                        
+                        if(isset($columns[$row])) $where .= "$row LIKE '%$item%' OR ";
                     }
 
                     $where = preg_replace('/\)?\s*or\s*\(?$/i', '', $where) . ') OR ';
-                    
                 }
-
-                $where && $where = preg_replace('/\s*or\s*$/i', '', $where) . ')';
                 
+                $where && $where = preg_replace('/\s*or\s*$/i', '', $where) . ')';
             }
-            
         }
-
         return compact('where', 'order');
     }
-    
 }
