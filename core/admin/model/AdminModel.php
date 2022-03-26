@@ -178,7 +178,7 @@ class AdminModel extends Model
                     (stripos($value['Type'], 'char') !== false || 
                     stripos($value['Type'], 'text') !== false)){
                     
-                    $search_rows = $column; 
+                    $search_rows[] = $column; 
                         
                 }
                 
@@ -220,11 +220,54 @@ class AdminModel extends Model
         }
     }
 
-    protected function createWhereOrder($search_rows, $search_array, $oreder_rows, $table)
+    protected function createWhereOrder($search_rows, $search_array, $order_rows, $table)
     {
-        $where = [];
+        $where = '';
 
         $order = [];
+
+        if($search_rows && $search_array){
+
+            $columns = $this->getColumns($table);
+
+            if($columns){
+
+                $where = '(';
+
+                foreach ($search_rows as $row){
+
+                    $where .= '(';
+
+                    foreach($search_array as $item){
+
+                        if(in_array($row, $order_rows)){
+
+                            $str = "($row LIKE '%$item%')";
+
+                            if(!in_array($str, $order)){
+
+                                $order[] = $str;
+                                
+                            }
+                            
+                        }
+
+                        if(isset($columns[$row])){
+
+                            $where .= "$row LIKE '%$item%' OR ";
+                        }
+                        
+                    }
+
+                    $where = preg_replace('/\)?\s*or\s*\(?$/i', '', $where) . ') OR ';
+                    
+                }
+
+                $where && $where = preg_replace('/\s*or\s*$/i', '', $where) . ')';
+                
+            }
+            
+        }
 
         return compact('where', 'order');
     }

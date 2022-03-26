@@ -30,7 +30,7 @@
 	<script>
 		const PATH = "<?=PATH?>";
 		const ADMIN_MODE = 1;
-		const tinyMceDefaultArea = "<?=implode(',', $this->blocks['center'])?>"
+		const tinyMceDefaultArea = "<?=!empty($this->blocks['center']) ?? implode(',', $this->blocks['center'])?>"
 	</script>
 	<?php $this->getScripts() ?>
 
