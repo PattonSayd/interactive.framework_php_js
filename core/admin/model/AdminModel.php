@@ -209,19 +209,24 @@ class AdminModel extends Model
                     'no_concat' => true
                 ]);
             }
-        }  
-
-        $this->test();
+        } 
 
         $order_direction = null;
         
         if($order){
-
             $order = ($correctCurrentTable ? 'current_table DESC, ' : '') . '(' . implode('+', $order). ')';
-
             $order_direction = 'DESC';
-            
         }
+
+        $result = $this->getUnion([
+            // 'type' => 'all',
+            // 'pagination' => [],
+            // 'limit' => 3,
+            'order' => $order,
+            'order_direction' => $order_direction
+        ]);
+
+        $a = 1;
 
       
         
@@ -259,7 +264,7 @@ class AdminModel extends Model
 
                     $where = preg_replace('/\)?\s*or\s*\(?$/i', '', $where) . ') OR ';
                 }
-                
+
                 $where && $where = preg_replace('/\s*or\s*$/i', '', $where) . ')';
             }
         }

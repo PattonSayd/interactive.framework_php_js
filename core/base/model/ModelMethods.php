@@ -61,11 +61,18 @@ abstract class ModelMethods
 
             foreach($set['fields'] as $field) {
                 
-                if($join_structure && !$id_field && $this->table_rows[$pseudo_table] === $field)
-                    $id_field = true;
+                if($join_structure && !$id_field && $this->table_rows[$pseudo_table] === $field) $id_field = true;
 
-                if($field){
+                if($field || $field === null){
+
+                    if($field === null){
+                        
+                        $fields .= "NULL,";
+                        continue;
+                    }
+
                     if($join && $join_structure){
+
                         if(preg_match('/^(.+)?\s+as\s+(.+)/i', $field, $matches))
                             $fields .= $concat_table . $matches[1] . ' as TABLE' . $pseudo_table . 'TABLE_' . $matches[2] . ',';
                         else

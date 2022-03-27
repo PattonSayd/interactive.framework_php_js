@@ -368,8 +368,102 @@ abstract class Model extends ModelMethods
 		
 	}
 
-	public function test(){
-		$a = 1;
+	public function getUnion($set=[]){
+		
+		if(!$this->union) return false;
+
+		$union_type = ' UNION ' . (!empty($set['type']) ? strtoupper($set['type']) . ' ' : '');
+
+		$max_count = 0;
+
+		$max_table_count = '';
+
+		foreach($this->union as $key => $item){
+
+			$count = count($item['fields']);
+
+			$join_fields = '';
+
+			if(!empty($item['joib'])){
+
+				foreach($item['joib'] as $table => $data){
+
+					if(array_key_exists('fields', $data) && $data['fields']){
+
+						$count += count($data['fields']);
+
+						$join_fields = $table;	
+
+					}elseif(!array_key_exists('fields', $data) || (!$join_fields['data'] || $data['fields'] === null)){
+						
+						$columns = $this->getColumns($table);
+
+						unset($columns['primary_key'], $columns['multi_primary_key']);
+
+						$count += count($columns);
+
+						foreach($columns as $fields => $value){
+
+							$this->union[$key]['join'][$table]['fields'][] = $fields;
+						}
+
+						$join_fields = $table;
+					}
+				}
+			}else{
+				$this->union[$key]['no_concat'] = true;
+			}
+
+			if($count > $max_count || ($count === $max_count && $join_fields)){
+
+				$max_count = $count;
+				$max_table_count = $key;				
+			}
+
+			$this->union[$key]['last_join_table'] = $join_fields;
+			$this->union[$key]['count_fields'] = $count;
+			
+		}
+
+		$query = '';
+
+		if($max_count && $max_table_count){
+
+			$query .= '(' . $this->select($max_table_count, $this->union[$max_table_count]) . ')';
+
+			unset($this->union[$max_table_count]);
+		}
+
+		foreach($this->union as $key => $item){
+
+			if(isset($item['count_fields']) && $item['count_fields'] < $max_count){
+
+				for($i = 0; $i < $max_count - $item['count_fields']; $i++){
+
+					if($item['last_join_table'])
+						$item['join'][$item['last_join_table']]['fields'][] = null;
+					else
+						$item['fields'][] = null;
+				}
+			}
+
+			$query && $query .= $union_type;
+
+			$query .= '(' . $this->select($key, $item) . ')';
+		}
+
+		$order = $this->createOrder($set);
+
+		$limit = !empty($set['limit']) ? 'LIMIT ' . $set['limit'] : '';
+
+		if(method_exists($this, 'createPagination'))
+			$this->createPagination($set, "($query)", $limit);
+		
+		$query .= " $order $limit";
+
+		$this->union = [];
+
+		return $this->query((trim($query)));
 	}
 	
 }
