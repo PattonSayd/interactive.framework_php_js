@@ -501,25 +501,39 @@ function showHideMenuSearch(){
 
     let icon = document.querySelector('.gn-search-icon');
 
-    let div = document.querySelector('.gn-search-input');
+    let input = document.querySelector('.gn-search-input');
 
     let dropdown = document.querySelector('.gn-dropdown');
 
     icon.addEventListener('click', () =>{
 
         search.classList.toggle('active');
+        input.focus()
 
     })
+   
+   
 
-    div.addEventListener('blur', () =>{
+    input.addEventListener('blur', e =>{
+
+        if(e.relatedTarget && e.relatedTarget.tagName === 'A') return;
+
+        input.value = ''
+
+        dropdown.innerText = ''
 
         search.classList.remove('active');
+
         dropdown.classList.remove('active');
+        
     })
 
-    div.addEventListener('click', () =>{
-
-        dropdown.classList.add('active');
+    input.addEventListener('input', () =>{
+        
+        if(input.value.length <= 1){
+            
+            dropdown.classList.remove('active');
+        }
     })
     
 }
@@ -562,7 +576,7 @@ let searchResultHover = (() => {
 
             drop[active_index].classList.add('gn-search-active');
 
-            search_input.value = drop[active_index].innerText;
+            search_input.value = drop[active_index].innerText.replace(/\(.+?\)\s*$/, '');
             
         }
     }
@@ -584,24 +598,24 @@ let searchResultHover = (() => {
 
             default_input_value = search_input.value;
            
-        },9000);
+        },0);
 
-         if(dropdown.children.length){
+        if(dropdown.children.length){
 
-                let children = [...dropdown.children];
+            let children = [...dropdown.children];
 
-                children.forEach(item => {
+            children.forEach(item => {
 
-                    item.addEventListener('mouseover', () => {
+                item.addEventListener('mouseover', () => {
 
-                        children.forEach(el => el.classList.remove('gn-search-active'));
-                        
-                        item.classList.add('gn-search-active');
+                    children.forEach(el => el.classList.remove('gn-search-active'));
+                    
+                    item.classList.add('gn-search-active');
 
-                        search_input.value = item.innerText
-                    })                   
-                })
-            }
+                    search_input.value = item.innerText.replace(/\(.+?\)\s*$/, '');
+                })                   
+            })
+        }
     }
     
 })()
@@ -849,7 +863,36 @@ function search(){
                     
                     
                 }).then(res => {
-                    console.log(res)
+                    try{
+                        console.log(res)
+                        res = JSON.parse(res)
+
+
+                        
+                        let res_dropdown = document.querySelector('.gn-dropdown')
+
+                        let counter = res.length > 20 ? 20 : res.length
+
+                        if(res_dropdown){
+
+                            res_dropdown.innerHTML = '';
+
+                            for(let i = 0; i < counter; i++){
+                                
+                                res_dropdown.insertAdjacentHTML('beforeend', `<a href="${res[i]['alias']}">${res[i]['name']}</a>`)
+                            }
+
+                            searchResultHover();
+
+                            if(res_dropdown.children.length > 0) res_dropdown.classList.add('active');
+                            else res_dropdown.classList.remove('active');                         
+                        }
+
+                    }catch(e){
+
+                        alert('Ошибка в системе поиска по административной панели')
+                        
+                    }
                 })
                 
             }

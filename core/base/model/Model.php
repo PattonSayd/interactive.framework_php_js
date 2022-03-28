@@ -384,9 +384,9 @@ abstract class Model extends ModelMethods
 
 			$join_fields = '';
 
-			if(!empty($item['joib'])){
+			if(!empty($item['join'])){
 
-				foreach($item['joib'] as $table => $data){
+				foreach($item['join'] as $table => $data){
 
 					if(array_key_exists('fields', $data) && $data['fields']){
 

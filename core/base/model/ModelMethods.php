@@ -80,7 +80,7 @@ abstract class ModelMethods
                         
  
                     }else{
-                        $fields .= $concat_table . $field . ', ';
+                        $fields .= (!preg_match('/(\([^()]*\))|(case\s+.+?\s+end)/i', $field) ? $concat_table : '' ) . $field . ', ';
                     }
                     
                 }
@@ -347,15 +347,16 @@ abstract class ModelMethods
                     $join .= '.' . $join_fields[0] . ' = ' . $concat_table . '.' . $join_fields[1];
 
                     $join_table = $key;
+                    
 
                     if ($new_where) {
                         if (!empty($value['where'])) $new_where = false;
                         $group_condition = 'WHERE';
                     } else {
-                        $group_condition = $value['group_condition'] ? strtoupper($value['group_condition']) : 'AND';
+                        $group_condition = !empty($value['group_condition']) ? strtoupper($value['group_condition']) : 'AND';
                     }
 
-                    $fields .= $this->createFields($value, $key, $set['join_structure']); # $set['join_structure'] 
+                    $fields .= $this->createFields($value, $key, !empty($set['join_structure'])); # $set['join_structure'] 
                     $where .= $this->createWhere($value, $key, $group_condition);
                 }
             }

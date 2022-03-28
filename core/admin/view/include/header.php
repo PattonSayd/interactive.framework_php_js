@@ -169,8 +169,8 @@
 
 					<div class="header-elements d-none">
 
-						<form method="post" autocomplete="off" class="position-relative gn-form-search" action="<?PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/search">
-							<div class="gn-search mr-4">
+						<form method="post" autocomplete="off" class="position-relative gn-form-search mr-4" action="<?=PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/search">
+							<div class="gn-search">
 								<div class="gn-search-icon"></div>
 								<div class="gn-search-input-div">
 									<input type="text" name="search" placeholder="Type to Search..." class="gn-search-input"> 
@@ -178,9 +178,7 @@
 								</div>
 							</div>
 							<div class="gn-dropdown">
-								<a href="">Link1</a>
-								<a href="">Link2</a>
-								<a href="">Link3</a>
+								
 							</div>
 						</form>
 						
