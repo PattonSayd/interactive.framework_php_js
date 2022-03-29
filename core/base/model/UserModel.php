@@ -32,15 +32,18 @@ class UserModel extends Model
        return $this->admint_table;
     }
 
+
     public function getBlockedTable()
     {
        return $this->blocked_table;
     }
 
+
     public function getLastError()
     {
        return $this->error;
     }
+
 
     public function setAdmin()
     {
@@ -93,6 +96,7 @@ class UserModel extends Model
         }   
     }
 
+
     public function checkUser($id = false, $admin = false)
     {
         $admin && $this->user_table !== $this->admin_table && $this->setAdmin();
@@ -120,6 +124,101 @@ class UserModel extends Model
         }
 
         return $this->user_data;
+    }
+
+
+    private function set()
+    {
+        $coockie_string = $this->packet();
+
+        if($coockie_string){
+
+            setcookie($this->coockie_name, $coockie_string, time() + 60*60*24*365*10, PATH_SEPARATOR);
+
+            return true;
+        }
+
+        throw new AuthException('Ошибка формирования coockie', 1);
+    }
+
+
+    private function packet()
+    {
+        if(!empty($this->user_data['id'])){
+
+            $data['id'] = $this->user_data;
+
+            $data['version'] = COOKIE_VERSION;
+
+            $data['coockieTime'] = date('Y-m-d H:i:s');
+
+            return Crypt::instance()->encrypt(json_encode($data));
+        }
+
+        throw new AuthException('Некорректный идентификатор пользователя - ' . $this->user_data['id'], 1);
+    }
+
+
+    private function unPackage()
+    {
+        if(empty($_COOKIE[$this->cookie_name])){
+
+            throw new AuthException('Отсутствует coockie пользователя');
+        }
+
+        $data = json_decode(Crypt::instance()->decrypt($_COOKIE[$this->cookie_name]), true);
+
+        if(empty($data['id']) || empty($data['version']) || empty($data['coockieTime'])){
+
+            $this->logout();
+
+            throw new AuthException('Некорректные данные в coockie пользователя', 1);
+        }
+
+        $this->validate($data);     
+        
+        $this->userData = $this->select($this->user_table, [
+
+            'where' => ['id' => $data['id']],
+        ]);
+
+        if(!$this->user_data) {
+
+            $this->logout();
+
+            throw new AuthException('Не найдены данные в таблице ' . $this->user_table . 'по идентификатору' . $data['id'], 1);
+        }
+
+        return true;
+    }
+
+
+    private function validate($data)
+    {
+        if(!empty(COOKIE_VERSION)){
+            
+            if($data['version'] !== COOKIE_VERSION){
+
+                $this->logout();
+
+                throw new AuthException('Некорректные версия coockie');
+            }
+        }
+
+        if(!empty(COOKIE_TIME)){
+
+            if((new \DateTime()) > (new \DateTime($data['cookie_time'])) ->modify(COOKIE_TIME . 'minute')){
+
+                throw new AuthException('Перевышено время бездействия пользователя');              
+            }
+            
+        }
+    }
+
+
+    public function logout()
+    {
+        setcookie($this->cookie_name, '', 1, PATH);
     }
 
 }
