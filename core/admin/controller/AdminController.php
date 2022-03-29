@@ -852,7 +852,7 @@ abstract class AdminController extends Controller
             if ($key === 'primary_key')
                 continue;
 
-            if ($value['Type'] === 'date' || $value['Type'] === 'datetime') {
+            if ($value['Type'] === 'date' || $value['Type'] === 'datetime' || $value['Type'] === 'timestamp') {
                        
                 if (!isset($_POST[$key])) $_POST[$key] = 'NOW()';
             }
