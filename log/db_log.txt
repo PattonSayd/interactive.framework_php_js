@@ -210,3 +210,19 @@ Fault: 28-03-2022 4:14:25 - Ошибка в SLQ запросе: (SELECT users.id
 file C:\xampp\htdocs\public_html\core\base\model\Model.php
 In line 48
 
+Fault: 29-03-2022 2:35:04 - Ошибка в SLQ запросе: SELECT .name as name, .parent_id FROM    ORDER BY parent_id ASC,menu_position ASC  - 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as name, .parent_id FROM    ORDER BY parent_id ASC,menu_position ASC' at line 1
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-03-2022 3:21:53 - Ошибка в SLQ запросе: SELECT users.content, users.created_at, users.visible FROM users  WHERE users.0 = '3'    - 1054 Unknown column 'users.0' in 'where clause'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-03-2022 3:25:24 - Ошибка в SLQ запросе: SELECT comments.content, comments.created_at, comments.visible FROM comments  WHERE comments.id = '37'    - 1054 Unknown column 'comments.created_at' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+
+Fault: 29-03-2022 3:30:22 - Ошибка в SLQ запросе: SELECT comments.content, comments.visible FROM comments  WHERE comments.id = '37'    - 1054 Unknown column 'comments.visible' in 'field list'
+file C:\xampp\htdocs\public_html\core\base\model\Model.php
+In line 48
+

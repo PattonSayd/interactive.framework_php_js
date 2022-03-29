@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 option-wrap" style="margin-top: 0px; display: none">
-                                <div style="border: 1px solid rgba(0,0,0,.15); border-bottom: 4.4px solid rgba(0,0,0,.15);border-top: 0px; box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);" >
+                                <div style="border: 1px solid rgba(0,0,0,.15); border-top: 0px; box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);" >
                                     <?php foreach($value['sub'] as $item) :?>
                                         <div class="gn-checkbox">
                                             <input type="checkbox" 

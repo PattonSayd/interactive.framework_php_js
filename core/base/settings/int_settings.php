@@ -39,11 +39,10 @@ const ADMIN_CSS_JS = [
             'resources/js/root.js',
         ],
         
-        'show' => [
+        'search' => [
             'resources/js/select2.min.js',
-            'resources/js/datatables_extension_colvis.js',
             'resources/js/datatables.min.js',
-            'resources/js/buttons.min.js',
+            'resources/js/datatables_basic.js',
         ],
 
         'add' => [

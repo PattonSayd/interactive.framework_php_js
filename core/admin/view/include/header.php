@@ -169,7 +169,7 @@
 
 					<div class="header-elements d-none">
 
-						<form method="post" autocomplete="off" class="position-relative gn-form-search mr-4" action="<?=PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/search">
+						<form autocomplete="off" class="position-relative gn-form-search mr-4" action="<?=PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/search">
 							<div class="gn-search">
 								<div class="gn-search-icon"></div>
 								<div class="gn-search-input-div">

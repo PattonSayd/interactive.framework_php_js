@@ -39,10 +39,10 @@ class ShowController extends AdminController
 
         if (count($fields) < 3)
             foreach ($this->columns as $key => $value) {
-                if (!empty($fields['name']) && strpos($key, 'name') !== false) {
+                if (!isset($fields['name']) && strpos($key, 'name') !== false) {
                     $fields['name'] = $key . ' as name';
                 }
-                if (!empty($fields['image']) && strpos($key, 'image') === 0) {
+                if (!isset($fields['image']) && strpos($key, 'image') === 0) {
                     $fields['image'] = $key . ' as image';
                 }
             }
