@@ -18,7 +18,7 @@
             <?php if ($this->data) : ?>
 			    <?php foreach ($this->data as $data) :?>
                 <tr>
-                    <td><a href="<?=$data['alias'] ?: $this->adminPath.'/edit/'.$data['table_name'].'/'.$data['alias']?>"><?=preg_replace('/\(.+?\)\s*$/i' , '', $data['name'])?></a></td>
+                    <td><a href="<?=$data['alias'] ?: $this->admin_path.'/edit/'.$data['table_name'].'/'.$data['alias']?>"><?=preg_replace('/\(.+?\)\s*$/i' , '', $data['name'])?></a></td>
                     <td><?=isset($data['content']) ? $data['content'] : ''?></td>
                     <td><?=isset($this->menu[$data['table_name']]) ? $this->menu[$data['table_name']]['name'] : $data['table_name']?></td>
                     <td><?=isset($data['created_at']) ? date('d.m.Y', strtotime($data['created_at'])) : ''?></td>

@@ -6,12 +6,12 @@
         </div>
    <?php endif; ?>
     <!-- Form inputs -->    
-            <form id="add-form" action="<?=$this->adminPath . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
+            <form id="add-form" action="<?=$this->admin_path . $this->action?>" method="post" class="form-validate-jquery" enctype="multipart/form-data">
                 <div class="row mb-3">
                     <div class="col-12">
                         <button type="submit" class="btn" style="background-color: #00b389; color:#f0fff0; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
                     <?php if(!$this->noDelete && $this->data) : ?>
-                        <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                        <a href="<?=$this->admin_path . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
                     <?php endif; ?>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="col-12 text-right">
                         <button type="submit" class="btn" style="background-color: #00b389; color:#c9fff5; border: 1px solid #10856b; border-bottom:3px solid #10856b">Success</button>
                     <?php if(!$this->noDelete && $this->data) : ?>
-                        <a href="<?=$this->adminPath . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
+                        <a href="<?=$this->admin_path . 'delete/' . $this->table . '/' . $this->data[$this->columns['primary_key']]?>"" class="btn ml-2" style="background-color: #fff9d9; color:#a68349; border: 1px solid #b79f5f; border-bottom:3px solid #c99c27">Delete</a>
                     <?php endif; ?>
                     </div>
                 </div>

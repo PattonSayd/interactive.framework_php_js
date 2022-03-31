@@ -15,7 +15,7 @@ abstract class AdminController extends Controller
     protected $columns;
     protected $foreignData;
 
-    protected $adminPath;
+    protected $admin_path;
   
     protected $menu;
     protected $title;
@@ -55,8 +55,8 @@ abstract class AdminController extends Controller
         if(!$this->menu)
             $this->menu = Settings::get('projectTable');
 
-        if(!$this->adminPath)
-            $this->adminPath = PATH . Settings::get('routes')['admin']['alias'] . '/';
+        if(!$this->admin_path)
+            $this->admin_path = PATH . Settings::get('routes')['admin']['alias'] . '/';
 
         if(!$this->templates)
             $this->templates = Settings::get('templates');

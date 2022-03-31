@@ -4,6 +4,7 @@ namespace core\base\controller;
 
 use core\base\controller\Methods;
 use core\base\exception\RouteException;
+use core\base\model\UserModel;
 use core\base\settings\Settings;
 
 
@@ -130,7 +131,7 @@ abstract class Controller
         exit;
     }
 
-# -------------------- INIT ------------------------------------------------
+# -------------------- INIT ---------------------------------------------------
 
     protected function init($admin = false)
     {
@@ -158,6 +159,17 @@ abstract class Controller
                 }
             }
         }
+    }
+
+# -------------------- CHECH AUTH ---------------------------------------------
+
+    protected function checkAuth($type = false)
+    {
+        if(!($this->userId = UserModel::instance()->chechUser(false, $type)))
+            $type && $this->redirect(PATH);
+
+        if(property_exists($this, 'userModel'))
+            $this->userModel = UserModel::instance();
     }
 }
 

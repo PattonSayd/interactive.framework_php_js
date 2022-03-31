@@ -121,7 +121,7 @@ class DeleteController extends AdminController
                                                     </span>
                                                 </div>';
 
-                    $this->redirect($this->adminPath . 'show/' . $this->table);
+                    $this->redirect($this->admin_path . 'show/' . $this->table);
                 }
             }
         }

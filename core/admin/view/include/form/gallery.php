@@ -19,7 +19,7 @@
 
                 <?php foreach ($this->data[$row] as $value) :?>
 
-                    <a href="<?=$this->adminPath . 'delete/' .  $this->table . '/' .  
+                    <a href="<?=$this->admin_path . 'delete/' .  $this->table . '/' .  
                                 $this->data[$this->columns['primary_key']] .
                                 '/' . $row . '/' . base64_encode($value)?>"
                                 class="d-flex align-items-center justify-content-center gn-dotted-square mb-1 mr-1">

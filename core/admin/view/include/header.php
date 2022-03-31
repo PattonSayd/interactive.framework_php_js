@@ -128,7 +128,7 @@
 							<?php foreach($this->menu as $table => $value) :?>
 
 								<li class="nav-item nav-item-submenu">
-									<a href="<?=$this->adminPath?>show/<?=$table?>" class="nav-link <?php if($table === $this->table) echo "active"; ?>">
+									<a href="<?=$this->admin_path?>show/<?=$table?>" class="nav-link <?php if($table === $this->table) echo "active"; ?>">
 										<i class="<?=$value['icon'] ? $value['icon'] : 'icon-home4'?>"></i>
 										<span><?=$value['name'] ? $value['name'] : $table?></span>
 									</a>

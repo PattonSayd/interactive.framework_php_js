@@ -14,7 +14,7 @@ class UserModel extends Model
 
     private $cookie_name = 'identifier';
 
-    private $cookie_admin_name = 'identifier';
+    private $cookie_admin_name = 'GNEngineCache';
 
     private $user_data = [];
 
@@ -22,7 +22,7 @@ class UserModel extends Model
 
     private $user_table = 'visitors';
 
-    private $admin_table = 'users';
+    private $admin_table = 'admin';
 
     private $blocked_table = 'blocked_access';
 
@@ -53,17 +53,17 @@ class UserModel extends Model
 
         if(!in_array($this->user_table, $this->getTables())){
 
-            $query = 'create table ' . $this->userTable . `
+            $query = 'create table ' . $this->user_table . '
             (
-                id int(11) auto_incriment primary key,
+                id int(11) auto_increment primary key,
                 name varchar(255) null,
                 login varchar(255) null,
                 password varchar(32) null,
-                credentials text null
+                credentials text null,
                 created_at timestamp default current_timestamp
             )
                 charset = utf8
-            `;
+            ';
 
             if(!$this->query($query, 'u')){
 
@@ -78,16 +78,16 @@ class UserModel extends Model
 
        if(!in_array($this->blocked_table, $this->getTables())){
            
-            $query = 'create table ' . $this->userTable . `
+            $query = 'create table ' . $this->blocked_table . '
             (
-                id int(11) auto_incriment primary key,
-                login varchar(255) null,
+                id int(11) auto_increment primary key,
+                login varchar(255) null,  
                 ip varchar(32) null,
-                trying tinyint(1) null
+                trying tinyint(1) null,
                 created_at timestamp default current_timestamp
             )
                 charset = utf8
-            `;       // time datatime null 
+            ';       // time datatime null 
 
             if(!$this->query($query, 'u')){
 
@@ -189,6 +189,8 @@ class UserModel extends Model
             throw new AuthException('Не найдены данные в таблице ' . $this->user_table . 'по идентификатору' . $data['id'], 1);
         }
 
+        $this->user_table = $this->user_data[0];
+        
         return true;
     }
 

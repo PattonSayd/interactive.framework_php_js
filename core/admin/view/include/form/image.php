@@ -20,7 +20,7 @@
                         style="background-color: #960c23; color: #ffe9fe; border: 1px solid #58131e; border-bottom:3px solid #680616" 
                         onclick="document.getElementById('<?=$row?>-delete').click();"><i class="icon-cross2"></i>
                 </button>
-                <a href="<?=$this->adminPath . 
+                <a href="<?=$this->admin_path . 
                             'delete/' . 
                             $this->table . '/' .  
                             $this->data[$this->columns['primary_key']] .
