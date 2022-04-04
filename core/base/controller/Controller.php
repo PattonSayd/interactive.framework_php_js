@@ -165,7 +165,7 @@ abstract class Controller
 
     protected function checkAuth($type = false)
     {
-        if(!($this->userId = UserModel::instance()->chechUser(false, $type)))
+        if(!($this->userId = UserModel::instance()->checkUser(false, $type)))
             $type && $this->redirect(PATH);
 
         if(property_exists($this, 'userModel'))

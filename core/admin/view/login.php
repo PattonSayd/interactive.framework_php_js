@@ -98,26 +98,37 @@
             border-radius: 1px;
             border: 1px solid #ccc;
             font-family: inherit;
+            cursor: pointer;
+        }
+        
+        .center input[type=submit]:hover {
+            background-color: #d8d9cf;
         }
 
         form{
             text-align:center 
+        }
+        .alert{
+            font-family: inherit;
+            font-size: 12px;
+            color: #e46569;
+            text-align: center;
         }
 
     </style>    
 
 </head>
 <body>
-    <?php if(isset($_SESSION['res']['answer'])) :?>
-        <div class="gn-alert gn-hide" tabindex="-1">
-            <?=$_SESSION['res']['answer']?>
-        </div>
-    <?php endif; ?>
+    
     <div class="container" method="post" onclick="onclick">
         <div class="top"></div>
         <div class="bottom"></div>
         <div class="center">
             <h2>Please Sign In</h2>
+            <?php if(isset($_SESSION['res']['answer']))
+                echo '<span class="alert">' . $_SESSION['res']['answer'] . '</span>';
+                unset($_SESSION['res']);
+            ?>
             <form action="<?=PATH . $admin_path?>/login" method="post">
                 <input type="text" name="login" placeholder="login" />
                 <input type="password" name="password" placeholder="password" />
@@ -128,6 +139,7 @@
     </div>
 
     <script src="<?=PATH . ADMIN_TEMPLATE?>/resources/js/ajax_sitemap.js"></script>
+    <script src="<?=PATH . ADMIN_TEMPLATE?>/resources/js/rune.js"></script>
     <script>
         
         let form = document.querySelector('form');
@@ -147,10 +159,12 @@
                         }
                         
                     }).then(res => {
+
                         if(res){
 
-                            form.insertAdjacentHTML('beforeend', `<input type="hidden" name="token" value="${res}" />`)
-                            
+                            res = res.trim();
+
+                            form.insertAdjacentHTML('beforeend', `<input type="hidden" value="${res}" name="token">`)
                         }
 
                         form.submit();
@@ -161,7 +175,7 @@
                 
             })
                 
-        }
+}
         
     </script>
 </body>

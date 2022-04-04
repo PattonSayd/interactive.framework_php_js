@@ -19,7 +19,6 @@ class AjaxController extends AdminController
                 case 'sitemap':
                     
                     return (new CreatesitemapController())->inputData($this->ajax_data['links_counter'], false);
-
                     break;
 
                 case 'editData':
@@ -29,7 +28,6 @@ class AjaxController extends AdminController
                     $this->checkPost();
 
                     return json_encode(['success' => 1]);
-                    
                     break;
                 
                 case 'change_parent':
@@ -51,9 +49,7 @@ class AjaxController extends AdminController
                     $file = $fileEdit->addFile($this->clearStr($this->ajax_data['table']) . '/content_file/');
                     
                     return ['location' => PATH . UPLOAD_DIR . $file[key($file)]];
-                    
                     break;
-
             }
         }
 

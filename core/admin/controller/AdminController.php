@@ -44,6 +44,8 @@ abstract class AdminController extends Controller
                 exit('Вы используете устаревшую версию браузера. Пожалуйста, обновитесь до актуальной версии.'); // EX. Ссылка на скачку браузера
             }
         }
+
+        $this->checkAuth(true);
         
         $this->init(true);
                   

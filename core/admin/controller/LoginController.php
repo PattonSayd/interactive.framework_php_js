@@ -23,7 +23,7 @@ class LoginController extends Controller
 
             $user_log = 'Выход пользователя ' . $this->userId['name'];
 
-            $this->writeLog($user_log, 'user_log_txt', 'Access user');
+            $this->writeLog($user_log, 'user_log.txt', 'Access user');
 
             $this->model->logout();
 
@@ -49,7 +49,7 @@ class LoginController extends Controller
             $ipUser = filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP) ?:
                         (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP) ?: @$_SERVER['REMOTE_ADDR']); 
             
-            $trying = $this->model->select($$this->model->getBlockedTable(), [
+            $trying = $this->model->select($this->model->getBlockedTable(), [
                 'fields' => ['trying'],
                 'where' => ['ip' => $ipUser],
             ]);
@@ -64,7 +64,7 @@ class LoginController extends Controller
 
                 $password = md5($this->clearStr($_POST['password']));
 
-                $user_data = $this->model->get($this->model->getAdminTable(), [
+                $user_data = $this->model->select($this->model->getAdminTable(), [
                     'field' => ['id', 'name'],
                     'where' => ['login' => $login, 'password' => $password]
                 ]);
@@ -79,32 +79,34 @@ class LoginController extends Controller
 
                         $method = 'edit';
 
-                        $where['id'] = $ipUser;
+                        $where['ip'] = $ipUser; 
+                    }
+                    
+                    $this->model->$method($this->model->getBlockedTable(), [
+                        'fields' => ['login' => $login, 'ip' => $ipUser, 'time' => 'NOW()', 'trying' => ++$trying],
+                        'where' => $where
+                    ]);
 
-                        $this->model->$method($this->model->getBlockedTable(), [
-                            'field' => ['login' => $login, 'ip' => $ipUser, 'time' => 'NOW()', 'trying' => ++$trying],
-                            'where' => $where
-                        ]);
+                    $error = 'Неверное имя пользователя или пароль - ' . $ipUser . ', логин - ' . $login;    
 
-                        $error = 'Неверное имя пользователя или пароль - ' . $ipUser . ', логин - ' . $login;     
+                }else{
 
+                    if(!$this->model->checkUser($user_data[0]['id'])){
+
+                        $error = $this->model->getLastError();
+                        
                     }else{
 
-                        if($this->model->checkUser($user_data[0]['id'])){
+                        $error = 'Вход пользователя - ' . $login;
 
-                            $error = $this->model->getLastError();
-                            
-                        }else{
-
-                            $error = 'Вход пользователя - ' . $login;
-
-                            $success = 1;                            
-                        }
-                        
+                        $success = 1;                            
                     }
+                    
                 }
                 
             }elseif($trying >= 3){
+
+                $this->model->logout();
 
                 $error = 'Перевышено максимальное количество попыток ввода пароля - ' . $ipUser;
                 
@@ -116,20 +118,19 @@ class LoginController extends Controller
 
             $_SESSION['res']['answer'] = $success ? '<div class="gn-item gn-before gn-success">
                                                         <span><i class="gn-icon gn-success-color icon-checkmark-circle"></i></span>
-                                                        <span class="gn-msg gn-success-color"><b>Well done! </b> Welcome '. $user_data['name'] .'</span> 
+                                                        <span class="gn-msg gn-success-color"><b>Welcome! </b>'. $user_data[0]['name'] .'</span> 
                                                         <span class="gn-btn-close">
                                                         <span class="gn-close gn-success-color-hover"><i class="gn-close-icon gn-success-color icon-cross"></i></span>
                                                         </span>
                                                         </div>' : preg_split('/\s*\-/', $error, 2, PREG_SPLIT_NO_EMPTY)[0];
 
-            $this->writeLog($error, 'user_log_txt', 'Access user');
+            $this->writeLog($error, 'user_log.txt', 'Access user');
 
             $path = null;
 
             $success && $path = PATH . Settings::get('routes')['admin']['alias'];
 
             $this->redirect($path);
-
         }
 
 

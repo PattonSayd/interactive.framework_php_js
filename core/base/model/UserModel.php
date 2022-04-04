@@ -29,7 +29,7 @@ class UserModel extends Model
 
     public function getAdminTable()
     {
-       return $this->admint_table;
+       return $this->admin_table;
     }
 
 
@@ -72,7 +72,7 @@ class UserModel extends Model
 
             $this->add($this->user_table, [
 
-                'fields' => ['name' => 'name', 'login' => 'admin', 'password' => md5('sayd')],
+                'fields' => ['name' => 'Administrator', 'login' => 'admin', 'password' => md5('sayd')],
             ]);
          }
 
@@ -84,7 +84,7 @@ class UserModel extends Model
                 login varchar(255) null,  
                 ip varchar(32) null,
                 trying tinyint(1) null,
-                created_at timestamp default current_timestamp
+                time datetime null
             )
                 charset = utf8
             ';       // time datatime null 
@@ -129,11 +129,11 @@ class UserModel extends Model
 
     private function set()
     {
-        $coockie_string = $this->packet();
+        $cookie_string = $this->packet();
 
-        if($coockie_string){
+        if($cookie_string){
 
-            setcookie($this->coockie_name, $coockie_string, time() + 60*60*24*365*10, PATH_SEPARATOR);
+            setcookie($this->cookie_name, $cookie_string, time() + 60*60*24*365*10, PATH);
 
             return true;
         }
@@ -146,11 +146,11 @@ class UserModel extends Model
     {
         if(!empty($this->user_data['id'])){
 
-            $data['id'] = $this->user_data;
+            $data['id'] = $this->user_data['id'];
 
             $data['version'] = COOKIE_VERSION;
 
-            $data['coockieTime'] = date('Y-m-d H:i:s');
+            $data['cookie_time'] = date('Y-m-d H:i:s');
 
             return Crypt::instance()->encrypt(json_encode($data));
         }
@@ -168,7 +168,7 @@ class UserModel extends Model
 
         $data = json_decode(Crypt::instance()->decrypt($_COOKIE[$this->cookie_name]), true);
 
-        if(empty($data['id']) || empty($data['version']) || empty($data['coockieTime'])){
+        if(empty($data['id']) || empty($data['version']) || empty($data['cookie_time'])){
 
             $this->logout();
 
@@ -177,8 +177,7 @@ class UserModel extends Model
 
         $this->validate($data);     
         
-        $this->userData = $this->select($this->user_table, [
-
+        $this->user_data = $this->select($this->user_table, [
             'where' => ['id' => $data['id']],
         ]);
 
