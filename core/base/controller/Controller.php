@@ -102,7 +102,7 @@ abstract class Controller
             else 
                 $template = ADMIN_TEMPLATE;
             
-            $path = $template . $this->actionPage; # [0] => index;
+            $path = $template . $this->getController(); # [0] => index;
         }
 
         ob_start();
@@ -138,12 +138,12 @@ abstract class Controller
         if (!$admin) {
             if (USER_CSS_JS['styles']) {
                 foreach (USER_CSS_JS['styles'] as $item) {                        
-                    $this->styles[] = PATH . TEMPLATE . trim($item, '/');
+                    $this->styles[] = (!preg_match('/^\s*https?:\/\//i', $item) ? PATH . TEMPLATE : '' ) . trim($item, '/');
                 }
             }
             if (USER_CSS_JS['scripts']) {
                 foreach (USER_CSS_JS['scripts'] as $item) {
-                    $this->scripts[] = PATH . TEMPLATE . trim($item, '/');
+                    $this->scripts[] = (!preg_match('/^\s*https?:\/\//i', $item) ? PATH . TEMPLATE : '' ) . trim($item, '/');
                 }
             }
         } else {

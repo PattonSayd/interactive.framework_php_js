@@ -2,11 +2,15 @@
 
 namespace core\user\controller;
 
-use core\base\controller\Controller;
 
-class IndexController extends Controller{
+class IndexController extends UserController
+{
 
-   public function inputData(){
-      return 'yellow';
+   protected function inputData()
+   {
+      parent::inputData();
+
+      $res = $this->getImage();
+      
    }
 }
