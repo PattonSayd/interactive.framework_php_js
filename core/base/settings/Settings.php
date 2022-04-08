@@ -51,24 +51,24 @@ class Settings
 
     private $templates = [
        # template => rows DB    
-        'input'    => ['name'],
+        'input'    => ['name', 'email', 'address', 'phone', 'alias'],
         'select'   => ['parent_id', 'menu_position'],
-        'radio'    => ['visible'],
+        'radio'    => ['visible','show_top_menu'],
         'checkbox' => ['pages'],
         'keywords' => ['keywords'],
-        'image'    => ['image', 'new_gallary'],
+        'image'    => ['image'],
         'gallery'  => ['gallery'],
-        'textarea' => ['content'],
+        'textarea' => ['description'],
 
     ];
 
     private $fileTemplates = ['image', 'gallery'];
 
     private $projectTable = [
-        'users'    => ['name' => 'Пользователи', 'icon' => 'icon-user'],
-        'comments' => ['name' => 'Комментарии', 'icon' => 'icon-stars'],
-        'pages'    => ['name' => 'Страницы', 'icon' => 'icon-book2'],
-        'color'    => ['name' => 'Цвета', 'icon' => 'icon-book2']
+        'users'       => ['name' => 'Пользователи', 'icon' => 'icon-user'],
+        'catalog'    => ['name' => 'Catalog', 'icon' => 'icon-stackoverflow'],
+        'information'    => ['name' => 'Information', 'icon' => 'icon-menu6'],
+        'settings'    => ['name' => 'Settings', 'icon' => 'icon-cog3']
     ];
 
     private $blocks = [
@@ -78,24 +78,30 @@ class Settings
     ];
 
     private $translate = [
-        'name'          => ['Название', 'Не более 50 символов'],
+        'name'          => ['Name', 'No more than 50 characters'],
         'content'       => ['Описание', 'Не менее 1000 символов'],
-        'visible'       => ['Видимость', 'По умолчанию: показать'],
-        'keywords'      => ['Ключевые слова'],
+        'visible'       => ['Visibility', 'Default: show'],
+        'keywords'      => ['Keywords'],
         'menu_position' => ['Позиция меню'],
         'parent_id'     => ['Родительская позиция'],
-        'image'         => ['Фоновый рисунок'],
-        'gallery'       => ['Галерея'],
-        'pages'         => ['Вложенные страницы']
+        'image'         => ['Picture'],
+        'description'   => ['SEO description'],
+        'gallery'       => ['Gallery'],
+        'phone'         => ['Phone'],
+        'email'         => ['Email'],
+        'address'       => ['Address'],
+        'alias'         => [' URLs'],
+        'show_top_menu' => ['Show top menu'],
     ];
 
     private $root = [
         'name'   => 'root',
-        'tables' => ['pages', 'comments', 'users'],
+        'tables' => ['users', 'catalog'],
     ];
 
     private $radio = [
-        'visible' => [1 => 'Показать', 0 => 'Скрыть', 'default' => 'Показать']
+        'visible' => [1 => 'show', 0 => 'hide', 'default' => 'show'],
+        'show_top_menu' => [1 => 'show', 0 => 'hide', 'default' => 'show']
     ];
     
     private $validation = [

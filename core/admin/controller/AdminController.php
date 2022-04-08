@@ -27,6 +27,7 @@ abstract class AdminController extends Controller
     protected $settings;
 
     protected $translate;
+    protected $validation;
     protected $blocks = [];
 
     protected $templates;
@@ -56,6 +57,9 @@ abstract class AdminController extends Controller
 
         if(!$this->menu)
             $this->menu = Settings::get('projectTable');
+
+        if(!$this->validation)
+            $this->validation = Settings::get('validation');
 
         if(!$this->admin_path)
             $this->admin_path = PATH . Settings::get('routes')['admin']['alias'] . '/';

@@ -660,9 +660,27 @@ Element.prototype.sortable = (function() {
 
         e.dataTransfer.dropEffect = 'move';
 
-        this.addEventListener('dragover', _onDragOver, false)
+        if(this.className.match('/center|left|right/')){
 
-        this.addEventListener('dragend', _onDragEnd, false)
+            if(dragEl.querySelector('#swap')){
+
+                dragEl.querySelector('#swap').addEventListener('dragover', e => {
+
+                    dragEl.style.border = "1px solid #01b389"
+    
+                    this.addEventListener('dragover', _onDragOver, false)
+    
+                    this.addEventListener('dragend', _onDragEnd, false)
+                })
+                
+            }            
+        }else{
+
+            this.addEventListener('dragover', _onDragOver, false)
+
+            this.addEventListener('dragend', _onDragEnd, false)
+            
+        }       
     }
 
     function _onDragOver(e){
@@ -687,6 +705,8 @@ Element.prototype.sortable = (function() {
 
             let next = (e.clientY - rect.top)/(rect.bottom - rect.top) > .5;
 
+            target.style.transform = "translateY("+next+"px)"
+
             this.insertBefore(dragEl, next && target.nextElementSibling || target);
         }       
     }
@@ -698,6 +718,8 @@ Element.prototype.sortable = (function() {
         this.removeEventListener('dragover', _onDragOver, false)
 
         this.removeEventListener('dragover', _onDragEnd, false)
+
+        dragEl.style.border = ""
 
         if(nextEl !== dragEl.nextsibling){
 
@@ -746,6 +768,7 @@ Element.prototype.sortable = (function() {
 
 
 let galleries = document.querySelectorAll('.gallery-container');
+
 if(galleries.length){
     galleries.forEach(item => {
         item.sortable({
@@ -754,6 +777,7 @@ if(galleries.length){
         })
     })
 }
+
 let fieldset = document.querySelector('#fieldset');
 
 if(fieldset){
@@ -826,6 +850,7 @@ function createJsSortable(form){
                         }
                         
                     }
+
                     inputSorting.value = JSON.stringify(res)
                 }
                 
@@ -867,8 +892,6 @@ function search(){
                         console.log(res)
                         res = JSON.parse(res)
 
-
-                        
                         let res_dropdown = document.querySelector('.gn-dropdown')
 
                         let counter = res.length > 20 ? 20 : res.length
@@ -903,6 +926,79 @@ function search(){
     
 }
 
+
+/*...................................................................
+.....................................................................
+..........CREATE BLOCK SORTABLE......................................
+.............................sorting block & save db.................
+.....................................................................
+*/ 
+function createBlockSortable(form){
+
+    if(form){
+
+        let sortable = form.querySelectorAll('input[type=file][multiple]');
+
+        if(sortable.length){
+
+            sortable.forEach(item => {
+
+                let container = item.closest('.gallery-container');
+
+                let name = item.getAttribute('name');
+
+                if(name && container){
+                    
+                    name = name.replace(/\[\]/g, '');
+
+                    let inputSorting = form.querySelector(`input[name="js-sorting[${name}]"]`);
+
+                    if(!inputSorting){
+
+                        inputSorting = document.createElement('input');
+
+                        inputSorting.setAttribute('type', 'hidden');
+                        
+                        inputSorting.name = `js-sorting[${name}]`;
+
+                        form.append(inputSorting);
+                        
+                    }
+
+                    let res = []
+
+                    for(let i in container.children){
+
+                        if(container.children.hasOwnProperty(i)){
+
+                            if(!container.children[i].matches('.button-div') && !container.children[i].matches('.empty-container')){
+
+                                if(container.children[i].tagName === 'A'){
+
+                                    res.push(container.children[i].querySelector('img').getAttribute('src'));
+                                    
+                                }else{
+
+                                    res.push(container.children[i].getAttribute(`data-deletefileid-${name}`))
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+
+                    inputSorting.value = JSON.stringify(res)
+                }
+                
+            })
+            
+        }
+    
+    }
+    
+}
 
 search()
 searchResultHover()

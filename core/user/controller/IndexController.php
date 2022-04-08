@@ -10,7 +10,7 @@ class IndexController extends UserController
    {
       parent::inputData();
 
-      $res = $this->getImage();
+      // $res = $this->getImage();
       
    }
 }

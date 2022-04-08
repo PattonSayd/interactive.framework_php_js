@@ -12,12 +12,35 @@ abstract class UserController extends Controller
 
     protected $table;
 
+    protected $set;
+
+    protected $catalog;
+
+    protected $information;
+    
     protected function inputData()
     {
         $this->init(); 
 
-        if(!$this->model) 
-            $this->model = UserModel::instance();
+        if(!$this->model) $this->model = UserModel::instance();
+
+        $this->set = $this->model->select('settings', [
+            'order' => ['id'],
+            'limit' => 1
+        ]);
+
+        $this->set && $this->set = $this->set[0];
+
+        $this->catalog = $this->model->select('catalog', [
+            'where' => ['visible' => 1, 'parent_id' => null],
+            'order' => ['menu_position']
+        ]);
+
+        $this->information = $this->model->select('information', [
+            'where' => ['visible' => 1, 'show_top_menu' => 1],
+            'order' => ['menu_position']
+        ]);
+        
     } 
     
     protected function outputData()
@@ -61,9 +84,11 @@ abstract class UserController extends Controller
         return '';
     }
 
-    protected function alias($alias = '', $query_string = '') 
+    protected function link($link = '', $query_string = '') 
     {
         $str = '';
+
+        // $link && $link = strtolower($link);
 
         if($query_string){
 
@@ -97,31 +122,31 @@ abstract class UserController extends Controller
             
         }
 
-        if(is_array($alias)){
+        if(is_array($link)){
 
-            $alias_string = '';
+            $link_string = '';
 
-            foreach($alias as $key => $item){
+            foreach($link as $key => $item){
 
                 if(!is_numeric($key) && $item){
 
-                    $alias_string .= $key . '/' . $item . '/';
+                    $link_string .= $key . '/' . $item . '/';
 
                 }elseif($item){
 
 
-                    $alias_string .= $item . '/';
+                    $link_string .= $item . '/';
                 }
             }
 
-            $alias = trim($alias_string, '/');
+            $link = trim(strtolower($link_string), '/');
         }
 
-        if(!$alias || $alias === '/') return PATH . $str;
+        if(!$link || $link === '/') return PATH . $str;
 
-        if(preg_match('/^\s*https?:\/\//i', $alias)) return $alias . $str;
+        if(preg_match('/^\s*https?:\/\//i', $link)) return $link . $str;
 
-        return preg_replace('/\{2,}/', '/', PATH . $alias . END_SLASH . $str);
+        return preg_replace('/\{2,}/', '/', PATH . $link . END_SLASH . $str);
     }
     
 }

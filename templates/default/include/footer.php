@@ -11,25 +11,19 @@
                   <div class="col-lg-3 col-md-6 col-sm-6">
                       <div class="single-footer-widget tp_widgets">
                           <h4 class="footer_title large_title">Our Mission</h4>
-                          <p>
-                              So seed seed green that winged cattle in. Gathering thing made fly you're no 
-                              divided deep moved us lan Gathering thing us land years living.
-                          </p>
-                          <p>
-                              So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
-                          </p>
+                          <?=$this->set['description']?>
                       </div>
                   </div>
                   <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
                       <div class="single-footer-widget tp_widgets">
                           <h4 class="footer_title">Quick Links</h4>
                           <ul class="list">
-                              <li><a href="#">Home</a></li>
-                              <li><a href="#">Shop</a></li>
-                              <li><a href="#">Blog</a></li>
-                              <li><a href="#">Product</a></li>
-                              <li><a href="#">Brand</a></li>
-                              <li><a href="#">Contact</a></li>
+                              <?php $keywords = explode(',', $this->set['keywords']);
+                                    foreach ($keywords as $key){
+                                        echo '<li><a href="'.$this->link([$key]).'">'. $key .'</a></li>';                                       
+                                    }
+
+                              ?>
                           </ul>
                       </div>
                   </div>
@@ -37,12 +31,17 @@
                       <div class="single-footer-widget instafeed">
                           <h4 class="footer_title">Gallery</h4>
                           <ul class="list instafeed d-flex flex-wrap">
-                              <li><img src="img/gallery/r1.jpg" alt=""></li>
-                              <li><img src="img/gallery/r2.jpg" alt=""></li>
-                              <li><img src="img/gallery/r3.jpg" alt=""></li>
-                              <li><img src="img/gallery/r5.jpg" alt=""></li>
-                              <li><img src="img/gallery/r7.jpg" alt=""></li>
-                              <li><img src="img/gallery/r8.jpg" alt=""></li>
+
+                            <?php if ($this->set['gallery']) :?>
+
+                                <?php $this->set['gallery'] = json_decode($this->set['gallery']);?>
+
+                                <?php foreach ($this->set['gallery'] as $file) :?>
+                                        <li><img src="<?=PATH . UPLOAD_DIR . $file?>" class="gn-img-size" alt="..."></li>                                      
+                                <?php endforeach; ?>
+                                    
+                            <?php endif; ?>
+
                           </ul>
                       </div>
                   </div>
@@ -54,15 +53,19 @@
                                   <span class="fa fa-location-arrow"></span>
                                   Head Office
                               </p>
-                              <p>123, Main Street, Your City</p>
+                              <p><?=$this->set['address']?></p>
   
                               <p class="sm-head">
                                   <span class="fa fa-phone"></span>
                                   Phone Number
                               </p>
                               <p>
-                                  +123 456 7890 <br>
-                                  +123 456 7890
+                                <?php $phones = explode('<br>', $this->set['phone']);
+                                        foreach ($phones as $phone){
+                                            echo '<a href="tel:'. preg_replace('/[^\+\d]/', '', $phone) .'">'. $phone .'</a>';                                       
+                                        }
+
+                                ?>
                               </p>
   
                               <p class="sm-head">
@@ -70,8 +73,7 @@
                                   Email
                               </p>
                               <p>
-                                  free@infoexample.com <br>
-                                  www.infoexample.com
+                                <?=$this->set['email']?> 
                               </p>
                           </div>
                       </div>

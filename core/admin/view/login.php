@@ -139,7 +139,6 @@
     </div>
 
     <script src="<?=PATH . ADMIN_TEMPLATE?>/resources/js/ajax_sitemap.js"></script>
-    <script src="<?=PATH . ADMIN_TEMPLATE?>/resources/js/rune.js"></script>
     <script>
         
         let form = document.querySelector('form');

@@ -10,7 +10,7 @@ const DEFAULT_IMAGE_DIRECTORY = 'default_images';
 const END_SLASH = '/';
 const COOKIE_VERSION = '1.0.0'; 
 const CRYPT_KEY = 'F-JaNdRgUkXp2r5u$C&F)J@NcRfUjXn2v9y$B&E)H@McQfTj2s5v8y/B?E(H+MbQkXn2r5u8x/A?D(G+RfUjXnZr4u7x!A%D@McQfTjWnZq4t7w!';      
-const COOKIE_TIME = 60;    
+const COOKIE_TIME = 120;    
 const BLOCK_TIME = 3;      
 const QTY = 8;             
 const QTY_LINKS = 3;       
@@ -50,7 +50,6 @@ const ADMIN_CSS_JS = [
         'add' => [
             'resources/js/tagsinput.min.js',
             'resources/js/form_floating_labels.js',
-            'resources/js/validate.min.js',
             'resources/js/form_validation.js',
             'resources/js/typeahead.bundle.min.js',
             'resources/js/bootstrap_multiselect.js',

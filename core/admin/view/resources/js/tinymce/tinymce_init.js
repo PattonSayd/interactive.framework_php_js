@@ -112,7 +112,7 @@ if(mce_element.length) {
 
                     tinymce.remove(`[name="${textAreaName}"]`)
 
-                    if(!blockContent) textArea.value = textArea.value.replace(/<\/?[^>]+(>|$)/g, '')
+                    // if(!blockContent) textArea.value = textArea.value.replace(/<\/?[^>]+(>|$)/g, '')
                     
                 }
                 
