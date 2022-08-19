@@ -1,8 +1,8 @@
 
-<div class="col-lg-12 img-wrapper mb-1">
+<div class="col-lg-12 img-wrapper gn-block-pb">
     <div class="row pb-3" style="background:#fff;border:1px solid rgba(0,0,0,.125);box-shadow:0 2px 5px 0 rgb(0 0 0 / 5%)">
         <label class="col-form-label col-lg-12"><?=$this->translate[$row][0] ?: $row?>
-            <span id="swap" style="float:right;cursor:pointer;color: #a8a7a7;"><i class="icon-move-alt1"></i></span>
+            <span id="swap" class="gn-swap-style" style="display: none; float:right; cursor:pointer; color: #a8a7a7;"><i class="icon-menu-open"></i></span>
             <span class="d-block font-weight-light text-secondary"><?=$this->translate[$row][1]?></span>
         </label>
         <div class="col-lg-12 d-flex flex-wrap gallery-container">
@@ -10,7 +10,7 @@
                 <button type="button" class="btn btn-light w-100 h-100" onclick="document.getElementById('<?=$row?>').click();">
                     <i class="icon-plus2" style="font-size:60px;"></i>
                 </button>
-                <input type="file" style="display:none;" id="<?=$row?>" name="<?=$row?>[]" multiple/>
+                <input class="jsElement__sortableBlock" type="file" style="display:none;" id="<?=$row?>" name="<?=$row?>[]" multiple/>
             </div>
 
             <?php if ($this->data[$row]) :?>

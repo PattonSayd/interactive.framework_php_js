@@ -47,16 +47,18 @@ abstract class AdminController extends Controller
         }
 
         $this->checkAuth(true);
-        
+
         $this->init(true);
-                  
+            
         $this->title = 'GN engine';
 
         if(!$this->model) 
-            $this->model = AdminModel::instance();
+            $this->model = AdminModel::instance(); 
 
         if(!$this->menu)
             $this->menu = Settings::get('projectTable');
+
+        $this->checkRootTable();
 
         if(!$this->validation)
             $this->validation = Settings::get('validation');
@@ -784,9 +786,9 @@ abstract class AdminController extends Controller
     protected function emptyFields($value, $name, $arr = [])
     {
         if(empty($value)) {
-            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-warning">
+            $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-warning gn-warning-alert">
                                             <span><i class="gn-icon gn-warning-color icon-exclamation"></i></span>
-                                            <span class="gn-msg gn-warning-color"><b>Warning! </b> '.$this->messages['empty'] .'</span> 
+                                            <span class="gn-msg gn-warning-color"><b>Warning! </b> '.$this->messages['empty'] . '<u id="alert" data-name="'.strtolower($name).'-focus">' . $name . '</u>' .'</span> 
                                             <span class="gn-btn-close">
                                             <span class="gn-close gn-warning-color-hover"><i class="gn-close-icon gn-warning-color icon-cross"></i></span>
                                             </span>
@@ -851,6 +853,13 @@ abstract class AdminController extends Controller
                 $where = [$this->columns['primary_key'] => $id];
                 $method = 'edit';
             }
+        }
+
+        if (!empty($_POST['password'])) {
+
+            $pass = $this->clearStr($_POST['password']);
+
+            $_POST['password'] = md5($pass);
         }
 
         foreach ($this->columns as $key => $value) {
@@ -1109,6 +1118,25 @@ abstract class AdminController extends Controller
         }
 
         return $res;        
+
+}# -------------------- CHECK ROOT TABLES ---------------------------------------- 
+
+    protected function checkRootTable()
+    {
+        $rootTable = Settings::get('rootTable');
+
+            if($this->userId[0]['credentials'] == 0){
+
+                foreach($rootTable as $table)
+                    unset($this->menu[$table]);
+                
+                if(isset($this->parameters) && in_array(key($this->parameters), $rootTable)){
+
+                    $redirect = PATH . Settings::get('routes')['admin']['alias'];
+
+                    $this->redirect($redirect);
+                }
+            }       
     }
 
 # -------------------- FILE EXISTENCE CHECH --------------------------------------    
@@ -1158,4 +1186,6 @@ abstract class AdminController extends Controller
             }
         }
     }
+
+    
 }

@@ -40,7 +40,7 @@ class Settings
         ]
     ];
     
-    private $defaultTable = 'users';
+    private $defaultTable = 'admin';
 
     private $extension = 'core/admin/extension/';
 
@@ -51,9 +51,9 @@ class Settings
 
     private $templates = [
        # template => rows DB    
-        'input'    => ['name', 'email', 'address', 'phone', 'alias'],
+        'input'    => ['name', 'login', 'password'],
         'select'   => ['parent_id', 'menu_position'],
-        'radio'    => ['visible','show_top_menu'],
+        'radio'    => ['visible', 'show_top_menu', 'credentials'],
         'checkbox' => ['pages'],
         'keywords' => ['keywords'],
         'image'    => ['image'],
@@ -64,11 +64,11 @@ class Settings
 
     private $fileTemplates = ['image', 'gallery'];
 
+    private $rootTable = ['admin'];
+
     private $projectTable = [
-        'users'       => ['name' => 'Пользователи', 'icon' => 'icon-user'],
-        'catalog'    => ['name' => 'Catalog', 'icon' => 'icon-stackoverflow'],
-        'information'    => ['name' => 'Information', 'icon' => 'icon-menu6'],
-        'settings'    => ['name' => 'Settings', 'icon' => 'icon-cog3']
+        'admin'          => ['name' => 'Users', 'icon' => 'icon-user'],
+        'blocked_access' => ['name' => 'Blocked', 'icon' => 'icon-user'],
     ];
 
     private $blocks = [
@@ -79,6 +79,8 @@ class Settings
 
     private $translate = [
         'name'          => ['Name', 'No more than 50 characters'],
+        'password'      => ['Password', 'No more than 8 symbols'],
+        'login'         => ['Login'],
         'content'       => ['Описание', 'Не менее 1000 символов'],
         'visible'       => ['Visibility', 'Default: show'],
         'keywords'      => ['Keywords'],
@@ -90,13 +92,14 @@ class Settings
         'phone'         => ['Phone'],
         'email'         => ['Email'],
         'address'       => ['Address'],
-        'alias'         => [' URLs'],
+        'alias'         => ['URLs'],
         'show_top_menu' => ['Show top menu'],
+        'credentials'   => ['Credentials'],
     ];
 
     private $root = [
         'name'   => 'root',
-        'tables' => ['users', 'catalog'],
+        'tables' => [],
     ];
 
     private $radio = [

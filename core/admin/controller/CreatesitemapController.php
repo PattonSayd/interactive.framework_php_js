@@ -3,6 +3,7 @@ namespace core\admin\controller;
 
 use core\admin\controller\AdminController;
 use core\base\controller\Methods;
+use core\base\settings\Settings;
 
 class CreatesitemapController extends AdminController
 {
@@ -86,7 +87,9 @@ class CreatesitemapController extends AdminController
                 $this->$name = [SITE_URL];
             }
         }
-
+        
+        $this->max_links = (int)$links_count > 1 ? ceil($this->max_links / $links_count) : $this->max_links;
+        
         while($this->temp_links){
 
             $temp_links_count = count($this->temp_links);
@@ -156,13 +159,14 @@ class CreatesitemapController extends AdminController
 
         if($redirect){
             !$_SESSION['res']['answer'] && $_SESSION['res']['answer'] = '<div class="gn-item gn-before gn-success">
-                                                                            <span><i class="gn-icon gn-success-color gn-success"></i></span>
+                                                                            <span><i class="gn-icon gn-success-color icon-checkmark-circle"></i></span>
                                                                             <span class="gn-msg gn-success-color"><b>Well done! </b> Sitemap is crealed.</span> 
                                                                             <span class="gn-btn-close">
                                                                             <span class="gn-close gn-success-color-hover"><i class="gn-close-icon gn-success-color icon-cross"></i></span>
                                                                             </span>
                                                                         </div>';
 
+            $redirect = PATH . Settings::get('routes')['admin']['alias'] . '/sitemap';
             $this->redirect(); 
  
         }else{
@@ -177,16 +181,11 @@ class CreatesitemapController extends AdminController
     {    
         if(!$urls) return;
 
+        $urls = (array)$urls;
+
         $curlMulty = curl_multi_init();
 
         $curl = [];
-
-        # $site = [];
-
-        # if(is_string($urls)){
-        #     $site[] = $urls;
-        # }elseif(is_array($urls))
-        #     $site = $urls;
 
         foreach($urls as $i => $url){
 
@@ -399,9 +398,7 @@ class CreatesitemapController extends AdminController
         }
 
         if($exit){
-            $alert['message'] = '<div class="alert alert-'.$class.' alert-styled-left alert-arrow-left alert-dismissible alert-setInterval">
-                                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                <span class="font-weight-semibold">Well done!</span>' . $alert['message'] . '</div>';;
+            $alert['message'] = '<div class="' . $class . '">' . $alert['message'] . '</div>' ;
             
 
             exit(json_encode($alert));
@@ -419,7 +416,7 @@ class CreatesitemapController extends AdminController
         $root = $dom->createElement('urlset'); # <urlset>элемент</urlset>
 
         $root->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-        $root->setAttribute('xmlns:xls', 'http://w3.org/2001/XMLSchema-instance');
+        $root->setAttribute('xmlns:xsi', 'http://w3.org/2001/XMLSchema-instance');
         $root->setAttribute('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
 
         $dom->appendChild($root);

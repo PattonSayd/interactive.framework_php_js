@@ -4,6 +4,7 @@
 	<?php if(isset($_SESSION['res']['answer'])) :?>
 		<div class="gn-alert gn-hide" tabindex="-1">
 			<?=$_SESSION['res']['answer']?>
+			<?php unset($_SESSION['res']);?>			
 		</div>
    <?php endif; ?>
    
@@ -16,7 +17,7 @@
 		<?php if ($this->data) : ?>
 			<?php foreach ($this->data as $data) :?>
 			<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-				<div class="bg-white" style="border: 1px solid rgba(0,0,0,.125); box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%)">
+				<div class="gn-block-style">
 					<a href="<?=$this->admin_path?>edit/<?=$this->table?>/<?=$data['id']?>" style="color: #5a5e66">
 						<div class="row">
 							<div class="col-4 d-flex justify-content-center align-items-center">
@@ -37,10 +38,6 @@
 		<?php endif; ?>
 		
 	</div>
-
-	<?php if(isset($_SESSION['res']['answer'])) :?>
-        <?php unset($_SESSION['res']);?>
-  	<?php endif; ?>
 </div>
 <!-- /content area -->
 

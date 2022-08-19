@@ -2,13 +2,14 @@
 
 namespace core\admin\controller;
 
+use core\base\model\AuthModel;
 use libraries\FileEdit;
 
 class AjaxController extends AdminController
 {
     public function ajax()
     {
-        if(isset($this->ajax_data['ajax'])){
+         if(isset($this->ajax_data['ajax'])){
 
             $this->parent_inputData();
 
@@ -38,6 +39,17 @@ class AjaxController extends AdminController
                 case 'search':
 
                     return $this->search();
+                    break;
+
+                case 'change_password':
+
+                    return $this->changePassword();
+                    break;
+                
+                case 'bloks':
+
+                    $this->model->sortingColumns($this->clearStr($this->ajax_data['table']), $this->ajax_data['sortable']);
+                    // return $this->redirect();
                     break;
 
                 case 'wysiwyg':
@@ -71,6 +83,25 @@ class AjaxController extends AdminController
             'where' => ['parent_id' => $this->ajax_data['parent_id']],
             'no_concat' => true
         ])[0]['count'] + $this->ajax_data['iterations'];
+    } 
+    
+    protected function changePassword()
+    {
+        $model = AuthModel::instance();
+
+        $user_data = $this->model->select($model->getAdminTable(), [
+            'fields' => ['id', 'name'],
+            'where' => ['id' => $this->userId[0]['id'], 'password' => md5($_POST['current'])]
+        ]);
+
+        if(!$user_data) return json_encode(['error' => 'Incorrect password']);
+
+        $this->model->edit($model->getAdminTable(),[
+            'fields' => ['password' => md5($_POST['confirm'])],
+            'where' => ['id' => $this->userId[0]['id'], 'password' => md5($_POST['current'])]
+        ]);
+
+        return json_encode(['success' => 1]);        
     }
     
 }

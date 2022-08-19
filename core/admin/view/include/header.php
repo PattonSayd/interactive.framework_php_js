@@ -13,6 +13,41 @@
 
 <body class="sidebar-xs">
 
+	<!-- change password -->
+
+	<div class="gn-shadow position-fixed">
+		<div  class="change-popup gn-center gn-popup-style position-fixed">
+			<div class="gn-close-btn"><i class="icon-minus3"></i></div>
+			<form id="change-form" action="<?=PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/reset" method="post">
+				<h3>Change password</h3>
+
+				<div class="form-element">
+					<label for="current-password">Current password</label>
+					<input type="password" id="current-password" name="current-password"/>
+				</div>
+
+				<div class="form-element">
+					<label for="new-password">New password</label>
+					<input type="password" id="new-password" name="new-password"/>
+				</div>
+
+				<div class="form-element">
+					<label for="confirm-password">Confirm password</label>
+					<input type="password" id="confirm-password" name="confirm-password"/>
+				</div>
+
+				<input type="hidden" name="table" value="<?=$this->table;?>">
+
+				<div class="form-element d-flex justify-content-between align-items-center">
+					<span class="message-popup">Success</span>
+					<button id="continue-btn" type="submit" class="btn" disabled>Continue</buttin>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- change password -->
+
 	<!-- Navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
 
@@ -50,7 +85,7 @@
 				
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
-						<img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle" alt="">
+						<img src="" class="rounded-circle" alt="">
 						<span>Patton</span>
 					</a>
 
@@ -59,7 +94,7 @@
 						<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
 						<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
+						<a id="change-pass-btn" class="dropdown-item"><i class="icon-cog5"></i> Change password</a>
 						<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias']?>/login/logout" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
 					</div>
 				</li>
@@ -97,7 +132,7 @@
 					<div class="card-body">
 						<div class="media">
 							<div class="mr-3">
-								<a href="#"><img src="https://www.meme-arsenal.com/memes/f829154b6247042d8821a19015eb2f7c.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
+								<a href="#"><img src="<?=PATH . UPLOAD_DIR . $this->userId[0]['image']?>" width="38" height="38" class="rounded-circle" alt=""></a>
 							</div>
 
 							<div class="media-body">
@@ -182,9 +217,10 @@
 							</div>
 						</form>
 						
-						<div class="d-flex justify-content-center">
-							<a href="#" class="btn btn-link btn-float text-default sitemap-button"><i class="icon-lan2 text-primary"></i> <span>Sitemap</span></a>
-						</div>
+						<!-- <div class="d-flex justify-content-center">
+							<a href="" class="btn btn-link btn-float text-default sitemap-button"><i class="icon-lan2"></i> <span>Create Sitemap</span></a>
+						</div> -->
+						
 					</div>
 				</div>
 
@@ -219,15 +255,15 @@
 							<div class="breadcrumb-elements-item dropdown p-0">
 								<a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
 									<i class="icon-gear mr-2"></i>
-									Settings
+									Map
 								</a>
 
 								<div class="dropdown-menu dropdown-menu-right">
-									<a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-									<a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-									<a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
+									<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/createsitemap" class="dropdown-item sitemap-button"><i class="icon-lan2"></i> Create sitemap</a>
+									<a href="<?= PATH . core\base\settings\Settings::get('routes')['admin']['alias'] ?>/sitemap" class="dropdown-item"><i class="icon-statistics"></i> Page sitemap</a>
+									<!-- <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
 									<div class="dropdown-divider"></div>
-									<a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
+									<a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a> -->
 								</div>
 							</div>
 						</div>

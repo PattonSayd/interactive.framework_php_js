@@ -4,7 +4,7 @@ namespace core\base\controller;
 
 use core\base\controller\Methods;
 use core\base\exception\RouteException;
-use core\base\model\UserModel;
+use core\base\model\AuthModel;
 use core\base\settings\Settings;
 
 
@@ -165,12 +165,13 @@ abstract class Controller
 
     protected function checkAuth($type = false)
     {
-        if(!($this->userId = UserModel::instance()->checkUser(false, $type)))
+        if(!($this->userId = AuthModel::instance()->checkUser(false, $type)))
             $type && $this->redirect(PATH);
 
         if(property_exists($this, 'userModel'))
-            $this->userModel = UserModel::instance();
+            $this->userModel = AuthModel::instance();
     }
+    
 }
 
 

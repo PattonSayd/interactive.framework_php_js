@@ -182,7 +182,7 @@ abstract class Model extends ModelMethods
 
 		if(empty($set['all_rows'])){
 
-			if($set['where']){
+			if(isset($set['where'])){
 				$where = $this->createWhere($set);
 			}else {
 				$where = false;
@@ -191,7 +191,7 @@ abstract class Model extends ModelMethods
 
 				if(!$columns) return false;
 						// id						
-				if($columns['primary_key'] && $set['fields'][$columns['primary_key']]){
+				if(isset($columns['primary_key']) && $set['fields'][$columns['primary_key']]){
 
 					$where = 'WHERE ' . $columns['primary_key'] . '=' . $set['fields'][$columns['primary_key']];
 
@@ -464,6 +464,53 @@ abstract class Model extends ModelMethods
 		$this->union = [];
 
 		return $this->query((trim($query)));
+	}
+
+/*
+|--------------------------------------------------------------------------
+|					SORTING COLUMNS	
+|--------------------------------------------------------------------------
+|   
+|   ALTER TABLE table_name
+|	MODIFY column_name column_definition
+|    [ FIRST | AFTER column_name ],
+|  MODIFY column_name column_definition
+|    [ FIRST | AFTER column_name ] ...
+*/
+
+	final public function sortingColumns($table, $rows)
+	{
+		$columns = $this->getColumns($table);
+
+		$modify = '';
+
+		$prev = '';
+
+		foreach($rows as $key => $name){
+
+			if(in_array($name, array_keys($columns))){
+
+				if($rows[0] === $name){
+
+					$modify .= $name . ' ' . $columns[$name]['Type'] . ' FIRST,';
+
+					$prev = $name;
+
+					continue;
+					
+				}
+
+				$modify .= 'MODIFY '. $name . ' ' . $columns[$name]['Type'] . ' AFTER ' . $prev . ',';
+
+				$prev = $name;
+			}
+		}
+
+		$modify = rtrim($modify, ',');
+
+		$query = "ALTER TABLE $table MODIFY $modify";
+
+		return $this->query($query, 'u');
 	}
 	
 }

@@ -3,7 +3,6 @@
 namespace core\user\controller;
 
 use core\base\controller\Controller;
-use core\base\model\UserModel;
 
 abstract class UserController extends Controller
 {
@@ -20,26 +19,26 @@ abstract class UserController extends Controller
     
     protected function inputData()
     {
-        $this->init(); 
+        // $this->init(); 
 
-        if(!$this->model) $this->model = UserModel::instance();
+        // if(!$this->model) $this->model = UserModel::instance();
 
-        $this->set = $this->model->select('settings', [
-            'order' => ['id'],
-            'limit' => 1
-        ]);
+        // $this->set = $this->model->select('settings', [
+        //     'order' => ['id'],
+        //     'limit' => 1
+        // ]);
 
-        $this->set && $this->set = $this->set[0];
+        // $this->set && $this->set = $this->set[0];
 
-        $this->catalog = $this->model->select('catalog', [
-            'where' => ['visible' => 1, 'parent_id' => null],
-            'order' => ['menu_position']
-        ]);
+        // $this->catalog = $this->model->select('catalog', [
+        //     'where' => ['visible' => 1, 'parent_id' => null],
+        //     'order' => ['menu_position']
+        // ]);
 
-        $this->information = $this->model->select('information', [
-            'where' => ['visible' => 1, 'show_top_menu' => 1],
-            'order' => ['menu_position']
-        ]);
+        // $this->information = $this->model->select('information', [
+        //     'where' => ['visible' => 1, 'show_top_menu' => 1],
+        //     'order' => ['menu_position']
+        // ]);
         
     } 
     
@@ -146,7 +145,9 @@ abstract class UserController extends Controller
 
         if(preg_match('/^\s*https?:\/\//i', $link)) return $link . $str;
 
-        return preg_replace('/\{2,}/', '/', PATH . $link . END_SLASH . $str);
+        $alias = preg_replace('/\{2,}/', '/', PATH . $link . END_SLASH . $str);
+
+        return rtrim($alias, '/');
     }
     
 }

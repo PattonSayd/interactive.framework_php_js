@@ -3,7 +3,7 @@
 namespace core\admin\controller;
 
 use core\base\controller\Controller;
-use core\base\model\UserModel;
+use core\base\model\AuthModel;
 use core\base\settings\Settings;
 
 class LoginController extends Controller
@@ -13,7 +13,7 @@ class LoginController extends Controller
     protected function inputData()
     {
 
-        $this->model = UserModel::instance();
+        $this->model = AuthModel::instance();
 
         $this->model->setAdmin();
 
